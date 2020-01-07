@@ -12,10 +12,6 @@ public class BallCollector extends SubsystemBase {
     }
 
     public void moveBySpeed (double speed){
-        components.getMaster().set(ControlMode.PercentOutput, speed);
+        components.getMaster().set(speed);
     }
-
-
-    
-
 }

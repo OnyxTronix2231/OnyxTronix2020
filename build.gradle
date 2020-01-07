@@ -53,7 +53,7 @@ dependencies {
     implementation wpi.deps.vendor.java()
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
-    //compile 'com.github.OnyxTronix2231:Lib-FRC:master-SNAPSHOT'
+    compile 'com.github.OnyxTronix2231:Lib-FRC:master-SNAPSHOT'
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
 }

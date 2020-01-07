@@ -11,4 +11,8 @@ public class Shooter extends SubsystemBase {
     public void moveBySpeed(final double speed){
         components.getMasterMotor().set(ControlMode.PercentOutput, speed);
     }
+
+    public int getEncoder() {
+        return components.getMasterMotor().getSelectedSensorPosition(0);
+    }
 }

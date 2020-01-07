@@ -3,10 +3,15 @@ package robot.shooter.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.shooter.Shooter;
 
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
+
 public class ShootBySpeed extends CommandBase {
-    private final double speed;
+
+    private final DoubleSupplier speed;
     private final Shooter shooter;
-    public ShootBySpeed(final Shooter shooter, final double speed){
+
+    public ShootBySpeed(final Shooter shooter, final DoubleSupplier speed){
         this.shooter = shooter;
         this.speed = speed;
 
@@ -20,5 +25,10 @@ public class ShootBySpeed extends CommandBase {
     @Override
     public boolean isFinished() {
         return false;
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooter.stopMotor();
     }
 }

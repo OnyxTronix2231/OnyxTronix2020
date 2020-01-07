@@ -16,11 +16,17 @@ public class DriveBySpeed extends CommandBase {
         this.driveTrain = driveTrain;
         this.forwardSpeedCalculation = forwardSpeedCalculation;
         this.rotationSpeedCalculation = rotationSpeedCalculation;
+        addRequirements(driveTrain);
     }
 
 
     @Override
     public void execute() {
         driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(),rotationSpeedCalculation.get().doubleValue());
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        driveTrain.stop();
     }
 }

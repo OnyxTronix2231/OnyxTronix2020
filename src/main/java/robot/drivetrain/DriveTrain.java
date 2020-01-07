@@ -16,6 +16,10 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
+    public void stop() {
+        components.getDifferentialDrive().stopMotor();
+    }
+
     public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
         components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
     }

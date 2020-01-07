@@ -31,10 +31,13 @@ public class DriveByDistance  extends CommandBase {
         return  (Math.abs(driveTrain.getLeftDistance() - distance) < DriveTrain.TOLERANCE && Math.abs(driveTrain.getRightDistance() - distance) < DriveTrain.TOLERANCE );
     }
 
+    @Override
+    public void execute() {
 
+    }
 
-
-
-
-
+    @Override
+    public void end(boolean interrupted) {
+        driveTrain.stop();
+    }
 }

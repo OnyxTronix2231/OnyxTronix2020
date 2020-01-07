@@ -9,7 +9,7 @@ import robot.shooter.Shooter;
 import robot.shooter.commands.ShootBySpeed;
 
 public class Robot extends TimedRobot {
-
+    
     @Override
     public void robotInit() {
 

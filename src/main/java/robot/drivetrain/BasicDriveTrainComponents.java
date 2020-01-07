@@ -2,37 +2,50 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
 
-    private IMotorController firstRightSlave;
-    private WPI_TalonSRX rightMaster;
-    private IMotorController firstLeftSlave;
-    private WPI_TalonSRX leftMaster;
-    private DifferentialDrive differentialDrive;
+    private static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
+    private static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
+    private static final double MAX_VELOCITY = 800; // needed to be checked
 
-
+    private final IMotorController firstRightSlave;
+    private final WPI_TalonSRX rightMaster;
+    private final IMotorController firstLeftSlave;
+    private final WPI_TalonSRX leftMaster;
+    private final DifferentialDrive differentialDrive;
 
     public BasicDriveTrainComponents(){
         rightMaster = new WPI_TalonSRX(2);
         rightMaster.configFactoryDefault();
+        rightMaster.configAllSettings(getConfiguration());
+
         firstRightSlave = new VictorSPX(1);
+        firstRightSlave.follow(rightMaster);
+
         leftMaster = new WPI_TalonSRX(4);
         leftMaster.configFactoryDefault();
+        leftMaster.configAllSettings(getConfiguration());
+
         firstLeftSlave = new VictorSPX(3);
+        firstLeftSlave.follow(leftMaster);
 
-        firstRightSlave.set(ControlMode.Follower,2);
-        firstLeftSlave.set(ControlMode.Follower,4);
-
-        this.differentialDrive=new DifferentialDrive( leftMaster,rightMaster);
-
-
+        this.differentialDrive=new DifferentialDrive(leftMaster, rightMaster);
 
     }
 
+    private TalonSRXConfiguration getConfiguration() {
+        TalonSRXConfiguration config = new TalonSRXConfiguration();
+        config.slot0.kP = 1;
+        config.slot0.kI = 0;
+        config.slot0.kD = 0;
+        config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+        return config;
+    }
 
     @Override
     public IMotorController getFirstRightSlave() {

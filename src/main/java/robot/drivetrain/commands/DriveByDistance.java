@@ -2,11 +2,12 @@ package robot.drivetrain.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.drivetrain.DriveTrain;
+import robot.drivetrain.DriveTrainConstants;
 
 import java.util.function.Supplier;
 
-public class DriveByDistance  extends CommandBase {
-    private static final int MIN_CHECKS = 10;
+public class DriveByDistance extends CommandBase {
+
     private final DriveTrain driveTrain;
     private final Supplier<Number> forwardSpeedCalculation;
     private final Supplier<Number> rotationSpeedCalculation;
@@ -14,7 +15,7 @@ public class DriveByDistance  extends CommandBase {
     private boolean isFinished;
     private int successfulCheckCounter;
 
-    public DriveByDistance(final DriveTrain driveTrain, final Supplier<Number> forwardSpeedCalculation, final Supplier<Number> rotationSpeedCalculation, final double distance){
+    public DriveByDistance(final DriveTrain driveTrain, final Supplier<Number> forwardSpeedCalculation, final Supplier<Number> rotationSpeedCalculation, final double distance) {
         this.driveTrain = driveTrain;
         this.forwardSpeedCalculation = forwardSpeedCalculation;
         this.rotationSpeedCalculation = rotationSpeedCalculation;
@@ -32,8 +33,8 @@ public class DriveByDistance  extends CommandBase {
 
     @Override
     public void execute() {
-        if (Math.abs(driveTrain.getLeftDistance() - distance) < DriveTrain.TOLERANCE && Math.abs(driveTrain.getRightDistance() - distance) < DriveTrain.TOLERANCE) {
-            if(successfulCheckCounter < MIN_CHECKS) {
+        if (Math.abs(driveTrain.getLeftDistance() - distance) < DriveTrainConstants.TOLERANCE && Math.abs(driveTrain.getRightDistance() - distance) < DriveTrainConstants.TOLERANCE) {
+            if (successfulCheckCounter < DriveTrainConstants.MIN_CHECKS) {
                 successfulCheckCounter++;
             } else {
                 isFinished = true;
@@ -50,6 +51,6 @@ public class DriveByDistance  extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return  (Math.abs(driveTrain.getLeftDistance() - distance) < DriveTrain.TOLERANCE && Math.abs(driveTrain.getRightDistance() - distance) < DriveTrain.TOLERANCE );
+        return (Math.abs(driveTrain.getLeftDistance() - distance) < DriveTrainConstants.TOLERANCE && Math.abs(driveTrain.getRightDistance() - distance) < DriveTrainConstants.TOLERANCE);
     }
 }

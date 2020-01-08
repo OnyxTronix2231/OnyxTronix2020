@@ -1,6 +1,5 @@
 package robot.drivetrain;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -9,9 +8,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
 
-    private static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
-    private static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
-    private static final double MAX_VELOCITY = 800; // needed to be checked
 
     private final IMotorController firstRightSlave;
     private final WPI_TalonSRX rightMaster;
@@ -19,7 +15,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     private final WPI_TalonSRX leftMaster;
     private final DifferentialDrive differentialDrive;
 
-    public BasicDriveTrainComponents(){
+    public BasicDriveTrainComponents() {
         rightMaster = new WPI_TalonSRX(2);
         rightMaster.configFactoryDefault();
         rightMaster.configAllSettings(getConfiguration());
@@ -34,7 +30,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
         firstLeftSlave = new VictorSPX(3);
         firstLeftSlave.follow(leftMaster);
 
-        this.differentialDrive=new DifferentialDrive(leftMaster, rightMaster);
+        this.differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 
     }
 
@@ -43,7 +39,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
         config.slot0.kP = 1;
         config.slot0.kI = 0;
         config.slot0.kD = 0;
-        config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+        config.slot0.kF = DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT * DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT / DriveTrainConstants.MAX_VELOCITY;
         return config;
     }
 

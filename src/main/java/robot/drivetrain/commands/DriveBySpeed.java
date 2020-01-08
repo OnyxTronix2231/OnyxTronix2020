@@ -12,7 +12,7 @@ public class DriveBySpeed extends CommandBase {
 
 
     public DriveBySpeed(final DriveTrain driveTrain, final Supplier<Number> forwardSpeedCalculation,
-                        final Supplier<Number> rotationSpeedCalculation){
+                        final Supplier<Number> rotationSpeedCalculation) {
         this.driveTrain = driveTrain;
         this.forwardSpeedCalculation = forwardSpeedCalculation;
         this.rotationSpeedCalculation = rotationSpeedCalculation;
@@ -22,7 +22,7 @@ public class DriveBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(),rotationSpeedCalculation.get().doubleValue());
+        driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(), rotationSpeedCalculation.get().doubleValue());
     }
 
     @Override

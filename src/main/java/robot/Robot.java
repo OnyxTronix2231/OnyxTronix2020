@@ -1,5 +1,8 @@
 package robot;
 
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,8 +15,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        XboxController driveJoystick = new XboxController(0);
-        XboxController buttonsJoystick = new XboxController(1);
+        XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
+        XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
 
         UniqueTriggerCache driveJoystickButtonCache = new UniqueTriggerCache(driveJoystick,
           new JoystickTriggerFactory(JoystickTriggerType.Button));

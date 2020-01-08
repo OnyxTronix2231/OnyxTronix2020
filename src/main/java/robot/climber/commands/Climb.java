@@ -3,12 +3,15 @@ package robot.climber.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.climber.Climber;
 
+import java.util.function.Supplier;
+
 public class Climb extends CommandBase {
 
     private final Climber climber;
-
-    public Climb(final Climber climber){
+    private final Supplier<Double> speedSupplier;
+    public Climb(final Climber climber, Supplier<Double> speedSupplier){
         this.climber = climber;
+        this.speedSupplier = speedSupplier;
         addRequirements(climber);
     }
 
@@ -19,7 +22,7 @@ public class Climb extends CommandBase {
 
     @Override
     public void execute() {
-        climber.moveBySpeed(0.5);
+        climber.moveBySpeed(speedSupplier.get());
     }
 
     @Override

@@ -26,8 +26,10 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void initializeMotionMagic(final double distance) {
-        components.getLeftMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT, DriveTrainConstants.PRIMARY_PID);
-        components.getRightMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT, DriveTrainConstants.PRIMARY_PID);
+        components.getLeftMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
+                DriveTrainConstants.PRIMARY_PID);
+        components.getRightMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
+                DriveTrainConstants.PRIMARY_PID);
         components.getLeftMaster().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
                 DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
         components.getRightMaster().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
@@ -40,11 +42,13 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getLeftDistance() {
-        return components.getLeftMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES * DriveTrainConstants.RADIUS * 2 * Math.PI;
+        return components.getLeftMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES *
+                DriveTrainConstants.RADIUS * 2 * Math.PI;
     }
 
     public double getRightDistance() {
-        return components.getRightMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES * DriveTrainConstants.RADIUS * 2 * Math.PI;
+        return components.getRightMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES *
+                DriveTrainConstants.RADIUS * 2 * Math.PI;
     }
 
 

@@ -39,7 +39,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
         config.slot0.kP = 1;
         config.slot0.kI = 0;
         config.slot0.kD = 0;
-        config.slot0.kF = DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT * DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT / DriveTrainConstants.MAX_VELOCITY;
+        config.slot0.kF = DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT *
+                DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT / DriveTrainConstants.MAX_VELOCITY;
         return config;
     }
 

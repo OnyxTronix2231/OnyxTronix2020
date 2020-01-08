@@ -22,7 +22,8 @@ public class DriveBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(), rotationSpeedCalculation.get().doubleValue());
+        driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(),
+                rotationSpeedCalculation.get().doubleValue());
     }
 
     @Override

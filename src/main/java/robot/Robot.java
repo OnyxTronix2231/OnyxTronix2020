@@ -13,9 +13,15 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         XboxController driveJoystick = new XboxController(0);
+        XboxController buttonsJoystick = new XboxController(1);
+
         UniqueTriggerCache driveJoystickButtonCache = new UniqueTriggerCache(driveJoystick,
           new JoystickTriggerFactory(JoystickTriggerType.Button));
         UniqueTriggerCache driveJoystickAxisCache = new UniqueTriggerCache(driveJoystick,
+          new JoystickTriggerFactory(JoystickTriggerType.Axis));
+        UniqueTriggerCache buttonsJoystickButtonCache = new UniqueTriggerCache(buttonsJoystick,
+          new JoystickTriggerFactory(JoystickTriggerType.Button));
+        UniqueTriggerCache buttonsJoystickAxisCache = new UniqueTriggerCache(buttonsJoystick,
           new JoystickTriggerFactory(JoystickTriggerType.Axis));
     }
 

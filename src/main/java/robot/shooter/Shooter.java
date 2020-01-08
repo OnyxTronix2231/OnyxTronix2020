@@ -6,7 +6,6 @@ import java.util.function.DoubleSupplier;
 
 public class Shooter extends SubsystemBase {
 
-    public static final double SPEED = 0.5;
     private final ShooterComponents components;
 
     public Shooter(final ShooterComponents components) {

@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.UniqueTriggerCache;
 import robot.shooter.commands.ShootBySpeed;
 
-public class ShooterOi {
+public final class ShooterOi {
 
     public ShooterOi(final UniqueTriggerCache buttonsJoystickAxisCache, final Shooter shooter) {
         final Trigger shootBySpeedButton = buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Button.kA.value);
-        shootBySpeedButton.whileActiveContinuous(new ShootBySpeed(shooter, () -> Shooter.SPEED));
+        shootBySpeedButton.whileActiveContinuous(new ShootBySpeed(shooter, () -> ShooterConstants.SPEED));
     }
 }

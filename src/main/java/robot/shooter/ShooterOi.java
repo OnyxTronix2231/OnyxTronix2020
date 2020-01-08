@@ -7,8 +7,8 @@ import robot.shooter.commands.ShootBySpeed;
 
 public class ShooterOi {
 
-    public ShooterOi (UniqueTriggerCache buttonsJoystickAxisCache, Shooter shooter){
-        Trigger shootBySpeedButton = buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Button.kA.value);
+    public ShooterOi(final UniqueTriggerCache buttonsJoystickAxisCache, final Shooter shooter) {
+        final Trigger shootBySpeedButton = buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Button.kA.value);
         shootBySpeedButton.whileActiveContinuous(new ShootBySpeed(shooter, () -> Shooter.SPEED));
     }
 }

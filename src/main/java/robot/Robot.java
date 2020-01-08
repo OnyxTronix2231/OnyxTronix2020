@@ -1,12 +1,8 @@
 package robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import robot.shooter.BasicShooterComponents;
-import robot.shooter.Shooter;
-import robot.shooter.commands.ShootBySpeed;
 
 public class Robot extends TimedRobot {
 

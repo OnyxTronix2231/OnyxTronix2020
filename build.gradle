@@ -10,6 +10,8 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+def includeDesktopSupport = true
+
 sourceSets {
     main {
         java {

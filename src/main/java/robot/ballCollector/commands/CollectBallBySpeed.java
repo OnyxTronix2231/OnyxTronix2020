@@ -3,14 +3,15 @@ package robot.ballCollector.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.ballCollector.BallCollector;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 public class CollectBallBySpeed extends CommandBase {
 
     private final BallCollector ballCollector;
-    private final Supplier<Double> speedSupplier;
+    private final DoubleSupplier speedSupplier;
 
-    public CollectBallBySpeed(final BallCollector ballCollector, Supplier<Double> speedSupplier) {
+    public CollectBallBySpeed(final BallCollector ballCollector,final DoubleSupplier speedSupplier) {
         this.ballCollector = ballCollector;
         this.speedSupplier = speedSupplier;
         addRequirements(ballCollector);
@@ -18,7 +19,7 @@ public class CollectBallBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        ballCollector.moveBySpeed(speedSupplier.get());
+        ballCollector.moveBySpeed(speedSupplier.getAsDouble());
     }
 
     @Override

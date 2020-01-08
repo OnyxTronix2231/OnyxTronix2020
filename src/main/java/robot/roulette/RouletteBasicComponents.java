@@ -13,7 +13,6 @@ public class RouletteBasicComponents implements RouletteComponents {
         doubleSolenoid = new DoubleSolenoid(0, 1);
     }
 
-
     @Override
     public TalonSRX getController() {
         return controller;

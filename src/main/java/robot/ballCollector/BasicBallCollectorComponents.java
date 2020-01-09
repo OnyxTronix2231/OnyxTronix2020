@@ -7,7 +7,7 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
     private final WPI_TalonSRX masterMotor;
 
     public BasicBallCollectorComponents() {
-        masterMotor = new WPI_TalonSRX(BallCollectorConstant.MASTER_MOTOR_PORT);
+        masterMotor = new WPI_TalonSRX(BallCollectorConstants.MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
     }
 

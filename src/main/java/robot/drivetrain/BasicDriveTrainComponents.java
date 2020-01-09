@@ -40,12 +40,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 
     gyro = new PigeonIMU(rightMaster);
-    final double[] yawPichRoll = new double[3];
-    gyro.getYawPitchRoll(yawPichRoll);
 
-    final double odometryHeading = Math.IEEEremainder(yawPichRoll[0], 360);
-
-    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(odometryHeading));
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getOdometryHeading()));
   }
 
   @Override
@@ -80,6 +76,12 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   @Override
   public final DifferentialDriveOdometry getOdometry() {
     return odometry;
+  }
+
+  public final double getOdometryHeading() {
+    final double[] yawPitchRoll = new double[3];
+    gyro.getYawPitchRoll(yawPitchRoll);
+    return Math.IEEEremainder(yawPitchRoll[0], 360);
   }
 
   private TalonSRXConfiguration getConfiguration() {

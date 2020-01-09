@@ -2,8 +2,12 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import sensors.counter.TalonSrxEncoder;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -12,6 +16,11 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
     CommandScheduler.getInstance().registerSubsystem(this);
+  }
+
+  @Override
+  public void periodic() {
+    components.getOdometry().update(Rotation2d.fromDegrees(components.getOdometryHeading()), getLeftDistance(), getRightDistance());
   }
 
   public final void stopDrive() {
@@ -49,6 +58,37 @@ public class DriveTrain extends SubsystemBase {
   public final boolean isDriveOnTarget() {
     return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
         Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
+  }
+
+  private TalonSrxEncoder getLeftEncoder() {
+    return new TalonSrxEncoder(components.getLeftMasterMotor(), 0);
+  }
+
+  private TalonSrxEncoder getRightEncoder() {
+    return new TalonSrxEncoder(components.getRightMasterMotor(), 0);
+  }
+
+  private void resetEncoders() {
+    getLeftEncoder().reset();
+    getRightEncoder().reset();
+  }
+
+  private void resetOdometry(final Pose2d pose) {
+    resetEncoders();
+    components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(components.getOdometryHeading()));
+  }
+
+  public void tankDriveVolts(final double rightVolts, final double leftVolts) {
+    components.getRightMasterMotor().setVoltage(rightVolts);
+    components.getLeftMasterMotor().setVoltage(leftVolts);
+  }
+
+  private Pose2d getPose() {
+    return components.getOdometry().getPoseMeters();
+  }
+
+  private DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
   }
 
   private double cmToEncoderUnits(final double cm) {

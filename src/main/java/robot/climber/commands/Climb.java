@@ -9,15 +9,11 @@ public class Climb extends CommandBase {
 
     private final Climber climber;
     private final Supplier<Double> speedSupplier;
-    public Climb(final Climber climber, Supplier<Double> speedSupplier){
+
+    public Climb(final Climber climber, Supplier<Double> speedSupplier) {
         this.climber = climber;
         this.speedSupplier = speedSupplier;
         addRequirements(climber);
-    }
-
-    @Override
-    public void initialize() {
-
     }
 
     @Override

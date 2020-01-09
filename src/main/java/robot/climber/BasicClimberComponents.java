@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicClimberComponents implements ClimberComponents {
 
-    private  final WPI_TalonSRX masterMotor;
+    private final WPI_TalonSRX masterMotor;
 
     private final VictorSPX slaveMotor;
 
@@ -16,12 +16,12 @@ public class BasicClimberComponents implements ClimberComponents {
     }
 
     @Override
-    public WPI_TalonSRX getMaster() {
+    public WPI_TalonSRX getMasterMotor() {
         return this.masterMotor;
     }
 
     @Override
-    public VictorSPX getSlave() {
+    public VictorSPX getSlaveMotor() {
         return this.slaveMotor;
     }
 }

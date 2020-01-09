@@ -3,22 +3,22 @@ package robot.climber.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.climber.Climber;
 
-import java.util.function.Supplier;
+import java.util.function.DoubleSupplier;
 
 public class Climb extends CommandBase {
 
     private final Climber climber;
-    private final Supplier<Double> speedSupplier;
+    private final DoubleSupplier speed;
 
-    public Climb(final Climber climber, Supplier<Double> speedSupplier) {
+    public Climb(final Climber climber, DoubleSupplier speed) {
         this.climber = climber;
-        this.speedSupplier = speedSupplier;
+        this.speed = speed;
         addRequirements(climber);
     }
 
     @Override
     public void execute() {
-        climber.moveBySpeed(speedSupplier.get());
+        climber.moveBySpeed(speed.getAsDouble());
     }
 
     @Override
@@ -28,6 +28,6 @@ public class Climb extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        climber.moveBySpeed(0);
+        climber.stopMotor();
     }
 }

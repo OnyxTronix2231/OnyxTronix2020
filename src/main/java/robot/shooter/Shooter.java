@@ -2,7 +2,6 @@ package robot.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import java.util.function.DoubleSupplier;
 
 public class Shooter extends SubsystemBase {
@@ -23,6 +22,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void stopMotor() {
-        components.getMasterMotor().set(0);
+        components.getMasterMotor().set(ShooterConstants.STOP_MOTOR);
     }
 }

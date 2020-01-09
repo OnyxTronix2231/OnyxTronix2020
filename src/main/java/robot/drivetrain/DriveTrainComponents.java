@@ -15,5 +15,4 @@ public interface DriveTrainComponents {
   WPI_TalonFX getLeftMasterMotor();
 
   DifferentialDrive getDifferentialDrive();
-
 }

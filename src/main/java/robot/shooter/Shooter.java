@@ -22,6 +22,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void stopMotor() {
-        components.getMasterMotor().set(ShooterConstants.STOP_MOTOR);
+        components.getMasterMotor().set(0);
     }
 }

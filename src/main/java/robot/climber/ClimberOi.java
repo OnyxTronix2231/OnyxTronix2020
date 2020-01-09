@@ -8,8 +8,8 @@ import static edu.wpi.first.wpilibj.XboxController.Button;
 
 public class ClimberOi {
 
-    public ClimberOi(final UniqueTriggerCache buttonsJoystickAxisCache, final Climber climber) {
-        final Trigger climbButton = buttonsJoystickAxisCache.createJoystickTrigger(Button.kA.value);
+    public ClimberOi(final UniqueTriggerCache buttonsJoystickButtonCache, final Climber climber) {
+        final Trigger climbButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kA.value);
         climbButton.whileActiveOnce(new ClimbBySpeed(climber, () -> ClimberConstants.SPEED));
     }
 }

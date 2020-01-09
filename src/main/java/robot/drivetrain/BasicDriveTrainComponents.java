@@ -43,7 +43,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
   }
 
-  private TalonFXConfiguration getConfiguration() {
+  private final TalonFXConfiguration getConfiguration() {
     TalonFXConfiguration config = new TalonFXConfiguration();
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;

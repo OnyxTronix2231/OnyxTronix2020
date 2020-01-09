@@ -19,7 +19,6 @@ public class DriveBySpeed extends CommandBase {
     addRequirements(driveTrain);
   }
 
-
   @Override
   public void execute() {
     driveTrain.arcadeDrive(forwardSpeedCalculation.getAsDouble(),
@@ -27,7 +26,7 @@ public class DriveBySpeed extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     driveTrain.stopDrive();
   }
 }

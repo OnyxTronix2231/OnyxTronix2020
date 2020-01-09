@@ -36,7 +36,7 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
   }
 
-  public final double cmToEncoderUnits(double cm) {
+  public final double cmToEncoderUnits(final double cm) {
     return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
   }
 

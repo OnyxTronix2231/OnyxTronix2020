@@ -9,6 +9,7 @@ public final class BallCollectorOi {
 
     public BallCollectorOi(BallCollector ballCollector, UniqueTriggerCache buttonJoystickButtonCache) {
         Trigger collectBallButton = buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-        collectBallButton.whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> BallCollectorConstant.SPEED));
+        collectBallButton.whileActiveContinuous(new CollectBallBySpeed(ballCollector,
+                () -> BallCollectorConstant.SPEED));
     }
 }

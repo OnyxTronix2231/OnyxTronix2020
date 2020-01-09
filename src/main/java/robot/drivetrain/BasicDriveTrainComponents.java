@@ -73,7 +73,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public final PigeonIMU grtGyro() {
+  public final PigeonIMU getGyro() {
     return gyro;
   }
 

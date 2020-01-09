@@ -18,7 +18,7 @@ public interface DriveTrainComponents {
 
   DifferentialDrive getDifferentialDrive();
 
-  PigeonIMU grtGyro();
+  PigeonIMU getGyro();
 
   DifferentialDriveOdometry getOdometry();
 }

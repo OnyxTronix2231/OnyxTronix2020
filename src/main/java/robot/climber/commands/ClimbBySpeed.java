@@ -5,12 +5,12 @@ import robot.climber.Climber;
 
 import java.util.function.DoubleSupplier;
 
-public class Climb extends CommandBase {
+public class ClimbBySpeed extends CommandBase {
 
     private final Climber climber;
     private final DoubleSupplier speed;
 
-    public Climb(final Climber climber, DoubleSupplier speed) {
+    public ClimbBySpeed(final Climber climber, DoubleSupplier speed) {
         this.climber = climber;
         this.speed = speed;
         addRequirements(climber);

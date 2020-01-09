@@ -7,7 +7,7 @@ public final class DriveTrainConstants {
     public static final double PERIMETER = 7.5 * 2 *Math.PI; //TODO: tuning is required
     public static final double TOLERANCE = 3; // TODO tuning is required
     public static final int PRIMARY_PID = 0;
-    public static final int MOTION_MAGIC_PID_SLOT = 0;
+    public static final int DRIVE_BY_DISTANCE_SLOT = 0;
     public static final double ARB_FEED_FORWARD = 0.04; // TODO tuning is required
     public static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
     public static final double MAX_CLOSED_LOOP_OUTPUT = 1023;

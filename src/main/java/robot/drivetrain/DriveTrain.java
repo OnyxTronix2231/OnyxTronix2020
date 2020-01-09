@@ -5,8 +5,6 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import java.util.function.DoubleSupplier;
-
 public class DriveTrain extends SubsystemBase {
 
     private final BasicDriveTrainComponents components;
@@ -24,19 +22,17 @@ public class DriveTrain extends SubsystemBase {
         components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
     }
 
-    public void resetEncoder() {
-        components.getLeftMasterMotor().setSelectedSensorPosition(0);
-        components.getRightMasterMotor().setSelectedSensorPosition(1);
-    }
-
-    public void initializeMotionMagic(final double distance) {
-        components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
+    public void initializeDriveByDistance(final double distance) {
+        components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
                 DriveTrainConstants.PRIMARY_PID);
-        components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
-                DriveTrainConstants.PRIMARY_PID);
-        components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
+        components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
+                        + components.getLeftMasterMotor().getSelectedSensorPosition(),
                 DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
-        components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
+
+        components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
+                DriveTrainConstants.PRIMARY_PID);
+        components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
+                        + components.getRightMasterMotor().getSelectedSensorPosition(),
                 DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
     }
 
@@ -53,4 +49,10 @@ public class DriveTrain extends SubsystemBase {
         return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
                 DriveTrainConstants.PERIMETER;
     }
+
+    public boolean isDriveOnTarget(){
+        return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
+                Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
+    }
+
 }

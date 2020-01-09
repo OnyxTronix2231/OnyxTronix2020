@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.IMotorController;
 
 public interface ClimberComponents {
 
-    IMotorController getMasterMotor();
+  IMotorController getMasterMotor();
 
-    IMotorController getSlaveMotor();
+  IMotorController getSlaveMotor();
 }

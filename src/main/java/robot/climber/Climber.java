@@ -6,18 +6,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
 
-    private final ClimberComponents components;
+  private final ClimberComponents components;
 
-    public Climber(final ClimberComponents components) {
-        this.components = components;
-        CommandScheduler.getInstance().registerSubsystem(this);
-    }
+  public Climber(final ClimberComponents components) {
+    this.components = components;
+    CommandScheduler.getInstance().registerSubsystem(this);
+  }
 
-    public final void moveBySpeed(final double speed) {
-        components.getMasterMotor().set(ControlMode.PercentOutput, speed);
-    }
+  public final void moveBySpeed(final double speed) {
+    components.getMasterMotor().set(ControlMode.PercentOutput, speed);
+  }
 
-    public final void stopMotor() {
-        components.getMasterMotor().set(ControlMode.Disabled, 0);
-    }
+  public final void stopMotor() {
+    components.getMasterMotor().set(ControlMode.Disabled, 0);
+  }
 }

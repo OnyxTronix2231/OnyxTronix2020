@@ -7,27 +7,27 @@ import java.util.function.DoubleSupplier;
 
 public class ClimbBySpeed extends CommandBase {
 
-    private final Climber climber;
-    private final DoubleSupplier speed;
+  private final Climber climber;
+  private final DoubleSupplier speed;
 
-    public ClimbBySpeed(final Climber climber, DoubleSupplier speed) {
-        this.climber = climber;
-        this.speed = speed;
-        addRequirements(climber);
-    }
+  public ClimbBySpeed(final Climber climber, DoubleSupplier speed) {
+    this.climber = climber;
+    this.speed = speed;
+    addRequirements(climber);
+  }
 
-    @Override
-    public void execute() {
-        climber.moveBySpeed(speed.getAsDouble());
-    }
+  @Override
+  public void execute() {
+    climber.moveBySpeed(speed.getAsDouble());
+  }
 
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 
-    @Override
-    public void end(final boolean interrupted) {
-        climber.stopMotor();
-    }
+  @Override
+  public void end(final boolean interrupted) {
+    climber.stopMotor();
+  }
 }

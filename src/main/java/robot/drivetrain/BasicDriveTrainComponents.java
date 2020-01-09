@@ -44,7 +44,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   private final TalonFXConfiguration getConfiguration() {
-    TalonFXConfiguration config = new TalonFXConfiguration();
+   final TalonFXConfiguration config = new TalonFXConfiguration();
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;

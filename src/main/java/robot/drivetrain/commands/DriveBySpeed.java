@@ -3,16 +3,16 @@ package robot.drivetrain.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.drivetrain.DriveTrain;
 
-import java.util.function.Supplier;
+import java.util.function.DoubleSupplier;
 
 public class DriveBySpeed extends CommandBase {
+
     private final DriveTrain driveTrain;
-    private final Supplier<Number> forwardSpeedCalculation;
-    private final Supplier<Number> rotationSpeedCalculation;
+    private final DoubleSupplier forwardSpeedCalculation;
+    private final DoubleSupplier rotationSpeedCalculation;
 
-
-    public DriveBySpeed(final DriveTrain driveTrain, final Supplier<Number> forwardSpeedCalculation,
-                        final Supplier<Number> rotationSpeedCalculation) {
+    public DriveBySpeed(final DriveTrain driveTrain, final DoubleSupplier forwardSpeedCalculation,
+                        final DoubleSupplier rotationSpeedCalculation) {
         this.driveTrain = driveTrain;
         this.forwardSpeedCalculation = forwardSpeedCalculation;
         this.rotationSpeedCalculation = rotationSpeedCalculation;
@@ -22,12 +22,12 @@ public class DriveBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.arcadeDrive(forwardSpeedCalculation.get().doubleValue(),
-                rotationSpeedCalculation.get().doubleValue());
+        driveTrain.arcadeDrive(forwardSpeedCalculation.getAsDouble(),
+                rotationSpeedCalculation.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        driveTrain.stop();
+        driveTrain.stopDrive();
     }
 }

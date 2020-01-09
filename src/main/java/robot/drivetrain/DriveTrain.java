@@ -2,17 +2,21 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class DriveTrain extends SubsystemBase {
-    private final BasicDriveTrainComponents components;
+import java.util.function.DoubleSupplier;
 
+public class DriveTrain extends SubsystemBase {
+
+    private final BasicDriveTrainComponents components;
 
     public DriveTrain(final BasicDriveTrainComponents components) {
         this.components = components;
+        CommandScheduler.getInstance().registerSubsystem(this);
     }
 
-    public void stop() {
+    public void stopDrive() {
         components.getDifferentialDrive().stopMotor();
     }
 
@@ -21,42 +25,32 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void resetEncoder() {
-        components.getLeftMaster().setSelectedSensorPosition(0);
-        components.getRightMaster().setSelectedSensorPosition(0);
+        components.getLeftMasterMotor().setSelectedSensorPosition(0);
+        components.getRightMasterMotor().setSelectedSensorPosition(1);
     }
 
     public void initializeMotionMagic(final double distance) {
-        components.getLeftMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
+        components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
                 DriveTrainConstants.PRIMARY_PID);
-        components.getRightMaster().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
+        components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.MOTION_MAGIC_PID_SLOT,
                 DriveTrainConstants.PRIMARY_PID);
-        components.getLeftMaster().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
+        components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
                 DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
-        components.getRightMaster().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
+        components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance),
                 DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
     }
 
-
     public double cmToEncoderUnits(double cm) {
-        return DriveTrainConstants.ENCODER_UNITES / (cm / (2 * DriveTrainConstants.RADIUS * Math.PI));
+        return DriveTrainConstants.ENCODER_UNITS / (cm / ( DriveTrainConstants.PERIMETER));
     }
 
     public double getLeftDistance() {
-        return components.getLeftMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES *
-                DriveTrainConstants.RADIUS * 2 * Math.PI;
+        return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
+                DriveTrainConstants.PERIMETER;
     }
 
     public double getRightDistance() {
-        return components.getRightMaster().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITES *
-                DriveTrainConstants.RADIUS * 2 * Math.PI;
+        return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
+                DriveTrainConstants.PERIMETER;
     }
-
-
 }
-
-
-
-
-
-
-

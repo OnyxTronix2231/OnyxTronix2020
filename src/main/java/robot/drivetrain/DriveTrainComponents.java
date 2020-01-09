@@ -1,20 +1,19 @@
 package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public interface DriveTrainComponents {
 
-    IMotorController getRightSlaveMotor();
+  IMotorController getRightSlaveMotor();
 
-    WPI_TalonSRX getRightMasterMotor();
+  WPI_TalonFX getRightMasterMotor();
 
-    IMotorController getLeftSlaveMotor();
+  IMotorController getLeftSlaveMotor();
 
-    WPI_TalonSRX getLeftMasterMotor();
+  WPI_TalonFX getLeftMasterMotor();
 
-    DifferentialDrive getDifferentialDrive();
-
+  DifferentialDrive getDifferentialDrive();
 
 }

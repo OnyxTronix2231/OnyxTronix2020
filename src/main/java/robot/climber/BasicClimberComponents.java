@@ -17,11 +17,11 @@ public class BasicClimberComponents implements ClimberComponents {
 
     @Override
     public final WPI_TalonSRX getMasterMotor() {
-        return this.masterMotor;
+        return masterMotor;
     }
 
     @Override
     public final VictorSPX getSlaveMotor() {
-        return this.slaveMotor;
+        return slaveMotor;
     }
 }

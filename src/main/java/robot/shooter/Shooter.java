@@ -1,5 +1,6 @@
 package robot.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.function.DoubleSupplier;
@@ -17,11 +18,15 @@ public class Shooter extends SubsystemBase {
         components.getMasterMotor().set(speed.getAsDouble());
     }
 
-    public int getEncoder() {
+    public int getWheelPosition() {
         return components.getMasterMotor().getSelectedSensorPosition(0);
     }
 
     public void stopMotor() {
         components.getMasterMotor().set(0);
+    }
+
+    public void setVelocity(final double speed){
+        components.getMasterMotor().set(ControlMode.Velocity, speed);
     }
 }

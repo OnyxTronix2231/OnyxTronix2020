@@ -1,6 +1,5 @@
 package robot.ballCollector;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallCollector extends SubsystemBase {
@@ -9,14 +8,13 @@ public class BallCollector extends SubsystemBase {
 
     public BallCollector(final BallCollectorComponents components) {
         this.components = components;
-        CommandScheduler.getInstance().registerSubsystem(this);
     }
 
-    public final void moveBySpeed(final double speed) {
+    public final void collectBySpeed(final double speed) {
         components.getMasterMotor().set(speed);
     }
 
     public final void stopMotor() {
-        moveBySpeed(0);
+        collectBySpeed(0);
     }
 }

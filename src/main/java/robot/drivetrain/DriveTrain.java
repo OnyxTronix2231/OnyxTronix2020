@@ -60,6 +60,19 @@ public class DriveTrain extends SubsystemBase {
         Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
   }
 
+  public final Pose2d getPose() {
+    return components.getOdometry().getPoseMeters();
+  }
+
+  public final void tankDriveVolts(final double rightVolts, final double leftVolts) {
+    components.getRightMasterMotor().setVoltage(rightVolts);
+    components.getLeftMasterMotor().setVoltage(leftVolts);
+  }
+
+  public final DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
+  }
+
   private TalonSrxEncoder getLeftEncoder() {
     return new TalonSrxEncoder(components.getLeftMasterMotor(), 0);
   }
@@ -76,19 +89,6 @@ public class DriveTrain extends SubsystemBase {
   private void resetOdometry(final Pose2d pose) {
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(components.getOdometryHeading()));
-  }
-
-  public void tankDriveVolts(final double rightVolts, final double leftVolts) {
-    components.getRightMasterMotor().setVoltage(rightVolts);
-    components.getLeftMasterMotor().setVoltage(leftVolts);
-  }
-
-  private Pose2d getPose() {
-    return components.getOdometry().getPoseMeters();
-  }
-
-  private DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
   }
 
   private double cmToEncoderUnits(final double cm) {

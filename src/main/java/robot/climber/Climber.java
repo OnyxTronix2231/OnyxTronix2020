@@ -13,11 +13,11 @@ public class Climber extends SubsystemBase {
         CommandScheduler.getInstance().registerSubsystem(this);
     }
 
-    public void moveBySpeed(double speed) {
+    public final void moveBySpeed(double speed) {
         components.getMasterMotor().set(ControlMode.PercentOutput, speed);
     }
 
-    public void stopMotor() {
-        components.getMasterMotor().set(ControlMode.PercentOutput, 0);
+    public final void stopMotor() {
+        components.getMasterMotor().set(ControlMode.Disabled, 0);
     }
 }

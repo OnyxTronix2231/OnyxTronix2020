@@ -12,7 +12,7 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
     }
 
     @Override
-    public WPI_TalonSRX getMasterMotor() {
+    public final WPI_TalonSRX getMasterMotor() {
         return masterMotor;
     }
 }

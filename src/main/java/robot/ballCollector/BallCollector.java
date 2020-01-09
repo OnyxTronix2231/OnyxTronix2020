@@ -12,11 +12,11 @@ public class BallCollector extends SubsystemBase {
         CommandScheduler.getInstance().registerSubsystem(this);
     }
 
-    public void moveBySpeed(double speed) {
+    public final void moveBySpeed(final double speed) {
         components.getMasterMotor().set(speed);
     }
 
-    public void stopMotor() {
+    public final void stopMotor() {
         moveBySpeed(0);
     }
 }

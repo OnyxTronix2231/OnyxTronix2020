@@ -13,13 +13,20 @@ public class Conveyance extends SubsystemBase {
         CommandScheduler.getInstance().registerSubsystem(this);
     }
 
-    public void moveConveyance(final double speed){
-        components.getMasterMotor().set(ControlMode.PercentOutput,speed);
+    public void moveConveyanceSystemOne(final double speed){
+        components.getFirstMasterMotor().set(ControlMode.PercentOutput,speed);
     }
 
-    public  void stopMotor(){
-        components.getMasterMotor().set(ControlMode.PercentOutput,0);
+    public  void stopMotorSystemOne(){
+        components.getFirstMasterMotor().set(ControlMode.PercentOutput,0);
     }
 
 
+    public void moveConveyanceSystemTwo(final double speed){
+        components.getSecondMasterMotor().set(ControlMode.PercentOutput,speed);
+    }
+
+    public  void stopMotorSystemTwo(){
+        components.getSecondMasterMotor().set(ControlMode.PercentOutput,0);
+    }
 }

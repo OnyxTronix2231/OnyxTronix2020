@@ -5,9 +5,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public interface ConveyanceComponents {
 
-    IMotorController getMasterMotor();
-    IMotorController getSlaveMotor();
-
-
-
+    IMotorController getFirstMasterMotor();
+    IMotorController getFirstSlaveMotor();
+    IMotorController getSecondMasterMotor();
+    IMotorController getSecondSlaveMotor();
 }

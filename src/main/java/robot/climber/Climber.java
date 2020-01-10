@@ -1,7 +1,6 @@
 package robot.climber;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
@@ -10,7 +9,6 @@ public class Climber extends SubsystemBase {
 
   public Climber(final ClimberComponents components) {
     this.components = components;
-    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   public final void moveBySpeed(final double speed) {
@@ -19,5 +17,13 @@ public class Climber extends SubsystemBase {
 
   public final void stopMotor() {
     components.getMasterMotor().set(0);
+  }
+
+  public final void closeDoubleSolenoid() {
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
+  }
+
+  public final void openDoubleSolenoid() {
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 }

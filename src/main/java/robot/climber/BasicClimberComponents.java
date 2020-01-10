@@ -9,9 +9,11 @@ public class BasicClimberComponents implements ClimberComponents {
   private final WPI_VictorSPX slaveMotor;
 
   public BasicClimberComponents() {
-    masterMotor = new WPI_TalonSRX(1);
+    masterMotor = new WPI_TalonSRX(ClimberConstants.Master_Motor_PORT);
+    masterMotor.configFactoryDefault();
 
-    slaveMotor = new WPI_VictorSPX(2);
+    slaveMotor = new WPI_VictorSPX(ClimberConstants.SLAVE_MOTOR_PORT);
+    slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
 
   }

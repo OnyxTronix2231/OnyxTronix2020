@@ -3,6 +3,8 @@ package robot.vision.limelight.exception;
 /**
  * TargetNotFoundException is a RuntimeException that is thrown whenever a trial to fetch a vision target from Limelight
  * is not successful
+ *
+ * @since 2020-01-10
  */
 public class TargetNotFoundException extends RuntimeException {
 

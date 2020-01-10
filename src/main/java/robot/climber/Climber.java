@@ -14,10 +14,10 @@ public class Climber extends SubsystemBase {
   }
 
   public final void moveBySpeed(final double speed) {
-    components.getMasterMotor().set(ControlMode.PercentOutput, speed);
+    components.getMasterMotor().set(speed);
   }
 
   public final void stopMotor() {
-    components.getMasterMotor().set(ControlMode.Disabled, 0);
+    components.getMasterMotor().set(0);
   }
 }

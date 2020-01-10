@@ -1,18 +1,22 @@
 package robot.climber;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import static edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class BasicClimberComponents implements ClimberComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final VictorSPX slaveMotor;
+  private final WPI_VictorSPX slaveMotor;
 
   public BasicClimberComponents() {
     masterMotor = new WPI_TalonSRX(1);
 
-    slaveMotor = new VictorSPX(2);
+    slaveMotor = new WPI_VictorSPX(2);
     slaveMotor.follow(masterMotor);
+    
   }
 
   @Override
@@ -21,7 +25,7 @@ public class BasicClimberComponents implements ClimberComponents {
   }
 
   @Override
-  public final VictorSPX getSlaveMotor() {
+  public final WPI_VictorSPX getSlaveMotor() {
     return slaveMotor;
   }
 }

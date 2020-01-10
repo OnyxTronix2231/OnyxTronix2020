@@ -8,17 +8,17 @@ import java.util.function.DoubleSupplier;
 public class ClimbBySpeed extends CommandBase {
 
   private final Climber climber;
-  private final DoubleSupplier speed;
+  private final DoubleSupplier speedSupplier;
 
-  public ClimbBySpeed(final Climber climber, DoubleSupplier speed) {
+  public ClimbBySpeed(final Climber climber, final DoubleSupplier speedSupplier) {
     this.climber = climber;
-    this.speed = speed;
+    this.speedSupplier = speedSupplier;
     addRequirements(climber);
   }
 
   @Override
   public void execute() {
-    climber.moveBySpeed(speed.getAsDouble());
+    climber.moveBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override

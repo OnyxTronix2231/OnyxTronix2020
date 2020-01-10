@@ -7,27 +7,27 @@ import java.util.function.DoubleSupplier;
 
 public class ShootByPercentOutput extends CommandBase {
 
-  private final DoubleSupplier speed;
+  private final DoubleSupplier speedSupplier;
   private final Shooter shooter;
 
   public ShootByPercentOutput(final Shooter shooter, final DoubleSupplier speed) {
     this.shooter = shooter;
-    this.speed = speed;
+    this.speedSupplier = speed;
     addRequirements(shooter);
   }
 
   @Override
-  public void execute() {
-    shooter.shootBySpeed(speed);
+  public final void execute() {
+    shooter.shootBySpeed(speedSupplier);
   }
 
   @Override
-  public boolean isFinished() {
+  public final boolean isFinished() {
     return false;
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public final void end(boolean interrupted) {
     shooter.stopMotor();
   }
 }

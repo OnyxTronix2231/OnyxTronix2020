@@ -14,8 +14,8 @@ public class Shooter extends SubsystemBase {
     CommandScheduler.getInstance().registerSubsystem(this);
   }
 
-  public void shootBySpeed(final DoubleSupplier speed) {
-    components.getMasterMotor().set(speed.getAsDouble());
+  public void shootBySpeed(final DoubleSupplier speedSupplier) {
+    components.getMasterMotor().set(speedSupplier.getAsDouble());
   }
 
   public int getEncoder() {

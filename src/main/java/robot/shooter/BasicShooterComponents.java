@@ -1,6 +1,7 @@
 package robot.shooter;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -17,12 +18,12 @@ public class BasicShooterComponents implements ShooterComponents {
   }
 
   @Override
-  public WPI_TalonSRX getMasterMotor() {
+  public final WPI_TalonSRX getMasterMotor() {
     return masterMotor;
   }
 
   @Override
-  public IMotorController getSlaveMotor() {
+  public final WPI_VictorSPX getSlaveMotor() {
     return slaveMotor;
   }
 }

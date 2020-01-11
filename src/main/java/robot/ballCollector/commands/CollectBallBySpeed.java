@@ -22,11 +22,6 @@ public class CollectBallBySpeed extends CommandBase {
     }
 
     @Override
-    public boolean isFinished() {
-        return false;
-    }
-
-    @Override
     public void end(final boolean interrupted) {
         ballCollector.stopMotor();
     }

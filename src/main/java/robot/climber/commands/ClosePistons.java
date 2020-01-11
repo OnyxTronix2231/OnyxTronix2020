@@ -16,5 +16,4 @@ public class ClosePistons extends InstantCommand {
   public void initialize() {
     climber.closePistons();
   }
-
 }

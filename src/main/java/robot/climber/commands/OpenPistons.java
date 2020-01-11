@@ -16,5 +16,4 @@ public class OpenPistons extends InstantCommand {
   public void initialize() {
     climber.openPistons();
   }
-
 }

@@ -10,5 +10,9 @@ public interface ClimberComponents {
 
   IMotorController getSlaveMotor();
 
-  DoubleSolenoid getDoubleSolenoid();
+  DoubleSolenoid getLeftDoubleSolenoid();
+
+  DoubleSolenoid getRightDoubleSolenoid();
+
+
 }

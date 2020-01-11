@@ -12,9 +12,11 @@ public class BasicShooterComponents implements ShooterComponents {
 
   public BasicShooterComponents() {
     masterMotor = new WPI_TalonSRX(1);
+    masterMotor.configFactoryDefault();
 
     slaveMotor = new WPI_VictorSPX(2);
     slaveMotor.follow(masterMotor);
+    slaveMotor.configFactoryDefault();
   }
 
   @Override

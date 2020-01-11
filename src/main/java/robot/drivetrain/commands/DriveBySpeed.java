@@ -8,21 +8,26 @@ import java.util.function.DoubleSupplier;
 public class DriveBySpeed extends CommandBase {
 
   private final DriveTrain driveTrain;
-  private final DoubleSupplier forwardSpeedCalculation;
-  private final DoubleSupplier rotationSpeedCalculation;
+  private final DoubleSupplier forwardSpeedCalculationSupplier;
+  private final DoubleSupplier rotationSpeedCalculationSupplier;
 
   public DriveBySpeed(final DriveTrain driveTrain, final DoubleSupplier forwardSpeedCalculation,
                       final DoubleSupplier rotationSpeedCalculation) {
     this.driveTrain = driveTrain;
-    this.forwardSpeedCalculation = forwardSpeedCalculation;
-    this.rotationSpeedCalculation = rotationSpeedCalculation;
+    this.forwardSpeedCalculationSupplier = forwardSpeedCalculation;
+    this.rotationSpeedCalculationSupplier = rotationSpeedCalculation;
     addRequirements(driveTrain);
   }
 
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(forwardSpeedCalculation.getAsDouble(),
-        rotationSpeedCalculation.getAsDouble());
+    driveTrain.arcadeDrive(forwardSpeedCalculationSupplier.getAsDouble(),
+        rotationSpeedCalculationSupplier.getAsDouble());
+  }
+
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 
   @Override

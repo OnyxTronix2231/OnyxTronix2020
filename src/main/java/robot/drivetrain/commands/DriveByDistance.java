@@ -10,7 +10,7 @@ public class DriveByDistance extends CommandBase {
   private final DriveTrain driveTrain;
   private final DoubleSupplier distanceSupplier;
 
-  public  DriveByDistance(final DriveTrain driveTrain, final DoubleSupplier distanceSupplier) {
+  public DriveByDistance(final DriveTrain driveTrain, final DoubleSupplier distanceSupplier) {
     this.driveTrain = driveTrain;
     this.distanceSupplier = distanceSupplier;
     addRequirements(driveTrain);
@@ -22,12 +22,13 @@ public class DriveByDistance extends CommandBase {
   }
 
   @Override
+  public boolean isFinished() {
+    return driveTrain.isDriveOnTarget();
+  }
+
+  @Override
   public void end(final boolean interrupted) {
     driveTrain.stopDrive();
   }
 
-  @Override
-  public boolean isFinished() {
-    return driveTrain.isDriveOnTarget();
-  }
 }

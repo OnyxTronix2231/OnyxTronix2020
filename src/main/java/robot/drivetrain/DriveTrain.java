@@ -11,7 +11,6 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
-    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   public final void stopDrive() {

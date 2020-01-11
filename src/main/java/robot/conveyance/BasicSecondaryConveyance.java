@@ -5,22 +5,23 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicSecondaryConveyance implements ConveyanceComponents{
 
-  private final WPI_TalonSRX secondMasterMotor;
-  private final WPI_TalonSRX secondSlaveMotor;
+  private final WPI_TalonSRX masterMotor;
+  private final WPI_TalonSRX slaveMotor;
 
   public BasicSecondaryConveyance(){
-    this.secondMasterMotor = new WPI_TalonSRX(ConveyanceConstants.SECOND_MASTER_MOTOR_PORT);
-    this.secondSlaveMotor = new WPI_TalonSRX(ConveyanceConstants.SECOND_SLAVE_MOTOR_PORT);
-    secondSlaveMotor.follow(secondMasterMotor);
+    this.masterMotor = new WPI_TalonSRX(ConveyanceConstants.SECOND_MASTER_MOTOR_PORT);
+
+    this.slaveMotor = new WPI_TalonSRX(ConveyanceConstants.SECOND_SLAVE_MOTOR_PORT);
+    slaveMotor.follow(masterMotor);
 }
 
   @Override
   public final WPI_TalonSRX getMasterMotor() {
-    return secondMasterMotor;
+    return masterMotor;
   }
 
   @Override
   public IMotorController getSlaveMotor() {
-    return secondSlaveMotor;
+    return slaveMotor;
   }
 }

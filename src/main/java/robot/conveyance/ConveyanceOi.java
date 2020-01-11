@@ -10,10 +10,8 @@ import robot.conveyance.commands.MoveBallConveyanceBySpeed;
 public class ConveyanceOi {
 
   public ConveyanceOi(final Conveyance conveyance, final UniqueTriggerCache buttonJoystickAxisCache){
-
     final Trigger moveSecondaryConveyanceBySpeed = buttonJoystickAxisCache.createJoystickTrigger(Button.kB.value);
     moveSecondaryConveyanceBySpeed.whileActiveContinuous(new MoveBallConveyanceBySpeed(conveyance ,
         () -> ConveyanceConstants.CONVEYANCE_SPEED));
-
   }
 }

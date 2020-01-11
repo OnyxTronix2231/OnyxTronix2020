@@ -22,7 +22,7 @@ public class MoveBallConveyanceBySpeed extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        conveyance.stopMotorConveyanceComponents();
+        conveyance.stopMotorFirstConveyance();
         conveyance.stopMotorSecondaryConveyance();
     }
 }

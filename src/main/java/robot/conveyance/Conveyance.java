@@ -10,7 +10,7 @@ public class Conveyance extends SubsystemBase {
         this.components = moveFirstConveyanceBySpeed;
     }
 
-    public final void moveConveyanceComponents(final double speed){
+    public final void moveConveyanceBySpeed(final double speed){
         components.getMasterMotor().set(speed);
     }
 

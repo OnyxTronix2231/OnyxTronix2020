@@ -15,12 +15,12 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     }
 
     @Override
-    public final WPI_TalonSRX getMasterMotor() {
+    public WPI_TalonSRX getMasterMotor() {
         return masterMotor;
     }
 
     @Override
-    public final WPI_TalonSRX getSlaveMotor() {
+    public WPI_TalonSRX getSlaveMotor() {
         return slaveMotor;
     }
 }

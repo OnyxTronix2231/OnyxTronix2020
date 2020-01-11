@@ -19,12 +19,12 @@ public class BasicShooterComponents implements ShooterComponents {
   }
 
   @Override
-  public final WPI_TalonSRX getMasterMotor() {
+  public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
   }
 
   @Override
-  public final IMotorController getSlaveMotor() {
+  public IMotorController getSlaveMotor() {
     return slaveMotor;
   }
 }

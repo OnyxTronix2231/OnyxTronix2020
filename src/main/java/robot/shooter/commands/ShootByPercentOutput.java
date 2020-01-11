@@ -17,12 +17,12 @@ public class ShootByPercentOutput extends CommandBase {
   }
 
   @Override
-  public final void execute() {
-    shooter.shootBySpeed(speedSupplier);
+  public void execute() {
+    shooter.shootBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override
-  public final void end(boolean interrupted) {
+  public void end(boolean interrupted) {
     shooter.stopMotor();
   }
 }

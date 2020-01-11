@@ -21,5 +21,4 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     public final WPI_TalonSRX getSlaveMotor() {
         return firstSlaveMotor;
     }
-
 }

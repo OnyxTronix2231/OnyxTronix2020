@@ -22,11 +22,6 @@ public class ClimbBySpeed extends CommandBase {
   }
 
   @Override
-  public boolean isFinished() {
-    return false;
-  }
-
-  @Override
   public void end(final boolean interrupted) {
     climber.climbBySpeed(0);
   }

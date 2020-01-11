@@ -16,13 +16,13 @@ public class MoveBallConveyanceBySpeed extends CommandBase {
 
     @Override
     public void initialize() {
-        conveyance.moveConveyanceSystemOne(speed.getAsDouble());
-        conveyance.moveConveyanceSystemTwo(speed.getAsDouble());
+        conveyance.moveConveyanceComponents(speed.getAsDouble());
+        conveyance.moveSecondaryConveyance(speed.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        conveyance.stopMotorSystemOne();
-        conveyance.stopMotorSystemTwo();
+        conveyance.stopMotorConveyanceComponents();
+        conveyance.stopMotorSecondaryConveyance();
     }
 }

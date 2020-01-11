@@ -2,11 +2,11 @@ package robot.conveyance;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Conveyance extends SubsystemBase {
+public class StorageConveyor extends SubsystemBase {
 
     private final BasicConveyanceComponents components;
 
-    public Conveyance(final BasicConveyanceComponents moveFirstConveyanceBySpeed, final BasicSecondaryConveyance secondaryComponents) {
+    public StorageConveyor(final BasicConveyanceComponents moveFirstConveyanceBySpeed, final BasicSecondaryConveyance secondaryComponents) {
         this.components = moveFirstConveyanceBySpeed;
     }
 

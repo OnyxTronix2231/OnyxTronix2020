@@ -1,15 +1,15 @@
 package robot.conveyance.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import robot.conveyance.Conveyance;
+import robot.conveyance.StorageConveyor;
 
 import java.util.function.DoubleSupplier;
 
 public class MoveBallConveyanceBySpeed extends CommandBase {
-    private final Conveyance conveyance;
+    private final StorageConveyor conveyance;
     private final DoubleSupplier speedSupplier;
 
-    public MoveBallConveyanceBySpeed(Conveyance conveyance , DoubleSupplier speed) {
+    public MoveBallConveyanceBySpeed(StorageConveyor conveyance , DoubleSupplier speed) {
         this.conveyance = conveyance;
         this.speedSupplier = speed;
     }

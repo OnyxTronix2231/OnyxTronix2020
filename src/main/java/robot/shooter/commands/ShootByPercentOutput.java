@@ -10,20 +10,15 @@ public class ShootByPercentOutput extends CommandBase {
   private final DoubleSupplier speedSupplier;
   private final Shooter shooter;
 
-  public ShootByPercentOutput(final Shooter shooter, final DoubleSupplier speed) {
+  public ShootByPercentOutput(final Shooter shooter, final DoubleSupplier speedSupplier) {
     this.shooter = shooter;
-    this.speedSupplier = speed;
+    this.speedSupplier = speedSupplier;
     addRequirements(shooter);
   }
 
   @Override
   public final void execute() {
     shooter.shootBySpeed(speedSupplier);
-  }
-
-  @Override
-  public final boolean isFinished() {
-    return false;
   }
 
   @Override

@@ -1,5 +1,6 @@
 package robot.conveyance;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicConveyanceComponents implements ConveyanceComponents {
@@ -8,9 +9,9 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     private final WPI_TalonSRX slaveMotor;
 
     public BasicConveyanceComponents() {
-        this.masterMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_MASTER_MOTOR_PORT);
+        masterMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_MASTER_MOTOR_PORT);
 
-        this.slaveMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_SLAVE_MOTOR_PORT);
+        slaveMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_SLAVE_MOTOR_PORT);
         slaveMotor.follow(masterMotor);
     }
 
@@ -20,7 +21,7 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     }
 
     @Override
-    public WPI_TalonSRX getSlaveMotor() {
+    public IMotorController getSlaveMotor() {
         return slaveMotor;
     }
 }

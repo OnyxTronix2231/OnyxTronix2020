@@ -14,12 +14,12 @@ public class Shooter extends SubsystemBase {
     this.components = components;
   }
 
-  public final void shootBySpeed(final DoubleSupplier speedSupplier) {
-    components.getMasterMotor().set(speedSupplier.getAsDouble());
+  public void shootBySpeed(final double speed) {
+    components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotor() {
-    shootBySpeed(() -> 0);
+  public void stopMotor() {
+    shootBySpeed(0);
   }
 
   public void setVelocity(final double velocity) {

@@ -11,19 +11,15 @@ public class Climber extends SubsystemBase {
     this.components = components;
   }
 
-  public final void moveBySpeed(final double speed) {
+  public final void climbBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotor() {
-    components.getMasterMotor().set(0);
-  }
-
-  public final void closeDoubleSolenoid() {
+  public final void closePistons() {
     components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
   }
 
-  public final void openDoubleSolenoid() {
+  public final void openPistons() {
     components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 }

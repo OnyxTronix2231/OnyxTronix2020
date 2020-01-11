@@ -18,7 +18,7 @@ public class ClimbBySpeed extends CommandBase {
 
   @Override
   public void execute() {
-    climber.moveBySpeed(speedSupplier.getAsDouble());
+    climber.climbBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override
@@ -28,6 +28,6 @@ public class ClimbBySpeed extends CommandBase {
 
   @Override
   public void end(final boolean interrupted) {
-    climber.stopMotor();
+    climber.climbBySpeed(0);
   }
 }

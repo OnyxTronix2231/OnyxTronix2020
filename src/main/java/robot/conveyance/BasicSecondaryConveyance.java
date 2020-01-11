@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicSecondaryConveyance implements ConveyanceComponents{
+
   private final WPI_TalonSRX secondMasterMotor;
   private final WPI_TalonSRX secondSlaveMotor;
 

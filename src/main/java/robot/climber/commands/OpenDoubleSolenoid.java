@@ -7,7 +7,7 @@ public class OpenDoubleSolenoid extends CommandBase {
 
   private final Climber climber;
 
-  public OpenDoubleSolenoid(Climber climber) {
+  public OpenDoubleSolenoid(final Climber climber) {
     this.climber = climber;
     addRequirements(climber);
   }

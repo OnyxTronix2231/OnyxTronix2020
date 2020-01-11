@@ -10,7 +10,6 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-
 sourceSets {
     main {
         java {

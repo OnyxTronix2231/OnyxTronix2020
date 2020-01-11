@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
+
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX rightMaster;
   private final WPI_TalonFX leftSlave;

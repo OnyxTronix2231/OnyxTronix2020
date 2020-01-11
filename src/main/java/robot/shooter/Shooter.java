@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
         components.getMasterMotor().set(0);
     }
 
-    public void setVelocity(final double speed){
-        components.getMasterMotor().set(ControlMode.Velocity, speed);
+    public void setVelocity(final double velocity){
+        components.getMasterMotor().set(ControlMode.Velocity, velocity);
     }
 }

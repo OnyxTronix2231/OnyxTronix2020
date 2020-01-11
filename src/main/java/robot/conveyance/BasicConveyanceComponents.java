@@ -23,17 +23,17 @@ public class BasicConveyanceComponents implements ConveyanceComponents{
     }
 
     @Override
-    public TalonSRX getFirstMasterMotor() {
+    public final TalonSRX getFirstMasterMotor() {
         return firstMasterMotor;
     }
 
     @Override
-    public IMotorController getFirstSlaveMotor() {
+    public final IMotorController getFirstSlaveMotor() {
         return firstSlaveMotor;
     }
 
     @Override
-    public IMotorController getSecondMasterMotor() {
+    public final IMotorController getSecondMasterMotor() {
         return secondMasterMotor;
     }
 

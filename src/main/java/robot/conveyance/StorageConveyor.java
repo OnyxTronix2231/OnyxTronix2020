@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StorageConveyor extends SubsystemBase {
 
-    private final BasicConveyanceComponents components;
+  private final BasicConveyorComponents components;
 
-    public StorageConveyor(final BasicConveyanceComponents moveFirstConveyanceBySpeed, final BasicSecondaryConveyance secondaryComponents) {
-        this.components = moveFirstConveyanceBySpeed;
-    }
+  public StorageConveyor(final BasicConveyorComponents moveFirstConveyorBySpeed, final BasicSecondaryConveyor secondaryComponents) {
+    this.components = moveFirstConveyorBySpeed;
+  }
 
-    public final void moveConveyanceBySpeed(final double speed){
-        components.getMasterMotor().set(speed);
-    }
+  public final void moveConveyorBySpeed(final double speed) {
+    components.getMasterMotor().set(speed);
+  }
 
-    public final void stopMotorFirstConveyance(){
-        components.getMasterMotor().set(0);
-    }
+  public final void stopMotorFirstConveyor() {
+    components.getMasterMotor().set(0);
+  }
 }

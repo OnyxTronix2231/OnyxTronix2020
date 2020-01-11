@@ -7,11 +7,11 @@ import onyxTronix.UniqueTriggerCache;
 import robot.conveyance.commands.MoveBallConveyanceBySpeed;
 
 
-public class ConveyanceOi {
+public class ConveyorOi {
 
-  public ConveyanceOi(final StorageConveyor conveyance, final UniqueTriggerCache buttonJoystickAxisCache){
+  public ConveyorOi(final StorageConveyor conveyance, final UniqueTriggerCache buttonJoystickAxisCache) {
     final Trigger moveSecondaryConveyanceBySpeed = buttonJoystickAxisCache.createJoystickTrigger(Button.kB.value);
-    moveSecondaryConveyanceBySpeed.whileActiveContinuous(new MoveBallConveyanceBySpeed(conveyance ,
-        () -> ConveyanceConstants.CONVEYANCE_SPEED));
+    moveSecondaryConveyanceBySpeed.whileActiveContinuous(new MoveBallConveyanceBySpeed(conveyance,
+        () -> ConveyorConstants.CONVEYOR_SPEED));
   }
 }

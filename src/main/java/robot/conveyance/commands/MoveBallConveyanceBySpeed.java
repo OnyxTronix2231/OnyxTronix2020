@@ -6,21 +6,21 @@ import robot.conveyance.StorageConveyor;
 import java.util.function.DoubleSupplier;
 
 public class MoveBallConveyanceBySpeed extends CommandBase {
-    private final StorageConveyor conveyance;
-    private final DoubleSupplier speedSupplier;
+  private final StorageConveyor conveyance;
+  private final DoubleSupplier speedSupplier;
 
-    public MoveBallConveyanceBySpeed(StorageConveyor conveyance , DoubleSupplier speed) {
-        this.conveyance = conveyance;
-        this.speedSupplier = speed;
-    }
+  public MoveBallConveyanceBySpeed(StorageConveyor conveyance, DoubleSupplier speed) {
+    this.conveyance = conveyance;
+    this.speedSupplier = speed;
+  }
 
-    @Override
-    public void initialize() {
-        conveyance.moveConveyanceBySpeed(speedSupplier.getAsDouble());
-    }
+  @Override
+  public void initialize() {
+    conveyance.moveConveyorBySpeed(speedSupplier.getAsDouble());
+  }
 
-    @Override
-    public void end(boolean interrupted) {
-        conveyance.stopMotorFirstConveyance();
-    }
+  @Override
+  public void end(boolean interrupted) {
+    conveyance.stopMotorFirstConveyor();
+  }
 }

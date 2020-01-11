@@ -13,43 +13,43 @@ import onyxTronix.UniqueTriggerCache;
 
 public class Robot extends TimedRobot {
 
-    @Override
-    public void robotInit() {
-        XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
-        UniqueTriggerCache driveJoystickButtonCache = new UniqueTriggerCache(driveJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Button));
-        UniqueTriggerCache driveJoystickAxisCache = new UniqueTriggerCache(driveJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Axis));
+  @Override
+  public void robotInit() {
+    XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
+    UniqueTriggerCache driveJoystickButtonCache = new UniqueTriggerCache(driveJoystick,
+        new JoystickTriggerFactory(JoystickTriggerType.Button));
+    UniqueTriggerCache driveJoystickAxisCache = new UniqueTriggerCache(driveJoystick,
+        new JoystickTriggerFactory(JoystickTriggerType.Axis));
 
-        XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
-        UniqueTriggerCache buttonsJoystickButtonCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Button));
-        UniqueTriggerCache buttonsJoystickAxisCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Axis));
-    }
+    XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
+    UniqueTriggerCache buttonsJoystickButtonCache = new UniqueTriggerCache(buttonsJoystick,
+        new JoystickTriggerFactory(JoystickTriggerType.Button));
+    UniqueTriggerCache buttonsJoystickAxisCache = new UniqueTriggerCache(buttonsJoystick,
+        new JoystickTriggerFactory(JoystickTriggerType.Axis));
+  }
 
-    @Override
-    public void autonomousPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void autonomousPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
-    @Override
-    public void teleopPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void teleopPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
-    @Override
-    public void testInit() {
-        LiveWindow.setEnabled(true);
-    }
+  @Override
+  public void testInit() {
+    LiveWindow.setEnabled(true);
+  }
 
-    @Override
-    public void disabledInit() {
-        LiveWindow.setEnabled(false);
-    }
+  @Override
+  public void disabledInit() {
+    LiveWindow.setEnabled(false);
+  }
 
-    @Override
-    public void disabledPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void disabledPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 }

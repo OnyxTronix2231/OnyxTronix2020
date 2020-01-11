@@ -2,17 +2,17 @@ package robot.conveyance;
 
 public class LoaderConveyor {
 
-  private final BasicSecondaryConveyance components;
+  private final BasicSecondaryConveyor components;
 
-  public LoaderConveyor(final BasicSecondaryConveyance moveFirstConveyanceBySpeed, final BasicSecondaryConveyance secondaryComponents) {
-    this.components = moveFirstConveyanceBySpeed;
+  public LoaderConveyor(final BasicSecondaryConveyor moveFirstConveyorBySpeed, final BasicSecondaryConveyor secondaryComponents) {
+    this.components = moveFirstConveyorBySpeed;
   }
 
-  public final void moveConveyanceBySpeed(final double speed){
+  public final void moveConveyorBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotorFirstConveyance(){
+  public final void stopMotorFirstConveyor() {
     components.getMasterMotor().set(0);
   }
 }

@@ -10,6 +10,6 @@ public class VisionOi {
   public VisionOi(final UniqueTriggerCache driveJoystickButtonCache, final XboxController driveJoystick,
                   final DriveTrain driveTrain) {
      Trigger correctByVisionButton = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-     correctByVisionButton.whileActiveContinuous(new CorrectByVision(driveTrain, driveJoystick));
+     correctByVisionButton.whileActiveOnce(new CorrectByVision(driveTrain, driveJoystick));
   }
 }

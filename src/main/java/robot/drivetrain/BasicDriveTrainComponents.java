@@ -28,18 +28,29 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     rightMaster = new WPI_TalonFX(MASTER_RIGHT_PORT);
     rightMaster.configFactoryDefault();
 
+    rightMaster.configVoltageCompSaturation(DriveTrainConstants.MAX_VOLTAGE,100);
+    rightMaster.enableVoltageCompensation(true);
+
     rightSlave = new WPI_TalonFX(SLAVE_RIGHT_PORT);
     rightSlave.follow(rightMaster);
     rightSlave.configFactoryDefault();
+    rightSlave.configVoltageCompSaturation(DriveTrainConstants.MAX_VOLTAGE,100);
+    rightSlave.enableVoltageCompensation(true);
 
     leftMaster = new WPI_TalonFX(MASTER_LEFT_PORT);
     leftMaster.configFactoryDefault();
     leftMaster.setInverted(true);
 
+    leftMaster.configVoltageCompSaturation(DriveTrainConstants.MAX_VOLTAGE,100);
+    leftMaster.enableVoltageCompensation(true);
+
     leftSlave = new WPI_TalonFX(SLAVE_LEFT_PORT);
     leftSlave.follow(leftMaster);
     leftSlave.configFactoryDefault();
     leftSlave.setInverted(true);
+
+    leftSlave.configVoltageCompSaturation(DriveTrainConstants.MAX_VOLTAGE,100);
+    leftSlave.enableVoltageCompensation(true);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);

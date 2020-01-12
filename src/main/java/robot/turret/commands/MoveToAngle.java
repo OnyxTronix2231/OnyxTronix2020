@@ -1,12 +1,11 @@
 package robot.turret.commands;
 
+import static robot.turret.TurretConstants.TOLERANCE;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.turret.Turret;
 
-import java.util.function.DoubleSupplier;
-
-public class MoveToAngle extends InstantCommand {
+public class MoveToAngle extends CommandBase {
 
   private final Turret turret;
   private final double angle;
@@ -19,7 +18,17 @@ public class MoveToAngle extends InstantCommand {
 
   @Override
   public void initialize() {
-    turret.moveToAngle(angle);
+    turret.initEncoders();
   }
 
+  @Override
+  public void execute() {
+    turret.moveToAngle(angle);
+    System.out.printf("I\'m Working :)\n");
+  }
+
+  @Override
+  public boolean isFinished() {
+    return Math.abs(turret.getEncoderPosition() - turret.convertAngleToEncoderUnits(angle)) < TOLERANCE;
+  }
 }

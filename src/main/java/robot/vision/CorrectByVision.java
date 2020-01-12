@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.drivetrain.DriveTrain;
 import robot.vision.limelight.Limelight;
 import robot.vision.limelight.enums.LimelightLedMode;
+import robot.vision.limelight.exception.TargetNotFoundException;
 import robot.vision.limelight.target.LimelightTarget;
 
 public class CorrectByVision extends CommandBase {
@@ -34,7 +35,13 @@ public class CorrectByVision extends CommandBase {
 
   @Override
   public void execute() {
-    final LimelightTarget target = Limelight.getInstance().getTarget();
+    LimelightTarget target = null;
+    try {
+      target = Limelight.getInstance().getTarget();
+    } catch (TargetNotFoundException e) {
+      System.out.println("Target Not found!");
+      return;
+    }
     driveTrain.arcadeDrive(driveJoystick.getY(GenericHID.Hand.kLeft)
       ,-pidController.calculate(target.getHorizontalOffsetToCrosshair()));
   }

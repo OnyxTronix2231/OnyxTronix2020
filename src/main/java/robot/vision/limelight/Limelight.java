@@ -103,7 +103,7 @@ public class Limelight {
    * @exception TargetNotFoundException
    * @return Vision Target retrieved from Limelight
    */
-  public LimelightTarget getTarget() {
+  public LimelightTarget getTarget() throws TargetNotFoundException{
     if(networkTable.getEntry("tv").getDouble(DEFAULT_VALUE) < 1) {
       throw new TargetNotFoundException();
     }
@@ -129,7 +129,7 @@ public class Limelight {
    * @exception TargetNotFoundException
    * @return Vision Target With Raw Corners Retrieved from Limelight
    */
-  public LimelightTargetWithRawCorners getTargetWithRawCorners() {
+  public LimelightTargetWithRawCorners getTargetWithRawCorners() throws TargetNotFoundException{
     final LimelightTarget basicTarget = getTarget();
     final Corner[] corners;
     final double[] xcorners;

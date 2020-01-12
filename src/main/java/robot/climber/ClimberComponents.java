@@ -13,6 +13,4 @@ public interface ClimberComponents {
   DoubleSolenoid getLeftDoubleSolenoid();
 
   DoubleSolenoid getRightDoubleSolenoid();
-
-
 }

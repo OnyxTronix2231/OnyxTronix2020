@@ -17,10 +17,10 @@ public class ClimberOi {
         buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
     climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
 
-    final Trigger openSolenoidButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kB.value);
-    openSolenoidButton.whenActive(new OpenPistons(climber));
+    final Trigger openDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kB.value);
+    openDoubleSolenoidsButton.whenActive(new OpenPistons(climber));
 
-    final Trigger closeSolenoidButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kX.value);
-    closeSolenoidButton.whenActive(new ClosePistons(climber));
+    final Trigger closeDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kX.value);
+    closeDoubleSolenoidsButton.whenActive(new ClosePistons(climber));
   }
 }

@@ -20,10 +20,10 @@ public class BasicClimberComponents implements ClimberComponents {
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
 
-    leftDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_LEFT_SOLENOID_FORWARD_PORT,
-        ClimberConstants.DOUBLE_LEFT_SOLENOID_REVERSE_PORT);
-    rightDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_RIGHT_SOLENOID_FORWARD_PORT,
-        ClimberConstants.DOUBLE_RIGHT_SOLENOID_REVERSE_PORT);
+    leftDoubleSolenoid = new DoubleSolenoid(ClimberConstants.LEFT_DOUBLE_SOLENOID_FORWARD_PORT,
+        ClimberConstants.LEFT_DOUBLE_SOLENOID_REVERSE_PORT);
+    rightDoubleSolenoid = new DoubleSolenoid(ClimberConstants.RIGHT_DOUBLE_SOLENOID_FORWARD_PORT,
+        ClimberConstants.RIGHT_DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   @Override
@@ -32,7 +32,7 @@ public class BasicClimberComponents implements ClimberComponents {
   }
 
   @Override
-  public IMotorController getSlaveMotor() {
+  public WPI_VictorSPX getSlaveMotor() {
     return slaveMotor;
   }
 

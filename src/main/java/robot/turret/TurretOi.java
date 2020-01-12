@@ -10,7 +10,7 @@ import robot.turret.commands.MoveToAngle;
 
 public class TurretOi {
 
-  public ClimberOi(final UniqueTriggerCache buttonsJoystickButtonCache,
+  public TurretOi(final UniqueTriggerCache buttonsJoystickButtonCache,
                    final UniqueAxisCache buttonJoystickAxisCache, final Turret turret) {
     final JoystickAxis climbBySpeedAxis =
         buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);

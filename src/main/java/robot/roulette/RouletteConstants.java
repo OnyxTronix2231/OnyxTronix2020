@@ -4,6 +4,9 @@ public final class RouletteConstants {
   public static int MASTER_MOTOR_PORT = 0;
   public static int DOUBLE_SOLENOID_FORWARD_CHANNEL = 0;
   public static int DOUBLE_SOLENOID_REVERSE_CHANNEL = 1;
+  public static int SPIN_DIRECTION_FORWARD = 1;
+  public static int SPIN_DIRECTION_BACKWARD = -1;
+  public static double SPIN_COLOR_SPEED = 0.3;
   public static RGBValue GREEN_RGB_VALUE = new RGBValue(0.149, 0.599, 0.250);
   public static RGBValue BLUE_RGB_VALUE = new RGBValue(0.108, 0.428, 0.462);
   public static RGBValue RED_RGB_VALUE = new RGBValue(0.551, 0.329, 0.119);

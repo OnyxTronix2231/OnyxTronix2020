@@ -2,7 +2,6 @@ package robot.roulette;
 
 import java.util.Arrays;
 import java.util.Collections;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.util.Color;

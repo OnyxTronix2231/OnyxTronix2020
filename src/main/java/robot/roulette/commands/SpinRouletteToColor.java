@@ -9,19 +9,22 @@ import robot.roulette.RouletteColor;
 public class SpinRouletteToColor extends CommandBase {
 
   private final Roulette roulette;
-  private final RouletteColor rouletteColor;
-  private final int direction;
+  private RouletteColor requiredColor;
 
-  public SpinRouletteToColor(Roulette roulette, RouletteColor rouletteColor, int direction) {
+  public SpinRouletteToColor(final Roulette roulette) {
     this.roulette = roulette;
-    this.rouletteColor = rouletteColor;
-    this.direction = direction;
     addRequirements(roulette);
   }
 
   @Override
+  public void initialize() {
+
+    requiredColor = roulette.getRequiredMatchColor();
+  }
+
+  @Override
   public void execute() {
-    roulette.spinMotor(SPIN_COLOR_SPEED * direction);
+    roulette.spinMotor(SPIN_COLOR_SPEED);
   }
 
   @Override
@@ -31,6 +34,6 @@ public class SpinRouletteToColor extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return rouletteColor == roulette.getClosestColor();
+    return requiredColor == roulette.getClosestColor();
   }
 }

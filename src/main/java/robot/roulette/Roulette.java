@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
-
     public Roulette(final BasicRouletteComponents componentsRoulette) {
         this.components = componentsRoulette;
     }
@@ -26,6 +26,29 @@ public class Roulette extends SubsystemBase {
     public void closeDoubleSolenoid() {
         components.getDoubleSolenoid().close();
     }
+
+    public RouletteColor getRequiredMatchColor() {
+        RouletteColor requiredMatchColor;
+        switch (DriverStation.getInstance().getGameSpecificMessage().charAt(0)) {
+            case 'B':
+                requiredMatchColor = RouletteColor.Blue;
+                break;
+            case 'G':
+                requiredMatchColor = RouletteColor.Green;
+                break;
+            case 'R':
+                requiredMatchColor = RouletteColor.Red;
+                break;
+            case 'Y':
+                requiredMatchColor = RouletteColor.Yellow;
+                break;
+            default:
+                requiredMatchColor = null;
+                break;
+        }
+        return requiredMatchColor;
+    }
+
 
     public RouletteColor getClosestColor() {
         final Color detectedColor = components.getColorSensorV3().getColor();
@@ -47,6 +70,7 @@ public class Roulette extends SubsystemBase {
                 return RouletteColor.Yellow;
         }
     }
+
 
     public void stopSpin() {
         components.getMasterMotor().set(ControlMode.Disabled, 1);

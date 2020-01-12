@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.shooter.BasicShooterComponents;
-import robot.shooter.Shooter;
-import robot.shooter.ShooterOi;
 
 public class Robot extends TimedRobot {
 

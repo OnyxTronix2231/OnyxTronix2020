@@ -20,8 +20,10 @@ public class BasicClimberComponents implements ClimberComponents {
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
 
-    leftDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_LEFT_SOLENOID_FORWARD_PORT, ClimberConstants.DOUBLE_LEFT_SOLENOID_REVERSE_PORT);
-    rightDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_RIGHT_SOLENOID_FORWARD_PORT, ClimberConstants.DOUBLE_RIGHT_SOLENOID_REVERSE_PORT);
+    leftDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_LEFT_SOLENOID_FORWARD_PORT,
+        ClimberConstants.DOUBLE_LEFT_SOLENOID_REVERSE_PORT);
+    rightDoubleSolenoid = new DoubleSolenoid(ClimberConstants.DOUBLE_RIGHT_SOLENOID_FORWARD_PORT,
+        ClimberConstants.DOUBLE_RIGHT_SOLENOID_REVERSE_PORT);
   }
 
   @Override

@@ -24,7 +24,7 @@ public class BasicShooterComponents implements ShooterComponents {
   }
 
   @Override
-  public IMotorController getSlaveMotor() {
+  public WPI_VictorSPX getSlaveMotor() {
     return slaveMotor;
   }
 }

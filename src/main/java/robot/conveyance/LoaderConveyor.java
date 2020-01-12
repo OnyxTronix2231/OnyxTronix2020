@@ -12,7 +12,7 @@ public class LoaderConveyor {
     components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotorFirstConveyor() {
+  public final void stopMotorStorageConveyor() {
     components.getMasterMotor().set(0);
   }
 }

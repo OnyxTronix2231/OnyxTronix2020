@@ -6,15 +6,15 @@ public class StorageConveyor extends SubsystemBase {
 
   private final BasicConveyorComponents components;
 
-  public StorageConveyor(final BasicConveyorComponents moveFirstConveyorBySpeed, final BasicSecondaryConveyor secondaryComponents) {
-    this.components = moveFirstConveyorBySpeed;
+  public StorageConveyor(final BasicConveyorComponents storageComponents, final BasicSecondaryConveyor LoaderComponents) {
+    this.components = storageComponents;
   }
 
   public final void moveConveyorBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotorFirstConveyor() {
+  public final void stopMotorStorageConveyor() {
     components.getMasterMotor().set(0);
   }
 }

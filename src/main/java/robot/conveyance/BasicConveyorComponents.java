@@ -10,8 +10,10 @@ public class BasicConveyorComponents implements ConveyorComponents {
 
   public BasicConveyorComponents() {
     masterMotor = new WPI_TalonSRX(ConveyorConstants.FIRST_MASTER_MOTOR_PORT);
+    masterMotor.configFactoryDefault();
 
     slaveMotor = new WPI_TalonSRX(ConveyorConstants.FIRST_SLAVE_MOTOR_PORT);
+    slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
   }
 

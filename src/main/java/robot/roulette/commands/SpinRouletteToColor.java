@@ -5,7 +5,6 @@ import static robot.roulette.RouletteConstants.SPIN_COLOR_SPEED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
-import robot.roulette.RouletteConstants;
 
 public class SpinRouletteToColor extends CommandBase {
 

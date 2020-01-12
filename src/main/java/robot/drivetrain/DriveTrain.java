@@ -43,19 +43,6 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
   }
 
-<<<<<<<
-    components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
-        DriveTrainConstants.PRIMARY_PID);
-    components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
-            + components.getRightMasterMotor().getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
-  }
-=======
-  public final double cmToEncoderUnits(final double cm) {
-    return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
-  }
->>>>>>>
-
   public final double getLeftDistance() {
     return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
         DriveTrainConstants.PERIMETER;
@@ -84,12 +71,12 @@ public class DriveTrain extends SubsystemBase {
     return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
   }
 
-  private TalonSrxEncoder getLeftEncoder() {
-    return new TalonSrxEncoder(components.getLeftMasterMotor(), 0);
+  private TalonFXEncoder getLeftEncoder() {
+    return new TalonFXEncoder(components.getLeftMasterMotor(), 0);
   }
 
-  private TalonSrxEncoder getRightEncoder() {
-    return new TalonSrxEncoder(components.getRightMasterMotor(), 0);
+  private TalonFXEncoder getRightEncoder() {
+    return new TalonFXEncoder(components.getRightMasterMotor(), 0);
   }
 
   private void resetEncoders() {

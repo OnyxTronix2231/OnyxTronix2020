@@ -8,7 +8,7 @@ import java.util.function.DoubleSupplier;
 public class DriveByDistance extends CommandBase {
 
   private final DriveTrain driveTrain;
-  private final DoubleSupplier distance;
+  private final DoubleSupplier distanceSupplier;
   private boolean isFinished;
   private int successfulCheckCounter;
 
@@ -32,10 +32,4 @@ public class DriveByDistance extends CommandBase {
   public void end(final boolean interrupted) {
     driveTrain.stopDrive();
   }
-
-<<<<<<<
-  }
-=======
-
->>>>>>>
 }

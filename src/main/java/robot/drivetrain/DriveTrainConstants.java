@@ -21,6 +21,7 @@ public final class DriveTrainConstants {
   public static final int SLAVE_LEFT_PORT = 3;
   public static final int MASTER_RIGHT_PORT = 0;
   public static final int SLAVE_RIGHT_PORT = 1;
+  public static final int PIGEON_NUMBER = 0;
 
   public static final class TRAJECTORY_PARAMS {
     // Use Robot Characterization Toolsuite to determine correct values of your robot per the guide found here:

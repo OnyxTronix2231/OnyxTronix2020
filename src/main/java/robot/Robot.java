@@ -3,27 +3,20 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-<<<<<<< HEAD
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-=======
-import onyxTronix.JoystickTriggerFactory;
-import onyxTronix.JoystickTriggerType;
-import onyxTronix.UniqueTriggerCache;
-import robot.drivetrain.BasicDriveTrainComponents;
-import robot.drivetrain.DriveByJoystick;
-import robot.drivetrain.DriveTrain;
-import robot.vision.VisionOi;
-import robot.vision.limelight.Limelight;
-import robot.vision.limelight.enums.LimelightLedMode;
-import robot.vision.limelight.enums.LimelightOperationMode;
->>>>>>> added basic vision + created a wrapper for Limelight's NetworkTables api
 
 public class Robot extends TimedRobot {
+
+    ColorSensorV3 colorSensorV3;
 
     @Override
     public void robotInit() {
@@ -32,22 +25,8 @@ public class Robot extends TimedRobot {
         UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
 
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
-<<<<<<< HEAD
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-=======
-        UniqueTriggerCache buttonsJoystickButtonCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Button));
-        UniqueTriggerCache buttonsJoystickAxisCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Axis));
-
-        Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
-        Limelight.getInstance().setOperationMode(LimelightOperationMode.visionProcessor);
-
-        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
-        driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
-        new VisionOi(driveJoystickButtonCache, driveJoystick, driveTrain);
->>>>>>> added basic vision + created a wrapper for Limelight's NetworkTables api
     }
 
     @Override
@@ -58,6 +37,54 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         CommandScheduler.getInstance().run();
+        Color color = colorSensorV3.getColor();
+        SmartDashboard.putNumber("Red", color.red);
+        SmartDashboard.putNumber("Green", color.green);
+        SmartDashboard.putNumber("Blue", color.blue);
+
+        SmartDashboard.putNumber("How Red", howRed(color));
+        SmartDashboard.putNumber("How Green", howGreen(color));
+        SmartDashboard.putNumber("How Blue", howBlue(color));
+        SmartDashboard.putNumber("How Yellow", howYellow(color));
+        SmartDashboard.putString("What Color", theColor(color));
+    }
+
+    public double squaredDiff(double a, double b) {
+        return Math.pow(a-b,2);
+    }
+
+    public double howBlue(Color color) {
+        return (squaredDiff(color.red, 0.108) + squaredDiff(color.green, 0.428) + squaredDiff(color.blue, 0.462));
+    }
+
+    public double howRed(Color color) {
+        return (squaredDiff(color.red, 0.551) + squaredDiff(color.green, 0.329) + squaredDiff(color.blue, 0.119));
+    }
+
+    public double howGreen(Color color) {
+        return (squaredDiff(color.red, 0.149) + squaredDiff(color.green, 0.599) + squaredDiff(color.blue, 0.250));
+    }
+
+    public double howYellow(Color color) {
+        return (squaredDiff(color.red, 0.319) + squaredDiff(color.green, 0.571) + squaredDiff(color.blue, 0.108));
+    }
+
+    public String theColor(Color color) {
+        double green = howGreen(color);
+        double blue = howBlue(color);
+        double red = howRed(color);
+        double yellow = howYellow(color);
+
+        double min = Math.min(green, Math.min(blue, Math.min(red, yellow)));
+        if (min == green) {
+            return "Green";
+        } else if (min == blue) {
+            return "Blue";
+        } else if (min == red) {
+            return "Red";
+        } else {
+            return "Yellow";
+        }
     }
 
     @Override

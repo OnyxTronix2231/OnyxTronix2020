@@ -1,5 +1,8 @@
 package robot.turret;
 
+import static robot.turret.TurretConstants.*;
+import static robot.turret.TurretConstants.DEGREES_IN_CIRCLE;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,7 +29,11 @@ public class Turret extends SubsystemBase {
     components.getMasterMotor().set(ControlMode.Position, convertAngleToEncoderUnits(angle));
   }
   public int convertAngleToEncoderUnits(final double angle){
-    return (int) (TurretConstants.DEGREES_IN_CIRCLE / TurretConstants.ENCODER_UNITS * TurretConstants.CONVERSION_RATE);
+    return (int) (DEGREES_IN_CIRCLE / ENCODER_UNITS * CONVERSION_RATE * angle);
+  }
+
+  public double getEncoderPosition() {
+    return components.getMasterMotor().getSelectedSensorPosition();
   }
 
 }

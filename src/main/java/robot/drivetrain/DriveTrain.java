@@ -15,7 +15,6 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
-    CommandScheduler.getInstance().registerSubsystem(this);
   }
 
   @Override
@@ -30,7 +29,6 @@ public class DriveTrain extends SubsystemBase {
   public final void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
-
   public final void initializeDriveByDistance(final double distance) {
     components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
         DriveTrainConstants.PRIMARY_PID);
@@ -44,6 +42,19 @@ public class DriveTrain extends SubsystemBase {
             + components.getRightMasterMotor().getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
   }
+
+<<<<<<<
+    components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
+        DriveTrainConstants.PRIMARY_PID);
+    components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
+            + components.getRightMasterMotor().getSelectedSensorPosition(),
+        DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
+  }
+=======
+  public final double cmToEncoderUnits(final double cm) {
+    return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
+  }
+>>>>>>>
 
   public final double getLeftDistance() {
     return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *

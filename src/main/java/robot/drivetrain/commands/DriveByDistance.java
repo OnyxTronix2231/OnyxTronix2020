@@ -12,27 +12,30 @@ public class DriveByDistance extends CommandBase {
   private boolean isFinished;
   private int successfulCheckCounter;
 
-  public DriveByDistance(final DriveTrain driveTrain, final DoubleSupplier distance) {
+  public DriveByDistance(final DriveTrain driveTrain, final DoubleSupplier distanceSupplier) {
     this.driveTrain = driveTrain;
-    this.distance = distance;
+    this.distanceSupplier = distanceSupplier;
     addRequirements(driveTrain);
   }
 
   @Override
   public void initialize() {
-    driveTrain.initializeDriveByDistance(distance.getAsDouble());
-    isFinished = false;
-    successfulCheckCounter = 0;
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    driveTrain.stopDrive();
+    driveTrain.initializeDriveByDistance(distanceSupplier.getAsDouble());
   }
 
   @Override
   public boolean isFinished() {
     return driveTrain.isDriveOnTarget();
-
   }
+
+  @Override
+  public void end(final boolean interrupted) {
+    driveTrain.stopDrive();
+  }
+
+<<<<<<<
+  }
+=======
+
+>>>>>>>
 }

@@ -3,6 +3,13 @@ package robot.drivetrain;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_D;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
+import static robot.drivetrain.DriveTrainConstants.MASTER_LEFT_PORT;
+import static robot.drivetrain.DriveTrainConstants.MASTER_RIGHT_PORT;
+import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.SLAVE_LEFT_PORT;
+import static robot.drivetrain.DriveTrainConstants.SLAVE_RIGHT_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -22,23 +29,38 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final PigeonIMU gyro;
   private final DifferentialDriveOdometry odometry;
 
+<<<<<<<
   public BasicDriveTrainComponents() {
     rightMaster = new WPI_TalonSRX(2);
     rightMaster.configFactoryDefault();
     rightMaster.configAllSettings(getConfiguration());
+=======
+  private final WPI_TalonFX rightSlave;
+  private final WPI_TalonFX rightMaster;
+  private final WPI_TalonFX leftSlave;
+  private final WPI_TalonFX leftMaster;
+  private final DifferentialDrive differentialDrive;
+>>>>>>>
 
-    rightSlave = new WPI_VictorSPX(1);
+  public BasicDriveTrainComponents() {
+    rightMaster = new WPI_TalonFX(MASTER_RIGHT_PORT);
+    rightMaster.configFactoryDefault();
+
+    rightSlave = new WPI_TalonFX(SLAVE_RIGHT_PORT);
     rightSlave.follow(rightMaster);
+    rightSlave.configFactoryDefault();
 
-    leftMaster = new WPI_TalonSRX(4);
+    leftMaster = new WPI_TalonFX(MASTER_LEFT_PORT);
     leftMaster.configFactoryDefault();
-    leftMaster.configAllSettings(getConfiguration());
+    leftMaster.setInverted(true);
 
-    leftSlave = new WPI_VictorSPX(3);
+    leftSlave = new WPI_TalonFX(SLAVE_LEFT_PORT);
     leftSlave.follow(leftMaster);
+    leftSlave.configFactoryDefault();
+    leftSlave.setInverted(true);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
-
+    differentialDrive.setRightSideInverted(false);
     gyro = new PigeonIMU(rightMaster);
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getOdometryHeading()));
@@ -50,7 +72,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public final WPI_TalonSRX getRightMasterMotor() {
+  public final WPI_TalonFX getRightMasterMotor() {
     return rightMaster;
   }
 
@@ -60,14 +82,14 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public final WPI_TalonSRX getLeftMasterMotor() {
+  public final WPI_TalonFX getLeftMasterMotor() {
     return leftMaster;
   }
 
+  @Override
   public final DifferentialDrive getDifferentialDrive() {
     return differentialDrive;
   }
-
   @Override
   public final PigeonIMU getGyro() {
     return gyro;

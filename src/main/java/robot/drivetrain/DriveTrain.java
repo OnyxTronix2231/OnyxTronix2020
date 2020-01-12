@@ -1,7 +1,15 @@
 package robot.drivetrain;
 
+import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
+import static robot.drivetrain.DriveTrainConstants.PERIMETER;
+import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
+import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
@@ -12,44 +20,44 @@ public class DriveTrain extends SubsystemBase {
     this.components = components;
   }
 
-  public final void stopDrive() {
+  public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
   }
 
-  public final void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
+  public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public final void initializeDriveByDistance(final double distance) {
-    components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
-        DriveTrainConstants.PRIMARY_PID);
-    components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
-            + components.getLeftMasterMotor().getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
-
-    components.getRightMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
-        DriveTrainConstants.PRIMARY_PID);
-    components.getRightMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
-            + components.getRightMasterMotor().getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
+  public TalonFX getLeftMaster() {
+    return components.getLeftMasterMotor();
   }
 
-  public final double cmToEncoderUnits(final double cm) {
-    return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
+  public TalonFX getRightMaster() {
+    return components.getRightMasterMotor();
   }
 
-  public final double getLeftDistance() {
-    return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
+  public void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
+    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
+        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
-  public final double getRightDistance() {
-    return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
+  public double getLeftDistance() {
+    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS *
+        PERIMETER;
   }
 
-  public final boolean isDriveOnTarget() {
-    return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
-        Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
+  public double getRightDistance() {
+    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS *
+        PERIMETER;
+  }
+
+  public boolean isDriveOnTarget() {
+    return Math.abs(getLeftMaster().getClosedLoopError()) < TOLERANCE &&
+        Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
+  }
+
+  private double cmToEncoderUnits(final double cm) {
+    return ENCODER_UNITS / (cm / (PERIMETER));
   }
 }

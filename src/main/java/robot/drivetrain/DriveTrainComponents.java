@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public interface DriveTrainComponents {
 
-  IMotorController getRightSlaveMotor();
-
   WPI_TalonFX getRightMasterMotor();
 
-  IMotorController getLeftSlaveMotor();
+  IMotorController getRightSlaveMotor();
 
   WPI_TalonFX getLeftMasterMotor();
+
+  IMotorController getLeftSlaveMotor();
 
   DifferentialDrive getDifferentialDrive();
 }

@@ -32,7 +32,7 @@ public class BasicClimberComponents implements ClimberComponents {
   }
 
   @Override
-  public WPI_VictorSPX getSlaveMotor() {
+  public IMotorController getSlaveMotor() {
     return slaveMotor;
   }
 

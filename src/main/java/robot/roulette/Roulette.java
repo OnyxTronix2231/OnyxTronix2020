@@ -27,20 +27,20 @@ public class Roulette extends SubsystemBase {
         components.getDoubleSolenoid().close();
     }
 
-    public RouletteColor getRequiredMatchColor() {
+    public RouletteColor getRequiredColorFromMatchColor() {
         RouletteColor requiredMatchColor;
         switch (DriverStation.getInstance().getGameSpecificMessage().charAt(0)) {
             case 'B':
-                requiredMatchColor = RouletteColor.Blue;
-                break;
-            case 'G':
-                requiredMatchColor = RouletteColor.Green;
-                break;
-            case 'R':
                 requiredMatchColor = RouletteColor.Red;
                 break;
-            case 'Y':
+            case 'G':
                 requiredMatchColor = RouletteColor.Yellow;
+                break;
+            case 'R':
+                requiredMatchColor = RouletteColor.Blue;
+                break;
+            case 'Y':
+                requiredMatchColor = RouletteColor.Green;
                 break;
             default:
                 requiredMatchColor = null;

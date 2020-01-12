@@ -18,8 +18,7 @@ public class SpinRouletteToColor extends CommandBase {
 
   @Override
   public void initialize() {
-
-    requiredColor = roulette.getRequiredMatchColor();
+    requiredColor = roulette.getRequiredColorFromMatchColor();
   }
 
   @Override

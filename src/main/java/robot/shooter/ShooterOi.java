@@ -1,16 +1,14 @@
 package robot.shooter;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
-import onyxTronix.UniqueTriggerCache;
+import onyxTronix.JoystickAxis.AxisMap;
+import onyxTronix.UniqueAxisCache;
 import robot.shooter.commands.ShootByPercentOutput;
 
 public class ShooterOi {
 
-  public ShooterOi(final UniqueTriggerCache buttonJoystickAxisCache, final Shooter shooter){
-    final Trigger shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootByPercentOutput(shooter,
-        () -> new Joystick(0).getRawAxis(JoystickAxis.AxisMap.kLeftY.value)));
+  public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache, final Shooter shooter){
+    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(AxisMap.kLeftY.value);
+    shootBySpeedAxis.whileActiveContinuous(new ShootByPercentOutput(shooter, shootBySpeedAxis::getRawAxis));
   }
 }

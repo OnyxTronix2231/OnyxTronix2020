@@ -34,25 +34,36 @@ public class DriveTrain extends SubsystemBase {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public TalonFX getLeftMaster() {
-    return components.getLeftMasterMotor();
+  public void driveByMotionMagic(final double distance) {
+    moveMotorByMotionMagic(getLeftMaster(), distance);
+    moveMotorByMotionMagic(getRightMaster(), distance);
   }
 
-  public TalonFX getRightMaster() {
-    return components.getRightMasterMotor();
+  public double getLeftDistance() {
+    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
-  public void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+  public double getRightDistance() {
+    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
+  }
+
+  public boolean isDriveOnTarget() {
+    return Math.abs(getLeftMaster().getClosedLoopError()) < TOLERANCE &&
+        Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
+  }
+
+  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
     motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
     motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
-  public boolean isDriveOnTarget() {
-    return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
-        Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
+  private TalonFX getLeftMaster() {
+    return components.getLeftMasterMotor();
   }
 
+  private TalonFX getRightMaster() {
+    return components.getRightMasterMotor();
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
   }
@@ -95,7 +106,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private double cmToEncoderUnits(final double cm) {
-    return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
+    return ENCODER_UNITS * cm / PERIMETER;
   }
 
 }

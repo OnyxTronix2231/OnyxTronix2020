@@ -50,6 +50,9 @@ public final class DriveTrainConstants {
     // meter per second of error calculated - Feedback Gains).
     public static final double P_DRIVE_VEL = 8.5;
 
+    // Max voltage the Ramsete command is allowed to use. (Self calculated)
+    public static final double MAX_VOLTAGE = 10;
+
 
     // The maximum distance the robot is able to reach every second (The robot's maximum velocity).
     public static final double MAX_SPEED_METERS_PER_SECOND = 3;
@@ -64,8 +67,6 @@ public final class DriveTrainConstants {
     public static final double RAMSETE_B = 2;
     public static final double RAMSETE_ZETA = 0.7;
     // Horizontal distance between the middle of each of your robot's wheel bases.
-    private static final double TRACKWIDTH_METERS = 0.69;
-    // This object is used to convert chassis speeds to wheel speeds.
-    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
+    public static final double TRACKWIDTH_METERS = 0.69;
   }
 }

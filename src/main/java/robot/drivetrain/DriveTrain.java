@@ -2,17 +2,14 @@ package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
-import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
-import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
-import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
@@ -49,6 +46,8 @@ public class DriveTrain extends SubsystemBase {
     motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
     motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+  }
+
   public boolean isDriveOnTarget() {
     return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
         Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;

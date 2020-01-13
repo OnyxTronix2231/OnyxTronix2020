@@ -10,6 +10,7 @@ import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
@@ -58,19 +59,19 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void tankDriveVolts(final double rightVolts, final double leftVolts) {
-    components.getLeftMasterMotor().setVoltage(leftVolts);
-    components.getRightMasterMotor().setVoltage(rightVolts);
+    getLeftMaster().setVoltage(leftVolts);
+    getRightMaster().setVoltage(rightVolts);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
   }
 
-  private TalonFX getLeftMaster() {
+  private WPI_TalonFX getLeftMaster() {
     return components.getLeftMasterMotor();
   }
 
-  private TalonFX getRightMaster() {
+  private WPI_TalonFX getRightMaster() {
     return components.getRightMasterMotor();
   }
 
@@ -103,5 +104,4 @@ public class DriveTrain extends SubsystemBase {
   private double cmToEncoderUnits(final double cm) {
     return ENCODER_UNITS * cm / PERIMETER;
   }
-
 }

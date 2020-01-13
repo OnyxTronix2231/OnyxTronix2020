@@ -22,5 +22,4 @@ public class TalonFXEncoder {
   public void reset() {
     m_talonFX.setSelectedSensorPosition(0, m_pidSlot, 100);
   }
-
 }

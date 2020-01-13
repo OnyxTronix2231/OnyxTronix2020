@@ -48,12 +48,6 @@ public class DriveTrain extends SubsystemBase {
         Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
   }
 
-  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
-    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
-    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
-  }
-
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
   }
@@ -65,6 +59,12 @@ public class DriveTrain extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
+  }
+
+  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
+    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
+        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
   private WPI_TalonFX getLeftMaster() {
@@ -84,11 +84,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private TalonFXEncoder getLeftEncoder() {
-    return new TalonFXEncoder(components.getLeftMasterMotor(), 0);
+    return new TalonFXEncoder(components.getLeftMasterMotor(), PRIMARY_PID);
   }
 
   private TalonFXEncoder getRightEncoder() {
-    return new TalonFXEncoder(components.getRightMasterMotor(), 0);
+    return new TalonFXEncoder(components.getRightMasterMotor(), PRIMARY_PID);
   }
 
   private void resetEncoders() {

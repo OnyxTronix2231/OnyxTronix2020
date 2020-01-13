@@ -55,7 +55,7 @@ public final class DriveTrainConstants {
     // The maximum distance the robot is able to reach every second (The robot's maximum velocity).
     public static final double MAX_SPEED_METERS_PER_SECOND = 3;
     // The maximum rise in velocity the robot is able to reach every second (The robot's maximum acceleration).
-    public static final double KAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
+    public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
 
 
     // Ramsete Parameters - Parameters used for calculations in the Ramsete Controller, a trajectory tracker

@@ -6,6 +6,9 @@ import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
 import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.PIGEON_NUMBER;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
@@ -112,8 +115,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
-    config.slot0.kF = DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT *
-        DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT / DriveTrainConstants.MAX_VELOCITY;
+    config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT *
+        MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     return config;
   }
 

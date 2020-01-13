@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public void driveByMotionProfile(final double distance) {
+  public void driveByMotionMagic(final double distance) {
     moveMotorByMotionMagic(getLeftMaster(), distance);
     moveMotorByMotionMagic(getRightMaster(), distance);
   }
@@ -46,18 +46,18 @@ public class DriveTrain extends SubsystemBase {
         Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
   }
 
+  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
+    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
+        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+  }
+
   private TalonFX getLeftMaster() {
     return components.getLeftMasterMotor();
   }
 
   private TalonFX getRightMaster() {
     return components.getRightMasterMotor();
-  }
-
-  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
-    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
-    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
   private double cmToEncoderUnits(final double cm) {

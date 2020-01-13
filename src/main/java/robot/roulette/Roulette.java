@@ -73,6 +73,6 @@ public class Roulette extends SubsystemBase {
 
 
     public void stopSpin() {
-        components.getMasterMotor().set(ControlMode.Disabled, 1);
+        components.getMasterMotor().set(0);
     }
 }

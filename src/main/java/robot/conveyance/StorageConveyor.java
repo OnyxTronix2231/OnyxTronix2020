@@ -10,11 +10,11 @@ public class StorageConveyor extends SubsystemBase {
     this.components = components;
   }
 
-  public final void moveConveyorBySpeed(final double speed) {
+  public void moveConveyorBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }
 
-  public final void stopMotorStorageConveyor() {
+  public void stopMotorStorageConveyor() {
     moveConveyorBySpeed(0);
   }
 }

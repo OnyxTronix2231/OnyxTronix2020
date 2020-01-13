@@ -3,11 +3,13 @@ package robot.drivetrain;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_D;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
-import static robot.drivetrain.DriveTrainConstants.MASTER_LEFT_PORT;
-import static robot.drivetrain.DriveTrainConstants.MASTER_RIGHT_PORT;
-import static robot.drivetrain.DriveTrainConstants.PIGEON_NUMBER;
-import static robot.drivetrain.DriveTrainConstants.SLAVE_LEFT_PORT;
-import static robot.drivetrain.DriveTrainConstants.SLAVE_RIGHT_PORT;
+import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
+import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
+import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -27,18 +29,20 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final DifferentialDriveOdometry odometry;
 
   public BasicDriveTrainComponents() {
-    rightMaster = new WPI_TalonFX(MASTER_RIGHT_PORT);
+    rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
     rightMaster.configFactoryDefault();
+    rightMaster.configAllSettings(getConfiguration());
 
-    rightSlave = new WPI_TalonFX(SLAVE_RIGHT_PORT);
-    rightSlave.follow(rightMaster);
+    rightSlave = new WPI_TalonFX(RIGHT_SLAVE_PORT);
     rightSlave.configFactoryDefault();
+    rightSlave.follow(rightMaster);
 
-    leftMaster = new WPI_TalonFX(MASTER_LEFT_PORT);
+    leftMaster = new WPI_TalonFX(LEFT_MASTER_PORT);
     leftMaster.configFactoryDefault();
+    leftMaster.configAllSettings(getConfiguration());
     leftMaster.setInverted(true);
 
-    leftSlave = new WPI_TalonFX(SLAVE_LEFT_PORT);
+    leftSlave = new WPI_TalonFX(LEFT_SLAVE_PORT);
     leftSlave.follow(leftMaster);
     leftSlave.configFactoryDefault();
     leftSlave.setInverted(true);

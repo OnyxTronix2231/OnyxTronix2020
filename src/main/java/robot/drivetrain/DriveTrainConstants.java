@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 public final class DriveTrainConstants {
 
+  public static final int LEFT_MASTER_PORT = 2;
+  public static final int LEFT_SLAVE_PORT = 3;
+  public static final int RIGHT_MASTER_PORT = 0;
+  public static final int RIGHT_SLAVE_PORT = 1;
   public static final double INCH_TO_CM = 2.54;
   public static final double ENCODER_UNITS = 1023.0;
   public static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
@@ -17,10 +21,6 @@ public final class DriveTrainConstants {
   public static final double DRIVE_BY_DISTANCE_P = 0;
   public static final double DRIVE_BY_DISTANCE_I = 0;
   public static final double DRIVE_BY_DISTANCE_D = 0;
-  public static final int MASTER_LEFT_PORT = 2;
-  public static final int SLAVE_LEFT_PORT = 3;
-  public static final int MASTER_RIGHT_PORT = 0;
-  public static final int SLAVE_RIGHT_PORT = 1;
   public static final int PIGEON_NUMBER = 0;
 
   public static final class TRAJECTORY_PARAMS {

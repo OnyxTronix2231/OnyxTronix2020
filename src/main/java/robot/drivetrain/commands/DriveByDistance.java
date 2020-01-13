@@ -20,7 +20,8 @@ public class DriveByDistance extends CommandBase {
 
   @Override
   public void initialize() {
-    driveTrain.initializeDriveByDistance(distanceSupplier.getAsDouble());
+    driveTrain.moveMotorByMotionMagic(driveTrain.getLeftMaster(), distanceSupplier.getAsDouble());
+    driveTrain.moveMotorByMotionMagic(driveTrain.getRightMaster(), distanceSupplier.getAsDouble());
   }
 
   @Override

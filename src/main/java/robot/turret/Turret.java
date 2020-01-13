@@ -26,10 +26,11 @@ public class Turret extends SubsystemBase {
     components.getMasterMotor().setSelectedSensorPosition(0);
   }
   public void moveToAngle(final double angle){
-    components.getMasterMotor().set(ControlMode.Position, convertAngleToEncoderUnits(angle));
+    System.out.println(convertAngleToEncoderUnits(angle));
+    components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(angle));
   }
   public int convertAngleToEncoderUnits(final double angle){
-    return (int) (DEGREES_IN_CIRCLE / ENCODER_UNITS * CONVERSION_RATE * angle);
+    return (int) (ENCODER_UNITS * CONVERSION_RATE * (angle / DEGREES_IN_CIRCLE));
   }
 
   public double getEncoderPosition() {

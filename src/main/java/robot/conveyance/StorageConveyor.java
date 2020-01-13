@@ -6,7 +6,7 @@ public class StorageConveyor extends SubsystemBase {
 
   private final BasicConveyorComponents components;
 
-  public StorageConveyor(final BasicConveyorComponents storageComponents, final BasicSecondaryConveyor LoaderComponents) {
+  public StorageConveyor(final BasicConveyorComponents storageComponents) {
     this.components = storageComponents;
   }
 

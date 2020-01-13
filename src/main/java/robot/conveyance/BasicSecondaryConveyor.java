@@ -1,5 +1,8 @@
 package robot.conveyance;
 
+import static robot.conveyance.ConveyorConstants.SECOND_MASTER_MOTOR_PORT;
+import static robot.conveyance.ConveyorConstants.SECOND_SLAVE_MOTOR_PORT;
+
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -9,10 +12,10 @@ public class BasicSecondaryConveyor implements ConveyorComponents {
   private final WPI_TalonSRX slaveMotor;
 
   public BasicSecondaryConveyor() {
-    this.masterMotor = new WPI_TalonSRX(ConveyorConstants.SECOND_MASTER_MOTOR_PORT);
+    this.masterMotor = new WPI_TalonSRX(SECOND_MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
 
-    this.slaveMotor = new WPI_TalonSRX(ConveyorConstants.SECOND_SLAVE_MOTOR_PORT);
+    this.slaveMotor = new WPI_TalonSRX(SECOND_SLAVE_MOTOR_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
   }

@@ -1,10 +1,12 @@
 package robot.conveyance;
 
-public class LoaderConveyor {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class LoaderConveyor extends SubsystemBase {
 
   private final BasicSecondaryConveyor components;
 
-  public LoaderConveyor(final BasicSecondaryConveyor moveFirstConveyorBySpeed, final BasicSecondaryConveyor secondaryComponents) {
+  public LoaderConveyor(final BasicSecondaryConveyor moveFirstConveyorBySpeed) {
     this.components = moveFirstConveyorBySpeed;
   }
 

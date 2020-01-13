@@ -15,7 +15,7 @@ public class ClimberOi {
   public ClimberOi(final UniqueTriggerCache buttonsJoystickButtonCache,
                    final UniqueAxisCache buttonJoystickAxisCache, final Climber climber) {
     final JoystickAxis climbBySpeedAxis =
-        buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
+        buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kRightY.value);
     climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
 
     final Trigger openDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(Button.kB.value);

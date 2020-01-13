@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class StorageConveyor extends SubsystemBase {
 
-  private final BasicConveyorComponents components;
+  private final BasicStorageConveyorComponents components;
 
-  public StorageConveyor(final BasicConveyorComponents storageComponents) {
-    this.components = storageComponents;
+  public StorageConveyor(final BasicStorageConveyorComponents components) {
+    this.components = components;
   }
 
   public final void moveConveyorBySpeed(final double speed) {
@@ -15,6 +15,6 @@ public class StorageConveyor extends SubsystemBase {
   }
 
   public final void stopMotorStorageConveyor() {
-    components.getMasterMotor().set(0);
+    moveConveyorBySpeed(0);
   }
 }

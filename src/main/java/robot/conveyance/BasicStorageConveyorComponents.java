@@ -1,27 +1,27 @@
 package robot.conveyance;
 
-import static robot.conveyance.ConveyorConstants.SECOND_MASTER_MOTOR_PORT;
-import static robot.conveyance.ConveyorConstants.SECOND_SLAVE_MOTOR_PORT;
+import static robot.conveyance.ConveyorConstants.FIRST_MASTER_MOTOR_PORT;
+import static robot.conveyance.ConveyorConstants.FIRST_SLAVE_MOTOR_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class BasicSecondaryConveyor implements ConveyorComponents {
+public class BasicStorageConveyorComponents implements ConveyorComponents {
 
   private final WPI_TalonSRX masterMotor;
   private final WPI_TalonSRX slaveMotor;
 
-  public BasicSecondaryConveyor() {
-    this.masterMotor = new WPI_TalonSRX(SECOND_MASTER_MOTOR_PORT);
+  public BasicStorageConveyorComponents() {
+    masterMotor = new WPI_TalonSRX(FIRST_MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
 
-    this.slaveMotor = new WPI_TalonSRX(SECOND_SLAVE_MOTOR_PORT);
+    slaveMotor = new WPI_TalonSRX(FIRST_SLAVE_MOTOR_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
   }
 
   @Override
-  public final WPI_TalonSRX getMasterMotor() {
+  public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
   }
 

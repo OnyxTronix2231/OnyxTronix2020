@@ -30,12 +30,12 @@ public class OnyxTrajectoryGenerator {
       DriveTrainConstants.TRAJECTORY_PARAMS.MAX_SPEED_METERS_PER_SECOND, DriveTrainConstants.TRAJECTORY_PARAMS.KAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
       .setKinematics(DriveTrainConstants.TRAJECTORY_PARAMS.DRIVE_KINEMATICS).addConstraint(autoVoltageConstraint);
 
-  public final Trajectory getTrajectoryFromPoses(final Pose2d startPose, final Pose2d endPose) {
+  private Trajectory getTrajectoryFromPoses(final Pose2d startPose, final Pose2d endPose) {
     return TrajectoryGenerator.generateTrajectory(startPose,
         List.of(new Translation2d(1, -1), new Translation2d(2, -1)), endPose, config);
   }
 
-  public final Command getAutonomousCommandFromPoses(final Pose2d startPose, final Pose2d endPose) {
+  public Command getAutonomousCommandFromPoses(final Pose2d startPose, final Pose2d endPose) {
     final Trajectory trajectory = getTrajectoryFromPoses(startPose, endPose);
 
     final RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrain::getPose,

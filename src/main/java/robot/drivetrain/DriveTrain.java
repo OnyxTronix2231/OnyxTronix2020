@@ -2,7 +2,10 @@ package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
+import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
+import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -39,14 +42,6 @@ public class DriveTrain extends SubsystemBase {
     moveMotorByMotionMagic(getRightMaster(), distance);
   }
 
-  public double getLeftDistance() {
-    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
-  }
-
-  public double getRightDistance() {
-    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
-  }
-
   public boolean isDriveOnTarget() {
     return Math.abs(getLeftMaster().getClosedLoopError()) < TOLERANCE &&
         Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
@@ -58,33 +53,33 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
-  private TalonFX getLeftMaster() {
-    return components.getLeftMasterMotor();
-  }
-
-  private TalonFX getRightMaster() {
-    return components.getRightMasterMotor();
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
   }
 
   public void tankDriveVolts(final double rightVolts, final double leftVolts) {
-    components.getRightMasterMotor().setVoltage(rightVolts);
     components.getLeftMasterMotor().setVoltage(leftVolts);
+    components.getRightMasterMotor().setVoltage(rightVolts);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
   }
 
+  private TalonFX getLeftMaster() {
+    return components.getLeftMasterMotor();
+  }
+
+  private TalonFX getRightMaster() {
+    return components.getRightMasterMotor();
+  }
+
   private double getLeftDistance() {
-    return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
+    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
   private double getRightDistance() {
-    return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
+    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
   private TalonFXEncoder getLeftEncoder() {

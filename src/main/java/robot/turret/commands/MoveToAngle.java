@@ -31,4 +31,9 @@ public class MoveToAngle extends CommandBase {
   public boolean isFinished() {
     return Math.abs(turret.getEncoderPosition() - turret.convertAngleToEncoderUnits(angle)) < TOLERANCE;
   }
+
+  @Override
+  public void end(boolean interrupted) {
+    turret.stopMotor();
+  }
 }

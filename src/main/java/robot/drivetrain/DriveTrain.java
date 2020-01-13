@@ -28,33 +28,36 @@ public class DriveTrain extends SubsystemBase {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public TalonFX getLeftMaster() {
-    return components.getLeftMasterMotor();
-  }
-
-  public TalonFX getRightMaster() {
-    return components.getRightMasterMotor();
-  }
-
-  public void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
-    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
-    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+  public void driveByMotionProfile(final double distance) {
+    moveMotorByMotionMagic(getLeftMaster(), distance);
+    moveMotorByMotionMagic(getRightMaster(), distance);
   }
 
   public double getLeftDistance() {
-    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS *
-        PERIMETER;
+    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
   public double getRightDistance() {
-    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS *
-        PERIMETER;
+    return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
   public boolean isDriveOnTarget() {
     return Math.abs(getLeftMaster().getClosedLoopError()) < TOLERANCE &&
         Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
+  }
+
+  private TalonFX getLeftMaster() {
+    return components.getLeftMasterMotor();
+  }
+
+  private TalonFX getRightMaster() {
+    return components.getRightMasterMotor();
+  }
+
+  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
+    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
+        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
 
   private double cmToEncoderUnits(final double cm) {

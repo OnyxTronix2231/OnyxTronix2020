@@ -61,6 +61,6 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private double cmToEncoderUnits(final double cm) {
-    return ENCODER_UNITS / (cm / (PERIMETER));
+    return ENCODER_UNITS * cm / PERIMETER;
   }
 }

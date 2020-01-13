@@ -19,4 +19,7 @@ public final class DriveTrainConstants {
   public static final double DRIVE_BY_DISTANCE_P = 0;
   public static final double DRIVE_BY_DISTANCE_I = 0;
   public static final double DRIVE_BY_DISTANCE_D = 0;
+  public static final double CURRENT_LIMIT = 0;
+  public static final double TRIGGER_THRESHOLD_CURRENT = 0;
+  public static final double TRIGGER_THRESHOLD_TIME = 0;
 }

@@ -8,7 +8,7 @@ import robot.shooter.commands.ShootByPercentOutput;
 public class ShooterOi {
 
   public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache, final Shooter shooter){
-    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(AxisMap.kLeftY.value);
+    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(AxisMap.kRightTrigger.value);
     shootBySpeedAxis.whileActiveContinuous(new ShootByPercentOutput(shooter, shootBySpeedAxis::getRawAxis));
   }
 }

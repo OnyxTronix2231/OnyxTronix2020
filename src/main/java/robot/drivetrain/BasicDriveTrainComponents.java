@@ -38,9 +38,9 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
 
     rightSlave = new WPI_TalonFX(RIGHT_SLAVE_PORT);
     rightSlave.configFactoryDefault();
-    rightSlave.follow(rightMaster);
     rightSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     rightSlave.setNeutralMode(NeutralMode.Brake);
+    rightSlave.follow(rightMaster);
 
     leftMaster = new WPI_TalonFX(LEFT_MASTER_PORT);
     leftMaster.configFactoryDefault();
@@ -50,11 +50,11 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftMaster.setNeutralMode(NeutralMode.Brake);
 
     leftSlave = new WPI_TalonFX(LEFT_SLAVE_PORT);
-    leftSlave.follow(leftMaster);
     leftSlave.configFactoryDefault();
     leftSlave.setInverted(true);
     leftSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
+    leftSlave.follow(leftMaster);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);

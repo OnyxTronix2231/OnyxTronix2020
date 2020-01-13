@@ -5,19 +5,13 @@ import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
 import static robot.drivetrain.DriveTrainConstants.MASTER_LEFT_PORT;
 import static robot.drivetrain.DriveTrainConstants.MASTER_RIGHT_PORT;
-import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
-import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.PIGEON_NUMBER;
 import static robot.drivetrain.DriveTrainConstants.SLAVE_LEFT_PORT;
 import static robot.drivetrain.DriveTrainConstants.SLAVE_RIGHT_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -80,6 +74,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   public DifferentialDrive getDifferentialDrive() {
     return differentialDrive;
   }
+
   @Override
   public PigeonIMU getGyro() {
     return gyro;

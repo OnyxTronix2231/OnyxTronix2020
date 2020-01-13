@@ -5,9 +5,7 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import sensors.counter.TalonSrxEncoder;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -15,6 +13,7 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
+    resetOdometry(new Pose2d());
   }
 
   @Override
@@ -22,14 +21,15 @@ public class DriveTrain extends SubsystemBase {
     components.getOdometry().update(Rotation2d.fromDegrees(components.getOdometryHeading()), getLeftDistance(), getRightDistance());
   }
 
-  public final void stopDrive() {
+  public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
   }
 
-  public final void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
+  public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
-  public final void initializeDriveByDistance(final double distance) {
+
+  public void initializeDriveByDistance(final double distance) {
     components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
         DriveTrainConstants.PRIMARY_PID);
     components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
@@ -43,32 +43,32 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
   }
 
-  public final double getLeftDistance() {
-    return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
-  }
-
-  public final double getRightDistance() {
-    return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
-        DriveTrainConstants.PERIMETER;
-  }
-
-  public final boolean isDriveOnTarget() {
+  public boolean isDriveOnTarget() {
     return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
         Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
   }
 
-  public final Pose2d getPose() {
+  public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
   }
 
-  public final void tankDriveVolts(final double rightVolts, final double leftVolts) {
+  public void tankDriveVolts(final double rightVolts, final double leftVolts) {
     components.getRightMasterMotor().setVoltage(rightVolts);
     components.getLeftMasterMotor().setVoltage(leftVolts);
   }
 
-  public final DifferentialDriveWheelSpeeds getWheelSpeeds() {
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getLeftEncoder().getRate(), getRightEncoder().getRate());
+  }
+
+  private double getLeftDistance() {
+    return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
+        DriveTrainConstants.PERIMETER;
+  }
+
+  private double getRightDistance() {
+    return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
+        DriveTrainConstants.PERIMETER;
   }
 
   private TalonFXEncoder getLeftEncoder() {

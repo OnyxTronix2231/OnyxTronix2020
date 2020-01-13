@@ -33,8 +33,7 @@ public final class DriveTrainConstants {
 
     public static final int ENCODER_CPR = 1024;
     public static final double WHEEL_DIAMETER_CM = 15;
-    public static final double ENCODER_DISTANCE_PER_PULSE =
-        (WHEEL_DIAMETER_CM * Math.PI) / (double) ENCODER_CPR;
+    public static final double ENCODER_DISTANCE_PER_PULSE = (WHEEL_DIAMETER_CM * Math.PI) / (double) ENCODER_CPR;
 
     // kS value found on the left part of the tool's main screen (Volts used for total movement)
     public static final double VOLTS = 0.22;
@@ -67,7 +66,6 @@ public final class DriveTrainConstants {
     // Horizontal distance between the middle of each of your robot's wheel bases.
     private static final double TRACKWIDTH_METERS = 0.69;
     // This object is used to convert chassis speeds to wheel speeds.
-    public static final DifferentialDriveKinematics DRIVE_KINEMATICS =
-        new DifferentialDriveKinematics(TRACKWIDTH_METERS);
+    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
   }
 }

@@ -115,8 +115,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
-    config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT *
-        MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     return config;
   }
 

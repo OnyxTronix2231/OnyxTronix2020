@@ -27,16 +27,14 @@ import java.util.List;
 public class OnyxTrajectoryGenerator {
   private final DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
 
-  private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(
-      VOLTS,
-      VOLT_SECONDS_PER_METER,
-      VOLT_SECONDS_SQUARED_PER_METER);
+  private final SimpleMotorFeedforward feedforward =
+      new SimpleMotorFeedforward(VOLTS, VOLT_SECONDS_PER_METER, VOLT_SECONDS_SQUARED_PER_METER);
 
   private final DifferentialDriveVoltageConstraint autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
       feedforward, DRIVE_KINEMATICS, 10);
 
-  private final TrajectoryConfig config = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
-      .setKinematics(DRIVE_KINEMATICS).addConstraint(autoVoltageConstraint);
+  private final TrajectoryConfig config = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND,
+      MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(DRIVE_KINEMATICS).addConstraint(autoVoltageConstraint);
 
   private Trajectory getTrajectoryFromPoses(final Pose2d startPose, final Pose2d endPose) {
     return TrajectoryGenerator.generateTrajectory(startPose,
@@ -46,12 +44,10 @@ public class OnyxTrajectoryGenerator {
   public Command getAutonomousCommandFromPoses(final Pose2d startPose, final Pose2d endPose) {
     final Trajectory trajectory = getTrajectoryFromPoses(startPose, endPose);
 
-    final RamseteCommand ramseteCommand = new RamseteCommand(trajectory, driveTrain::getPose,
-        new RamseteController(RAMSETE_B, RAMSETE_ZETA),
-        feedforward, DRIVE_KINEMATICS, driveTrain::getWheelSpeeds,
-        new PIDController(P_DRIVE_VEL, 0, 0),
-        new PIDController(P_DRIVE_VEL, 0, 0),
-        driveTrain::tankDriveVolts, driveTrain);
+    final RamseteCommand ramseteCommand =
+        new RamseteCommand(trajectory, driveTrain::getPose, new RamseteController(RAMSETE_B, RAMSETE_ZETA),
+            feedforward, DRIVE_KINEMATICS, driveTrain::getWheelSpeeds, new PIDController(P_DRIVE_VEL, 0, 0),
+            new PIDController(P_DRIVE_VEL, 0, 0), driveTrain::tankDriveVolts, driveTrain);
 
     return ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0));
   }

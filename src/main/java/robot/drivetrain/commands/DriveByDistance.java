@@ -9,6 +9,7 @@ public class DriveByDistance extends CommandBase {
 
   private final DriveTrain driveTrain;
   private final DoubleSupplier distanceSupplier;
+
   public DriveByDistance(final DriveTrain driveTrain, final DoubleSupplier distanceSupplier) {
     this.driveTrain = driveTrain;
     this.distanceSupplier = distanceSupplier;

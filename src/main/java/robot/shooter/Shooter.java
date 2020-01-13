@@ -1,5 +1,6 @@
 package robot.shooter;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,5 +20,9 @@ public class Shooter extends SubsystemBase {
 
   public void stopMotor() {
     shootBySpeed(0);
+  }
+
+  public void setVelocity(final double velocity) {
+    components.getMasterMotor().set(ControlMode.Velocity, velocity);
   }
 }

@@ -30,10 +30,10 @@ public class SpinsRouletteByRotation extends CommandBase {
         currentColor = roulette.getClosestColor();
         
         if(currentColor.getRgbValue().equals(initialColor) && !currentColor.getRgbValue().equals(previousColor.getRgbValue())){
-			spinsCounter++;
+	    spinsCounter++;
         }
 
-		previousColor = currentColor;
+	previousColor = currentColor;
     }
 
     @Override

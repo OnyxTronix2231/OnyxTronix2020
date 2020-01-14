@@ -7,12 +7,12 @@ import java.util.function.DoubleSupplier;
 
 public class MoveBySpeed extends CommandBase {
 
-  private final Turret turret;
   private final DoubleSupplier speedSupplier;
+  private final Turret turret;
 
   public MoveBySpeed(final Turret turret, final DoubleSupplier speedSupplier) {
-    this.turret = turret;
     this.speedSupplier = speedSupplier;
+    this.turret = turret;
     addRequirements(turret);
   }
 

@@ -1,10 +1,8 @@
 package robot.turret;
 
-import static robot.turret.TurretConstants.*;
-import static robot.turret.TurretConstants.DEGREES_IN_CIRCLE;
+import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
@@ -16,7 +14,7 @@ public class Turret extends SubsystemBase {
     initEncoders();
   }
 
-  public void moveBySpeed(final double speed){
+  public void moveBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }
 
@@ -24,28 +22,35 @@ public class Turret extends SubsystemBase {
     moveBySpeed(0);
   }
 
-  public void initEncoders(){
+  public void initEncoders() {
     components.getMasterMotor().setSelectedSensorPosition(0);
   }
 
-  public void moveToAngle(double angle){
-    if(angle > 270) {
-      angle -= 360;
-    } else if (angle < -270) {
-        angle += 360;
-    } else if(angle < 0 && angle + 360 < 270 && getAngle() > 0) {
-          angle += 360;
-    } else if(angle > 0 && angle - 360 > -270 && getAngle() < 0) {
-          angle -= 360;
+  public void moveToAngle(final double angle) {
+    double tempAngle = angle;
+
+    while (tempAngle > 270) {
+      tempAngle -= 360;
     }
-    components.getMasterMotor().set(ControlMode.MotionMagic, angle);
+
+    while (tempAngle < -270) {
+      tempAngle += 360;
+    }
+
+    if (tempAngle < 0 && tempAngle + 360 < 270 && getAngle() > 0) {
+      tempAngle += 360;
+    } else if (tempAngle > 0 && tempAngle - 360 > -270 && getAngle() < 0) {
+      tempAngle -= 360;
+    }
+
+    components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle);
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
     return angle / ENCODER_TO_ANGLE;
   }
 
-  public double getAngle(){
+  public double getAngle() {
     return getEncoderPosition() * ENCODER_TO_ANGLE;
   }
 

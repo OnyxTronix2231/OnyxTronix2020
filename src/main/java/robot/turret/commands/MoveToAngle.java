@@ -7,8 +7,8 @@ import robot.turret.Turret;
 
 public class MoveToAngle extends CommandBase {
 
-  private final Turret turret;
   private final double angle;
+  private final Turret turret;
 
   public MoveToAngle(final Turret turret, final double angle) {
     this.turret = turret;

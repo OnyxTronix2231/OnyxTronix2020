@@ -13,7 +13,7 @@ public enum RouletteColor {
 
   public final RGBValue rgbValue;
 
-  RouletteColor(RGBValue rgbValue) {
+  RouletteColor (final RGBValue rgbValue) {
     this.rgbValue = rgbValue;
   }
 }

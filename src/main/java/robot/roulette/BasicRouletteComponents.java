@@ -12,10 +12,13 @@ import edu.wpi.first.wpilibj.I2C;
 public class BasicRouletteComponents implements RouletteComponents {
 
     private final WPI_TalonSRX masterMotor;
+
     private final DoubleSolenoid doubleSolenoid;
+
     private final ColorSensorV3 colorSensorV3;
 
     public BasicRouletteComponents() {
+
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_CHANNEL, DOUBLE_SOLENOID_REVERSE_CHANNEL);
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);

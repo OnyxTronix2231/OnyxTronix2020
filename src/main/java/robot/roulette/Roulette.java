@@ -2,6 +2,8 @@ package robot.roulette;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.DoubleSupplier;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,8 +17,8 @@ public class Roulette extends SubsystemBase {
         this.components = componentsRoulette;
     }
 
-    public void spinMotor(final double speed) {
-        components.getMasterMotor().set(speed);
+    public void spinMotor(final DoubleSupplier speed) {
+        components.getMasterMotor().set(speed.getAsDouble());
     }
 
     public void openDoubleSolenoid() {

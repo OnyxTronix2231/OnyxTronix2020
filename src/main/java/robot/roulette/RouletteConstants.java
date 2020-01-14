@@ -11,6 +11,8 @@ public final class RouletteConstants {
   public static int MIN_ROTATIONS = 3;
   public static int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS)/2;
   public static int REQUIRED_ROTATIONS = AVERAGE_ROTATIONS *  COLORS_IN_ROTATIONS;
+  public static final int PICK_AMP = 40;
+  public static final int PICK_AMP_DURATION = 0;
   public static RGBValue GREEN_RGB_VALUE = new RGBValue(0.149, 0.599, 0.250);
   public static RGBValue BLUE_RGB_VALUE = new RGBValue(0.108, 0.428, 0.462);
   public static RGBValue RED_RGB_VALUE = new RGBValue(0.551, 0.329, 0.119);

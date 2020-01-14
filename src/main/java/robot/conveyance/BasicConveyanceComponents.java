@@ -26,4 +26,5 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     public IMotorController getSlaveMotor() {
         return slaveMotor;
     }
+    delet what i am taping now.
 }

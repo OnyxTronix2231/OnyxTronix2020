@@ -8,4 +8,6 @@ public final class BallCollectorConstants {
     public static final int DOUBLE_RIGHT_SOLENOID_REVERSE_PORT = 1;
     public static final int DOUBLE_LEFT_SOLENOID_FORWARD_PORT = 0;
     public static final int DOUBLE_LEFT_SOLENOID_REVERSE_PORT = 1;
+    public static final int PICK_AMP = 40;
+    public static final int PICK_AMP_DURATION = 0;
 }

@@ -25,15 +25,13 @@ public class BasicClimberComponents implements ClimberComponents {
   public BasicClimberComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
-
-    slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
-    slaveMotor.configFactoryDefault();
-    slaveMotor.follow(masterMotor);
-
     masterMotor.configPeakCurrentLimit(PICK_AMP);
     masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
     masterMotor.setNeutralMode(NeutralMode.Brake);
 
+    slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
+    slaveMotor.configFactoryDefault();
+    slaveMotor.follow(masterMotor);
 
     leftDoubleSolenoid = new DoubleSolenoid(LEFT_DOUBLE_SOLENOID_FORWARD_PORT,
         LEFT_DOUBLE_SOLENOID_REVERSE_PORT);

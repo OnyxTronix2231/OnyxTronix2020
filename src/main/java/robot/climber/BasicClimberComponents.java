@@ -3,11 +3,14 @@ package robot.climber;
 import static robot.climber.ClimberConstants.LEFT_DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.climber.ClimberConstants.LEFT_DOUBLE_SOLENOID_REVERSE_PORT;
 import static robot.climber.ClimberConstants.MASTER_MOTOR_PORT;
+import static robot.climber.ClimberConstants.PICK_AMP;
+import static robot.climber.ClimberConstants.PICK_AMP_DURATION;
 import static robot.climber.ClimberConstants.RIGHT_DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.climber.ClimberConstants.RIGHT_DOUBLE_SOLENOID_REVERSE_PORT;
 import static robot.climber.ClimberConstants.SLAVE_MOTOR_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -26,6 +29,11 @@ public class BasicClimberComponents implements ClimberComponents {
     slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
+
+    masterMotor.configPeakCurrentLimit(PICK_AMP);
+    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+    masterMotor.setNeutralMode(NeutralMode.Brake);
+
 
     leftDoubleSolenoid = new DoubleSolenoid(LEFT_DOUBLE_SOLENOID_FORWARD_PORT,
         LEFT_DOUBLE_SOLENOID_REVERSE_PORT);

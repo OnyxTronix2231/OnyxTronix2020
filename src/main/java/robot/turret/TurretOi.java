@@ -7,6 +7,8 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueTriggerCache;
 import robot.turret.commands.MoveBySpeed;
 import robot.turret.commands.MoveToAngle;
+import robot.vision.limelight.Limelight;
+import robot.vision.limelight.exception.TargetNotFoundException;
 
 public class TurretOi {
 
@@ -18,7 +20,14 @@ public class TurretOi {
 
     final Trigger moveToAngleButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
-    moveToAngleButton.whenActive(new MoveToAngle(turret, 360));
+    moveToAngleButton.whenActive(new MoveToAngle(turret, () -> {
+      try {
+        return Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair();
+      } catch (TargetNotFoundException e) {
+        e.printStackTrace();
+      }
+      return 0;
+    }));
 
   }
 }

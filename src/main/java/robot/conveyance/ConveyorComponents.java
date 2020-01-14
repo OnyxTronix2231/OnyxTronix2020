@@ -3,10 +3,9 @@ package robot.conveyance;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public interface ConveyanceComponents {
+public interface ConveyorComponents {
 
-    WPI_TalonSRX getMasterMotor();
+  WPI_TalonSRX getMasterMotor();
 
-    IMotorController getSlaveMotor();
-
+  IMotorController getSlaveMotor();
 }

@@ -13,13 +13,13 @@ public final class BallCollectorOi {
 
     public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache buttonJoystickAxisCache, UniqueTriggerCache buttonsJoystickButtonCache) {
         final JoystickAxis collectBySpeedAxis =
-                buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
+                buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftTrigger.value);
         collectBySpeedAxis.whileActiveContinuous(new CollectBallBySpeed(ballCollector, collectBySpeedAxis::getRawAxis));
 
         final Trigger openDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
         openDoubleSolenoidsButton.whenActive(new OpenPistons(ballCollector));
 
-        final Trigger closeDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
+        final Trigger closeDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
         closeDoubleSolenoidsButton.whenActive(new ClosePistons(ballCollector));
     }
 }

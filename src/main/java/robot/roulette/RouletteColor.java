@@ -16,4 +16,8 @@ public enum RouletteColor {
   RouletteColor (final RGBValue rgbValue) {
     this.rgbValue = rgbValue;
   }
+
+  public RGBValue getRgbValue() {
+    return rgbValue;
+  }
 }

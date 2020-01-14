@@ -4,6 +4,7 @@ import static robot.turret.TurretConstants.MAX_ACCELERATION;
 import static robot.turret.TurretConstants.MAX_VELOCITY;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -15,6 +16,9 @@ public class BasicTurretComponents implements TurretComponents {
     this.masterMotor = new WPI_TalonSRX(TurretConstants.MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
+    masterMotor.configPeakCurrentLimit(TurretConstants.PICK_AMP);
+    masterMotor.configPeakCurrentDuration(TurretConstants.PICK_AMP_DURATION);
+    masterMotor.setNeutralMode(NeutralMode.Brake);
   }
   
   @Override

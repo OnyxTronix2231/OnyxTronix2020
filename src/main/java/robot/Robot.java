@@ -1,8 +1,5 @@
 package robot;
 
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,21 +8,24 @@ import onyxTronix.JoystickTriggerFactory;
 import onyxTronix.JoystickTriggerType;
 import onyxTronix.UniqueTriggerCache;
 
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
+
 public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
         XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
         UniqueTriggerCache driveJoystickButtonCache = new UniqueTriggerCache(driveJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Button));
+                new JoystickTriggerFactory(JoystickTriggerType.Button));
         UniqueTriggerCache driveJoystickAxisCache = new UniqueTriggerCache(driveJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Axis));
+                new JoystickTriggerFactory(JoystickTriggerType.Axis));
 
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueTriggerCache buttonsJoystickButtonCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Button));
+                new JoystickTriggerFactory(JoystickTriggerType.Button));
         UniqueTriggerCache buttonsJoystickAxisCache = new UniqueTriggerCache(buttonsJoystick,
-          new JoystickTriggerFactory(JoystickTriggerType.Axis));
+                new JoystickTriggerFactory(JoystickTriggerType.Axis));
     }
 
     @Override

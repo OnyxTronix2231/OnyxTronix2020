@@ -1,6 +1,7 @@
 package robot.conveyance.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import robot.TransportToShooter.TransportToShooter;
 import robot.conveyance.Conveyance;
 
 import java.util.function.DoubleSupplier;
@@ -9,7 +10,7 @@ public class MoveBallConveyanceBySpeed extends CommandBase {
     private final Conveyance conveyance;
     private final DoubleSupplier speedSupplier;
 
-    public MoveBallConveyanceBySpeed(Conveyance conveyance , DoubleSupplier speed) {
+    public MoveBallConveyanceBySpeed(Conveyance conveyance, DoubleSupplier speed) {
         this.conveyance = conveyance;
         this.speedSupplier = speed;
     }

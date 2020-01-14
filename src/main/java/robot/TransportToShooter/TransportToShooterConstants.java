@@ -1,6 +1,6 @@
-package robot.conveyance;
+package robot.TransportToShooter;
 
-public final class ConveyanceConstants {
+public class TransportToShooterConstants {
 
     public static final int FIRST_MASTER_MOTOR_PORT = 7; //TODO check and change
     public static final int FIRST_SLAVE_MOTOR_PORT = 8; //TODO check and change

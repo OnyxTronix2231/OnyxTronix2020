@@ -6,15 +6,15 @@ public class Conveyance extends SubsystemBase {
 
     private final BasicConveyanceComponents components;
 
-    public Conveyance(final BasicConveyanceComponents moveFirstConveyanceBySpeed, final BasicSecondaryConveyance secondaryComponents) {
+    public Conveyance(final BasicConveyanceComponents moveFirstConveyanceBySpeed) {
         this.components = moveFirstConveyanceBySpeed;
     }
 
-    public final void moveConveyanceBySpeed(final double speed){
+    public final void moveConveyanceBySpeed(final double speed) {
         components.getMasterMotor().set(speed);
     }
 
-    public final void stopMotorFirstConveyance(){
+    public final void stopMotorFirstConveyance() {
         components.getMasterMotor().set(0);
     }
 }

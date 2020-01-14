@@ -9,10 +9,10 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     private final WPI_TalonSRX slaveMotor;
 
     public BasicConveyanceComponents() {
-        masterMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_MASTER_MOTOR_PORT);
+        masterMotor = new WPI_TalonSRX(TransportToShoteerConstants.FIRST_MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
 
-        slaveMotor = new WPI_TalonSRX(ConveyanceConstants.FIRST_SLAVE_MOTOR_PORT);
+        slaveMotor = new WPI_TalonSRX(TransportToShoteerConstants.FIRST_SLAVE_MOTOR_PORT);
         slaveMotor.configFactoryDefault();
         slaveMotor.follow(masterMotor);
     }
@@ -26,5 +26,4 @@ public class BasicConveyanceComponents implements ConveyanceComponents {
     public IMotorController getSlaveMotor() {
         return slaveMotor;
     }
-    delet what i am taping now.
 }

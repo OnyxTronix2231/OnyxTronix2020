@@ -17,4 +17,5 @@ public class TurretConstants {
   public static double ENCODER_TO_ANGLE = DEGREES_IN_CIRCLE / (ENCODER_UNITS * CONVERSION_RATE);
   public static final int PICK_AMP = 40;
   public static final int PICK_AMP_DURATION = 0;
+  public static final int CONTINUES_CURRENT_LIMIT = 40;
 }

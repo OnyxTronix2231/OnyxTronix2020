@@ -1,5 +1,6 @@
 package robot.turret;
 
+import static robot.turret.TurretConstants.CONTINUES_CURRENT_LIMIT;
 import static robot.turret.TurretConstants.MASTER_MOTOR_PORT;
 import static robot.turret.TurretConstants.MAX_ACCELERATION;
 import static robot.turret.TurretConstants.MAX_VELOCITY;
@@ -23,8 +24,7 @@ public class BasicTurretComponents implements TurretComponents {
     this.masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
-    masterMotor.configPeakCurrentLimit(PICK_AMP);
-    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+    masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
   }
   
@@ -42,6 +42,9 @@ public class BasicTurretComponents implements TurretComponents {
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.QuadEncoder;
     config.motionCruiseVelocity = MAX_VELOCITY;
     config.motionAcceleration = MAX_ACCELERATION;
+    config.peakCurrentLimit = PICK_AMP;
+    config.peakCurrentDuration = PICK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUES_CURRENT_LIMIT;
     return config;
   }
 }

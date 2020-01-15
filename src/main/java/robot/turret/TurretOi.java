@@ -18,7 +18,7 @@ public class TurretOi {
 
     final Trigger moveToAngleButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
-    moveToAngleButton.whenActive(new MoveToAngle(turret, 360));
+    moveToAngleButton.whenActive(new MoveToAngle(turret, () -> 360));
 
   }
 }

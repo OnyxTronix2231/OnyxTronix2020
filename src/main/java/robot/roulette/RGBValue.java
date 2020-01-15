@@ -8,7 +8,7 @@ public class RGBValue {
     private final double green;
     private final double blue;
 
-    public RGBValue(double red, double green, double blue) {
+    public RGBValue(final double red, final double green, final double blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;

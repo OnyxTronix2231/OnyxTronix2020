@@ -1,9 +1,13 @@
 package robot.turret;
 
 import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
+import static robot.turret.TurretConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import robot.turret.commands.MoveToAngleAndKeep;
+
+import java.util.function.DoubleSupplier;
 
 public class Turret extends SubsystemBase {
 
@@ -12,6 +16,7 @@ public class Turret extends SubsystemBase {
   public Turret(final TurretComponents components) {
     this.components = components;
     initEncoders();
+    setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngle));
   }
 
   public void moveBySpeed(final double speed) {
@@ -60,6 +65,10 @@ public class Turret extends SubsystemBase {
 
   public double getEncoderPosition() {
     return components.getMasterMotor().getSelectedSensorPosition();
+  }
+
+  public boolean isOnTarget(){
+    return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
 }

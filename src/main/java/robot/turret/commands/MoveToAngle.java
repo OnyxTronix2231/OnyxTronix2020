@@ -7,47 +7,20 @@ import robot.turret.Turret;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveToAngle extends CommandBase {
-
-  private final DoubleSupplier supplierAngle;
-  private final Turret turret;
-  private final boolean updateAngle;
-  private double angle;
+public class MoveToAngle extends MoveToAngleAndKeep {
 
   public MoveToAngle(final Turret turret, final DoubleSupplier supplierAngle) {
-    this.turret = turret;
-    this.supplierAngle = supplierAngle;
-    updateAngle = true;
-    addRequirements(turret);
-  }
-
-  public MoveToAngle(final Turret turret, final DoubleSupplier supplierAngle, final boolean updateAngle) {
-    this.turret = turret;
-    this.supplierAngle = supplierAngle;
-    this.updateAngle = updateAngle;
-    addRequirements(turret);
-  }
-
-  @Override
-  public void initialize() {
-    turret.initEncoders();
+    super(turret, supplierAngle);
   }
 
   @Override
   public void execute() {
-    if (updateAngle){
-      angle = turret.getAngle();
-    }
-    turret.moveToAngle(supplierAngle.getAsDouble());
+    angle = supplierAngle.getAsDouble();
+    super.execute();
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(turret.getEncoderPosition() - turret.convertAngleToEncoderUnits(supplierAngle.getAsDouble())) < TOLERANCE;
-  }
-
-  @Override
-  public void end(boolean interrupted) {
-    turret.stopMotor();
+    return turret.isOnTarget();
   }
 }

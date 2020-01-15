@@ -60,6 +60,10 @@ public class DriveTrain extends SubsystemBase {
     return components.getRightMasterMotor();
   }
 
+  public double getYaw() {
+    return components.getGyro().getYaw();
+  }
+
   private double cmToEncoderUnits(final double cm) {
     return ENCODER_UNITS * cm / PERIMETER;
   }

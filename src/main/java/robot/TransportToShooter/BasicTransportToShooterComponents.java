@@ -2,7 +2,6 @@ package robot.TransportToShooter;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import robot.conveyance.TransportToShoteerConstants;
 
 public class BasicTransportToShooterComponents implements TransportToShooterComponents  {
 
@@ -10,9 +9,9 @@ public class BasicTransportToShooterComponents implements TransportToShooterComp
     private final WPI_TalonSRX slaveMotor;
 
     public BasicTransportToShooterComponents() {
-        this.masterMotor = new WPI_TalonSRX(TransportToShoteerConstants.SECOND_MASTER_MOTOR_PORT);
+        this.masterMotor = new WPI_TalonSRX(TransportToShooterConstants.MASTER_MOTOR_PORT);
 
-        this.slaveMotor = new WPI_TalonSRX(TransportToShoteerConstants.SECOND_SLAVE_MOTOR_PORT);
+        this.slaveMotor = new WPI_TalonSRX(TransportToShooterConstants.SLAVE_MOTOR_PORT);
         slaveMotor.follow(masterMotor);
     }
 

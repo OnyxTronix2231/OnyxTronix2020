@@ -9,7 +9,7 @@ public class MoveBallTransportToShooterBySpeed extends CommandBase {
     private final robot.TransportToShooter.TransportToShooter TransportToShooter;
     private final DoubleSupplier speedSupplier;
 
-    public MoveBallTransportToShooterBySpeed(TransportToShooter transportToShooter, DoubleSupplier speed) {
+    public MoveBallTransportToShooterBySpeed(final TransportToShooter transportToShooter, final DoubleSupplier speed) {
         this.TransportToShooter = transportToShooter;
         this.speedSupplier = speed;
     }

@@ -7,5 +7,4 @@ public interface ConveyorComponents {
 
   WPI_TalonSRX getMasterMotor();
 
-  IMotorController getSlaveMotor();
 }

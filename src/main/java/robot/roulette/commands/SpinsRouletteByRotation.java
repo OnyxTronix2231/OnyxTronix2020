@@ -42,7 +42,7 @@ public class SpinsRouletteByRotation extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {
+    public void end(final boolean interrupted) {
         roulette.stopSpin();
     }
 }

@@ -29,12 +29,12 @@ public class Turret extends SubsystemBase {
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
 
-    while (tempAngle > 270) {
-      tempAngle -= 360;
+    if (tempAngle > 270) {
+      tempAngle %= 360;
     }
 
-    while (tempAngle < -270) {
-      tempAngle += 360;
+    if (tempAngle < -270) {
+      tempAngle %= 360;
     }
 
     if (tempAngle < 0 && tempAngle + 360 < 270 && getAngle() > 0) {
@@ -44,6 +44,10 @@ public class Turret extends SubsystemBase {
     }
 
     components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle);
+  }
+
+  public void moveByAngle(final double angle){
+    moveToAngle(getAngle() + angle);
   }
 
   public double convertAngleToEncoderUnits(final double angle) {

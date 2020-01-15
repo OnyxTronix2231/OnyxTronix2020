@@ -44,7 +44,7 @@ public class RGBValue {
         return howCloseTo(other) >= RGB_EQUALS_THRESHOLD;
     }
 
-    public boolean equals(Color other) {
+    public boolean equals(final Color other) {
         return equals(colorToRgb(other));
     }
 

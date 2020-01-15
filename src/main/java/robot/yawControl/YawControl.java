@@ -7,17 +7,19 @@ import robot.turret.commands.MoveToAngleAndKeep;
 
 public class YawControl extends Turret {
 
-  enum TurretState {
+  public enum TurretState {
     RTF,
     RTR,
     Homing
   }
 
   private final DriveTrain driveTrain;
+  private TurretState turretState;
 
   public YawControl(TurretComponents turretComponents, DriveTrain driveTrain) {
     super(turretComponents);
     this.driveTrain = driveTrain;
+    setTurretState(TurretState.RTR);
   }
 
   public void setTurretState(TurretState turretState) {
@@ -32,6 +34,7 @@ public class YawControl extends Turret {
         setDefaultCommand(new MoveToAngleAndKeep(this, () -> 0));
         break;
     }
+    this.turretState = turretState;
   }
 
   public double getTurretAngleRTF() {

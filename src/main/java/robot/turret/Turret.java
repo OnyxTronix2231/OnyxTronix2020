@@ -13,10 +13,9 @@ public class Turret extends SubsystemBase {
 
   private final TurretComponents components;
 
-  public Turret(final TurretComponents components) {
+  protected Turret(final TurretComponents components) {
     this.components = components;
     initEncoders();
-    setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngle));
   }
 
   public void moveBySpeed(final double speed) {

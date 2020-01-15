@@ -1,5 +1,6 @@
 package robot.shooter;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -14,6 +15,9 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor = new WPI_TalonSRX(ShooterConstants.MASTER_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
+    masterMotor.configPeakCurrentLimit(ShooterConstants.PICK_AMP);
+    masterMotor.configPeakCurrentDuration(ShooterConstants.PICK_AMP_DURATION);
+    masterMotor.setNeutralMode(NeutralMode.Brake);
 
     slaveMotor = new WPI_VictorSPX(ShooterConstants.SLAVE_PORT);
     slaveMotor.configFactoryDefault();

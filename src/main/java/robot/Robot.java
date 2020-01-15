@@ -9,10 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import onyxTronix.UniqueTriggerCache;
-import robot.turret.BasicTurretComponents;
-import robot.turret.Turret;
-import robot.turret.TurretOi;
 
 public class Robot extends TimedRobot {
 
@@ -24,10 +20,7 @@ public class Robot extends TimedRobot {
 
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
-        UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache((buttonsJoystick));
-
-        Turret turret = new Turret(new BasicTurretComponents());
-        new TurretOi(driveJoystickButtonCache, driveJoystickAxisCache, turret);
+        UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
     }
 
     @Override

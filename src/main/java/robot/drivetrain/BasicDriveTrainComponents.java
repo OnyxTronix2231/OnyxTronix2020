@@ -19,6 +19,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
@@ -27,6 +29,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
+  private final AHRS gyro;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponents() {
@@ -56,6 +59,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
+    gyro = new AHRS(SPI.Port.kMXP);
+
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
   }
@@ -78,6 +83,11 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   @Override
   public IMotorController getLeftSlaveMotor() {
     return leftSlave;
+  }
+
+  @Override
+  public AHRS getGyro() {
+    return gyro;
   }
 
   @Override

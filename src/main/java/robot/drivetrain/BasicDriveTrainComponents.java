@@ -8,12 +8,14 @@ import static robot.drivetrain.DriveTrainConstants.MASTER_RIGHT_PORT;
 import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.PIGEON_PORT;
 import static robot.drivetrain.DriveTrainConstants.SLAVE_LEFT_PORT;
 import static robot.drivetrain.DriveTrainConstants.SLAVE_RIGHT_PORT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
@@ -22,6 +24,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX rightMaster;
   private final WPI_TalonFX leftSlave;
   private final WPI_TalonFX leftMaster;
+  private final PigeonIMU pigeon;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponents() {
@@ -52,11 +55,13 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.configVoltageCompSaturation(DriveTrainConstants.MAX_VOLTAGE,100);
     leftSlave.enableVoltageCompensation(true);
 
+    pigeon = new PigeonIMU(PIGEON_PORT);
+
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
   }
 
-  private final TalonFXConfiguration getConfiguration() {
+  private TalonFXConfiguration getConfiguration() {
    final TalonFXConfiguration config = new TalonFXConfiguration();
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
@@ -67,27 +72,32 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public final IMotorController getRightSlaveMotor() {
+  public IMotorController getRightSlaveMotor() {
     return rightSlave;
   }
 
   @Override
-  public final WPI_TalonFX getRightMasterMotor() {
+  public WPI_TalonFX getRightMasterMotor() {
     return rightMaster;
   }
 
   @Override
-  public final IMotorController getLeftSlaveMotor() {
+  public IMotorController getLeftSlaveMotor() {
     return leftSlave;
   }
 
   @Override
-  public final WPI_TalonFX getLeftMasterMotor() {
+  public WPI_TalonFX getLeftMasterMotor() {
     return leftMaster;
   }
 
   @Override
-  public final DifferentialDrive getDifferentialDrive() {
+  public PigeonIMU getPigeon() {
+    return pigeon;
+  }
+
+  @Override
+  public DifferentialDrive getDifferentialDrive() {
     return differentialDrive;
   }
 }

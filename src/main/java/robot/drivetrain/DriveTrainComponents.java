@@ -2,6 +2,7 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public interface DriveTrainComponents {
@@ -13,6 +14,8 @@ public interface DriveTrainComponents {
   IMotorController getLeftSlaveMotor();
 
   WPI_TalonFX getLeftMasterMotor();
+
+  PigeonIMU getPigeon();
 
   DifferentialDrive getDifferentialDrive();
 }

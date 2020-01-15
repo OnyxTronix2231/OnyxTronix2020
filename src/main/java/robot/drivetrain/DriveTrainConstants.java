@@ -19,5 +19,6 @@ public final class DriveTrainConstants {
   public static final int SLAVE_LEFT_PORT = 3;
   public static final int MASTER_RIGHT_PORT = 0;
   public static final int SLAVE_RIGHT_PORT = 1;
+  public static final int PIGEON_PORT = 0; // TODO: Need to be checked
   public static final double MAX_VOLTAGE = 1;
 }

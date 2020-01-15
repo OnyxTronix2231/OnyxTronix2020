@@ -12,15 +12,15 @@ public class DriveTrain extends SubsystemBase {
     this.components = components;
   }
 
-  public final void stopDrive() {
+  public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
   }
 
-  public final void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
+  public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public final void initializeDriveByDistance(final double distance) {
+  public void initializeDriveByDistance(final double distance) {
     components.getLeftMasterMotor().selectProfileSlot(DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT,
         DriveTrainConstants.PRIMARY_PID);
     components.getLeftMasterMotor().set(ControlMode.MotionMagic, cmToEncoderUnits(distance)
@@ -34,21 +34,31 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, DriveTrainConstants.ARB_FEED_FORWARD);
   }
 
-  public final double cmToEncoderUnits(final double cm) {
+  public double cmToEncoderUnits(final double cm) {
     return DriveTrainConstants.ENCODER_UNITS / (cm / (DriveTrainConstants.PERIMETER));
   }
 
-  public final double getLeftDistance() {
+  public double getLeftDistance() {
     return components.getLeftMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
         DriveTrainConstants.PERIMETER;
   }
 
-  public final double getRightDistance() {
+  public double getRightDistance() {
     return components.getRightMasterMotor().getSelectedSensorPosition() / DriveTrainConstants.ENCODER_UNITS *
         DriveTrainConstants.PERIMETER;
   }
 
-  public final boolean isDriveOnTarget() {
+  public void resetGyro() {
+    components.getPigeon().setYaw(0);
+  }
+
+  public double getGyroYaw() {
+    double[] yawPitchRoll = new double[3];
+    components.getPigeon().getYawPitchRoll(yawPitchRoll);
+    return yawPitchRoll[0]; // indices: yaw = 0, pitch = 1, roll = 2
+  }
+
+  public boolean isDriveOnTarget() {
     return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE &&
         Math.abs(components.getRightMasterMotor().getClosedLoopError()) < DriveTrainConstants.TOLERANCE;
   }

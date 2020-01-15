@@ -40,7 +40,7 @@ public class RGBValue {
                 squaredError(anotherColor.blue, this.blue));
     }
 
-    public boolean equals(RGBValue other) {
+    public boolean equals(final RGBValue other) {
         return howCloseTo(other) >= RGB_EQUALS_THRESHOLD;
     }
 

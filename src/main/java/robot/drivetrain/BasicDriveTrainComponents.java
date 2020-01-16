@@ -86,7 +86,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public AHRS getGyro() {
+  public AHRS getNavX() {
     return gyro;
   }
 

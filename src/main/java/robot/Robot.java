@@ -1,14 +1,14 @@
 package robot;
 
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 
 public class Robot extends TimedRobot {
 

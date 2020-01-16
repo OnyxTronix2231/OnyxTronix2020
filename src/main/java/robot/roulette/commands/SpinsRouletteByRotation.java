@@ -6,6 +6,9 @@ import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
 import robot.roulette.RouletteConstants;
 
+import static robot.roulette.RouletteConstants.SPIN_ROTATIONS_SPEED;
+import static robot.roulette.RouletteConstants.REQUIRED_ROTATIONS;
+
 public class SpinsRouletteByRotation extends CommandBase {
     private final Roulette roulette;
     private int spinsCounter;
@@ -26,7 +29,7 @@ public class SpinsRouletteByRotation extends CommandBase {
 
     @Override
     public void execute() {
-        roulette.spinMotor(RouletteConstants.SPIN_ROTATIONS_SPEED);
+        roulette.spinMotor(() -> SPIN_ROTATIONS_SPEED);
         currentColor = roulette.getClosestColor();
         
         if(currentColor.getRgbValue().equals(initialColor) && !currentColor.getRgbValue().equals(previousColor.getRgbValue())){
@@ -38,7 +41,7 @@ public class SpinsRouletteByRotation extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return RouletteConstants.REQUIRED_ROTATIONS <= spinsCounter;
+        return REQUIRED_ROTATIONS <= spinsCounter;
     }
 
     @Override

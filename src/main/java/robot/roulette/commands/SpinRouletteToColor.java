@@ -23,7 +23,7 @@ public class SpinRouletteToColor extends CommandBase {
 
   @Override
   public void execute() {
-    roulette.spinMotor(SPIN_COLOR_SPEED);
+    roulette.spinMotor(() -> SPIN_COLOR_SPEED);
   }
 
   @Override

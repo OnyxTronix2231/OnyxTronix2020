@@ -24,7 +24,7 @@ public class TurretOi {
       try {
         return Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair();
       } catch (TargetNotFoundException e) {
-        e.printStackTrace();
+        System.out.println("Target Was Not Found!");
       }
       return 0;
     }));

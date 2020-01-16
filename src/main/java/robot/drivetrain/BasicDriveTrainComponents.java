@@ -29,7 +29,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
-  private final AHRS gyro;
+  private final AHRS navx;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponents() {

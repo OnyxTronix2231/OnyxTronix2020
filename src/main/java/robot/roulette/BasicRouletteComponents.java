@@ -1,14 +1,12 @@
 package robot.roulette;
 
-import static robot.roulette.RouletteConstants.DOUBLE_SOLENOID_FORWARD_CHANNEL;
-import static robot.roulette.RouletteConstants.DOUBLE_SOLENOID_REVERSE_CHANNEL;
-import static robot.roulette.RouletteConstants.MASTER_MOTOR_PORT;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
+
+import static robot.roulette.RouletteConstants.*;
 
 public class BasicRouletteComponents implements RouletteComponents {
 
@@ -24,7 +22,9 @@ public class BasicRouletteComponents implements RouletteComponents {
         masterMotor.configFactoryDefault();
         masterMotor.configPeakCurrentLimit(RouletteConstants.PICK_AMP);
         masterMotor.configPeakCurrentDuration(RouletteConstants.PICK_AMP_DURATION);
+        masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.setNeutralMode(NeutralMode.Brake);
+        masterMotor.enableCurrentLimit(true);
 
         doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_CHANNEL, DOUBLE_SOLENOID_REVERSE_CHANNEL);
 

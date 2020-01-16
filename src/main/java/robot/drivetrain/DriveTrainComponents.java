@@ -15,7 +15,7 @@ public interface DriveTrainComponents {
 
   IMotorController getLeftSlaveMotor();
 
-  AHRS getGyro();
+  AHRS getNavX();
 
   DifferentialDrive getDifferentialDrive();
 }

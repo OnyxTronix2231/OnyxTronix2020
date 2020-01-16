@@ -1,6 +1,6 @@
-package robot.TransportToShooter;
+package robot.LoaderConveyor;
 
-public class TransportToShooterConstants {
+public class LoaderConveyorConstants {
 
     public static final int MASTER_MOTOR_PORT = 9; //TODO check and change
     public static final int SLAVE_MOTOR_PORT = 10; //TODO check and change

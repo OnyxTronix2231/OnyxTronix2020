@@ -10,11 +10,11 @@ public class BallStopper {
   }
 
   public final void moveBallStopperBySpeed(final double speed) {
-    ballStopperComponents.getMasterMotor().set(speed);
+    ballStopperComponents.getMotor().set(speed);
   }
 
   public final void stopMotor() {
-    ballStopperComponents.getMasterMotor().set(0);
+    ballStopperComponents.getMotor().set(0);
   }
 }
 

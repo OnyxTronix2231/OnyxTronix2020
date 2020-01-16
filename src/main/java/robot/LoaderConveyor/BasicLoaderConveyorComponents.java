@@ -1,17 +1,17 @@
-package robot.TransportToShooter;
+package robot.LoaderConveyor;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import static robot.TransportToShooter.TransportToShooterConstants.*;
+import static robot.LoaderConveyor.LoaderConveyorConstants.*;
 
-public class BasicTransportToShooterComponents implements TransportToShooterComponents  {
+public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
 
     private final WPI_TalonSRX masterMotor;
     private final WPI_TalonSRX slaveMotor;
 
-    public BasicTransportToShooterComponents() {
+    public BasicLoaderConveyorComponents() {
         this.masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
         masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);

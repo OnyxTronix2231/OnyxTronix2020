@@ -10,4 +10,7 @@ public final class ShooterConstants {
   public static final double VELOCITY_D = 0;
   public static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
   public static final double MAX_VELOCITY = 1500; //TODO check and change
+  public static final int PICK_AMP = 40;
+  public static final int PICK_AMP_DURATION = 0;
+  public static final int CONTINUOS_CURRENT_LIMIT = 20; // TODO: check and change
 }

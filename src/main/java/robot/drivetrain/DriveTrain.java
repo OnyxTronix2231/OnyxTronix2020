@@ -61,7 +61,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getYaw() {
-    return components.getGyro().getYaw();
+    return components.getNavX().getYaw();
   }
 
   private double cmToEncoderUnits(final double cm) {

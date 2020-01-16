@@ -19,7 +19,6 @@ public class MoveToAngleAndKeep extends CommandBase {
 
   @Override
   public void initialize() {
-    turret.initEncoders();
     angle = supplierAngle.getAsDouble();
   }
 

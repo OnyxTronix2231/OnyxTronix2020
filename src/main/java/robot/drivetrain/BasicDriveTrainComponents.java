@@ -59,7 +59,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    gyro = new AHRS(SPI.Port.kMXP);
+    navx = new AHRS(SPI.Port.kMXP);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);

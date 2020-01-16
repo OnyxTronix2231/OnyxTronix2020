@@ -13,12 +13,11 @@ public class BasicBallStopperComponents implements BallStopperComponents {
   public BasicBallStopperComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
-    masterMotor.enableCurrentLimit(true);
     masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
     masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
     masterMotor.configPeakCurrentLimit(PICK_AMP);
     masterMotor.setNeutralMode(NeutralMode.Brake);
-
+    masterMotor.enableCurrentLimit(true);
   }
 
     @Override

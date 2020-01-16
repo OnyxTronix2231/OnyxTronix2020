@@ -14,7 +14,7 @@ public class Conveyor extends SubsystemBase {
         components.getMasterMotor().set(speed);
     }
 
-    public final void stopMotorConveyor() {
+    public final void stopMotor() {
         components.getMasterMotor().set(0);
     }
 }

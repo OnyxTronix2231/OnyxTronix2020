@@ -20,8 +20,8 @@ public class MoveBallTransportToShooterBySpeed extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {
-        TransportToShooter.stopMotorTransportToShooter();
+    public void end(final boolean interrupted) {
+        TransportToShooter.stopMotor();
     }
 
 }

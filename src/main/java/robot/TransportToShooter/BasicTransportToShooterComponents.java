@@ -14,13 +14,13 @@ public class BasicTransportToShooterComponents implements TransportToShooterComp
     public BasicTransportToShooterComponents() {
         this.masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
-        masterMotor.enableCurrentLimit(true);
         masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
         masterMotor.configPeakCurrentLimit(PICK_AMP);
         masterMotor.setNeutralMode(NeutralMode.Brake);
         this.slaveMotor = new WPI_TalonSRX(SLAVE_MOTOR_PORT);
         slaveMotor.follow(masterMotor);
+        masterMotor.enableCurrentLimit(true);
     }
 
     @Override

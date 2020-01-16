@@ -13,12 +13,11 @@ public class BasicConveyorComponents implements ConveyorComponents {
     public BasicConveyorComponents() {
         masterMotor = new WPI_TalonSRX(ConveyorConstants.MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
-        masterMotor.enableCurrentLimit(true);
         masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
         masterMotor.configPeakCurrentLimit(PICK_AMP);
         masterMotor.setNeutralMode(NeutralMode.Brake);
-
+        masterMotor.enableCurrentLimit(true);
     }
 
     @Override

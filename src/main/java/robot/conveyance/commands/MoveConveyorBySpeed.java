@@ -21,6 +21,6 @@ public class MoveConveyorBySpeed extends CommandBase {
 
     @Override
     public void end(final boolean interrupted) {
-        conveyance.stopMotorConveyor();
+        conveyance.stopMotor();
     }
 }

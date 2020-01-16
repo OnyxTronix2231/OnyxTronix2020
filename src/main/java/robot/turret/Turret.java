@@ -30,6 +30,8 @@ public class Turret extends SubsystemBase {
     components.getMasterMotor().setSelectedSensorPosition(0);
   }
 
+  private double lastAngle = -999;
+
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
 
@@ -47,7 +49,12 @@ public class Turret extends SubsystemBase {
       tempAngle -= 360;
     }
 
-    components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle);
+    if(lastAngle != tempAngle){
+      lastAngle = tempAngle;
+      System.out.println(lastAngle);
+    }
+
+    components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle / ENCODER_TO_ANGLE);
   }
 
   public void moveByAngle(final double angle){

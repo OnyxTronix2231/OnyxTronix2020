@@ -59,6 +59,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
+    differentialDrive.setSafetyEnabled(false);
   }
 
   @Override

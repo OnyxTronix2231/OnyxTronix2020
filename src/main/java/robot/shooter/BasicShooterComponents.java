@@ -17,7 +17,9 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.configPeakCurrentLimit(ShooterConstants.PICK_AMP);
     masterMotor.configPeakCurrentDuration(ShooterConstants.PICK_AMP_DURATION);
+    masterMotor.configContinuousCurrentLimit(ShooterConstants.CONTINUOS_CURRENT_LIMIT);
     masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.enableCurrentLimit(true);
 
     slaveMotor = new WPI_VictorSPX(ShooterConstants.SLAVE_PORT);
     slaveMotor.configFactoryDefault();

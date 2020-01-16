@@ -5,12 +5,12 @@ import robot.LoaderConveyor.LoaderConveyor;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveLoaderConvetorBySpeed extends CommandBase {
+public class MoveLoaderConveyorBySpeed extends CommandBase {
 
     private final LoaderConveyor loaderConveyor;
     private final DoubleSupplier speedSupplier;
 
-    public MoveLoaderConvetorBySpeed(final LoaderConveyor loaderConveyor,
+    public MoveLoaderConveyorBySpeed(final LoaderConveyor loaderConveyor,
                                      final DoubleSupplier speedSupplier) {
         this.loaderConveyor = loaderConveyor;
         this.speedSupplier = speedSupplier;

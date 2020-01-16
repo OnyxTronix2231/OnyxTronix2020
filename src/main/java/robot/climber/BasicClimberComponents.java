@@ -1,5 +1,6 @@
 package robot.climber;
 
+import static robot.climber.ClimberConstants.CONTINUOUS_CURRENT_LIMIT;
 import static robot.climber.ClimberConstants.LEFT_DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.climber.ClimberConstants.LEFT_DOUBLE_SOLENOID_REVERSE_PORT;
 import static robot.climber.ClimberConstants.MASTER_MOTOR_PORT;
@@ -27,6 +28,8 @@ public class BasicClimberComponents implements ClimberComponents {
     masterMotor.configFactoryDefault();
     masterMotor.configPeakCurrentLimit(PICK_AMP);
     masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+    masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
+    masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);

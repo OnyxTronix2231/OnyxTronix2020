@@ -12,7 +12,7 @@ public class TransportToShooter {
         components.getMasterMotor().set(speed);
     }
 
-    public final void stopMotorFirstTransportToShooter() {
+    public final void stopMotorTransportToShooter() {
         components.getMasterMotor().set(0);
     }
 }

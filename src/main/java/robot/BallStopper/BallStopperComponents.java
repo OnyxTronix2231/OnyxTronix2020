@@ -1,8 +1,8 @@
-package robot.ConveytorOneBall;
+package robot.BallStopper;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public interface ConveyorOneBallComponents {
+public interface BallStopperComponents {
 
   WPI_TalonSRX getMasterMotor();
 

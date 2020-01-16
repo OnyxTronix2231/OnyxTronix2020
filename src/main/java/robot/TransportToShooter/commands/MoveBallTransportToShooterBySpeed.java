@@ -9,19 +9,19 @@ public class MoveBallTransportToShooterBySpeed extends CommandBase {
     private final robot.TransportToShooter.TransportToShooter TransportToShooter;
     private final DoubleSupplier speedSupplier;
 
-    public MoveBallTransportToShooterBySpeed(final TransportToShooter transportToShooter, final DoubleSupplier speed) {
+    public MoveBallTransportToShooterBySpeed(final TransportToShooter transportToShooter, final DoubleSupplier speedSupplier) {
         this.TransportToShooter = transportToShooter;
-        this.speedSupplier = speed;
+        this.speedSupplier = speedSupplier;
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         TransportToShooter.moveTransportToShooterBySpeed(speedSupplier.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        TransportToShooter.stopMotorFirstTransportToShooter();
+        TransportToShooter.stopMotorTransportToShooter();
     }
 
 }

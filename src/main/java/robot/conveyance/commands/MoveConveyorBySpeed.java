@@ -9,18 +9,18 @@ public class MoveConveyorBySpeed extends CommandBase {
     private final Conveyor conveyance;
     private final DoubleSupplier speedSupplier;
 
-    public MoveConveyorBySpeed( final Conveyor conveyance,final DoubleSupplier speed) {
+    public MoveConveyorBySpeed( final Conveyor conveyance,final DoubleSupplier speedSupplier) {
         this.conveyance = conveyance;
-        this.speedSupplier = speed;
+        this.speedSupplier = speedSupplier;
     }
 
     @Override
-    public void initialize() {
-        conveyance.moveConveyanceBySpeed(speedSupplier.getAsDouble());
+    public void execute() {
+        conveyance.moveConveyorBySpeed(speedSupplier.getAsDouble());
     }
 
     @Override
     public void end(final boolean interrupted) {
-        conveyance.stopMotorFirstConveyance();
+        conveyance.stopMotorConveyor();
     }
 }

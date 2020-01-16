@@ -10,7 +10,6 @@ public class DriveTrainOi {
   public DriveTrainOi(final DriveTrain driveTrain, final UniqueAxisCache driveJoystickAxisCache) {
     JoystickAxis leftY = driveJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
     JoystickAxis rightX = driveJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kRightX.value);
-
-    leftY.or(rightX).whileActiveContinuous(new DriveBySpeed(driveTrain, leftY::getRawAxis, -rightX::getRawAxis));
+    leftY.or(rightX).whileActiveContinuous(new DriveBySpeed(driveTrain, leftY::getRawAxis, () -> -rightX.getRawAxis()));
   }
 }

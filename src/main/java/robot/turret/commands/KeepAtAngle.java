@@ -11,7 +11,6 @@ public class KeepAtAngle extends MoveToAngleAndKeep{
 
   @Override
   public void execute() {
-
     angle = supplierAngle.getAsDouble();
     super.execute();
   }

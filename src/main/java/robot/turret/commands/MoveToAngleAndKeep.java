@@ -20,6 +20,7 @@ public class MoveToAngleAndKeep extends CommandBase {
   @Override
   public void initialize() {
     angle = supplierAngle.getAsDouble();
+    System.out.println("setpoint: " + angle);
   }
 
   @Override

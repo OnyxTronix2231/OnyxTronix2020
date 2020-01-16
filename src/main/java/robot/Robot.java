@@ -22,6 +22,9 @@ import robot.turret.Turret;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
+
 public class Robot extends TimedRobot {
 
     @Override
@@ -36,13 +39,13 @@ public class Robot extends TimedRobot {
 
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain, () -> driveJoystick.getY(GenericHID.Hand.kLeft),
-            () -> driveJoystick.getX(GenericHID.Hand.kRight)));
+            () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
         YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
         new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
 
-        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
-        new BallCollectorOi(ballCollector, buttonsJoystickButtonCache);
+//        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
+//        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
     }
 
     @Override

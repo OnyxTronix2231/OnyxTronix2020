@@ -8,4 +8,6 @@ public interface ShooterComponents {
   WPI_TalonSRX getMasterMotor();
   
   IMotorController getSlaveMotor();
+
+  IMotorController getLoaderMotor();
 }

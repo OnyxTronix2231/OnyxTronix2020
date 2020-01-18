@@ -13,8 +13,7 @@ import static robot.ballCollector.BallCollectorConstants.PICK_AMP_DURATION;
 public class BasicBallCollectorComponents implements BallCollectorComponents {
 
     private final WPI_TalonSRX masterMotor;
-    private final DoubleSolenoid rightDoubleSolenoid;
-    private final DoubleSolenoid leftDoubleSolenoid;
+    private final DoubleSolenoid doubleSolenoid;
 
     public BasicBallCollectorComponents() {
         masterMotor = new WPI_TalonSRX(BallCollectorConstants.MASTER_MOTOR_PORT);
@@ -24,9 +23,9 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
         masterMotor.configContinuousCurrentLimit(BallCollectorConstants.CONTINUOUS_CURRENT_LIMIT);
         masterMotor.enableCurrentLimit(true);
         masterMotor.setNeutralMode(NeutralMode.Brake);
+        masterMotor.setInverted(true);
 
-        rightDoubleSolenoid = new DoubleSolenoid(BallCollectorConstants.DOUBLE_RIGHT_SOLENOID_FORWARD_PORT, BallCollectorConstants.DOUBLE_RIGHT_SOLENOID_REVERSE_PORT);
-        leftDoubleSolenoid = new DoubleSolenoid(BallCollectorConstants.DOUBLE_LEFT_SOLENOID_FORWARD_PORT, BallCollectorConstants.DOUBLE_LEFT_SOLENOID_REVERSE_PORT);
+        doubleSolenoid = new DoubleSolenoid(BallCollectorConstants.DOUBLE_SOLENOID_FORWARD_PORT, BallCollectorConstants.DOUBLE_SOLENOID_REVERSE_PORT);
     }
 
     @Override
@@ -35,12 +34,7 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
     }
 
     @Override
-    public final DoubleSolenoid getRightDoubleSolenoid() {
-        return rightDoubleSolenoid;
-    }
-
-    @Override
-    public final DoubleSolenoid getLeftDoubleSolenoid() {
-        return leftDoubleSolenoid;
+    public DoubleSolenoid getDoubleSolenoid() {
+        return doubleSolenoid;
     }
 }

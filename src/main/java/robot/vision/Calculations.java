@@ -3,26 +3,28 @@ package robot.vision;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_VERTICAL_OFFSET_ANGLE;
+import static robot.vision.VisionConstants.TARGET_LENGTH_CM;
+import static robot.vision.VisionConstants.TARGET_WIDTH_CM;
 
+import org.opencv.video.Video;
 import robot.vision.limelight.Limelight;
 import robot.vision.limelight.exception.TargetNotFoundException;
+import robot.vision.limelight.target.LimelightTarget;
 
 public class Calculations {
 
 
-  public static double calculateDistance() {
-    try {
-      return (TARGET_HEIGHT_CM - CAMERA_HEIGHT_CM) / Math.tan(Math.toRadians(CAMERA_VERTICAL_OFFSET_ANGLE +
-          Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair()));
-    } catch (TargetNotFoundException e) {
-      System.out.println("Target Was Not Found");
-    }
-    return 0;
+  public static double calculateDistance(final LimelightTarget target) {
+    return (TARGET_HEIGHT_CM - CAMERA_HEIGHT_CM) / Math.tan(Math.toRadians(CAMERA_VERTICAL_OFFSET_ANGLE +
+        target.getVerticalOffsetToCrosshair()));
   }
 
-  public static double calculateDistanceToInnerTarget() {
-    double length = 0;
-    double width =
-    final double orientation = Math.toDegrees(Math.acos());
+  public static double calculateOrientationToTarget(final LimelightTarget target) {
+    return Math.atan((target.getShortSideOfFittedBoundingBox()/ target.getLongSideOfFittedBoundingBox()) /
+        (TARGET_LENGTH_CM / TARGET_WIDTH_CM));
+  }
+
+  public static double getHorizontalOffsetInnerTarget(LimelightTarget target, double orientation) {
+    return 0;
   }
 }

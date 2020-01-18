@@ -1,6 +1,7 @@
 package robot.turret;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
@@ -16,9 +17,10 @@ public class TurretOi {
         buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
     climbBySpeedAxis.whileActiveContinuous(new MoveBySpeed(turret, climbBySpeedAxis::getRawAxis));
 
-    final Trigger moveToAngleButton =
+    final Trigger moveByAngleButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
-    moveToAngleButton.whenActive(new MoveToAngle(turret, () -> 360));
+    moveByAngleButton.whenActive(new MoveToAngle(turret, () -> 360));
+
 
   }
 }

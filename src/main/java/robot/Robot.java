@@ -19,6 +19,7 @@ import robot.drivetrain.commands.DriveByDistance;
 import robot.drivetrain.commands.DriveBySpeed;
 import robot.turret.BasicTurretComponents;
 import robot.turret.Turret;
+import robot.turret.TurretOi;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 
@@ -38,11 +39,11 @@ public class Robot extends TimedRobot {
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
-        driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain, () -> driveJoystick.getY(GenericHID.Hand.kLeft),
-            () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
         YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
         new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
+
+        new TurretOi(buttonsJoystickButtonCache, buttonsJoystickAxisCache, yawControl);
 
 //        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
 //        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);

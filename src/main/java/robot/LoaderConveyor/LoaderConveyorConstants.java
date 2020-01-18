@@ -12,4 +12,5 @@ public class LoaderConveyorConstants {
     public static final int PICK_AMP_DURATION = 0; //TODO check and change
     public static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
     public static final int PICK_AMP = 40; //TODO check and change
+
 }

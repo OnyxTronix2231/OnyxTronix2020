@@ -26,7 +26,6 @@ public class BasicShooterComponents implements ShooterComponents {
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
-
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -39,9 +38,7 @@ public class BasicShooterComponents implements ShooterComponents {
     config.peakCurrentDuration = PICK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     return config;
-
   }
-
 
   @Override
   public WPI_TalonSRX getMasterMotor() {

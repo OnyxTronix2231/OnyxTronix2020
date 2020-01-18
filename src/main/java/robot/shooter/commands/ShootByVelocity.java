@@ -25,4 +25,5 @@ public class ShootByVelocity extends CommandBase {
   public void end(final boolean interrupted) {
     shooter.stopMotor();
   }
+
 }

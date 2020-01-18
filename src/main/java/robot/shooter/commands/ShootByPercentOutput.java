@@ -19,7 +19,6 @@ public class ShootByPercentOutput extends CommandBase {
   @Override
   public void execute() {
     shooter.shootBySpeed(speedSupplier.getAsDouble());
-    shooter.loaderBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override

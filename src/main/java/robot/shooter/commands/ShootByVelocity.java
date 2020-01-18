@@ -19,7 +19,6 @@ public class ShootByVelocity extends CommandBase {
   @Override
   public void execute() {
     shooter.setVelocity(velocitySupplier.getAsDouble());
-    shooter.setLoaderVelocity(velocitySupplier.getAsDouble());
   }
 
   @Override

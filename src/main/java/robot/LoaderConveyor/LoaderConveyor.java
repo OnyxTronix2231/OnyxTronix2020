@@ -1,6 +1,9 @@
 package robot.LoaderConveyor;
 
-public class LoaderConveyor {
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class LoaderConveyor extends SubsystemBase {
 
     private final BasicLoaderConveyorComponents components;
 
@@ -9,10 +12,14 @@ public class LoaderConveyor {
     }
 
     public final void moveLoaderConveyorBySpeed(final double speed) {
-        components.getMasterMotor().set(speed);
+        components.getMotor().set(speed);
     }
 
     public final void stopMotor() {
-        components.getMasterMotor().set(0);
+        components.getMotor().set(0);
+    }
+
+    public void setVelocity(final double velocity) {
+        components.getMotor().set(ControlMode.Velocity, velocity);
     }
 }

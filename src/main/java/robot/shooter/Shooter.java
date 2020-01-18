@@ -20,18 +20,10 @@ public class Shooter extends SubsystemBase {
 
   public void stopMotor() {
     shootBySpeed(0);
-    loaderBySpeed(0);
   }
 
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
   }
 
-  public void loaderBySpeed(final double speed) {
-    components.getLoaderMotor().set(ControlMode.PercentOutput,speed);
   }
-
-  public void setLoaderVelocity(final double velocity) {
-    components.getLoaderMotor().set(ControlMode.Velocity, velocity);
-  }
-}

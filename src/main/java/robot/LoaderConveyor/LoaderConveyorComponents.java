@@ -5,8 +5,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public interface LoaderConveyorComponents {
 
-    WPI_TalonSRX getMasterMotor();
-
-    IMotorController getSlaveMotor();
+    WPI_TalonSRX getMotor();
 
 }

@@ -9,5 +9,4 @@ public interface ShooterComponents {
   
   IMotorController getSlaveMotor();
 
-  IMotorController getLoaderMotor();
 }

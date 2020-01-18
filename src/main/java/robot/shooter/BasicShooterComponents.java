@@ -1,5 +1,8 @@
 package robot.shooter;
 
+import static robot.LoaderConveyor.LoaderConveyorConstants.CONTINUOUS_CURRENT_LIMIT;
+import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP;
+import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP_DURATION;
 import static robot.shooter.ShooterConstants.*;
 import static robot.shooter.ShooterConstants.LOADER_PORT;
 
@@ -19,9 +22,6 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor = new WPI_TalonSRX(MASTER_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
-    masterMotor.configPeakCurrentLimit(PICK_AMP);
-    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
-    masterMotor.configContinuousCurrentLimit(CONTINUOS_CURRENT_LIMIT);
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.enableCurrentLimit(true);
 
@@ -37,6 +37,9 @@ public class BasicShooterComponents implements ShooterComponents {
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;
     config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    config.peakCurrentLimit = PICK_AMP;
+    config.peakCurrentDuration = PICK_AMP_DURATION;
     return config;
 
   }

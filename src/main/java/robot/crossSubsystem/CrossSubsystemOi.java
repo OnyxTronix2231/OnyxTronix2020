@@ -10,10 +10,10 @@ import robot.LoaderConveyor.commands.MoveLoaderByVelocity;
 import robot.shooter.Shooter;
 import robot.shooter.commands.ShootByVelocity;
 
-public class CrossSubsystem {
+public class CrossSubsystemOi {
 
-  public CrossSubsystem(final UniqueAxisCache driveJoystickAxisCache,
-                        final Shooter shooter, LoaderConveyor loaderConveyor) {
+  public CrossSubsystemOi(final UniqueAxisCache driveJoystickAxisCache,
+                          final Shooter shooter, final LoaderConveyor loaderConveyor) {
     final JoystickAxis shootByVelocityAxis =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
     shootByVelocityAxis.whileActiveContinuous(new ShootByVelocity(shooter,

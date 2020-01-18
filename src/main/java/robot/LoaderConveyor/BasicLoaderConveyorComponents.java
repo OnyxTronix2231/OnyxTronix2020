@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static robot.LoaderConveyor.LoaderConveyorConstants.*;
 
-
 public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
 
     private final WPI_TalonSRX masterMotor;

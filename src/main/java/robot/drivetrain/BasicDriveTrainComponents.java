@@ -29,7 +29,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
-  private final AHRS gyro;
+  private final AHRS navx;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponents() {
@@ -59,7 +59,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    gyro = new AHRS(SPI.Port.kMXP);
+    navx = new AHRS(SPI.Port.kMXP);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
@@ -87,8 +87,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public AHRS getGyro() {
-    return gyro;
+  public AHRS getNavX() {
+    return navx;
   }
 
   @Override

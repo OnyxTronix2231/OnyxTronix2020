@@ -100,12 +100,18 @@ public class Limelight {
   /**
    * Retrieves a Target From Limelight
    *
-   * @exception TargetNotFoundException
    * @return Vision Target retrieved from Limelight
    */
-  public LimelightTarget getTarget() throws TargetNotFoundException{
+
+  public boolean targetFound() {
     if(networkTable.getEntry("tv").getDouble(DEFAULT_VALUE) < 1) {
-      throw new TargetNotFoundException();
+      return false;
+    }
+    return true;
+  }
+  public LimelightTarget getTarget() {
+    if(targetFound() == false) {
+      return null;
     }
 
     final double horizontalOffsetToCrosshair = networkTable.getEntry("tx").getDouble(DEFAULT_VALUE);

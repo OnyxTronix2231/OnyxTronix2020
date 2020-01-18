@@ -22,6 +22,9 @@ import robot.drivetrain.commands.DriveBySpeed;
 import robot.turret.BasicTurretComponents;
 import robot.turret.Turret;
 import robot.turret.TurretOi;
+import robot.vision.Calculations;
+import robot.vision.limelight.Limelight;
+import robot.vision.limelight.target.LimelightTarget;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 
@@ -39,7 +42,6 @@ public class Robot extends TimedRobot {
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-
 
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
 
@@ -61,6 +63,11 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         CommandScheduler.getInstance().run();
+        if(Limelight.getInstance().targetFound()) {
+            LimelightTarget target = Limelight.getInstance().getTarget();
+            System.out.println("Orientation = " + Calculations.calculateOrientationToTarget(target));
+            System.out.println("Distance = " + Calculations.calculateDistance(target));
+        }
     }
 
     @Override

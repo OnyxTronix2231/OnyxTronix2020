@@ -12,14 +12,14 @@ public class LoaderConveyor extends SubsystemBase {
     }
 
     public final void moveLoaderConveyorBySpeed(final double speed) {
-        components.getMotor().set(speed);
+        components.getMasterMotor().set(speed);
     }
 
     public final void stopMotor() {
-        components.getMotor().set(0);
+        components.getMasterMotor().set(0);
     }
 
     public void setVelocity(final double velocity) {
-        components.getMotor().set(ControlMode.Velocity, velocity);
+        components.getMasterMotor().set(ControlMode.Velocity, velocity);
     }
 }

@@ -4,10 +4,8 @@ import static robot.LoaderConveyor.LoaderConveyorConstants.CONTINUOUS_CURRENT_LI
 import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP;
 import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP_DURATION;
 import static robot.shooter.ShooterConstants.*;
-import static robot.shooter.ShooterConstants.LOADER_PORT;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -37,9 +35,9 @@ public class BasicShooterComponents implements ShooterComponents {
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;
     config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     config.peakCurrentLimit = PICK_AMP;
     config.peakCurrentDuration = PICK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     return config;
 
   }

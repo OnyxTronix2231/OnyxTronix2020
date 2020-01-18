@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public interface BallCollectorComponents {
     WPI_TalonSRX getMasterMotor();
 
-    DoubleSolenoid getRightDoubleSolenoid();
-
-    DoubleSolenoid getLeftDoubleSolenoid();
+    DoubleSolenoid getDoubleSolenoid();
 }
 

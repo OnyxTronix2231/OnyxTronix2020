@@ -46,20 +46,20 @@ public class YawControl extends Turret {
   }
 
   private double getaa(){
-    System.out.println(getAngle() + driveTrain.getYaw());
-    return getAngle() + driveTrain.getYaw();
+    System.out.println(getAngle() + driveTrain.getNavXYaw());
+    return getAngle() + driveTrain.getNavXYaw();
   }
 
   @Override
   public void moveToAngle(double angle) {
     if(turretState == TurretState.RTF) {
-      angle -= driveTrain.getYaw();
+      angle -= driveTrain.getNavXYaw();
     }
     super.moveToAngle(angle);
   }
 
   public double getTurretAngleRTF() {
-    System.out.println("Yaw robot: " + driveTrain.getYaw());
-    return driveTrain.getYaw() + getAngle();
+    System.out.println("Yaw robot: " + driveTrain.getNavXYaw());
+    return driveTrain.getNavXYaw() + getAngle();
   }
 }

@@ -3,8 +3,8 @@ package robot.climber;
 import static edu.wpi.first.wpilibj.XboxController.Button;
 import static edu.wpi.first.wpilibj.XboxController.Button.*;
 import static onyxTronix.JoystickAxis.*;
-import static onyxTronix.JoystickAxis.AxisMap.*;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
@@ -19,7 +19,7 @@ public class ClimberOi {
   public ClimberOi(final UniqueButtonCache driverJoystickButtonCache,
                    final UniqueAxisCache driverJoystickAxisCache, final Climber climber) {
     final JoystickAxis climbBySpeedAxis =
-        driverJoystickAxisCache.createJoystickTrigger(kRightY.value);
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightY.value);
     climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
 
     final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kY.value);

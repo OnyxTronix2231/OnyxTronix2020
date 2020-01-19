@@ -1,15 +1,18 @@
 package robot.roulette;
 
 public final class RouletteConstants {
-  public static int MASTER_MOTOR_PORT = 0;
-  public static int DOUBLE_SOLENOID_FORWARD_CHANNEL = 0;
-  public static int DOUBLE_SOLENOID_REVERSE_CHANNEL = 1;
-  public static double SPIN_COLOR_SPEED = 0.3;
-  public static double SPIN_ROTATIONS_SPEED = 0.7;
-  public static int COLORS_IN_ROTATIONS = 8;
-  public static int MAX_ROTATIONS = 5;
-  public static int MIN_ROTATIONS = 3;
-  public static int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS)/2;
+  public final static int MASTER_MOTOR_PORT = 0;
+  public final static int DOUBLE_SOLENOID_FORWARD_CHANNEL = 0;
+  public final static int DOUBLE_SOLENOID_REVERSE_CHANNEL = 1;
+  public final static double SPIN_COLOR_SPEED = 0.3;
+  public final static double SPIN_ROTATIONS_SPEED = 0.7;
+  public final static int COLORS_IN_ROTATIONS = 8;
+  public  static int ENCODER_UNITS_PER_ROTATION;
+  public final static int ROULETTE_ROTATION_TO_WHEEL_ROTATION = 2;
+  public final static int TOLERANCE = 50;
+  public final static int MAX_ROTATIONS = 5;
+  public final static int MIN_ROTATIONS = 3;
+  public final static int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS)/2;
   public static int REQUIRED_ROTATIONS = AVERAGE_ROTATIONS *  COLORS_IN_ROTATIONS;
   public static final int PICK_AMP = 40; // TODO: check and change
   public static final int PICK_AMP_DURATION = 1; // TODO: check and change

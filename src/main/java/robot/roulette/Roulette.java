@@ -10,9 +10,12 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import static robot.roulette.RouletteConstants.*;
+
 public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
+
     public Roulette(final BasicRouletteComponents componentsRoulette) {
         this.components = componentsRoulette;
     }
@@ -52,7 +55,7 @@ public class Roulette extends SubsystemBase {
     }
 
 
-    public RouletteColor getClosestColor() {
+    public RouletteColor getCurrentColor() {
         final Color detectedColor = components.getColorSensorV3().getColor();
         final Double[] howCloseToEach = {
           RouletteColor.Red.rgbValue.howCloseTo(detectedColor),
@@ -76,5 +79,18 @@ public class Roulette extends SubsystemBase {
 
     public void stopSpin() {
         components.getMasterMotor().set(0);
+    }
+
+    public void spinByColorsCount(double rouletteRotation) {
+        components.getMasterMotor().set(ControlMode.MotionMagic,
+                getrouletteRotationToEncoderUnits(rouletteRotation));
+    }
+
+    public double getrouletteRotationToEncoderUnits(double rouletteRotations){
+        return rouletteRotations * RouletteConstants.ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
+    }
+
+    public boolean isOnTarget() {
+        return Math.abs(components.getMasterMotor().getClosedLoopError()) <= TOLERANCE;
     }
 }

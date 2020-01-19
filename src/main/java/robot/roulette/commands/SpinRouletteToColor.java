@@ -33,6 +33,6 @@ public class SpinRouletteToColor extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return requiredColor == roulette.getClosestColor();
+    return requiredColor == roulette.getCurrentColor();
   }
 }

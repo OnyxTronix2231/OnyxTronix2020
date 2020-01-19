@@ -25,4 +25,5 @@ public class ShootByPercentOutput extends CommandBase {
   public void end(final boolean interrupted) {
     shooter.stopMotor();
   }
+
 }

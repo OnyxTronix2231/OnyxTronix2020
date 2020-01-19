@@ -1,6 +1,7 @@
 package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
 import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
@@ -18,6 +19,8 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
+    resetEncoders();
+
   }
 
   public void stopDrive() {
@@ -28,9 +31,16 @@ public class DriveTrain extends SubsystemBase {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
   }
 
-  public void driveByMotionMagic(final double distance) {
-    moveMotorByMotionMagic(getLeftMaster(), distance);
-    moveMotorByMotionMagic(getRightMaster(), distance);
+  public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
+    moveMotorByMotionMagic(getLeftMaster(), leftTarget);
+    moveMotorByMotionMagic(getRightMaster(), rightTarget);
+  }
+
+  public void print(final double leftTarget, final double rightTarget) {
+    System.out.println("Left Distance = " + (getLeftDistance()));
+    System.out.println("Right Distance = " + (getLeftMaster().getSelectedSensorPosition()));
+    System.out.println(leftTarget);
+    System.out.println(rightTarget);
   }
 
   public double getLeftDistance() {
@@ -41,15 +51,26 @@ public class DriveTrain extends SubsystemBase {
     return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
-  public boolean isDriveOnTarget() {
-    return Math.abs(getLeftMaster().getClosedLoopError()) < TOLERANCE &&
-        Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
+  public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
+    return Math.abs(leftTarget - getLeftMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE) &&
+        Math.abs(rightTarget - getRightMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);
   }
 
-  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
+  public double getRightTargetFromDistance(final double distance) {
+    return getTargetFromDistance(getRightMaster(), distance);
+  }
+
+  public double getLeftTargetFromDistance(final double distance) {
+    return getTargetFromDistance(getLeftMaster(), distance);
+  }
+
+  private void moveMotorByMotionMagic(final TalonFX motor, final double target) {
     motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
-    motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
-        DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+    motor.set(ControlMode.MotionMagic, target, DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+  }
+
+  private double getTargetFromDistance(final TalonFX motor, final double distance) {
+    return cmToEncoderUnits(distance) + motor.getSelectedSensorPosition();
   }
 
   private TalonFX getLeftMaster() {
@@ -61,6 +82,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private double cmToEncoderUnits(final double cm) {
-    return ENCODER_UNITS * cm / PERIMETER;
+    return CONVERSION_RATE * ENCODER_UNITS * cm / PERIMETER;
+  }
+
+  public void resetEncoders() {
+    getLeftMaster().setSelectedSensorPosition(0);
+    getRightMaster().setSelectedSensorPosition(0);
   }
 }

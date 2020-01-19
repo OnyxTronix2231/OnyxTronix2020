@@ -7,8 +7,6 @@ import robot.turret.commands.MoveToAngleAndKeep;
 
 public class YawControl extends Turret {
 
-
-
   public enum TurretState {
     RTF,
     RTR,
@@ -28,7 +26,7 @@ public class YawControl extends Turret {
     if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
       case RTF:
-        setDefaultCommand(new MoveToAngleAndKeep(this, this::getaa));
+        setDefaultCommand(new MoveToAngleAndKeep(this, this::getTurretAngleRTF));
         break;
       case RTR:
         setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngle));
@@ -40,11 +38,6 @@ public class YawControl extends Turret {
     this.turretState = turretState;
   }
 
-  private double getaa(){
-    System.out.println(getAngle() + driveTrain.getNavXYaw());
-    return getAngle() + driveTrain.getNavXYaw();
-  }
-
   @Override
   public void moveToAngle(double angle) {
     if(turretState == TurretState.RTF) {
@@ -54,7 +47,6 @@ public class YawControl extends Turret {
   }
 
   public double getTurretAngleRTF() {
-    System.out.println("Yaw robot: " + driveTrain.getNavXYaw());
     return driveTrain.getNavXYaw() + getAngle();
   }
 }

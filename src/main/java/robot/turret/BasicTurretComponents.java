@@ -28,11 +28,6 @@ public class BasicTurretComponents implements TurretComponents {
     masterMotor.setNeutralMode(NeutralMode.Brake);
   }
   
-  @Override
-  public WPI_TalonSRX getMasterMotor() {
-    return masterMotor;
-  }
-
   private TalonSRXConfiguration getConfiguration() {
     TalonSRXConfiguration config = new TalonSRXConfiguration();
     config.slot0.kP = VELOCITY_P;
@@ -46,5 +41,10 @@ public class BasicTurretComponents implements TurretComponents {
     config.peakCurrentDuration = PICK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUES_CURRENT_LIMIT;
     return config;
+  }
+
+  @Override
+  public WPI_TalonSRX getMasterMotor() {
+    return masterMotor;
   }
 }

@@ -1,6 +1,5 @@
 package robot.yawControl.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControl.TurretState;

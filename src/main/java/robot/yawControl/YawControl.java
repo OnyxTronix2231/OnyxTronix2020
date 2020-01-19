@@ -1,14 +1,9 @@
 package robot.yawControl;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
-import robot.turret.commands.KeepAtAngle;
 import robot.turret.commands.MoveToAngleAndKeep;
-
-import java.util.function.DoubleToIntFunction;
 
 public class YawControl extends Turret {
 
@@ -33,7 +28,7 @@ public class YawControl extends Turret {
     if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
       case RTF:
-        setDefaultCommand(new MoveToAngleAndKeep(this, () -> getaa() ));
+        setDefaultCommand(new MoveToAngleAndKeep(this, this::getaa));
         break;
       case RTR:
         setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngle));

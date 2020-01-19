@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import onyxTronix.UniqueTriggerCache;
 import robot.yawControl.commands.ChangeAngleOffsetByPercent;
 import robot.yawControl.commands.SetTurretState;
 

@@ -10,7 +10,7 @@ public class ChangeAngleOffsetByPercent extends CommandBase {
   private final YawControl yawControl;
   private final DoubleSupplier percentSupplier;
 
-  public ChangeAngleOffsetByPercent(YawControl yawControl, DoubleSupplier percentSupplier) {
+  public ChangeAngleOffsetByPercent(final YawControl yawControl,final DoubleSupplier percentSupplier) {
     this.yawControl = yawControl;
     this.percentSupplier = percentSupplier;
   }

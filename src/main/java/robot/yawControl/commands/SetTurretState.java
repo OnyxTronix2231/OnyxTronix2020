@@ -9,7 +9,7 @@ public class SetTurretState extends InstantCommand {
   private final YawControl yawControl;
   private final TurretState turretState;
 
-  public SetTurretState(YawControl yawControl, TurretState turretState) {
+  public SetTurretState(final YawControl yawControl, final TurretState turretState) {
     this.yawControl = yawControl;
     this.turretState = turretState;
   }

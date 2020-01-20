@@ -15,7 +15,7 @@ public class YawControl extends Turret {
   private final DriveTrain driveTrain;
 
   private TurretState turretState;
-  public YawControl(TurretComponents turretComponents, DriveTrain driveTrain) {
+  public YawControl(final TurretComponents turretComponents,final DriveTrain driveTrain) {
     super(turretComponents);
     this.driveTrain = driveTrain;
     setTurretState(TurretState.RTR);

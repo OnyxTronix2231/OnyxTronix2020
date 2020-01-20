@@ -1,8 +1,5 @@
 package robot;
 
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,15 +9,9 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponents;
-import robot.drivetrain.BasicDriveTrainComponents;
-import robot.drivetrain.DriveTrain;
-import robot.drivetrain.commands.DriveByDistance;
-import robot.drivetrain.commands.DriveBySpeed;
-import robot.turret.BasicTurretComponents;
-import robot.turret.Turret;
-import robot.turret.TurretOi;
-import robot.yawControl.YawControl;
-import robot.yawControl.YawControlOi;
+
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 
 public class Robot extends TimedRobot {
 
@@ -34,15 +25,8 @@ public class Robot extends TimedRobot {
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
-        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
-
-        YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
-        new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
-
-        new TurretOi(buttonsJoystickButtonCache, buttonsJoystickAxisCache, yawControl);
-
-//        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
-//        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
+        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
     }
 
     @Override

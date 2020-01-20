@@ -2,6 +2,7 @@ package robot.roulette;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.opencv.core.Mat;
 
 import static robot.roulette.RouletteConstants.*;
 
@@ -16,10 +18,11 @@ public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
 
-    private final RouletteColor[] rouletteColors;
+    private final List<RouletteColor> rouletteColors;
 
     public Roulette(final BasicRouletteComponents componentsRoulette) {
         this.components = componentsRoulette;
+        this.rouletteColors = Arrays.asList(RouletteColor.values());
     }
 
     public void spinMotor(final DoubleSupplier speed) {
@@ -97,8 +100,15 @@ public class Roulette extends SubsystemBase {
        return (double) (MIN_ROTATIONS * COLORS_IN_ROTATIONS - colorCount) / COLORS_IN_ROTATIONS;
     }
 
+    /**
+        @return When return value is positive, the roulette needs to be rotated clockwise
+     */
     public double getRotationRequiredToColor(RouletteColor requiredColor) {
-
+        int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
+        int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
+        int colorDistance = indexOfRequiredColor - indexOfCurrentColor;
+        colorDistance = Math.abs(colorDistance);
+        return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
     }
 
     public boolean isOnTarget() {

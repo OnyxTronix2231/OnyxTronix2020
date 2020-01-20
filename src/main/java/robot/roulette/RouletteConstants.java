@@ -17,6 +17,7 @@ public final class RouletteConstants {
   public static final int PICK_AMP = 40; // TODO: check and change
   public static final int PICK_AMP_DURATION = 1; // TODO: check and change
   public static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
+  public static final double DISTANCE_FROM_FIELD_SENSOR = 2.0; // TODO: check and change
   public static RGBValue GREEN_RGB_VALUE = new RGBValue(0.149, 0.599, 0.250);
   public static RGBValue BLUE_RGB_VALUE = new RGBValue(0.108, 0.428, 0.462);
   public static RGBValue RED_RGB_VALUE = new RGBValue(0.551, 0.329, 0.119);

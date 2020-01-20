@@ -29,7 +29,7 @@ public class YawControl extends Turret {
         setDefaultCommand(new MoveToAngleAndKeep(this, this::getTurretAngleRTF));
         break;
       case RTR:
-        setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngle));
+        setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngleRTR));
         break;
       case Homing:
         setDefaultCommand(new MoveToAngleAndKeep(this, () -> 0));
@@ -47,6 +47,6 @@ public class YawControl extends Turret {
   }
 
   public double getTurretAngleRTF() {
-    return driveTrain.getNavXYaw() + getAngle();
+    return driveTrain.getNavXYaw() + getAngleRTR();
   }
 }

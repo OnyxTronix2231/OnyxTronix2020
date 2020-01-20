@@ -13,14 +13,13 @@ public class TurretOi {
 
   public TurretOi(final UniqueTriggerCache buttonsJoystickButtonCache,
                    final UniqueAxisCache buttonJoystickAxisCache, final Turret turret) {
-    final JoystickAxis climbBySpeedAxis =
+    final JoystickAxis moveBySpeedAxis =
         buttonJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kLeftY.value);
-    climbBySpeedAxis.whileActiveContinuous(new MoveBySpeed(turret, climbBySpeedAxis::getRawAxis));
+    moveBySpeedAxis.whileActiveContinuous(new MoveBySpeed(turret, moveBySpeedAxis::getRawAxis));
 
     final Trigger moveByAngleButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
     moveByAngleButton.whenActive(new MoveToAngle(turret, () -> 360));
-
 
   }
 }

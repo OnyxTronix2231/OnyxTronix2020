@@ -20,14 +20,14 @@ public class MoveByAngle extends CommandBase {
 
   @Override
   public void initialize() {
-    turretAngle = turret.getAngle();
+    turretAngle = turret.getAngleRTR();
     angle = angleSupplier.getAsDouble();
   }
 
   @Override
   public void execute() {
     if(angle != angleSupplier.getAsDouble()) {
-      turretAngle = turret.getAngle();
+      turretAngle = turret.getAngleRTR();
       angle = angleSupplier.getAsDouble();
     }
     turret.moveToAngle(turretAngle + angle);
@@ -38,8 +38,4 @@ public class MoveByAngle extends CommandBase {
     turret.stopMotor();
   }
 
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }

@@ -1,11 +1,11 @@
 package robot.turret;
 
-import static robot.turret.TurretConstants.CONTINUES_CURRENT_LIMIT;
+import static robot.turret.TurretConstants.CONTINUOUS_CURRENT_LIMIT;
 import static robot.turret.TurretConstants.MASTER_MOTOR_PORT;
 import static robot.turret.TurretConstants.MAX_ACCELERATION;
 import static robot.turret.TurretConstants.MAX_VELOCITY;
-import static robot.turret.TurretConstants.PICK_AMP;
-import static robot.turret.TurretConstants.PICK_AMP_DURATION;
+import static robot.turret.TurretConstants.PEAK_AMP;
+import static robot.turret.TurretConstants.PEAK_AMP_DURATION;
 import static robot.turret.TurretConstants.VELOCITY_D;
 import static robot.turret.TurretConstants.VELOCITY_F;
 import static robot.turret.TurretConstants.VELOCITY_I;
@@ -37,9 +37,9 @@ public class BasicTurretComponents implements TurretComponents {
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.QuadEncoder;
     config.motionCruiseVelocity = MAX_VELOCITY;
     config.motionAcceleration = MAX_ACCELERATION;
-    config.peakCurrentLimit = PICK_AMP;
-    config.peakCurrentDuration = PICK_AMP_DURATION;
-    config.continuousCurrentLimit = CONTINUES_CURRENT_LIMIT;
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     return config;
   }
 

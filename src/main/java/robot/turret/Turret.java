@@ -9,10 +9,6 @@ import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.turret.commands.MoveToAngleAndKeep;
-
-import java.util.AbstractMap;
-import java.util.function.DoubleSupplier;
 
 public class Turret extends SubsystemBase {
 
@@ -53,15 +49,17 @@ public class Turret extends SubsystemBase {
 
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if(tempAngle < -135) {
+    if(tempAngle < -180 && getAngleRTR() == -135) {
       tempAngle = 135;
-    } else if(tempAngle > 135) {
+    } else if(tempAngle > 180 && getAngleRTR() == 135) {
       tempAngle = -135;
     }
 
-//    if(lastAngle != tempAngle){
-//      lastAngle = tempAngle;
-//    }
+    if (tempAngle > 135 && tempAngle < 360){
+      tempAngle -= 360;
+    }else if (tempAngle < -135 && tempAngle > -360){
+      tempAngle += 360;
+    }
 
     components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle / ENCODER_TO_ANGLE);
   }
@@ -79,14 +77,14 @@ public class Turret extends SubsystemBase {
   }
 
   public void moveByAngle(final double angle){
-    moveToAngle(getAngle() + angle);
+    moveToAngle(getAngleRTR() + angle);
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
     return angle / ENCODER_TO_ANGLE;
   }
 
-  public double getAngle() {
+  public double getAngleRTR() {
     return getEncoderPosition() * ENCODER_TO_ANGLE;
   }
 

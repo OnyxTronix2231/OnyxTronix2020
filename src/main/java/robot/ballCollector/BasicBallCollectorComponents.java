@@ -1,8 +1,5 @@
 package robot.ballCollector;
 
-import static robot.climber.ClimberConstants.CONTINUOUS_CURRENT_LIMIT;
-import static robot.climber.ClimberConstants.PICK_AMP;
-import static robot.climber.ClimberConstants.PICK_AMP_DURATION;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;

@@ -9,7 +9,6 @@ import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.PIGEON_NUMBER;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.TRIGGER_THRESHOLD_CURRENT;
@@ -66,7 +65,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
-    gyro = new PigeonIMU(PIGEON_NUMBER);
+    gyro = new PigeonIMU(0);
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getOdometryHeading()));
   }

@@ -63,6 +63,8 @@ public class DriveTrain extends SubsystemBase {
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
     return Math.abs(leftTarget - getLeftMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE) &&
         Math.abs(rightTarget - getRightMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);
+  }
+
   public void tankDriveVolts(final double rightVolts, final double leftVolts) {
     getLeftMaster().setVoltage(leftVolts);
     getRightMaster().setVoltage(rightVolts);
@@ -89,16 +91,12 @@ public class DriveTrain extends SubsystemBase {
     return cmToEncoderUnits(distance) + motor.getSelectedSensorPosition();
   }
 
-  private TalonFX getLeftMaster() {
+  private WPI_TalonFX getLeftMaster() {
     return components.getLeftMasterMotor();
   }
 
   private WPI_TalonFX getRightMaster() {
     return components.getRightMasterMotor();
-  }
-
-  private double getLeftDistance() {
-    return getLeftMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
   private double getRightDistance() {
@@ -113,11 +111,6 @@ public class DriveTrain extends SubsystemBase {
     return new TalonFXEncoder(components.getRightMasterMotor(), PRIMARY_PID);
   }
 
-  private void resetEncoders() {
-    getLeftEncoder().reset();
-    getRightEncoder().reset();
-  }
-
   private void resetOdometry(final Pose2d pose) {
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(components.getOdometryHeading()));
@@ -130,5 +123,7 @@ public class DriveTrain extends SubsystemBase {
   public void resetEncoders() {
     getLeftMaster().setSelectedSensorPosition(0);
     getRightMaster().setSelectedSensorPosition(0);
+    getLeftEncoder().reset();
+    getRightEncoder().reset();
   }
 }

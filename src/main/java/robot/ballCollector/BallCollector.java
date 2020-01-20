@@ -1,6 +1,5 @@
 package robot.ballCollector;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallCollector extends SubsystemBase {
@@ -17,13 +16,5 @@ public class BallCollector extends SubsystemBase {
 
     public final void stopMotor() {
         collectBySpeed(0);
-    }
-
-    public void openPistons() {
-        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void closePistons() {
-        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
     }
 }

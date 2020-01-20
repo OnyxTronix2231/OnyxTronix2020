@@ -16,6 +16,8 @@ public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
 
+    private final RouletteColor[] rouletteColors;
+
     public Roulette(final BasicRouletteComponents componentsRoulette) {
         this.components = componentsRoulette;
     }
@@ -87,12 +89,16 @@ public class Roulette extends SubsystemBase {
                 getRouletteRotationToEncoderUnits(rouletteRotation));
     }
 
-    public double getRouletteRotationToEncoderUnits(double rouletteRotations){
+    public double getRouletteRotationToEncoderUnits(double rouletteRotations) {
         return rouletteRotations * RouletteConstants.ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
     }
 
-    public double getRouletteRotationByColorCount(int colorCount){
+    public double getRouletteRotationByColorCount(int colorCount) {
        return (double) (MIN_ROTATIONS * COLORS_IN_ROTATIONS - colorCount) / COLORS_IN_ROTATIONS;
+    }
+
+    public double getRotationRequiredToColor(RouletteColor requiredColor) {
+
     }
 
     public boolean isOnTarget() {

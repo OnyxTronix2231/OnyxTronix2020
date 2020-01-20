@@ -12,7 +12,7 @@ public class MoveByAngle extends CommandBase {
   private double angle;
   private double turretAngle;
 
-  public MoveByAngle(Turret turret, DoubleSupplier angleSupplier) {
+  public MoveByAngle(final Turret turret, final DoubleSupplier angleSupplier) {
     this.turret = turret;
     this.angleSupplier = angleSupplier;
     addRequirements(turret);

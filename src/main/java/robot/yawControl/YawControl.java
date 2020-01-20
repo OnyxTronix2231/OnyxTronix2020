@@ -21,7 +21,7 @@ public class YawControl extends Turret {
     setTurretState(TurretState.RTR);
   }
 
-  public void setTurretState(TurretState turretState) {
+  public void setTurretState(final TurretState turretState) {
     zeroOffsetByPercent();
     if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
@@ -39,11 +39,12 @@ public class YawControl extends Turret {
   }
 
   @Override
-  public void moveToAngle(double angle) {
+  public void moveToAngle(final double angle) {
+    double tempAngle = angle;
     if(turretState == TurretState.RTF) {
-      angle -= driveTrain.getNavXYaw();
+      tempAngle -= driveTrain.getNavXYaw();
     }
-    super.moveToAngle(angle);
+    super.moveToAngle(tempAngle);
   }
 
   public double getTurretAngleRTF() {

@@ -49,23 +49,23 @@ public class Turret extends SubsystemBase {
 
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if(tempAngle < -180 && getAngleRTR() == -135) {
-      tempAngle = 135;
-    } else if(tempAngle > 180 && getAngleRTR() == 135) {
-      tempAngle = -135;
+    if(tempAngle < -FLIP_POINT && getAngleRTR() == MIN_ANGLE) {
+      tempAngle = MAX_ANGLE;
+    } else if(tempAngle > FLIP_POINT && getAngleRTR() == MAX_ANGLE) {
+      tempAngle = MIN_ANGLE;
     }
 
-    if (tempAngle > 135 && tempAngle < 360){
-      tempAngle -= 360;
-    }else if (tempAngle < -135 && tempAngle > -360){
-      tempAngle += 360;
+    if (tempAngle > MAX_ANGLE && tempAngle < DEGREES_IN_CIRCLE){
+      tempAngle -= DEGREES_IN_CIRCLE;
+    }else if (tempAngle < MIN_ANGLE && tempAngle > -DEGREES_IN_CIRCLE){
+      tempAngle += DEGREES_IN_CIRCLE;
     }
 
-    components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle / ENCODER_TO_ANGLE);
+    components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 
-  public void setOffsetByPercent(double percent) {
-    angleOffset += percent * 1;
+  public void setOffsetByPercent(final double percent) {
+    angleOffset += percent;
   }
 
   public double getOffsetByPercent() {
@@ -76,7 +76,7 @@ public class Turret extends SubsystemBase {
     angleOffset = 0;
   }
 
-  public void moveByAngle(final double angle){
+  public void moveByAngle(final double angle) {
     moveToAngle(getAngleRTR() + angle);
   }
 

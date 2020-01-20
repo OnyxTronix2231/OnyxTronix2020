@@ -28,7 +28,7 @@ public class MoveToAngleAndKeep extends CommandBase {
   }
 
   @Override
-  public void end(final boolean interrupted) {
+  public void end(boolean interrupted) {
     turret.stopMotor();
   }
 }

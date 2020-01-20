@@ -21,7 +21,7 @@ public class BasicTurretComponents implements TurretComponents {
   private final WPI_TalonSRX masterMotor;
 
   public BasicTurretComponents() {
-    this.masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
+    masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);

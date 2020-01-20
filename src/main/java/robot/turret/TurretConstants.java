@@ -18,4 +18,7 @@ public class TurretConstants {
   public static final int PEAK_AMP = 40;
   public static final int PEAK_AMP_DURATION = 0;
   public static final int CONTINUOUS_CURRENT_LIMIT = 40;
+  public static final int FLIP_POINT = 180;
+  public static final int MAX_ANGLE = 135;
+  public static final int MIN_ANGLE = -135;
 }

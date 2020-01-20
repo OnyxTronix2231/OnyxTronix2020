@@ -15,6 +15,7 @@ import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.TRIGGER_THRESHOLD_CURRENT;
 import static robot.drivetrain.DriveTrainConstants.TRIGGER_THRESHOLD_TIME;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -64,6 +65,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
+    differentialDrive.setSafetyEnabled(false);
     gyro = new PigeonIMU(PIGEON_NUMBER);
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getOdometryHeading()));
@@ -116,6 +118,9 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
     config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
+    config.motionCruiseVelocity = (int) MAX_VELOCITY;
+//    config.motionAcceleration = M
     return config;
   }
 

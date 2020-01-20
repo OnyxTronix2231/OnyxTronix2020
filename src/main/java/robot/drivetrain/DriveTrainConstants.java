@@ -1,7 +1,5 @@
 package robot.drivetrain;
 
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
-
 public final class DriveTrainConstants {
 
   public static final int LEFT_MASTER_PORT = 2;

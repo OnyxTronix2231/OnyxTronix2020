@@ -23,13 +23,13 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
-    resetEncoders();
     resetOdometry(new Pose2d());
+    resetEncoders();
   }
 
   @Override
   public void periodic() {
-    components.getOdometry().update(Rotation2d.fromDegrees(components.getOdometryHeading()), getLeftDistance(), getRightDistance());
+    components.getOdometry().update(Rotation2d.fromDegrees(getOdometryHeading()), getLeftDistance(), getRightDistance());
   }
 
   public void stopDrive() {
@@ -111,19 +111,23 @@ public class DriveTrain extends SubsystemBase {
     return new TalonFXEncoder(components.getRightMasterMotor(), PRIMARY_PID);
   }
 
+  private double getOdometryHeading() {
+    return Math.IEEEremainder(components.getGyro().getYaw(), 360);
+  }
+
   private void resetOdometry(final Pose2d pose) {
     resetEncoders();
-    components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(components.getOdometryHeading()));
+    components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
   }
 
   private double cmToEncoderUnits(final double cm) {
     return CONVERSION_RATE * ENCODER_UNITS * cm / PERIMETER;
   }
 
-  public void resetEncoders() {
-    getLeftMaster().setSelectedSensorPosition(0);
-    getRightMaster().setSelectedSensorPosition(0);
+  private void resetEncoders() {
     getLeftEncoder().reset();
     getRightEncoder().reset();
+    getLeftMaster().setSelectedSensorPosition(0);
+    getRightMaster().setSelectedSensorPosition(0);
   }
 }

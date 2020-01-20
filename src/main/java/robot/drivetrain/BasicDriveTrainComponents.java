@@ -20,7 +20,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.sensors.PigeonIMU;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -32,7 +32,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
   private final DifferentialDrive differentialDrive;
-  private final PigeonIMU gyro;
+  private final AHRS gyro;
   private final DifferentialDriveOdometry odometry;
 
   public BasicDriveTrainComponents() {
@@ -65,9 +65,9 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
-    gyro = new PigeonIMU(0);
+    gyro = new AHRS();
 
-    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getOdometryHeading()));
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(Math.IEEEremainder(gyro.getYaw(), 360)));
   }
 
   @Override
@@ -96,19 +96,13 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   }
 
   @Override
-  public PigeonIMU getGyro() {
+  public AHRS getGyro() {
     return gyro;
   }
 
   @Override
   public DifferentialDriveOdometry getOdometry() {
     return odometry;
-  }
-
-  public double getOdometryHeading() {
-    final double[] yawPitchRoll = new double[3];
-    gyro.getYawPitchRoll(yawPitchRoll);
-    return Math.IEEEremainder(yawPitchRoll[0], 360);
   }
 
   private TalonFXConfiguration getFalconConfiguration() {
@@ -119,7 +113,6 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
     config.motionCruiseVelocity = (int) MAX_VELOCITY;
-//    config.motionAcceleration = M
     return config;
   }
 

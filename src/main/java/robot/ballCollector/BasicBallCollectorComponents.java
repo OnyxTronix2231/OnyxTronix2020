@@ -32,12 +32,9 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
     public final WPI_TalonSRX getMasterMotor() {
         return masterMotor;
     }
+
     @Override
-    public final DoubleSolenoid getRightDoubleSolenoid(){
-        return rightDoubleSolenoid;
-    }
-    @Override
-    public final DoubleSolenoid getLeftDoubleSolenoid(){
-        return leftDoubleSolenoid;
+    public DoubleSolenoid getDoubleSolenoid() {
+        return doubleSolenoid;
     }
 }

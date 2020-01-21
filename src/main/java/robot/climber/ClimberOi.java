@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import onyxTronix.UniqueTriggerCache;
 import robot.climber.commands.ClimbBySpeed;
 import robot.climber.commands.ClosePistons;
 import robot.climber.commands.OpenPistons;
@@ -18,7 +17,7 @@ public class ClimberOi {
 
   public ClimberOi(final UniqueButtonCache driverJoystickButtonCache,
                    final UniqueAxisCache driverJoystickAxisCache, final Climber climber) {
-    final JoystickAxis climbBySpeedAxis =
+      final JoystickAxis climbBySpeedAxis =
         driverJoystickAxisCache.createJoystickTrigger(kRightY.value);
     climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
 

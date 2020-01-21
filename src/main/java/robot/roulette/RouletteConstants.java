@@ -12,6 +12,7 @@ public final class RouletteConstants {
   public final static int TOLERANCE = 50;
   public final static int MAX_ROTATIONS = 5;
   public final static int MIN_ROTATIONS = 3;
+  public static final double RGB_EQUALS_THRESHOLD = 0.8;
   public final static int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS)/2;
   public static int REQUIRED_ROTATIONS = AVERAGE_ROTATIONS *  COLORS_IN_ROTATIONS;
   public static final int PICK_AMP = 40; // TODO: check and change

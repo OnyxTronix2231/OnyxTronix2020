@@ -18,15 +18,15 @@ public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
 
-    private final List<RouletteColor> rouletteColors;
+    private final List <RouletteColor> rouletteColors;
 
     public Roulette(final BasicRouletteComponents componentsRoulette) {
         this.components = componentsRoulette;
         this.rouletteColors = Arrays.asList(RouletteColor.values());
     }
 
-    public void spinMotor(final DoubleSupplier speed) {
-        components.getMasterMotor().set(speed.getAsDouble());
+    public void spinMotor(final DoubleSupplier speedSupplier) {
+        components.getMasterMotor().set(speedSupplier.getAsDouble());
     }
 
     public void openDoubleSolenoid() {
@@ -103,6 +103,7 @@ public class Roulette extends SubsystemBase {
     /**
         @return When return value is positive, the roulette needs to be rotated clockwise
      */
+
     public double getRotationRequiredToColor(RouletteColor requiredColor) {
         int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
         int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());

@@ -3,7 +3,6 @@ package robot.roulette;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class RGBValue {
-  public static final double RGB_EQUALS_THRESHOLD = 0.8;
   private final double red;
     private final double green;
     private final double blue;
@@ -26,7 +25,7 @@ public class RGBValue {
         return blue;
     }
 
-    public RGBValue colorToRgb(Color color) {
+    public RGBValue colorToRgb(final Color color) {
         return new RGBValue(color.red, color.green, color.blue);
     }
 
@@ -41,7 +40,7 @@ public class RGBValue {
     }
 
     public boolean equals(final RGBValue other) {
-        return howCloseTo(other) >= RGB_EQUALS_THRESHOLD;
+        return howCloseTo(other) >= RouletteConstants.RGB_EQUALS_THRESHOLD;
     }
 
     public boolean equals(final Color other) {

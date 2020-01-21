@@ -20,8 +20,8 @@ public class BasicRouletteComponents implements RouletteComponents {
 
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
-        masterMotor.configPeakCurrentLimit(RouletteConstants.PICK_AMP);
-        masterMotor.configPeakCurrentDuration(RouletteConstants.PICK_AMP_DURATION);
+        masterMotor.configPeakCurrentLimit(PICK_AMP);
+        masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
         masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.enableCurrentLimit(true);
@@ -29,8 +29,6 @@ public class BasicRouletteComponents implements RouletteComponents {
         doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_CHANNEL, DOUBLE_SOLENOID_REVERSE_CHANNEL);
 
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
-
-
     }
 
     @Override

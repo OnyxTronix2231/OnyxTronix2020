@@ -34,8 +34,7 @@ public class SpinRouletteByColor extends CommandBase {
             previousColor = currentColor;
         }
     }
-
-
+    
     @Override
     public boolean isFinished() {
         return colorCounter >= colorsRequired;

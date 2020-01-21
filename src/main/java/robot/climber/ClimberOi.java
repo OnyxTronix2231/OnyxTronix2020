@@ -22,10 +22,10 @@ public class ClimberOi {
         driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightY.value);
     climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
 
-    final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kY.value);
+    final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
     openDoubleSolenoidsButton.whenActive(new OpenPistons(climber));
 
-    final Trigger closeDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kX.value);
-    closeDoubleSolenoidsButton.whenActive(new ClosePistons(climber));
+//    final Trigger closeDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kX.value);
+//    closeDoubleSolenoidsButton.whenActive(new ClosePistons(climber));
   }
 }

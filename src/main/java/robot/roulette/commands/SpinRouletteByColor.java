@@ -3,10 +3,6 @@ package robot.roulette.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
-import robot.roulette.RouletteConstants;
-
-import static robot.roulette.RouletteConstants.COLORS_IN_ROTATIONS;
-import static robot.roulette.RouletteConstants.MIN_ROTATIONS;
 
 public class SpinRouletteByColor extends CommandBase {
     private final Roulette roulette;
@@ -34,7 +30,7 @@ public class SpinRouletteByColor extends CommandBase {
             previousColor = currentColor;
         }
     }
-    
+
     @Override
     public boolean isFinished() {
         return colorCounter >= colorsRequired;

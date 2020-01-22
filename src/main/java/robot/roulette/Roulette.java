@@ -19,8 +19,8 @@ public class Roulette extends SubsystemBase {
 
     private final List <RouletteColor> rouletteColors;
 
-    public Roulette(final BasicRouletteComponents componentsRoulette) {
-        this.components = componentsRoulette;
+    public Roulette(final BasicRouletteComponents components) {
+        this.components = components;
         this.rouletteColors = Arrays.asList(RouletteColor.values());
     }
 
@@ -61,7 +61,6 @@ public class Roulette extends SubsystemBase {
         return requiredMatchColor;
     }
 
-
     public RouletteColor getCurrentColor() {
         final Color detectedColor = components.getColorSensorV3().getColor();
         final Double[] howCloseToEach = {
@@ -82,8 +81,7 @@ public class Roulette extends SubsystemBase {
                 return RouletteColor.Yellow;
         }
     }
-
-
+    
     public void stopSpin() {
         components.getMasterMotor().set(0);
     }

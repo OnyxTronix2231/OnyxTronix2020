@@ -22,4 +22,8 @@ public class LoaderConveyor extends SubsystemBase {
     public void setVelocity(final double velocity) {
         components.getMasterMotor().set(ControlMode.Velocity, velocity);
     }
+
+    public double getVelocity() {
+        return components.getMasterMotor().getSelectedSensorVelocity();
+    }
 }

@@ -1,11 +1,10 @@
-package robot.vision.Target;
+package robot.vision;
 
 import static robot.vision.VisionConstants.CAMERA_HEIGHT_CM;
 import static robot.vision.VisionConstants.DISTANCE_BETWEEN_OUTER_INNER_TARGET;
 import static robot.vision.VisionConstants.HEIGHT_OFFSET_INNER_OUTER_CENTER;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 
-import robot.vision.Calculations;
 import robot.vision.limelight.target.LimelightTarget;
 
 public class VisionTarget {
@@ -22,11 +21,12 @@ public class VisionTarget {
     this.verticalOffset = verticalOffset;
     this.orientation = orientation;
     this.distance = distance;
-    this.y = y;
     this.x = x;
+    this.y = y;
   }
 
-  public VisionTarget(double horizontalOffset, double verticalOffset, double orientation, double distance) {
+  public VisionTarget(final double horizontalOffset, final double verticalOffset,
+                      final double orientation, final double distance) {
     this.horizontalOffset = horizontalOffset;
     this.verticalOffset = verticalOffset;
     this.orientation = orientation;
@@ -38,8 +38,8 @@ public class VisionTarget {
   public VisionTarget(final LimelightTarget target) {
     this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
     this.verticalOffset = target.getVerticalOffsetToCrosshair();
-    this.orientation = Calculations.calculateOrientationToTarget(target);
-    this.distance = Calculations.calculateDistance(target);
+    this.orientation = VisionCalculations.calculateOrientationToTarget(target, 0); //
+    this.distance = VisionCalculations.calculateDistance(target);
     this.x = distance * Math.sin(Math.toRadians(orientation));
     this.y = distance * Math.cos(Math.toRadians(orientation));
   }

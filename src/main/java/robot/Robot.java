@@ -3,33 +3,21 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.turret.BasicTurretComponents;
-import robot.turret.TurretOi;
-import robot.ballCollector.BallCollector;
-import robot.ballCollector.BallCollectorOi;
-import robot.ballCollector.BasicBallCollectorComponents;
 import robot.drivetrain.BasicDriveTrainComponents;
 import robot.drivetrain.DriveTrain;
-import robot.drivetrain.commands.DriveByDistance;
-import robot.drivetrain.commands.DriveBySpeed;
-import robot.turret.BasicTurretComponents;
-import robot.turret.Turret;
-import robot.turret.TurretOi;
-import robot.vision.Calculations;
+import robot.vision.VisionOi;
+import robot.vision.VisionTarget;
 import robot.vision.limelight.Limelight;
-import robot.vision.limelight.target.LimelightTarget;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
-
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 
 public class Robot extends TimedRobot {
 
@@ -48,7 +36,7 @@ public class Robot extends TimedRobot {
         YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
         new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
 
-        new TurretOi(buttonsJoystickButtonCache, buttonsJoystickAxisCache, yawControl);
+        new VisionOi(buttonsJoystickButtonCache, yawControl);
 
 //        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
 //        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
@@ -64,9 +52,13 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         CommandScheduler.getInstance().run();
         if(Limelight.getInstance().targetFound()) {
-            LimelightTarget target = Limelight.getInstance().getTarget();
-            System.out.println("Orientation = " + Calculations.calculateOrientationToTarget(target));
-            System.out.println("Distance = " + Calculations.calculateDistance(target));
+            VisionTarget outerTarget = new VisionTarget(Limelight.getInstance().getTarget());
+            VisionTarget innerTarget = outerTarget.generateInnerTarget();
+
+            SmartDashboard.putNumber("Outer Orientation", outerTarget.getOrientation());
+            SmartDashboard.putNumber("Outer Distance", outerTarget.getDistance());
+            SmartDashboard.putNumber("Inner Orientation", innerTarget.getOrientation());
+            SmartDashboard.putNumber("Inner Distance", innerTarget.getDistance());
         }
     }
 

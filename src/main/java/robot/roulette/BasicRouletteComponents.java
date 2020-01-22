@@ -11,12 +11,13 @@ import static robot.roulette.RouletteConstants.*;
 public class BasicRouletteComponents implements RouletteComponents {
 
     private final WPI_TalonSRX masterMotor;
-
-    private final DoubleSolenoid doubleSolenoid;
-
+    private final DoubleSolenoid doubleRightSolenoid;
+    private final DoubleSolenoid doubleLeftSolenoid;
     private final ColorSensorV3 colorSensorV3;
 
-    public BasicRouletteComponents() {
+    public BasicRouletteComponents(DoubleSolenoid doubleRightSolenoid, DoubleSolenoid doubleLeftSolenoid) {
+        this.doubleRightSolenoid = doubleRightSolenoid;
+        this.doubleLeftSolenoid = doubleLeftSolenoid;
 
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
@@ -26,7 +27,11 @@ public class BasicRouletteComponents implements RouletteComponents {
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.enableCurrentLimit(true);
 
-        doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_CHANNEL, DOUBLE_SOLENOID_REVERSE_CHANNEL);
+        doubleLeftSolenoid = new DoubleSolenoid
+                (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
+
+        doubleRightSolenoid = new DoubleSolenoid
+                (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL,DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
     }
@@ -37,8 +42,13 @@ public class BasicRouletteComponents implements RouletteComponents {
     }
 
     @Override
-    public DoubleSolenoid getDoubleSolenoid() {
-        return doubleSolenoid;
+    public DoubleSolenoid getDoubleRightSolenoid() {
+        return doubleRightSolenoid;
+    }
+
+    @Override
+    public DoubleSolenoid getDoubleLeftSolenoid() {
+        return doubleLeftSolenoid;
     }
 
     @Override

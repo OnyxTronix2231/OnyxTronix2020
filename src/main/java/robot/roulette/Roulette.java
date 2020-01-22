@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.opencv.core.Mat;
 
 import static robot.roulette.RouletteConstants.*;
 
@@ -30,11 +29,14 @@ public class Roulette extends SubsystemBase {
     }
 
     public void openDoubleSolenoid() {
-        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+        components.getDoubleRightSolenoid().set(DoubleSolenoid.Value.kForward);
+        components.getDoubleLeftSolenoid().set(DoubleSolenoid.Value.kForward);
     }
 
     public void closeDoubleSolenoid() {
-        components.getDoubleSolenoid().close();
+        components.getDoubleRightSolenoid().close();
+        components.getDoubleLeftSolenoid().close();
+
     }
 
     public RouletteColor getRequiredColorFromMatchColor() {

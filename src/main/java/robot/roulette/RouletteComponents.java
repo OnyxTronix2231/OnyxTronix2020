@@ -9,7 +9,9 @@ public interface RouletteComponents {
 
     WPI_TalonSRX getMasterMotor();
 
-    DoubleSolenoid getDoubleSolenoid();
+    DoubleSolenoid getDoubleLeftSolenoid();
+
+    DoubleSolenoid getDoubleRightSolenoid();
 
     ColorSensorV3 getColorSensorV3();
 }

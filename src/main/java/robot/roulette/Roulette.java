@@ -36,7 +36,6 @@ public class Roulette extends SubsystemBase {
     public void closeDoubleSolenoid() {
         components.getDoubleRightSolenoid().close();
         components.getDoubleLeftSolenoid().close();
-
     }
 
     public RouletteColor getRequiredColorFromMatchColor() {
@@ -63,6 +62,7 @@ public class Roulette extends SubsystemBase {
 
     public RouletteColor getCurrentColor() {
         final Color detectedColor = components.getColorSensorV3().getColor();
+
         final Double[] howCloseToEach = {
           RouletteColor.Red.rgbValue.howCloseTo(detectedColor),
           RouletteColor.Green.rgbValue.howCloseTo(detectedColor),
@@ -81,22 +81,22 @@ public class Roulette extends SubsystemBase {
                 return RouletteColor.Yellow;
         }
     }
-    
+
     public void stopSpin() {
         components.getMasterMotor().set(0);
     }
 
-    public void spinByColorsCount(int PastColorCount) {
+    public void spinByColorsCount(final int PastColorCount) {
         double rouletteRotation = getRouletteRotationByColorCount(PastColorCount);
         components.getMasterMotor().set(ControlMode.MotionMagic,
                 getRouletteRotationToEncoderUnits(rouletteRotation));
     }
 
-    public double getRouletteRotationToEncoderUnits(double rouletteRotations) {
+    public double getRouletteRotationToEncoderUnits(final double rouletteRotations) {
         return rouletteRotations * RouletteConstants.ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
     }
 
-    public double getRouletteRotationByColorCount(int colorCount) {
+    public double getRouletteRotationByColorCount(final int colorCount) {
        return (double) (MIN_ROTATIONS * COLORS_IN_ROTATIONS - colorCount) / COLORS_IN_ROTATIONS;
     }
 
@@ -104,7 +104,7 @@ public class Roulette extends SubsystemBase {
         @return When return value is positive, the roulette needs to be rotated clockwise
      */
 
-    public double getRotationRequiredToColor(RouletteColor requiredColor) {
+    public double getRotationRequiredToColor(final RouletteColor requiredColor) {
         int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
         int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
         int colorDistance = indexOfRequiredColor - indexOfCurrentColor;

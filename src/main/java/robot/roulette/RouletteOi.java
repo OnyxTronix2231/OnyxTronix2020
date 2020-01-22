@@ -9,7 +9,6 @@ import robot.roulette.commands.*;
 import static edu.wpi.first.wpilibj.XboxController.Button.*;
 import static onyxTronix.JoystickAxis.AxisMap.kRightX;
 
-
 public class RouletteOi {
 
     public RouletteOi(final Roulette roulette, final UniqueAxisCache driverJoystickAxisCache,

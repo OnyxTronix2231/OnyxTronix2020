@@ -17,7 +17,7 @@ public final class BallCollectorOi {
                 buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
         collectBySpeedAxis.whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> SPEED));
 
-        final Trigger openDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperRight.value);
+        final Trigger openDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperRight.value);a
         openDoubleSolenoidsButton.whenActive(new OpenPistons(ballCollector));
 
         final Trigger closeDoubleSolenoidsButton = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);

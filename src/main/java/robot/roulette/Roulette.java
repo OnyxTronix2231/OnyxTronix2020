@@ -86,7 +86,7 @@ public class Roulette extends SubsystemBase {
         components.getMasterMotor().set(0);
     }
 
-    public void spinByColorsCount(final int PastColorCount) {
+    public void spinByColorsCount(final double PastColorCount) {
         double rouletteRotation = getRouletteRotationByColorCount(PastColorCount);
         components.getMasterMotor().set(ControlMode.MotionMagic,
                 getRouletteRotationToEncoderUnits(rouletteRotation));
@@ -96,7 +96,7 @@ public class Roulette extends SubsystemBase {
         return rouletteRotations * RouletteConstants.ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
     }
 
-    public double getRouletteRotationByColorCount(final int colorCount) {
+    public double getRouletteRotationByColorCount(final double colorCount) {
        return (double) (MIN_ROTATIONS * COLORS_IN_ROTATIONS - colorCount) / COLORS_IN_ROTATIONS;
     }
 
@@ -104,14 +104,14 @@ public class Roulette extends SubsystemBase {
         @return When return value is positive, the roulette needs to be rotated clockwise
      */
 
-    public double getRotationRequiredToColor(final RouletteColor requiredColor) {
+    public double getColorCountRequiredToColor(final RouletteColor requiredColor) {
         int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
         int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
         int colorDistance = indexOfRequiredColor - indexOfCurrentColor;
         colorDistance = Math.abs(colorDistance);
         return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
     }
-
+   
     public boolean isOnTarget() {
         return Math.abs(components.getMasterMotor().getClosedLoopError()) <= TOLERANCE;
     }

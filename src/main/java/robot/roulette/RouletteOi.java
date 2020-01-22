@@ -28,6 +28,6 @@ public class RouletteOi {
         spinRouletteByColorExist.whenActive(new SpinRouletteByColorIfExists(roulette));
 
         final Trigger spinRouletteToColor = driverJoystickButtonCache.createJoystickTrigger(kY.value);
-        spinRouletteToColor.whenActive(new SpinRouletteToColor(roulette));
+        spinRouletteToColor.whenActive(new SpinRouletteToColor(roulette, roulette.getRequiredColorFromMatchColor()));
     }
 }

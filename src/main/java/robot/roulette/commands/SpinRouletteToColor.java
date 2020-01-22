@@ -1,38 +1,15 @@
 package robot.roulette.commands;
 
-import static robot.roulette.RouletteConstants.SPIN_COLOR_SPEED;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
 
-public class SpinRouletteToColor extends CommandBase {
+import java.util.function.Supplier;
 
-  private final Roulette roulette;
-  private RouletteColor requiredColor;
+import static robot.roulette.RouletteConstants.COLORS_IN_ROTATIONS;
 
-  public SpinRouletteToColor(final Roulette roulette) {
-    this.roulette = roulette;
-    addRequirements(roulette);
-  }
+public class SpinRouletteToColor extends SpinRouletteByColorCount {
 
-  @Override
-  public void initialize() {
-    requiredColor = roulette.getRequiredColorFromMatchColor();
-  }
-
-  @Override
-  public void execute() {
-    roulette.spinMotor(() -> SPIN_COLOR_SPEED);
-  }
-
-  @Override
-  public void end(final boolean interrupted) {
-    roulette.stopSpin();
-  }
-
-  @Override
-  public boolean isFinished() {
-    return requiredColor == roulette.getCurrentColor();
+  public SpinRouletteToColor(final Roulette roulette, Supplier<RouletteColor> requiredColor) {
+    super(roulette, () -> roulette.getColorCountRequiredToColor (requiredColor.get()));
   }
 }

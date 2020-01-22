@@ -4,14 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
 
-public class SpinRouletteByColor extends CommandBase {
+import java.util.function.DoubleSupplier;
+
+public class SpinRouletteByColorCount extends CommandBase {
     private final Roulette roulette;
-    private int colorsRequired = 8;
+    private DoubleSupplier colorsRequired;
     private RouletteColor currentColor;
     private RouletteColor previousColor;
     private int colorCounter;
 
-    public SpinRouletteByColor(final Roulette roulette, int colorsRequired ) {
+    public SpinRouletteByColorCount(final Roulette roulette, DoubleSupplier colorsRequired ) {
         this.roulette = roulette;
         this.colorsRequired = colorsRequired;
     }
@@ -25,6 +27,7 @@ public class SpinRouletteByColor extends CommandBase {
     @Override
     public void execute() {
         currentColor = roulette.getCurrentColor();
+        roulette.spinByColorsCount(colorsRequired.getAsDouble() - colorCounter);
         if (!currentColor.getRgbValue().equals(previousColor.rgbValue)) {
             colorCounter++;
             previousColor = currentColor;
@@ -33,7 +36,7 @@ public class SpinRouletteByColor extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return colorCounter >= colorsRequired;
+        return colorCounter >= colorsRequired.getAsDouble();
     }
 
     @Override

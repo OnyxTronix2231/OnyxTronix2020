@@ -19,7 +19,8 @@ public class CrossSubsystemOi {
                           final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     final JoystickButton loadingShooter =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
-    loadingShooter.whenPressed (new SpinShooterAndLoader(shooter, loaderConveyor, () -> SHOOTER_VELOCITY));
+    loadingShooter.whenPressed (new SpinShooterAndLoader(shooter, loaderConveyor, () -> SHOOTER_VELOCITY)
+        .withTimeout(SPIN_SHOOTER_AND_LOADER_TIME_OUT));
 
     final JoystickButton shootWithLoaderConveyorTrigger =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);

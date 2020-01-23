@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import javax.swing.*;
+
 import static robot.roulette.RouletteConstants.*;
 
 public class Roulette extends SubsystemBase {
@@ -86,8 +88,8 @@ public class Roulette extends SubsystemBase {
         components.getMasterMotor().set(0);
     }
 
-    public void spinByColorsCount(final double PastColorCount) {
-        double rouletteRotation = getRouletteRotationByColorCount(PastColorCount);
+    public void spinByColorsCount(final double pastColorCount) {
+        double rouletteRotation = getRouletteRotationByColorCount(pastColorCount);
         components.getMasterMotor().set(ControlMode.MotionMagic,
                 getRouletteRotationToEncoderUnits(rouletteRotation));
     }
@@ -111,7 +113,11 @@ public class Roulette extends SubsystemBase {
         colorDistance = Math.abs(colorDistance);
         return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
     }
-   
+
+    public void resetEncoder(){
+        components.getMasterMotor().setSelectedSensorPosition(0);
+    }
+
     public boolean isOnTarget() {
         return Math.abs(components.getMasterMotor().getClosedLoopError()) <= TOLERANCE;
     }

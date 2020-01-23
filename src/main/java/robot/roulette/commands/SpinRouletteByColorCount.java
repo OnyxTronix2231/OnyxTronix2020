@@ -20,6 +20,7 @@ public class SpinRouletteByColorCount extends CommandBase {
 
     @Override
     public void initialize() {
+        roulette.resetEncoder();
         previousColor = roulette.getCurrentColor();
         colorCounter = 0;
     }
@@ -30,6 +31,7 @@ public class SpinRouletteByColorCount extends CommandBase {
         roulette.spinByColorsCount(colorsRequired.getAsDouble() - colorCounter);
         if (!currentColor.getRgbValue().equals(previousColor.rgbValue)) {
             colorCounter++;
+            roulette.resetEncoder();// Reset to sync it's color place
             previousColor = currentColor;
         }
     }

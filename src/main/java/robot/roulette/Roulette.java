@@ -1,9 +1,8 @@
 package robot.roulette;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.DoubleSupplier;
+import java.util.function.ToDoubleFunction;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -64,24 +63,12 @@ public class Roulette extends SubsystemBase {
 
     public RouletteColor getCurrentColor() {
         final Color detectedColor = components.getColorSensorV3().getColor();
-
-        final Double[] howCloseToEach = {
-          RouletteColor.Red.rgbValue.howCloseTo(detectedColor),
-          RouletteColor.Green.rgbValue.howCloseTo(detectedColor),
-          RouletteColor.Blue.rgbValue.howCloseTo(detectedColor),
-          RouletteColor.Yellow.rgbValue.howCloseTo(detectedColor)
-        };
-
-        switch (Arrays.binarySearch(howCloseToEach, Collections.max(Arrays.asList(howCloseToEach)))) {
-            case 0:
-                return RouletteColor.Red;
-            case 1:
-                return RouletteColor.Green;
-            case 2:
-                return RouletteColor.Blue;
-            default:
-                return RouletteColor.Yellow;
-        }
+        final RouletteColor[] rouletteColors = RouletteColor.values();
+        Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
+                Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
+        return roulette.orElse(null);
+        //        return Arrays.stream(rouletteColors).max(
+//                Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor))).orElse(null);
     }
 
     public void stopSpin() {

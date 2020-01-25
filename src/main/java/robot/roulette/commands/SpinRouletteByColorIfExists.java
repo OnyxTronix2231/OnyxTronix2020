@@ -10,4 +10,4 @@ public class SpinRouletteByColorIfExists extends ConditionalCommand {
     super(new SpinRouletteToColor(roulette, roulette::getRequiredColorFromMatchColor),new InstantCommand(() -> System.out.println("Color Doesn't exist")),
         () -> roulette.getRequiredColorFromMatchColor() != null);
   }
-}
+} 

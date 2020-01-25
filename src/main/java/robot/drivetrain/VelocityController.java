@@ -11,7 +11,6 @@ public class VelocityController implements SpeedController {
   private final WPI_TalonFX motor;
 
   public VelocityController(final double maxVelocity, final int pidSlot, final WPI_TalonFX motor){
-
     this.maxVelocity = maxVelocity;
     this.pidSlot = pidSlot;
     this.motor = motor;

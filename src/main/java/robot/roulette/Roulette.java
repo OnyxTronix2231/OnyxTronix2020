@@ -17,7 +17,6 @@ import static robot.roulette.RouletteConstants.*;
 public class Roulette extends SubsystemBase {
 
     private final BasicRouletteComponents components;
-
     private final List <RouletteColor> rouletteColors;
 
     public Roulette(final BasicRouletteComponents components) {
@@ -67,7 +66,7 @@ public class Roulette extends SubsystemBase {
         Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
                 Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
         return roulette.orElse(null);
-        //        return Arrays.stream(rouletteColors).max(
+//                return Arrays.stream(rouletteColors).max(
 //                Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor))).orElse(null);
     }
 

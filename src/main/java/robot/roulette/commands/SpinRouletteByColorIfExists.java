@@ -6,8 +6,8 @@ import robot.roulette.Roulette;
 
 public class SpinRouletteByColorIfExists extends ConditionalCommand {
 
-  public SpinRouletteByColorIfExists(final Roulette roulette) {
-    super(new SpinRouletteToColor(roulette, roulette::getRequiredColorFromMatchColor),new InstantCommand(() -> System.out.println("Color Doesn't exist")),
-        () -> roulette.getRequiredColorFromMatchColor() != null);
-  }
-} 
+    public SpinRouletteByColorIfExists(final Roulette roulette) {
+        super(new SpinRouletteToColor(roulette, roulette::getRequiredColorFromMatchColor), new InstantCommand(() -> System.out.println("Color Doesn't exist")),
+                () -> roulette.getRequiredColorFromMatchColor() != null);
+    }
+}

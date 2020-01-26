@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
         YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
         new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
 
-        new VisionOi(buttonsJoystickButtonCache, yawControl);
+        new VisionOi(buttonsJoystickButtonCache, yawControl, driveTrain);
 
 //        BallCollector ballCollector =new BallCollector(new BasicBallCollectorComponents());
 //        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);

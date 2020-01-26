@@ -17,4 +17,5 @@ public class VisionCalculations {
   public static double calculateOrientationToTarget(final LimelightTarget target, final double accelerometerAngle) {
     return target.getHorizontalOffsetToCrosshair() + accelerometerAngle;
   }
+
 }

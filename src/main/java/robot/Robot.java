@@ -51,15 +51,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         CommandScheduler.getInstance().run();
-        if(Limelight.getInstance().targetFound()) {
-            VisionTarget outerTarget = new VisionTarget(Limelight.getInstance().getTarget());
-            VisionTarget innerTarget = outerTarget.generateInnerTarget();
-
-            SmartDashboard.putNumber("Outer Orientation", outerTarget.getOrientation());
-            SmartDashboard.putNumber("Outer Distance", outerTarget.getDistance());
-            SmartDashboard.putNumber("Inner Orientation", innerTarget.getOrientation());
-            SmartDashboard.putNumber("Inner Distance", innerTarget.getDistance());
-        }
     }
 
     @Override

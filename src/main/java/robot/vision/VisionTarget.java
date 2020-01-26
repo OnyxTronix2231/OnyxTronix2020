@@ -35,10 +35,10 @@ public class VisionTarget {
     this.y = distance * Math.cos(Math.toRadians(orientation));
   }
 
-  public VisionTarget(final LimelightTarget target) {
+  public VisionTarget(final LimelightTarget target, final double accelerometerAngle) {
     this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
     this.verticalOffset = target.getVerticalOffsetToCrosshair();
-    this.orientation = VisionCalculations.calculateOrientationToTarget(target, 0); //
+    this.orientation = VisionCalculations.calculateOrientationToTarget(target, accelerometerAngle);
     this.distance = VisionCalculations.calculateDistance(target);
     this.x = distance * Math.sin(Math.toRadians(orientation));
     this.y = distance * Math.cos(Math.toRadians(orientation));

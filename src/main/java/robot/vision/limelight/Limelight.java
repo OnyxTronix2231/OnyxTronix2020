@@ -7,7 +7,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import robot.vision.limelight.enums.LimelightLedMode;
 import robot.vision.limelight.enums.LimelightOperationMode;
 import robot.vision.limelight.enums.LimelightStreamMode;
-import robot.vision.limelight.exception.TargetNotFoundException;
 import robot.vision.limelight.target.Corner;
 import robot.vision.limelight.target.LimelightTarget;
 import robot.vision.limelight.target.LimelightTargetWithRawCorners;
@@ -98,17 +97,22 @@ public class Limelight {
   }
 
   /**
-   * Retrieves a Target From Limelight
+   * Check if target exists
    *
-   * @return Vision Target retrieved from Limelight
+   * @return if target was found return true
    */
-
   public boolean targetFound() {
     if(networkTable.getEntry("tv").getDouble(DEFAULT_VALUE) < 1) {
       return false;
     }
     return true;
   }
+
+  /**
+   * Retrieves a Target From Limelight
+   *
+   * @return Vision Target retrieved from Limelight
+   */
   public LimelightTarget getTarget() {
     if(targetFound() == false) {
       return null;
@@ -132,16 +136,15 @@ public class Limelight {
   /**
    * Retrieves a Target With Raw Corners From Limelight
    *
-   * @exception TargetNotFoundException
    * @return Vision Target With Raw Corners Retrieved from Limelight
    */
-  public LimelightTargetWithRawCorners getTargetWithRawCorners() throws TargetNotFoundException{
+  public LimelightTargetWithRawCorners getTargetWithRawCorners() {
     final LimelightTarget basicTarget = getTarget();
     final Corner[] corners;
     final double[] xcorners;
     final double[] ycorners;
     if((xcorners = networkTable.getEntry("tcornx").getDoubleArray(new double[] {-999}))[0] == -999) {
-      throw new TargetNotFoundException("Target does not send raw corners");
+      return null;
     }
     ycorners = networkTable.getEntry("tcorny").getDoubleArray(new double[] {-999});
     corners = new Corner[xcorners.length];

@@ -10,7 +10,6 @@ import robot.turret.commands.MoveByAngle;
 import robot.turret.commands.MoveBySpeed;
 import robot.turret.commands.MoveToAngle;
 import robot.vision.limelight.Limelight;
-import robot.vision.limelight.exception.TargetNotFoundException;
 
 public class TurretOi {
 

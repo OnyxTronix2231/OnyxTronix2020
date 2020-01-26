@@ -15,10 +15,7 @@ public class BasicRouletteComponents implements RouletteComponents {
     private final DoubleSolenoid doubleLeftSolenoid;
     private final ColorSensorV3 colorSensorV3;
 
-    public BasicRouletteComponents(DoubleSolenoid doubleRightSolenoid, DoubleSolenoid doubleLeftSolenoid) {
-        this.doubleRightSolenoid = doubleRightSolenoid;
-        this.doubleLeftSolenoid = doubleLeftSolenoid;
-
+    public BasicRouletteComponents() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
         masterMotor.configPeakCurrentLimit(PICK_AMP);

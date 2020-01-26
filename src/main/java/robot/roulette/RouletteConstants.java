@@ -4,8 +4,8 @@ public final class RouletteConstants {
     public final static int MASTER_MOTOR_PORT = 0;
     public final static int DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL = 1;
     public final static int DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL = 0;
-    public final static int DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL = 1;
-    public final static int DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL = 0;
+    public final static int DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL = 2;
+    public final static int DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL = 3;
     public final static double SPIN_COLOR_SPEED = 0.3;
     public final static double SPIN_ROTATIONS_SPEED = 0.7;
     public final static int COLORS_IN_ROTATIONS = 8;

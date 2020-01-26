@@ -7,6 +7,7 @@ import java.util.function.ToDoubleFunction;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -16,12 +17,13 @@ import static robot.roulette.RouletteConstants.*;
 
 public class Roulette extends SubsystemBase {
 
-    private final BasicRouletteComponents components;
+    private final RouletteComponents components;
     private final List <RouletteColor> rouletteColors;
 
-    public Roulette(final BasicRouletteComponents components) {
+    public Roulette(final RouletteComponents components) {
         this.components = components;
         this.rouletteColors = Arrays.asList(RouletteColor.values());
+        Shuffleboard.getTab("Roulette").addString("", () -> getCurrentColor().toString());
     }
 
     public void spinMotor(final DoubleSupplier speedSupplier) {

@@ -63,7 +63,7 @@ public class VisionTarget {
   public VisionTarget generateInnerTarget() {
     final double innerX = x;
     final double innerY = y + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
-    final double innerOrientation = Math.toDegrees(innerX / innerY);
+    final double innerOrientation = Math.toDegrees(Math.atan(Math.toDegrees(innerX / innerY)));
     final double innerDistance = Math.sqrt(Math.pow(innerX, 2) + Math.pow(innerY, 2));
     final double innerHorizontalOffset = horizontalOffset - 90 + innerOrientation;
     final double innerVerticalOffset = Math.toDegrees(Math.atan(

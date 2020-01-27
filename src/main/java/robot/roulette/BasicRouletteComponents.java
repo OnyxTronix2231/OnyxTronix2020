@@ -1,6 +1,7 @@
 package robot.roulette;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -31,6 +32,18 @@ public class BasicRouletteComponents implements RouletteComponents {
                 (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL,DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
+    }
+
+    private TalonSRXConfiguration getConfiguration() {
+        TalonSRXConfiguration config = new TalonSRXConfiguration();
+        config.slot0.kP = RouletteConstants.K_P;
+        config.slot0.kI = RouletteConstants.K_I;
+        config.slot0.kD = RouletteConstants.K_D;
+        config.slot0.kF = RouletteConstants.MAX_CLOSED_LOOP_OUTPUT / RouletteConstants.MAX_VELOCITY;
+        config.motionCruiseVelocity = MAX_VELOCITY;
+        config.motionAcceleration = MAX_ACCELERATION;
+        config.motionCurveStrength = MOTIONCURVESTRENGH;
+        return config;
     }
 
     @Override

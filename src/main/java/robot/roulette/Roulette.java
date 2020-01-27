@@ -78,8 +78,10 @@ public class Roulette extends SubsystemBase {
 
     public void spinByColorsCount(final double pastColorCount) {
         double rouletteRotation = getRouletteRotationByColorCount(pastColorCount);
-        components.getMasterMotor().set(ControlMode.MotionMagic,
-                getRouletteRotationToEncoderUnits(rouletteRotation));
+        double encoderSetpoint = getRouletteRotationToEncoderUnits(rouletteRotation) +
+                components.getMasterMotor().getSelectedSensorPosition();
+
+        components.getMasterMotor().set(ControlMode.MotionMagic, encoderSetpoint);
     }
 
     public double getRouletteRotationToEncoderUnits(final double rouletteRotations) {

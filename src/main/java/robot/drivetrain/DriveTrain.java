@@ -66,6 +66,26 @@ public class DriveTrain extends SubsystemBase {
     return components.getNavX().getYaw();
   }
 
+  public void resetGyroPID() {
+    components.getGyroPIDController().reset();
+  }
+
+  public void setGyroPIDSetPoint(final double setPoint) {
+    components.getGyroPIDController().setSetpoint(setPoint);
+  }
+
+  public double calculateGyroPIDProduct() {
+    return components.getGyroPIDController().calculate(getNavXYaw());
+  }
+
+  public double getGyroPIDError() {
+    return components.getGyroPIDController().getPositionError();
+  }
+
+  public boolean isGyroPIDatSetPoint() {
+    return components.getGyroPIDController().atSetpoint();
+  }
+
   private double cmToEncoderUnits(final double cm) {
     return ENCODER_UNITS * cm / PERIMETER;
   }

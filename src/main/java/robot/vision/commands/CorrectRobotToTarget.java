@@ -1,39 +1,38 @@
 package robot.vision.commands;
 
-import static robot.vision.VisionConstants.KI;
-import static robot.vision.VisionConstants.KP;
-
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.drivetrain.DriveTrain;
 import robot.vision.VisionConstants;
 import robot.vision.VisionTarget;
+import java.util.function.Supplier;
 
 public class CorrectRobotToTarget extends CommandBase {
 
   private final DriveTrain driveTrain;
-  private final VisionTarget visionTarget;
-  private final PIDController pidController;
+  private final Supplier<VisionTarget> visionTargetSupplier;
 
-
-  public CorrectRobotToTarget(final DriveTrain driveTrain, final VisionTarget visionTarget) {
+  public CorrectRobotToTarget(final DriveTrain driveTrain, final Supplier<VisionTarget> visionTargetSupplier) {
     this.driveTrain = driveTrain;
-    this.visionTarget = visionTarget;
-    this.pidController = new PIDController(KP, KI, KP);
+    this.visionTargetSupplier = visionTargetSupplier;
+    addRequirements(driveTrain);
   }
 
   @Override
   public void initialize() {
-    pidController.setSetpoint(driveTrain.getNavXYaw() - visionTarget.getHorizontalOffset());
+    driveTrain.resetGyroPID();
+    driveTrain.setGyroPIDSetPoint(driveTrain.getNavXYaw() + 90);
   }
 
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(0, -pidController.calculate(driveTrain.getNavXYaw()));
+    driveTrain.arcadeDrive(0, -driveTrain.calculateGyroPIDProduct());
   }
 
   @Override
   public boolean isFinished() {
-    return pidController.atSetpoint();
+    return driveTrain.isGyroPIDatSetPoint();
   }
 }

@@ -76,7 +76,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
 
-    gyroPID = new PIDController(GYRO_P, GYRO_I, GYRO_D, 1.0 / NAVX_REFRESH_RATE - 10);
+    gyroPID = new PIDController(GYRO_P, GYRO_I, GYRO_D, 1.0 / NAVX_REFRESH_RATE - 50);
     gyroPID.setIntegratorRange(-GYRO_I_ZONE, GYRO_I_ZONE);
     gyroPID.setTolerance(GYRO_PID_TOLERANCE);
     gyroPID.enableContinuousInput(-180, 180);

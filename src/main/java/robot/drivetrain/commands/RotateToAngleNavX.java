@@ -35,6 +35,6 @@ public class RotateToAngleNavX extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return driveTrain.isGyroPIDatSetPoint() && navXPIDLoop.isFinished();
+    return navXPIDLoop.isFinished();
   }
 }

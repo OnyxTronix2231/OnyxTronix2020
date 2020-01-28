@@ -12,8 +12,8 @@ public class VisionOi {
 
   public VisionOi(final UniqueTriggerCache buttonsJoystickButtonCache,
                   final Turret turret, final DriveTrain driveTrain) {
+    NavXPIDLoop navXPIDLoop = new NavXPIDLoop(driveTrain);
     Trigger correctRobotToTargetTrigger = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStart.value);
-    correctRobotToTargetTrigger.whenActive(new RotateToAngleNavX(new NavXPIDLoop(driveTrain), driveTrain,
-        () -> driveTrain.getNavXYaw() + 90));
+    correctRobotToTargetTrigger.whenActive(navXPIDLoop::start);
   }
 }

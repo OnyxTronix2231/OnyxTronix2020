@@ -13,6 +13,7 @@ import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.NAVX_REFRESH_RATE;
 import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
@@ -69,13 +70,13 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    navx = new AHRS(SPI.Port.kMXP);
+    navx = new AHRS(SPI.Port.kMXP, NAVX_REFRESH_RATE);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
 
-    gyroPID = new PIDController(GYRO_P, GYRO_I, GYRO_D);
+    gyroPID = new PIDController(GYRO_P, GYRO_I, GYRO_D, 1.0 / NAVX_REFRESH_RATE - 10);
     gyroPID.setIntegratorRange(-GYRO_I_ZONE, GYRO_I_ZONE);
     gyroPID.setTolerance(GYRO_PID_TOLERANCE);
     gyroPID.enableContinuousInput(-180, 180);

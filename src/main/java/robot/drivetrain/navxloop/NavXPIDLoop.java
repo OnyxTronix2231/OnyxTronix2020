@@ -8,7 +8,7 @@ import robot.drivetrain.DriveTrainConstants;
 public class NavXPIDLoop {
 
   private final DriveTrain driveTrain;
-  private static final double period = (double)1 / NAVX_REFRESH_RATE - 10; // in seconds
+  private static final double period = 0.01; // in seconds
   private final TimedLoopThread timedLoopThread;
 
   public NavXPIDLoop(final DriveTrain driveTrain) {
@@ -25,14 +25,10 @@ public class NavXPIDLoop {
   }
 
   public boolean isFinished() {
-    return !timedLoopThread.isAlive();
+    return false;
   }
 
   private void loop() {
-    if(driveTrain.isGyroPIDatSetPoint()) {
-      driveTrain.arcadeDrive(0,0);
-      return;
-    }
     driveTrain.arcadeDrive(0, -driveTrain.calculateGyroPIDProduct());
   }
 }

@@ -5,31 +5,21 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Watchdog;
 
+import java.awt.*;
+
 public class TimedLoopThread extends Thread {
 
-  private final int notifier; // C Pointer to Notifier
   private final double period;
   private final Runnable runnable;
   private double expirationTime;
-  private final Watchdog watchdog;
   private boolean run;
   private final String ePoch;
 
 
   public TimedLoopThread(final Runnable runnable, final double period, final String epoch) {
     this.period = period;
-    this.notifier = NotifierJNI.initializeNotifier();
     this.runnable = runnable;
     this.ePoch = epoch;
-    this.watchdog = new Watchdog(period, () -> {
-      System.out.println("Timed Out disabling Thread");
-    });
-  }
-
-  @Override
-  protected void finalize() { // cleans C Object
-    NotifierJNI.stopNotifier(notifier);
-    NotifierJNI.cleanNotifier(notifier);
   }
 
   public void disable() {
@@ -43,20 +33,13 @@ public class TimedLoopThread extends Thread {
   @Override
   public void run() {
     run = true;
-    expirationTime = RobotController.getFPGATime() * 1e-6 + period;
-    NotifierJNI.updateNotifierAlarm(notifier, (long) (expirationTime * 1e6));
 
     while (run) {
-      if(NotifierJNI.waitForNotifierAlarm(notifier) == 0 || DriverStation.getInstance().isDisabled()) {
+      if(DriverStation.getInstance().isDisabled()) {
         break;
       }
 
-      watchdog.reset();
-      expirationTime += period;
-      NotifierJNI.updateNotifierAlarm(notifier, (long) (expirationTime * 1e6));
       runnable.run();
-      watchdog.addEpoch(ePoch);
     }
-    watchdog.close();
   }
 }

@@ -13,5 +13,7 @@ public final class ShooterConstants {
   public static final int PICK_AMP = 40;//TODO check and change
   public static final int PICK_AMP_DURATION = 0;//TODO check and change
   public static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
+  public static final double OPEN_LOOP_RAMP = 23;//TODO: check and change
+  public static final double CLOSE_LOOP_RAMP = 23;//TODO: check and change
 
 }

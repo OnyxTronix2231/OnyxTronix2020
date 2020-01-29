@@ -6,9 +6,8 @@ import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
 import static robot.drivetrain.DriveTrainConstants.GYRO_D;
 import static robot.drivetrain.DriveTrainConstants.GYRO_I;
-import static robot.drivetrain.DriveTrainConstants.GYRO_I_ZONE;
+import static robot.drivetrain.DriveTrainConstants.GYRO_I_MAX;
 import static robot.drivetrain.DriveTrainConstants.GYRO_P;
-import static robot.drivetrain.DriveTrainConstants.GYRO_PID_MAX_I;
 import static robot.drivetrain.DriveTrainConstants.GYRO_PID_TOLERANCE;
 import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
@@ -31,7 +30,6 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
@@ -78,10 +76,9 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     differentialDrive.setSafetyEnabled(false);
 
     gyroPID = new PIDController(GYRO_P, GYRO_I, GYRO_D);
-    gyroPID.setIntegratorRange(-GYRO_I_ZONE, GYRO_I_ZONE);
+    gyroPID.setIntegratorRange(-GYRO_I_MAX, GYRO_I_MAX);
     gyroPID.setTolerance(GYRO_PID_TOLERANCE);
     gyroPID.enableContinuousInput(-180, 180);
-    gyroPID.setIntegratorRange(-GYRO_PID_MAX_I, GYRO_PID_MAX_I);
     Shuffleboard.getTab("Gyro PID").add(gyroPID);
     Shuffleboard.getTab("Gyro PID").addNumber("Error", gyroPID::getPositionError);
   }

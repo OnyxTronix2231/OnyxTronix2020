@@ -22,6 +22,7 @@ public final class DriveTrainConstants {
   public static final double GYRO_P = 0.060;
   public static final double GYRO_I = 0.01;
   public static final double GYRO_D = 0.0055;
+  public static final double GYRO_F = 0;
   public static final double GYRO_I_ZONE = 10;
   public static final double GYRO_PID_TOLERANCE = 0.5;
   public static final double GYRO_PID_MAX_I = 0.3;

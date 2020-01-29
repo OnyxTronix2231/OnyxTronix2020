@@ -24,7 +24,9 @@ public class RotateToAngleNavX extends CommandBase {
 
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(0, driveTrain.calculateGyroPIDProduct());
+    final double change = driveTrain.calculateGyroPIDProduct();
+    driveTrain.setLeft(-change * 0.7);
+    driveTrain.setRight(change * 0.7);
   }
 
   @Override

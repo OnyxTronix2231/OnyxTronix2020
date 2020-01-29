@@ -31,7 +31,8 @@ public class RotateToAngleNavX extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    driveTrain.arcadeDrive(0, 0);
+    driveTrain.setLeft(0);
+    driveTrain.setRight(0);
   }
 
   @Override

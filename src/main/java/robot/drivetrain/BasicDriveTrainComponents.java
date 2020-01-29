@@ -8,6 +8,7 @@ import static robot.drivetrain.DriveTrainConstants.GYRO_D;
 import static robot.drivetrain.DriveTrainConstants.GYRO_I;
 import static robot.drivetrain.DriveTrainConstants.GYRO_I_ZONE;
 import static robot.drivetrain.DriveTrainConstants.GYRO_P;
+import static robot.drivetrain.DriveTrainConstants.GYRO_PID_MAX_I;
 import static robot.drivetrain.DriveTrainConstants.GYRO_PID_TOLERANCE;
 import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
@@ -80,6 +81,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     gyroPID.setIntegratorRange(-GYRO_I_ZONE, GYRO_I_ZONE);
     gyroPID.setTolerance(GYRO_PID_TOLERANCE);
     gyroPID.enableContinuousInput(-180, 180);
+    gyroPID.setIntegratorRange(-GYRO_PID_MAX_I, GYRO_PID_MAX_I);
     Shuffleboard.getTab("Gyro PID").add(gyroPID);
     Shuffleboard.getTab("Gyro PID").addNumber("Error", gyroPID::getPositionError);
   }

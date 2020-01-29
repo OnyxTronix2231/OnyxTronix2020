@@ -44,12 +44,8 @@ public class DriveTrain extends SubsystemBase {
     return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
   }
 
-  public void setLeft(final double percentage) {
-    components.getLeftMasterMotor().set(percentage);
-  }
-
-  public void setRight(final double percentage) {
-    components.getRightMasterMotor().set(percentage);
+  public void arcadeDrive(final  double speed, final double rotation, final boolean square) {
+    components.getDifferentialDrive().arcadeDrive(speed, rotation, square);
   }
 
   public boolean isDriveOnTarget() {

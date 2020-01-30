@@ -23,7 +23,17 @@ public class Roulette extends SubsystemBase {
     public Roulette(final RouletteComponents components) {
         this.components = components;
         this.rouletteColors = Arrays.asList(RouletteColor.values());
-        Shuffleboard.getTab("Roulette").addString("", () -> getCurrentColor().toString());
+        Shuffleboard.getTab("Roulette").addString("Current color", () -> getCurrentColor().toString());
+        Shuffleboard.getTab("Roulette").addNumber("Req color", this::getS);
+        Shuffleboard.getTab("Roulette").addNumber("Encoder Setpoint", () -> encoderSetpoint);
+        Shuffleboard.getTab("Roulette").addNumber("Color count", () -> rouletteRotation);
+    }
+
+    private double getS() {
+        if(getRequiredColorFromMatchColor() == null){
+            return 0;
+        }
+        return getColorCountRequiredToColor(getRequiredColorFromMatchColor());
     }
 
     public void spinMotor(final DoubleSupplier speedSupplier) {
@@ -42,18 +52,21 @@ public class Roulette extends SubsystemBase {
 
     public RouletteColor getRequiredColorFromMatchColor() {
         RouletteColor requiredMatchColor;
+        if(DriverStation.getInstance().getGameSpecificMessage().isEmpty()) {
+            return null;
+        }
         switch (DriverStation.getInstance().getGameSpecificMessage().charAt(0)) {
             case 'B':
-                requiredMatchColor = RouletteColor.Red;
-                break;
-            case 'G':
-                requiredMatchColor = RouletteColor.Yellow;
-                break;
-            case 'R':
                 requiredMatchColor = RouletteColor.Blue;
                 break;
-            case 'Y':
+            case 'G':
                 requiredMatchColor = RouletteColor.Green;
+                break;
+            case 'R':
+                requiredMatchColor = RouletteColor.Red;
+                break;
+            case 'Y':
+                requiredMatchColor = RouletteColor.Yellow;
                 break;
             default:
                 requiredMatchColor = null;
@@ -76,12 +89,13 @@ public class Roulette extends SubsystemBase {
         components.getMasterMotor().set(0);
     }
 
-    public void spinByColorsCount(final double pastColorCount) {
-        double rouletteRotation = getRouletteRotationByColorCount(pastColorCount);
-        double encoderSetpoint = getRouletteRotationToEncoderUnits(rouletteRotation) +
-                components.getMasterMotor().getSelectedSensorPosition();
-
-        components.getMasterMotor().set(ControlMode.MotionMagic, encoderSetpoint);
+    double encoderSetpoint = 0;
+    double rouletteRotation = 0;
+    public void spinByColorsCount(final double requiredColorCount) {
+        rouletteRotation = getRouletteRotationByColorCount(requiredColorCount);
+        encoderSetpoint = getRouletteRotationToEncoderUnits(rouletteRotation);
+        components.getMasterMotor().set(ControlMode.Position, encoderSetpoint +
+                components.getMasterMotor().getSelectedSensorPosition());
     }
 
     public double getRouletteRotationToEncoderUnits(final double rouletteRotations) {
@@ -89,7 +103,7 @@ public class Roulette extends SubsystemBase {
     }
 
     public double getRouletteRotationByColorCount(final double colorCount) {
-       return (double) (MIN_ROTATIONS * COLORS_IN_ROTATIONS - colorCount) / COLORS_IN_ROTATIONS;
+       return colorCount / COLORS_IN_ROTATIONS;
     }
 
     /**

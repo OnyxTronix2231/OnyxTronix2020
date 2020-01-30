@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -19,11 +20,13 @@ public class BasicRouletteComponents implements RouletteComponents {
     public BasicRouletteComponents() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
+        masterMotor.configAllSettings(getConfiguration());
         masterMotor.configPeakCurrentLimit(PICK_AMP);
         masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
         masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.enableCurrentLimit(true);
+        masterMotor.setSensorPhase(true);
 
         doubleLeftSolenoid = new DoubleSolenoid
                 (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
@@ -32,6 +35,7 @@ public class BasicRouletteComponents implements RouletteComponents {
                 (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL,DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
+        new Compressor(0).stop();
     }
 
     private TalonSRXConfiguration getConfiguration() {
@@ -39,7 +43,7 @@ public class BasicRouletteComponents implements RouletteComponents {
         config.slot0.kP = RouletteConstants.K_P;
         config.slot0.kI = RouletteConstants.K_I;
         config.slot0.kD = RouletteConstants.K_D;
-        config.slot0.kF = RouletteConstants.MAX_CLOSED_LOOP_OUTPUT / RouletteConstants.MAX_VELOCITY;
+//        config.slot0.kF = RouletteConstants.MAX_CLOSED_LOOP_OUTPUT / RouletteConstants.MAX_VELOCITY;
         config.motionCruiseVelocity = MAX_VELOCITY;
         config.motionAcceleration = MAX_ACCELERATION;
         config.motionCurveStrength = MOTIONCURVESTRENGH;

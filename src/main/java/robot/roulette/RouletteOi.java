@@ -1,13 +1,14 @@
 package robot.roulette;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.roulette.commands.*;
 
-import static edu.wpi.first.wpilibj.XboxController.Button.*;
-import static onyxTronix.JoystickAxis.AxisMap.kRightX;
+import java.util.function.DoubleSupplier;
 
 public class RouletteOi {
 
@@ -15,21 +16,19 @@ public class RouletteOi {
                       final UniqueButtonCache driverJoystickButtonCache){
 
         final JoystickAxis rouletteBySpeedAxis =
-                driverJoystickAxisCache.createJoystickTrigger(kRightX.value);
+                driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
         rouletteBySpeedAxis.whileActiveContinuous(new SpinRouletteBySpeed(roulette, rouletteBySpeedAxis::getRawAxis));
 
-        final Trigger closeDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(kA.value);
+        final JoystickButton closeDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
         closeDoubleSolenoid.whenActive(new CloseDoubleSolenoid(roulette));
 
-        final Trigger openDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(kX.value);
+        final JoystickButton openDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
         openDoubleSolenoid.whenActive(new OpenDoubleSolenoid(roulette));
 
-        final Trigger spinRouletteByColorExist = driverJoystickButtonCache.createJoystickTrigger(kB.value);
+        final JoystickButton spinRouletteByColorExist = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
         spinRouletteByColorExist.whenActive(new SpinRouletteByColorIfExists(roulette));
 
-        final Trigger spinRouletteToColor = driverJoystickButtonCache.createJoystickTrigger(kY.value);
-        spinRouletteToColor.whenActive(new SpinRouletteToColor(roulette, roulette::getRequiredColorFromMatchColor));
-
-
+        final JoystickButton spinRouletteByColorCount = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+        spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, ()-> 8));
     }
 }

@@ -19,10 +19,10 @@ public final class DriveTrainConstants {
   public static final double DRIVE_BY_DISTANCE_P = 0;
   public static final double DRIVE_BY_DISTANCE_I = 0;
   public static final double DRIVE_BY_DISTANCE_D = 0;
-  public static final double GYRO_P = 0.060;
-  public static final double GYRO_I = 0.01;
-  public static final double GYRO_D = 0.0055;
-  public static final double GYRO_F = 0;
+  public static final double GYRO_P = 0.00650;
+  public static final double GYRO_I = 0.00001;
+  public static final double GYRO_D = 0.000012;
+  public static final double GYRO_F = 0.0;
   public static final double GYRO_I_MAX = 0.3;
   public static final double GYRO_PID_TOLERANCE = 0.5;
   public static final double CURRENT_LIMIT = 35;

@@ -141,15 +141,13 @@ public class Limelight {
   public LimelightTargetWithRawCorners getTargetWithRawCorners() {
     final LimelightTarget basicTarget = getTarget();
     final Corner[] corners;
-    final double[] xcorners;
-    final double[] ycorners;
-    if((xcorners = networkTable.getEntry("tcornx").getDoubleArray(new double[] {-999}))[0] == -999) {
+    final double[] xycorners;
+    if((xycorners = networkTable.getEntry("tcornxy").getDoubleArray(new double[] {-999}))[0] == -999) {
       return null;
     }
-    ycorners = networkTable.getEntry("tcorny").getDoubleArray(new double[] {-999});
-    corners = new Corner[xcorners.length];
-    for (int i = 0; i < xcorners.length; i++) {
-      corners[i] = new Corner(xcorners[i], ycorners[i]);
+    corners = new Corner[xycorners.length];
+    for (int i = 0; i < xycorners.length-1; i+=2) {
+      corners[i] = new Corner(xycorners[i], xycorners[i+1]);
     }
 
     return new LimelightTargetWithRawCorners(basicTarget, corners);

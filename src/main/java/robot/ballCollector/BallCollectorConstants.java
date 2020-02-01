@@ -9,5 +9,5 @@ public final class BallCollectorConstants {
     public static final int PICK_AMP = 40; // TODO: check value
     public static final int PICK_AMP_DURATION = 0; // TODO: check value
     public static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check value
-  
+
 }

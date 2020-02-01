@@ -1,5 +1,8 @@
 package robot;
 
+import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
+import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -18,9 +21,10 @@ import robot.drivetrain.DriveTrain;
 import robot.drivetrain.commands.DriveBySpeed;
 import robot.shooter.BasicShooterComponents;
 import robot.shooter.Shooter;
-
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
+import robot.turret.BasicTurretComponents;
+import robot.vision.VisionOi;
+import robot.yawControl.YawControl;
+import robot.yawControl.YawControlOi;
 
 public class Robot extends TimedRobot {
 
@@ -33,7 +37,6 @@ public class Robot extends TimedRobot {
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-
         BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
         new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
@@ -45,6 +48,10 @@ public class Robot extends TimedRobot {
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,
             () -> driveJoystick.getY(GenericHID.Hand.kLeft), () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
+        YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
+        new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
+
+        new VisionOi(buttonsJoystickButtonCache, yawControl, driveTrain);
     }
 
     @Override

@@ -19,7 +19,20 @@ public final class DriveTrainConstants {
   public static final double DRIVE_BY_DISTANCE_P = 0;
   public static final double DRIVE_BY_DISTANCE_I = 0;
   public static final double DRIVE_BY_DISTANCE_D = 0;
+<<<<<<< HEAD
   public static final double CURRENT_LIMIT = 35; // TODO: check value
   public static final double TRIGGER_THRESHOLD_CURRENT = 50; // TODO: check value
   public static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
+=======
+  public static final double GYRO_P = 0.00650;
+  public static final double GYRO_I = 0.00001;
+  public static final double GYRO_D = 0.000012;
+  public static final double GYRO_F = 0.0;
+  public static final double GYRO_I_MAX = 0.3;
+  public static final double GYRO_PID_TOLERANCE = 0.5;
+  public static final double CURRENT_LIMIT = 35;
+  public static final byte NAVX_REFRESH_RATE = (byte)200;
+  public static final double TRIGGER_THRESHOLD_CURRENT = 50;
+  public static final double TRIGGER_THRESHOLD_TIME = 2.5;
+>>>>>>> origin/feature-limelight
 }

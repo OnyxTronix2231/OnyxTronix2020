@@ -5,6 +5,8 @@ import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP;
 import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP_DURATION;
 import static robot.shooter.ShooterConstants.*;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IMotorController;
@@ -22,6 +24,7 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.enableCurrentLimit(true);
+    masterMotor.setInverted(true);
 
     masterMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
     masterMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
@@ -29,6 +32,7 @@ public class BasicShooterComponents implements ShooterComponents {
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
+    slaveMotor.setInverted(true);
 
     slaveMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
     slaveMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
@@ -43,6 +47,9 @@ public class BasicShooterComponents implements ShooterComponents {
     config.peakCurrentLimit = PICK_AMP;
     config.peakCurrentDuration = PICK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
+    config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
+    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
     return config;
   }
 

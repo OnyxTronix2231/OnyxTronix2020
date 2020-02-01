@@ -22,7 +22,7 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor = new WPI_TalonSRX(MASTER_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
-    masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
     masterMotor.setInverted(true);
 
@@ -31,11 +31,14 @@ public class BasicShooterComponents implements ShooterComponents {
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
+    slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
     slaveMotor.setInverted(true);
 
     slaveMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
     slaveMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
+
+    masterMotor.selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -43,7 +46,7 @@ public class BasicShooterComponents implements ShooterComponents {
     config.slot0.kP = VELOCITY_P;
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;
-    config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.slot0.kF = VELOCITY_F;
     config.peakCurrentLimit = PICK_AMP;
     config.peakCurrentDuration = PICK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;

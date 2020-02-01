@@ -9,6 +9,7 @@ import static robot.LoaderConveyor.LoaderConveyorConstants.*;
 public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
 
     private final WPI_TalonSRX masterMotor;
+    private final WPI_TalonSRX slaveMotor;
 
     public BasicLoaderConveyorComponents() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -16,6 +17,14 @@ public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
         masterMotor.configAllSettings(getConfiguration());
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.enableCurrentLimit(true);
+        masterMotor.setInverted(true);
+
+        slaveMotor = new WPI_TalonSRX(SLAVE_MOTOR_PORT);
+        slaveMotor.configFactoryDefault();
+        slaveMotor.configAllSettings(getConfiguration());
+        slaveMotor.setNeutralMode(NeutralMode.Brake);
+        slaveMotor.enableCurrentLimit(true);
+        slaveMotor.follow(masterMotor);
     }
 
     private TalonSRXConfiguration getConfiguration() {
@@ -33,5 +42,10 @@ public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
     @Override
     public WPI_TalonSRX getMasterMotor() {
         return masterMotor;
+    }
+
+    @Override
+    public WPI_TalonSRX getSlaveMotor() {
+        return slaveMotor;
     }
 }

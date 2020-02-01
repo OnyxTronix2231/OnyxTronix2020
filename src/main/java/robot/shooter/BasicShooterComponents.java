@@ -28,6 +28,7 @@ public class BasicShooterComponents implements ShooterComponents {
 
     masterMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
     masterMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
+    masterMotor.setSensorPhase(true);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
@@ -52,7 +53,7 @@ public class BasicShooterComponents implements ShooterComponents {
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
-    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+    config.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
     return config;
   }
 

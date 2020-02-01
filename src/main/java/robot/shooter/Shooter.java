@@ -34,6 +34,11 @@ public class Shooter extends SubsystemBase {
 
     Shuffleboard.getTab("Shooter").addNumber
             ("outputAMP" ,() -> components.getMasterMotor().getStatorCurrent());
+
+  }
+
+  @Override
+  public void periodic() {
   }
 
   public void shootBySpeed(final double speed) {

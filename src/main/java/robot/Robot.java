@@ -21,6 +21,7 @@ import robot.drivetrain.DriveTrain;
 import robot.drivetrain.commands.DriveBySpeed;
 import robot.shooter.BasicShooterComponents;
 import robot.shooter.Shooter;
+import robot.shooter.ShooterOi;
 import robot.turret.BasicTurretComponents;
 import robot.vision.VisionOi;
 import robot.yawControl.YawControl;
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot {
         new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
 
         new VisionOi(buttonsJoystickButtonCache, yawControl, driveTrain);
+
+        new ShooterOi(shooter, buttonsJoystickAxisCache, driveJoystickButtonCache);
     }
 
     @Override

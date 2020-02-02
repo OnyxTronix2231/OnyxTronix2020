@@ -35,6 +35,8 @@ public class Shooter extends SubsystemBase {
     Shuffleboard.getTab("Shooter").addNumber
             ("outputAMP" ,() -> components.getMasterMotor().getStatorCurrent());
 
+    Shuffleboard.getTab("Shooter").addNumber("error",()-> components.getMasterMotor().getClosedLoopError());
+
   }
 
   @Override

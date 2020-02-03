@@ -1,19 +1,25 @@
 package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class VelocityController implements SpeedController {
+public abstract class VelocityController implements SpeedController {
 
   private final double maxVelocity;
   private final int pidSlot;
-  private final WPI_TalonFX motor;
+  private final IMotorController motor;
 
-  public VelocityController(final double maxVelocity, final int pidSlot, final WPI_TalonFX motor){
+  public VelocityController(final double maxVelocity, final int pidSlot, final IMotorController motor){
     this.maxVelocity = maxVelocity;
     this.pidSlot = pidSlot;
     this.motor = motor;
+  }
+
+  public void initVelocityController() {
+    motor.selectProfileSlot(pidSlot,0);
   }
 
   public double getVelocityBySpeed(final double speed){
@@ -22,18 +28,7 @@ public class VelocityController implements SpeedController {
 
   @Override
   public void set(final double speed) {
-    motor.selectProfileSlot(pidSlot,0);
-    if(speed != 0){
-      motor.set(ControlMode.Velocity,getVelocityBySpeed(speed));
-    }
-    else{
-      motor.set(ControlMode.PercentOutput,0);
-    }
-  }
-
-  @Override
-  public double get() {
-    return motor.get();
+    motor.set(ControlMode.Velocity,getVelocityBySpeed(speed));
   }
 
   @Override
@@ -48,7 +43,8 @@ public class VelocityController implements SpeedController {
 
   @Override
   public void disable() {
-    motor.disable();
+    motor.set(ControlMode.Disabled, 0);
+    motor.set(ControlMode.PercentOutput, 0.0);
   }
 
   @Override
@@ -58,6 +54,6 @@ public class VelocityController implements SpeedController {
 
   @Override
   public void pidWrite(final double output) {
-    motor.pidWrite(output);
+    motor.set(ControlMode.PercentOutput, 0);
   }
 }

@@ -18,7 +18,6 @@ public class Turret extends SubsystemBase {
 
   protected Turret(final TurretComponents components) {
     this.components = components;
-    initEncoders();
     angleOffset = 0;
     shuffleboardTab = Shuffleboard.getTab("Turret");
     shuffleboardTab.add("Velocity F",VELOCITY_F).getEntry().
@@ -41,10 +40,6 @@ public class Turret extends SubsystemBase {
 
   public void stopMotor() {
     moveBySpeed(0);
-  }
-
-  public void initEncoders() {
-    components.getMasterMotor().setSelectedSensorPosition(0);
   }
 
   public void moveToAngle(final double angle) {
@@ -85,7 +80,7 @@ public class Turret extends SubsystemBase {
   }
 
   public double getAngleRTR() {
-    return getEncoderPosition() * ENCODER_TO_ANGLE;
+    return getEncoderPosition() * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
   }
 
   public double getEncoderPosition() {
@@ -96,4 +91,8 @@ public class Turret extends SubsystemBase {
     return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
+  @Override
+  public void periodic() {
+    System.out.println(getAngleRTR());
+  }
 }

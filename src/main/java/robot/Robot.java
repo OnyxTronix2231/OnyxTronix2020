@@ -9,6 +9,12 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponents;
+import robot.drivetrain.BasicDriveTrainComponents;
+import robot.drivetrain.DriveTrain;
+import robot.turret.BasicTurretComponents;
+import robot.turret.Turret;
+import robot.yawControl.YawControl;
+import robot.yawControl.YawControlOi;
 
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
@@ -27,6 +33,8 @@ public class Robot extends TimedRobot {
 
         BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
         new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
+        YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
     }
 
     @Override

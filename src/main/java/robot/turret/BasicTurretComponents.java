@@ -23,9 +23,10 @@ public class BasicTurretComponents implements TurretComponents {
   public BasicTurretComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
-    masterMotor.configAllSettings(getConfiguration());
+//    masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
   }
   
   private TalonSRXConfiguration getConfiguration() {

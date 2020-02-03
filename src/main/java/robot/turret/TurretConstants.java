@@ -3,7 +3,7 @@ package robot.turret;
 public class TurretConstants {
 
   public static final int MASTER_MOTOR_PORT = 11;
-  public static final int ENCODER_UNITS = 4096;
+  public static final int ENCODER_UNITS = 1023;
   public static final int MAX_VELOCITY = 3100;
   public static final int MAX_OUTPUT = 1023;
   public static final double VELOCITY_P = 5;

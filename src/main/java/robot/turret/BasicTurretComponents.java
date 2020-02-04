@@ -30,7 +30,7 @@ public class BasicTurretComponents implements TurretComponents {
   }
   
   private TalonSRXConfiguration getConfiguration() {
-    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    final TalonSRXConfiguration config = new TalonSRXConfiguration();
     config.slot0.kP = VELOCITY_P;
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;

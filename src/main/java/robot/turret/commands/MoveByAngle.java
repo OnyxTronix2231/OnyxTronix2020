@@ -34,8 +34,7 @@ public class MoveByAngle extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     turret.stopMotor();
   }
-
 }

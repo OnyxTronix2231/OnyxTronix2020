@@ -12,10 +12,11 @@ public class YawControl extends Turret {
     RTR,
     Homing;
   }
-  private final DriveTrain driveTrain;
 
+  private final DriveTrain driveTrain;
   private TurretState turretState;
-  public YawControl(final TurretComponents turretComponents,final DriveTrain driveTrain) {
+
+  public YawControl(final TurretComponents turretComponents, final DriveTrain driveTrain) {
     super(turretComponents);
     this.driveTrain = driveTrain;
     setTurretState(TurretState.RTR);
@@ -41,7 +42,7 @@ public class YawControl extends Turret {
   @Override
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if(turretState == TurretState.RTF) {
+    if (turretState == TurretState.RTF) {
       tempAngle -= driveTrain.getNavXYaw();
     }
     super.moveToAngle(tempAngle);

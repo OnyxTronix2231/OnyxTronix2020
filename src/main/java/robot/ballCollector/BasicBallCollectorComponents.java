@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
+import static robot.ballCollector.BallCollectorConstants.CONTINUOUS_CURRENT_LIMIT;
+import static robot.ballCollector.BallCollectorConstants.MASTER_MOTOR_PORT;
 import static robot.ballCollector.BallCollectorConstants.PICK_AMP;
 import static robot.ballCollector.BallCollectorConstants.PICK_AMP_DURATION;
 
@@ -13,11 +15,11 @@ public class BasicBallCollectorComponents implements BallCollectorComponents {
     private final DoubleSolenoid doubleSolenoid;
 
     public BasicBallCollectorComponents() {
-        masterMotor = new WPI_TalonSRX(BallCollectorConstants.MASTER_MOTOR_PORT);
+        masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
-        masterMotor.configPeakCurrentLimit(BallCollectorConstants.PICK_AMP);
-        masterMotor.configPeakCurrentDuration(BallCollectorConstants.PICK_AMP_DURATION);
-        masterMotor.configContinuousCurrentLimit(BallCollectorConstants.CONTINUOUS_CURRENT_LIMIT);
+        masterMotor.configPeakCurrentLimit(PICK_AMP);
+        masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+        masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         masterMotor.enableCurrentLimit(true);
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.setInverted(true);

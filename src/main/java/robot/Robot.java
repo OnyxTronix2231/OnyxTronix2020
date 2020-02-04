@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
-        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
+        final BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
         new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
         YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);

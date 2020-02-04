@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class OffsetChecker extends SubsystemBase {
 
-  private double offset;
+  private static double offset;
 
   public OffsetChecker(final double offset) {
     this.offset = offset;

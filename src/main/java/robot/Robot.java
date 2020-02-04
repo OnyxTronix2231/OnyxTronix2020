@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
@@ -23,7 +24,10 @@ import robot.shooter.BasicShooterComponents;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterOi;
 import robot.turret.BasicTurretComponents;
+import robot.vision.VisionCalculations;
 import robot.vision.VisionOi;
+import robot.vision.limelight.Limelight;
+import robot.vision.limelight.target.LimelightTarget;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 
@@ -49,12 +53,25 @@ public class Robot extends TimedRobot {
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,
             () -> driveJoystick.getY(GenericHID.Hand.kLeft), () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
-        YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
-        new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
-
-        new VisionOi(buttonsJoystickButtonCache, yawControl, driveTrain);
-
         new ShooterOi(shooter, buttonsJoystickAxisCache, driveJoystickButtonCache);
+
+        Shuffleboard.getTab("Shooter").addNumber("Limelight Angle", this::getLimelightAngle);
+        Shuffleboard.getTab("Shooter").addNumber("Limelight Distance", this::getLimelightDistance);
+
+    }
+
+    public double getLimelightAngle() {
+        if(Limelight.getInstance().targetFound()) {
+            return Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair();
+        }
+        return 0;
+    }
+
+    public double getLimelightDistance() {
+        if(Limelight.getInstance().targetFound()) {
+            return VisionCalculations.calculateDistance(Limelight.getInstance().getTarget());
+        }
+        return 0;
     }
 
     @Override

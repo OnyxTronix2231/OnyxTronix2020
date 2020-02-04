@@ -18,7 +18,7 @@ public class CrossSubsystemOi {
     final JoystickAxis shootByVelocityAxis =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
     shootByVelocityAxis.whileActiveContinuous(new ShootByVelocity(shooter,
-        () -> 20000)
+        () -> 39000)
         .alongWith(new MoveLoaderByVelocity(loaderConveyor, () -> shootByVelocityAxis.getRawAxis() * LoaderConveyorConstants.MAX_VELOCITY)));
   }
 

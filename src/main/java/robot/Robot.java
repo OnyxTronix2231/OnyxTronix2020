@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
@@ -24,6 +25,7 @@ import robot.shooter.Shooter;
 import robot.shooter.ShooterOi;
 import robot.turret.BasicTurretComponents;
 import robot.vision.VisionOi;
+import robot.vision.limelight.Limelight;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 
@@ -38,8 +40,8 @@ public class Robot extends TimedRobot {
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
-        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+//        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
+//        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
         LoaderConveyor loaderConveyor =  new LoaderConveyor(new BasicLoaderConveyorComponents());
         Shooter shooter = new Shooter(new BasicShooterComponents());
@@ -49,12 +51,14 @@ public class Robot extends TimedRobot {
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,
             () -> driveJoystick.getY(GenericHID.Hand.kLeft), () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
-        YawControl yawControl = new YawControl(new BasicTurretComponents(), driveTrain);
-        new YawControlOi(yawControl, buttonsJoystickButtonCache, buttonsJoystickAxisCache);
+        Shuffleboard.getTab("Shooter").addNumber("Limelight Angle", this::getLimelightAngle);
+    }
 
-        new VisionOi(buttonsJoystickButtonCache, yawControl, driveTrain);
-
-        new ShooterOi(shooter, buttonsJoystickAxisCache, driveJoystickButtonCache);
+    public double getLimelightAngle() {
+        if(Limelight.getInstance().targetFound()) {
+            return Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair();
+        }
+        return 0;
     }
 
     @Override

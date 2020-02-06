@@ -1,17 +1,21 @@
 package robot.turret;
 
-import static robot.turret.TurretConstants.*;
+import static robot.turret.TurretConstants.DEGREES_IN_CIRCLE;
 import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
+import static robot.turret.TurretConstants.FLIP_POINT;
+import static robot.turret.TurretConstants.MAX_ANGLE;
+import static robot.turret.TurretConstants.MIN_ANGLE;
 import static robot.turret.TurretConstants.TOLERANCE;
+import static robot.turret.TurretConstants.VELOCITY_D;
+import static robot.turret.TurretConstants.VELOCITY_F;
+import static robot.turret.TurretConstants.VELOCITY_I;
+import static robot.turret.TurretConstants.VELOCITY_P;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.turret.commands.MoveToAngleAndKeep;
-
-import java.util.function.DoubleSupplier;
 
 public class Turret extends SubsystemBase {
 
@@ -21,20 +25,19 @@ public class Turret extends SubsystemBase {
 
   protected Turret(final TurretComponents components) {
     this.components = components;
-    initEncoders();
     angleOffset = 0;
     shuffleboardTab = Shuffleboard.getTab("Turret");
-    shuffleboardTab.add("Velocity F",VELOCITY_F).getEntry().
-        addListener(f -> components.getMasterMotor().config_kF(0, f.value.getDouble()),EntryListenerFlags.kUpdate);
+    shuffleboardTab.add("Velocity F", VELOCITY_F).getEntry().
+        addListener(f -> components.getMasterMotor().config_kF(0, f.value.getDouble()), EntryListenerFlags.kUpdate);
 
-    shuffleboardTab.add("Velocity P",VELOCITY_P).getEntry().
+    shuffleboardTab.add("Velocity P", VELOCITY_P).getEntry().
         addListener(p -> components.getMasterMotor().config_kP(0, p.value.getDouble()), EntryListenerFlags.kUpdate);
 
-    shuffleboardTab.add("Velocity D",VELOCITY_D).getEntry().
+    shuffleboardTab.add("Velocity D", VELOCITY_D).getEntry().
         addListener(d -> components.getMasterMotor().config_kP(0, d.value.getDouble()), EntryListenerFlags.kUpdate);
 
-    shuffleboardTab.add("Velocity I",VELOCITY_I).getEntry().
-        addListener(i -> components.getMasterMotor().config_kP(0, i.value.getDouble()),EntryListenerFlags.kUpdate);
+    shuffleboardTab.add("Velocity I", VELOCITY_I).getEntry().
+        addListener(i -> components.getMasterMotor().config_kP(0, i.value.getDouble()), EntryListenerFlags.kUpdate);
     shuffleboardTab.addNumber("Motion magic error: ", () -> components.getMasterMotor().getClosedLoopError());
   }
 
@@ -46,29 +49,25 @@ public class Turret extends SubsystemBase {
     moveBySpeed(0);
   }
 
-  public void initEncoders() {
-    components.getMasterMotor().setSelectedSensorPosition(0);
-  }
-
-  private double lastAngle = -999;
-
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if(tempAngle < -135) {
-      tempAngle = -135;
-    } else if(tempAngle > 135) {
-      tempAngle = 135;
+    if (tempAngle < -FLIP_POINT && getAngleRTR() == MIN_ANGLE) {
+      tempAngle = MAX_ANGLE;
+    } else if (tempAngle > FLIP_POINT && getAngleRTR() == MAX_ANGLE) {
+      tempAngle = MIN_ANGLE;
     }
 
-//    if(lastAngle != tempAngle){
-//      lastAngle = tempAngle;
-//    }
+    if (tempAngle > MAX_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
+      tempAngle -= DEGREES_IN_CIRCLE;
+    } else if (tempAngle < MIN_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
+      tempAngle += DEGREES_IN_CIRCLE;
+    }
 
-    components.getMasterMotor().set(ControlMode.MotionMagic, tempAngle / ENCODER_TO_ANGLE);
+    components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 
-  public void setOffsetByPercent(double percent) {
-    angleOffset += percent * 1;
+  public void setOffsetByPercent(final double percent) {
+    angleOffset += percent;
   }
 
   public double getOffsetByPercent() {
@@ -79,24 +78,28 @@ public class Turret extends SubsystemBase {
     angleOffset = 0;
   }
 
-  public void moveByAngle(final double angle){
-    moveToAngle(getAngle() + angle);
+  public void moveByAngle(final double angle) {
+    moveToAngle(getAngleRTR() + angle);
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
     return angle / ENCODER_TO_ANGLE;
   }
 
-  public double getAngle() {
-    return getEncoderPosition() * ENCODER_TO_ANGLE;
+  public double getAngleRTR() {
+    return getEncoderPosition() * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
   }
 
   public double getEncoderPosition() {
     return components.getMasterMotor().getSelectedSensorPosition();
   }
 
-  public boolean isOnTarget(){
+  public boolean isOnTarget() {
     return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
+  @Override
+  public void periodic() {
+    System.out.println(getAngleRTR());
+  }
 }

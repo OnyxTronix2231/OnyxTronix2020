@@ -3,55 +3,52 @@ package robot.yawControl;
 import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
-import robot.turret.commands.KeepAtAngle;
 import robot.turret.commands.MoveToAngleAndKeep;
 
 public class YawControl extends Turret {
-
-
 
   public enum TurretState {
     RTF,
     RTR,
     Homing;
   }
-  private final DriveTrain driveTrain;
 
+  private final DriveTrain driveTrain;
   private TurretState turretState;
-  private double angleOffset;
-  public YawControl(TurretComponents turretComponents, DriveTrain driveTrain) {
+
+  public YawControl(final TurretComponents turretComponents, final DriveTrain driveTrain) {
     super(turretComponents);
     this.driveTrain = driveTrain;
-    angleOffset = 0;
     setTurretState(TurretState.RTR);
   }
 
-  public void setTurretState(TurretState turretState) {
-    System.out.println(turretState);
-    if(getDefaultCommand() != null) getDefaultCommand().cancel();
+  public void setTurretState(final TurretState turretState) {
+    zeroOffsetByPercent();
+    if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
       case RTF:
-        setDefaultCommand(new KeepAtAngle(this, () -> getTurretAngleRTF() + getOffsetByPercent()));
+        setDefaultCommand(new MoveToAngleAndKeep(this, this::getTurretAngleRTF));
         break;
       case RTR:
-        setDefaultCommand(new KeepAtAngle(this, () -> getAngle() + getOffsetByPercent()));
+        setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngleRTR));
         break;
       case Homing:
-        setDefaultCommand(new KeepAtAngle(this, this::getOffsetByPercent));
+        setDefaultCommand(new MoveToAngleAndKeep(this, () -> 0));
         break;
     }
     this.turretState = turretState;
   }
 
-  public void setOffsetByPercent(double percent) {
-    angleOffset += percent * 0.1;
-  }
-
-  public double getOffsetByPercent() {
-    return angleOffset;
+  @Override
+  public void moveToAngle(final double angle) {
+    double tempAngle = angle;
+    if (turretState == TurretState.RTF) {
+      tempAngle -= driveTrain.getNavXYaw();
+    }
+    super.moveToAngle(tempAngle);
   }
 
   public double getTurretAngleRTF() {
-    return driveTrain.getYaw() + getAngle();
+    return driveTrain.getNavXYaw() + getAngleRTR();
   }
 }

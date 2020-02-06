@@ -12,7 +12,7 @@ public class MoveByAngle extends CommandBase {
   private double angle;
   private double turretAngle;
 
-  public MoveByAngle(Turret turret, DoubleSupplier angleSupplier) {
+  public MoveByAngle(final Turret turret, final DoubleSupplier angleSupplier) {
     this.turret = turret;
     this.angleSupplier = angleSupplier;
     addRequirements(turret);
@@ -20,26 +20,23 @@ public class MoveByAngle extends CommandBase {
 
   @Override
   public void initialize() {
-    turretAngle = turret.getAngle();
+    turretAngle = turret.getAngleRTR();
     angle = angleSupplier.getAsDouble();
   }
 
   @Override
   public void execute() {
+    //updates the current angle of the turret only when the angle supplier changes
+    // that way the turret doesn't "chase it's own tail"
     if(angle != angleSupplier.getAsDouble()) {
-      turretAngle = turret.getAngle();
+      turretAngle = turret.getAngleRTR();
       angle = angleSupplier.getAsDouble();
     }
     turret.moveToAngle(turretAngle + angle);
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     turret.stopMotor();
-  }
-
-  @Override
-  public boolean isFinished() {
-    return false;
   }
 }

@@ -1,9 +1,5 @@
 package robot.roulette;
 
-import java.util.*;
-import java.util.function.DoubleSupplier;
-import java.util.function.ToDoubleFunction;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -11,14 +7,20 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import javax.swing.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.DoubleSupplier;
 
 import static robot.roulette.RouletteConstants.*;
 
 public class Roulette extends SubsystemBase {
 
     private final RouletteComponents components;
-    private final List <RouletteColor> rouletteColors;
+    private final List<RouletteColor> rouletteColors;
+    double encoderSetpoint = 0;
+    double rouletteRotation = 0;
 
     public Roulette(final RouletteComponents components) {
         this.components = components;
@@ -30,7 +32,7 @@ public class Roulette extends SubsystemBase {
     }
 
     private double getS() {
-        if(getRequiredColorFromMatchColor() == null){
+        if (getRequiredColorFromMatchColor() == null) {
             return 0;
         }
         return getColorCountRequiredToColor(getRequiredColorFromMatchColor());
@@ -52,7 +54,7 @@ public class Roulette extends SubsystemBase {
 
     public RouletteColor getRequiredColorFromMatchColor() {
         RouletteColor requiredMatchColor;
-        if(DriverStation.getInstance().getGameSpecificMessage().isEmpty()) {
+        if (DriverStation.getInstance().getGameSpecificMessage().isEmpty()) {
             return null;
         }
         switch (DriverStation.getInstance().getGameSpecificMessage().charAt(0)) {
@@ -87,8 +89,6 @@ public class Roulette extends SubsystemBase {
         components.getMasterMotor().set(0);
     }
 
-    double encoderSetpoint = 0;
-    double rouletteRotation = 0;
     public void spinByColorsCount(final double requiredColorCount) {
         rouletteRotation = getRouletteRotationByColorCount(requiredColorCount);
         encoderSetpoint = getRouletteRotationToEncoderUnits(rouletteRotation);
@@ -101,11 +101,11 @@ public class Roulette extends SubsystemBase {
     }
 
     public double getRouletteRotationByColorCount(final double colorCount) {
-       return colorCount / COLORS_IN_ROTATIONS;
+        return colorCount / COLORS_IN_ROTATIONS;
     }
 
     /**
-        @return When return value is positive, the roulette needs to be rotated clockwise
+     * @return When return value is positive, the roulette needs to be rotated clockwise
      */
 
     public double getColorCountRequiredToColor(final RouletteColor requiredColor) {
@@ -116,7 +116,7 @@ public class Roulette extends SubsystemBase {
         return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
     }
 
-    public void resetEncoder(){
+    public void resetEncoder() {
         components.getMasterMotor().setSelectedSensorPosition(0);
     }
 

@@ -3,7 +3,7 @@ package robot.roulette;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class RGBValue {
-  private final double red;
+    private final double red;
     private final double green;
     private final double blue;
 

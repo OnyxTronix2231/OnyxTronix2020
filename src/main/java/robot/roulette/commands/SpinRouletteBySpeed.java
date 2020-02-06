@@ -1,9 +1,9 @@
 package robot.roulette.commands;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
+
+import java.util.function.DoubleSupplier;
 
 public class SpinRouletteBySpeed extends CommandBase {
 

@@ -32,7 +32,7 @@ public class BasicRouletteComponents implements RouletteComponents {
                 (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
 
         doubleRightSolenoid = new DoubleSolenoid
-                (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL,DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
+                (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL, DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
         colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
         new Compressor(0).stop();

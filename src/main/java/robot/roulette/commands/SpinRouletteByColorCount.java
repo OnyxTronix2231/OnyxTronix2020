@@ -1,6 +1,5 @@
 package robot.roulette.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
 

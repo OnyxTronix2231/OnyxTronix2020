@@ -1,37 +1,29 @@
 package robot.shooter.commands;
 
-import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE;
-import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE;
+import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE_CM;
+import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE_CM;
 import static robot.shooter.ShooterConstants.SPEED_FIRST;
 import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
 import static robot.shooter.ShooterConstants.SPEED_THIRD;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.shooter.Shooter;
 
-public class ShootByDistance extends CommandBase {
+import java.util.function.DoubleSupplier;
 
-  private final double distance;
-  private final Shooter shooter;
+public class ShootByDistance extends ShootByVelocity {
 
-  ShootByDistance(double distance, Shooter shooter) {
-    this.distance = distance;
-    this.shooter = shooter;
-  }
-
-  @Override
-  public void execute() {
-    if (distance > MIN_THIRD_RANGE) {
-      shooter.setVelocity(SPEED_THIRD);
-    } else if (distance > MAX_FIRST_RANGE && distance < MIN_THIRD_RANGE) {
-      shooter.setVelocity(SPEED_MIDDLE);
-    } else {
-      shooter.setVelocity(SPEED_FIRST);
-    }
-  }
-
-  @Override
-  public void end(final boolean interrupted) {
-    shooter.stopMotor();
+  public ShootByDistance(final Shooter shooter, final DoubleSupplier distanceSupplier) {
+    super(shooter, () -> {
+      double distance = distanceSupplier.getAsDouble();
+      if (distance > MIN_THIRD_RANGE_CM) {
+        return SPEED_THIRD;
+      } else if (distance > MAX_FIRST_RANGE_CM && distance < MIN_THIRD_RANGE_CM) {
+        return SPEED_MIDDLE;
+      } else {
+        return SPEED_FIRST;
+      }
+    });
   }
 }

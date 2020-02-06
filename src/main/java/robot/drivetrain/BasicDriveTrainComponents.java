@@ -56,10 +56,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
-    differentialDrive.setSafetyEnabled(false);
   }
 
   @Override

@@ -1,23 +1,14 @@
 package robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.LoaderConveyor.BasicLoaderConveyorComponents;
-import robot.LoaderConveyor.LoaderConveyor;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponents;
-import robot.crossSubsystem.CrossSubsystemOi;
-import robot.drivetrain.BasicDriveTrainComponents;
-import robot.drivetrain.DriveTrain;
-import robot.drivetrain.commands.DriveBySpeed;
-import robot.shooter.BasicShooterComponents;
-import robot.shooter.Shooter;
 
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
@@ -36,15 +27,6 @@ public class Robot extends TimedRobot {
 
         BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
         new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
-
-        LoaderConveyor loaderConveyor =  new LoaderConveyor(new BasicLoaderConveyorComponents());
-        Shooter shooter = new Shooter(new BasicShooterComponents());
-        new CrossSubsystemOi(driveJoystickAxisCache, shooter, loaderConveyor);
-
-        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
-        driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,
-            () -> driveJoystick.getY(GenericHID.Hand.kLeft), () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
-
     }
 
     @Override

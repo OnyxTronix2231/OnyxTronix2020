@@ -81,8 +81,6 @@ public class Roulette extends SubsystemBase {
         Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
                 Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
         return roulette.orElse(null);
-//                return Arrays.stream(rouletteColors).max(
-//                Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor))).orElse(null);
     }
 
     public void stopSpin() {

@@ -11,7 +11,7 @@ public final class RouletteConstants {
     public static final double K_D = 0;
     public static final int MAX_VELOCITY = 8000;
     public static final int MAX_ACCELERATION = 8000;
-    public static final int MOTIONCURVESTRENGH = 0;// todo changeeeeee!!!!!
+    public static final int MOTION_CURVE_STRENGTH = 0;// todo changeeeeee!!!!!
     public static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     public final static double SPIN_COLOR_SPEED = 0.3;
     public final static double SPIN_ROTATIONS_SPEED = 0.7;

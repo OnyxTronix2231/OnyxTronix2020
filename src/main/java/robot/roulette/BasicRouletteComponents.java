@@ -46,7 +46,7 @@ public class BasicRouletteComponents implements RouletteComponents {
 //        config.slot0.kF = RouletteConstants.MAX_CLOSED_LOOP_OUTPUT / RouletteConstants.MAX_VELOCITY;
         config.motionCruiseVelocity = MAX_VELOCITY;
         config.motionAcceleration = MAX_ACCELERATION;
-        config.motionCurveStrength = MOTIONCURVESTRENGH;
+        config.motionCurveStrength = MOTION_CURVE_STRENGTH;
         return config;
     }
 

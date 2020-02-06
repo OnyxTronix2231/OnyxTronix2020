@@ -11,8 +11,7 @@ import robot.ballCollector.commands.OpenPistons;
 
 public final class BallCollectorOi {
 
-    public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache buttonJoystickAxisCache,
-                           final UniqueTriggerCache buttonsJoystickButtonCache) {
+    public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache buttonJoystickAxisCache, UniqueTriggerCache buttonsJoystickButtonCache) {
         final JoystickAxis collectBySpeedAxis =
                 buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
         collectBySpeedAxis.whileActiveContinuous(new CollectBallBySpeed(ballCollector, collectBySpeedAxis::getRawAxis));

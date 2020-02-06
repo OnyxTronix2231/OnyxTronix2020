@@ -2,12 +2,13 @@ package robot.shooter;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.shooter.commands.ShootByDistance;
+import onyxTronix.UniqueTriggerCache;
+import robot.ballCollector.BallCollector;
+import robot.ballCollector.commands.CollectBallBySpeed;
 import robot.shooter.commands.ShootByPercentOutput;
-import robot.vision.VisionTarget;
-import robot.vision.limelight.Limelight;
 
 public class ShooterOi {
 

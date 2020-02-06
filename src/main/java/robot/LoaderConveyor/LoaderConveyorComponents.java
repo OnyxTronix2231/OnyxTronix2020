@@ -7,4 +7,5 @@ public interface LoaderConveyorComponents {
     WPI_TalonSRX getMasterMotor();
     WPI_TalonSRX getSlaveMotor();
 
+    WPI_TalonSRX getSlaveMotor();
 }

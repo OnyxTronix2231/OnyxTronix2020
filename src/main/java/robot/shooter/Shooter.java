@@ -11,6 +11,7 @@ import java.util.function.DoubleSupplier;
 public class Shooter extends SubsystemBase {
 
   private final ShooterComponents components;
+  private double velocity;
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
@@ -45,14 +46,20 @@ public class Shooter extends SubsystemBase {
 
   public void shootBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
+    velocity = ShooterConstants.MAX_VELOCITY * speed;
   }
 
   public void stopMotor() {
     shootBySpeed(0);
+    velocity = 0;
+  }
+
+  public double getSetPoint() {
+    return velocity;
   }
 
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
+    this.velocity = velocity;
   }
-
   }

@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
         LoaderConveyor loaderConveyor =  new LoaderConveyor(new BasicLoaderConveyorComponents());
         Shooter shooter = new Shooter(new BasicShooterComponents());
-        new CrossSubsystemOi(driveJoystickAxisCache, shooter, loaderConveyor);
+        new CrossSubsystemOi(driveJoystickAxisCache, driveJoystickButtonCache, shooter, loaderConveyor);
 
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,

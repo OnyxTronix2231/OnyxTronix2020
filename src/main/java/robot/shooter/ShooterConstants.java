@@ -7,9 +7,9 @@ public final class ShooterConstants {
   public static final double SPEED = 0.5; //TODO check and change
   public static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
   public static final double MAX_VELOCITY = 39000; //TODO check and change
-  public static final double VELOCITY_P = 0.2; //0.15;//TODO check and change
+  public static final double VELOCITY_P = 0.12; //0.15;//TODO check and change
   public static final double VELOCITY_I = 0.0;//TODO check and change
-  public static final double VELOCITY_D = 50;//TODO check and change
+  public static final double VELOCITY_D = 7;//TODO check and change
   public static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
   public static final int VELOCITY_PID_SLOT = 0;
   public static final int PRIMARY_PID = 0;

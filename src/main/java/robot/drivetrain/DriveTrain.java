@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
-    components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed);
+    components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed, false);
   }
 
   public void driveByMotionMagic(final double distance) {

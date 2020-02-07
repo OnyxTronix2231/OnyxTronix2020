@@ -24,6 +24,7 @@ import robot.shooter.BasicShooterComponents;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterOi;
 import robot.turret.BasicTurretComponents;
+import robot.vision.VisionCalculations;
 import robot.vision.VisionOi;
 import robot.vision.limelight.Limelight;
 import robot.yawControl.YawControl;
@@ -45,13 +46,14 @@ public class Robot extends TimedRobot {
 
         LoaderConveyor loaderConveyor =  new LoaderConveyor(new BasicLoaderConveyorComponents());
         Shooter shooter = new Shooter(new BasicShooterComponents());
-        new CrossSubsystemOi(driveJoystickAxisCache, shooter, loaderConveyor);
+        new CrossSubsystemOi(driveJoystickAxisCache, driveJoystickButtonCache, shooter, loaderConveyor);
 
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
         driveTrain.setDefaultCommand(new DriveBySpeed(driveTrain,
             () -> driveJoystick.getY(GenericHID.Hand.kLeft), () -> -driveJoystick.getX(GenericHID.Hand.kRight)));
 
         Shuffleboard.getTab("Shooter").addNumber("Limelight Angle", this::getLimelightAngle);
+        Shuffleboard.getTab("Shooter").addNumber("Limelight Distance", this::getLimelightDistance);
     }
 
     public double getLimelightAngle() {
@@ -59,6 +61,10 @@ public class Robot extends TimedRobot {
             return Limelight.getInstance().getTarget().getHorizontalOffsetToCrosshair();
         }
         return 0;
+    }
+
+    public double getLimelightDistance() {
+        return VisionCalculations.calculateDistance(Limelight.getInstance().getTarget());
     }
 
     @Override

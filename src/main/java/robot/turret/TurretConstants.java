@@ -15,7 +15,7 @@ public class TurretConstants {
   public static final int MIN_ANGLE = -135;
   public static final int ENCODER_UNITS = 1023;
   public static final int DEGREES_IN_CIRCLE = 360;
-  public static final double CONVERSION_RATE = 4;
+  public static final double CONVERSION_RATE = 114.375;
   public static final double ENCODER_TO_ANGLE = DEGREES_IN_CIRCLE / (ENCODER_UNITS * CONVERSION_RATE);
   public static final double VELOCITY_P = 5;
   public static final double VELOCITY_I = 0;

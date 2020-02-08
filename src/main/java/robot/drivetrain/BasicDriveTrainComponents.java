@@ -1,5 +1,6 @@
 package robot.drivetrain;
 
+import static robot.drivetrain.DriveTrainConstants.CLOSED_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.CURRENT_LIMIT;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_D;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
@@ -8,6 +9,7 @@ import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
@@ -32,12 +34,14 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   public BasicDriveTrainComponents() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
     rightMaster.configFactoryDefault();
+    rightMaster.setInverted(true);
     rightMaster.configAllSettings(getFalconConfiguration());
     rightMaster.configSupplyCurrentLimit(getCurrentConfiguration());
     rightMaster.setNeutralMode(NeutralMode.Brake);
 
     rightSlave = new WPI_TalonFX(RIGHT_SLAVE_PORT);
     rightSlave.configFactoryDefault();
+    rightSlave.setInverted(true);
     rightSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     rightSlave.setNeutralMode(NeutralMode.Brake);
     rightSlave.follow(rightMaster);
@@ -45,19 +49,18 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftMaster = new WPI_TalonFX(LEFT_MASTER_PORT);
     leftMaster.configFactoryDefault();
     leftMaster.configAllSettings(getFalconConfiguration());
-    leftMaster.setInverted(true);
     leftMaster.configSupplyCurrentLimit(getCurrentConfiguration());
     leftMaster.setNeutralMode(NeutralMode.Brake);
 
     leftSlave = new WPI_TalonFX(LEFT_SLAVE_PORT);
     leftSlave.configFactoryDefault();
-    leftSlave.setInverted(true);
     leftSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
+    differentialDrive.setSafetyEnabled(false);
   }
 
   @Override
@@ -91,6 +94,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
     config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.openloopRamp = OPEN_LOOP_RAMP;
+    config.closedloopRamp = CLOSED_LOOP_RAMP;
     return config;
   }
 

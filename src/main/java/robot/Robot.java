@@ -24,9 +24,6 @@ public class Robot extends TimedRobot {
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-
-        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
-        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
     }
 
     @Override

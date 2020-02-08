@@ -24,4 +24,6 @@ public final class DriveTrainConstants {
   public static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
   public static final double OPEN_LOOP_RAMP = 0.3;
   public static final double CLOSED_LOOP_RAMP = 0;
+  public static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
+  public static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
 }

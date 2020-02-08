@@ -1,6 +1,8 @@
 package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
+import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
 import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
@@ -25,7 +27,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
-    components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed, false);
+    components.getDifferentialDrive().arcadeDrive(forwardSpeed * ARCADE_DRIVE_FORWARD_SENSITIVITY,
+        rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
   }
 
   public void driveByMotionMagic(final double distance) {

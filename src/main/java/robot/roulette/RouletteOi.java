@@ -23,7 +23,7 @@ public class RouletteOi {
         openDoubleSolenoid.whenActive(new OpenDoubleSolenoid(roulette));
 
         final JoystickButton spinRouletteByColorExist = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
-        spinRouletteByColorExist.whenActive(new SpinRouletteByColorIfExists(roulette));
+        spinRouletteByColorExist.whenActive(new SpinRouletteToColorIfExists(roulette));
 
         final JoystickButton spinRouletteByColorCount = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
         spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> 8));

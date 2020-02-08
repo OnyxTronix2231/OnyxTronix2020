@@ -15,7 +15,7 @@ public final class DriveTrainConstants {
   public static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
   public static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
   public static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
-  public static final double MAX_VELOCITY = 800; // TODO: needed to be checked
+  public static final double MAX_VELOCITY = 20000; // TODO: needed to be checked
   public static final double DRIVE_BY_DISTANCE_P = 0;
   public static final double DRIVE_BY_DISTANCE_I = 0;
   public static final double DRIVE_BY_DISTANCE_D = 0;
@@ -26,4 +26,8 @@ public final class DriveTrainConstants {
   public static final double CLOSED_LOOP_RAMP = 0;
   public static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
   public static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
+  public static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
+  public static final double VELOCITY_CONTROLLER_P = 0;
+  public static final double VELOCITY_CONTROLLER_I = 0;
+  public static final double VELOCITY_CONTROLLER_D = 0;
 }

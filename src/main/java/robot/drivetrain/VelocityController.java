@@ -28,7 +28,7 @@ public abstract class VelocityController implements SpeedController {
 
   @Override
   public void set(final double speed) {
-    motor.set(ControlMode.Velocity,getVelocityBySpeed(speed));
+    motor.set(ControlMode.Velocity, getVelocityBySpeed(speed));
   }
 
   @Override

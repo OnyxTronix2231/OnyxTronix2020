@@ -20,12 +20,10 @@ public class BallCollector extends SubsystemBase {
     }
 
     public void openPistons() {
-        components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
-        components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
     }
 
     public void closePistons() {
-        components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
-        components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
+        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
     }
 }

@@ -9,6 +9,9 @@ import onyxTronix.UniqueButtonCache;
 import robot.roulette.BasicRouletteComponents;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteOi;
+import robot.drivetrain.BasicDriveTrainComponents;
+import robot.drivetrain.DriveTrain;
+import robot.drivetrain.commands.DriveByJoystick;
 
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
@@ -25,9 +28,11 @@ public class Robot extends TimedRobot {
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
+        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
+        driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
+
         Roulette roulette = new Roulette(new BasicRouletteComponents());
         new RouletteOi(roulette, driveJoystickAxisCache, driveJoystickButtonCache);
-
     }
 
 

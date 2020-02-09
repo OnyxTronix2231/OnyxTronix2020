@@ -1,11 +1,8 @@
 package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
-import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
-import static robot.drivetrain.DriveTrainConstants.GYRO_F;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.*;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
-import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;

@@ -1,22 +1,9 @@
 package robot.drivetrain;
 
-import static robot.drivetrain.DriveTrainConstants.CURRENT_LIMIT;
-import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_D;
-import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_I;
-import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_P;
-import static robot.drivetrain.DriveTrainConstants.GYRO_D;
-import static robot.drivetrain.DriveTrainConstants.GYRO_I;
-import static robot.drivetrain.DriveTrainConstants.GYRO_I_MAX;
-import static robot.drivetrain.DriveTrainConstants.GYRO_P;
-import static robot.drivetrain.DriveTrainConstants.GYRO_PID_TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.LEFT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.LEFT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.MAX_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
-import static robot.drivetrain.DriveTrainConstants.NAVX_REFRESH_RATE;
+
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.*;
+
 import static robot.drivetrain.DriveTrainConstants.PERCENTAGE_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.RIGHT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.TRIGGER_THRESHOLD_CURRENT;
 import static robot.drivetrain.DriveTrainConstants.TRIGGER_THRESHOLD_TIME;
 

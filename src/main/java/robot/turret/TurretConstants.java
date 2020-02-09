@@ -17,12 +17,12 @@ final class TurretConstants {
 
   }
 
+  private static final int ENCODER_UNITS = 1023;
+  private static final double CONVERSION_RATE = 114.375;
+  static final int DEGREES_IN_CIRCLE = 360;
   static final int TOLERANCE = 10;
   static final int FLIP_POINT = 180;
   static final int MAX_ANGLE = 135;
   static final int MIN_ANGLE = -135;
-  private static final int ENCODER_UNITS = 1023;
-  static final int DEGREES_IN_CIRCLE = 360;
-  private static final double CONVERSION_RATE = 114.375;
   static final double ENCODER_TO_ANGLE = DEGREES_IN_CIRCLE / (ENCODER_UNITS * CONVERSION_RATE);
 }

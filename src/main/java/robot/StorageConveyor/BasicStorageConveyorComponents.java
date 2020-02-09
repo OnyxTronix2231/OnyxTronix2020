@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import static robot.StorageConveyor.StorageConveyorConstants.*;
+import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponents.*;
 
 
 public class BasicStorageConveyorComponents implements StorageConveyorComponents {
@@ -12,7 +12,7 @@ public class BasicStorageConveyorComponents implements StorageConveyorComponents
     private final WPI_TalonSRX Motor;
 
     public BasicStorageConveyorComponents() {
-        Motor = new WPI_TalonSRX(StorageConveyorConstants.MASTER_MOTOR_PORT);
+        Motor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         Motor.configFactoryDefault();
         Motor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
         Motor.configPeakCurrentDuration(PICK_AMP_DURATION);

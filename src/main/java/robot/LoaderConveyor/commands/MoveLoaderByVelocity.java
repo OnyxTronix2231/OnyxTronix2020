@@ -1,6 +1,5 @@
 package robot.LoaderConveyor.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.LoaderConveyor.LoaderConveyor;
 import java.util.function.DoubleSupplier;
 

@@ -1,5 +1,7 @@
 package robot.shooter;
 
+import static robot.shooter.ShooterConstants.ShooterComponents.*;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -15,17 +17,17 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
-    Shuffleboard.getTab("Shooter").add("velocity_p", ShooterConstants.VELOCITY_P).
+    Shuffleboard.getTab("Shooter").add("velocity_p", VELOCITY_P).
             getEntry().addListener(
                     p->components.getMasterMotor().config_kP(0, p.value.getDouble()),
                     EntryListenerFlags.kUpdate);
 
-    Shuffleboard.getTab("Shooter").add("velocity_I", ShooterConstants.VELOCITY_I).
+    Shuffleboard.getTab("Shooter").add("velocity_I", VELOCITY_I).
             getEntry().addListener(
             i->components.getMasterMotor().config_kI(0, i.value.getDouble()),
             EntryListenerFlags.kUpdate);
 
-    Shuffleboard.getTab("Shooter").add("velocity_D", ShooterConstants.VELOCITY_D).
+    Shuffleboard.getTab("Shooter").add("velocity_D", VELOCITY_D).
             getEntry().addListener(
             d->components.getMasterMotor().config_kD(0, d.value.getDouble()),
             EntryListenerFlags.kUpdate);
@@ -46,7 +48,7 @@ public class Shooter extends SubsystemBase {
 
   public void shootBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
-    velocity = ShooterConstants.MAX_VELOCITY * speed;
+    velocity = MAX_VELOCITY * speed;
   }
 
   public void stopMotor() {

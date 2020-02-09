@@ -1,15 +1,15 @@
 package robot.turret;
 
-import static robot.turret.TurretConstants.CONTINUOUS_CURRENT_LIMIT;
-import static robot.turret.TurretConstants.MASTER_MOTOR_PORT;
-import static robot.turret.TurretConstants.MAX_ACCELERATION;
-import static robot.turret.TurretConstants.MAX_VELOCITY;
-import static robot.turret.TurretConstants.PEAK_AMP;
-import static robot.turret.TurretConstants.PEAK_AMP_DURATION;
-import static robot.turret.TurretConstants.VELOCITY_D;
-import static robot.turret.TurretConstants.VELOCITY_F;
-import static robot.turret.TurretConstants.VELOCITY_I;
-import static robot.turret.TurretConstants.VELOCITY_P;
+import static robot.turret.TurretConstants.RobotAComponents.CONTINUOUS_CURRENT_LIMIT;
+import static robot.turret.TurretConstants.RobotAComponents.MASTER_MOTOR_PORT;
+import static robot.turret.TurretConstants.RobotAComponents.MAX_ACCELERATION;
+import static robot.turret.TurretConstants.RobotAComponents.MAX_VELOCITY;
+import static robot.turret.TurretConstants.RobotAComponents.PEAK_AMP;
+import static robot.turret.TurretConstants.RobotAComponents.PEAK_AMP_DURATION;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_P;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_I;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_D;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_F;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;

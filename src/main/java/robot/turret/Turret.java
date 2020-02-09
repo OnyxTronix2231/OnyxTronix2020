@@ -27,18 +27,19 @@ public class Turret extends SubsystemBase {
     this.components = components;
     angleOffset = 0;
     shuffleboardTab = Shuffleboard.getTab("Turret");
-    shuffleboardTab.add("Velocity F", VELOCITY_F).getEntry().
-        addListener(f -> components.getMasterMotor().config_kF(0, f.value.getDouble()), EntryListenerFlags.kUpdate);
 
     shuffleboardTab.add("Velocity P", VELOCITY_P).getEntry().
         addListener(p -> components.getMasterMotor().config_kP(0, p.value.getDouble()), EntryListenerFlags.kUpdate);
 
-    shuffleboardTab.add("Velocity D", VELOCITY_D).getEntry().
-        addListener(d -> components.getMasterMotor().config_kP(0, d.value.getDouble()), EntryListenerFlags.kUpdate);
-
     shuffleboardTab.add("Velocity I", VELOCITY_I).getEntry().
         addListener(i -> components.getMasterMotor().config_kP(0, i.value.getDouble()), EntryListenerFlags.kUpdate);
     shuffleboardTab.addNumber("Motion magic error: ", () -> components.getMasterMotor().getClosedLoopError());
+
+    shuffleboardTab.add("Velocity D", VELOCITY_D).getEntry().
+        addListener(d -> components.getMasterMotor().config_kP(0, d.value.getDouble()), EntryListenerFlags.kUpdate);
+
+    shuffleboardTab.add("Velocity F", VELOCITY_F).getEntry().
+        addListener(f -> components.getMasterMotor().config_kF(0, f.value.getDouble()), EntryListenerFlags.kUpdate);
   }
 
   public void moveBySpeed(final double speed) {

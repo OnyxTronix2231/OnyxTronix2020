@@ -5,11 +5,11 @@ import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
 import static robot.turret.TurretConstants.FLIP_POINT;
 import static robot.turret.TurretConstants.MAX_ANGLE;
 import static robot.turret.TurretConstants.MIN_ANGLE;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_D;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_F;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_I;
+import static robot.turret.TurretConstants.RobotAComponents.VELOCITY_P;
 import static robot.turret.TurretConstants.TOLERANCE;
-import static robot.turret.TurretConstants.VELOCITY_D;
-import static robot.turret.TurretConstants.VELOCITY_F;
-import static robot.turret.TurretConstants.VELOCITY_I;
-import static robot.turret.TurretConstants.VELOCITY_P;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;

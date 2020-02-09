@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import static robot.LoaderConveyor.LoaderConveyorConstants.*;
+import static robot.LoaderConveyor.LoaderConveyorConstants.LoaderConveyorComponents.*;
 
 public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
 

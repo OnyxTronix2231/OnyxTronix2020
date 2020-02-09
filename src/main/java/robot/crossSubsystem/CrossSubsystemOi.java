@@ -7,8 +7,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.UniqueButtonCache;
 import robot.BallStopper.BallStopper;
 import robot.LoaderConveyor.LoaderConveyor;
+import robot.LoaderConveyor.commands.StopLoaderConveyor;
 import robot.StorageConveyor.StorageConveyor;
 import robot.shooter.Shooter;
+import robot.shooter.commands.StopShooter;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.*;
 
@@ -27,9 +29,11 @@ public class CrossSubsystemOi {
     final JoystickButton shootWithBallStopperTrigger =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
 
-    shootWithBallStopperTrigger.and(shootWithLoaderConveyorTrigger.negate()).whileActiveContinuous
-        (new ShootWithBallStopperTrigger(shooter, loaderConveyor,
-            storageConveyor, ballStopper, () -> SHOOTER_VELOCITY, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
+    shootWithBallStopperTrigger.and(shootWithLoaderConveyorTrigger.negate()).
+        whileActiveContinuous
+            (new ShootWithBallStopperTrigger(shooter, loaderConveyor,
+            storageConveyor, ballStopper, () -> SHOOTER_VELOCITY, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED))
+            .whenInactive(new StopShooter(shooter).alongWith(new StopLoaderConveyor(loaderConveyor)));
     shootWithLoaderConveyorTrigger.and(shootWithBallStopperTrigger).whileActiveContinuous(
         new ShootWithLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> SHOOTER_VELOCITY, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));

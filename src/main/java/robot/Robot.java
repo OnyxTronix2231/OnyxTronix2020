@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.roulette.BasicRouletteComponents;
+import robot.roulette.BasicARouletteComponents;
 import robot.roulette.Roulette;
 import robot.roulette.RouletteOi;
 import robot.drivetrain.BasicDriveTrainComponents;
@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
         DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
         driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-        Roulette roulette = new Roulette(new BasicRouletteComponents());
+        Roulette roulette = new Roulette(new BasicARouletteComponents());
         new RouletteOi(roulette, driveJoystickAxisCache, driveJoystickButtonCache);
     }
 

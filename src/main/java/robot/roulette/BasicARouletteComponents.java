@@ -9,15 +9,16 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 
 import static robot.roulette.RouletteConstants.*;
+import static robot.roulette.RouletteConstants.RobotAComponents.*;
 
-public class BasicRouletteComponents implements RouletteComponents {
+public class BasicARouletteComponents implements RouletteComponents {
 
     private final WPI_TalonSRX masterMotor;
     private final DoubleSolenoid doubleRightSolenoid;
     private final DoubleSolenoid doubleLeftSolenoid;
     private final ColorSensorV3 colorSensorV3;
 
-    public BasicRouletteComponents() {
+    public BasicARouletteComponents() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
         masterMotor.configAllSettings(getConfiguration());
@@ -40,9 +41,9 @@ public class BasicRouletteComponents implements RouletteComponents {
 
     private TalonSRXConfiguration getConfiguration() {
         TalonSRXConfiguration config = new TalonSRXConfiguration();
-        config.slot0.kP = RouletteConstants.K_P;
-        config.slot0.kI = RouletteConstants.K_I;
-        config.slot0.kD = RouletteConstants.K_D;
+        config.slot0.kP = K_P;
+        config.slot0.kI = K_I;
+        config.slot0.kD = K_D;
         config.motionCruiseVelocity = MAX_VELOCITY;
         config.motionAcceleration = MAX_ACCELERATION;
         config.motionCurveStrength = MOTION_CURVE_STRENGTH;

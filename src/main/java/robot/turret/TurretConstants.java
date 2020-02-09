@@ -2,7 +2,7 @@ package robot.turret;
 
 public final class TurretConstants {
 
-  public static final class RobotAComponents{
+  public static final class RobotAComponents {
     public static final int MASTER_MOTOR_PORT = 11;
     public static final int PEAK_AMP = 40;
     public static final int PEAK_AMP_DURATION = 0;
@@ -16,6 +16,7 @@ public final class TurretConstants {
     public static final double VELOCITY_F = (double) MAX_OUTPUT / MAX_VELOCITY;
 
   }
+
   public static final int TOLERANCE = 10;
   public static final int FLIP_POINT = 180;
   public static final int MAX_ANGLE = 135;

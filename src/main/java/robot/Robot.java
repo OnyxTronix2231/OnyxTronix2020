@@ -9,6 +9,9 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponents;
+import robot.drivetrain.BasicDriveTrainComponents;
+import robot.drivetrain.DriveTrain;
+import robot.drivetrain.commands.DriveByJoystick;
 
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
@@ -25,8 +28,8 @@ public class Robot extends TimedRobot {
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
         UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
-        BallCollector ballCollector = new BallCollector(new BasicBallCollectorComponents());
-        new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+        DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
+        driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
     }
 
     @Override

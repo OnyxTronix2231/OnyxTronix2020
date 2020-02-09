@@ -23,9 +23,15 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.enableCurrentLimit(true);
 
+    masterMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
+    masterMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
+
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.follow(masterMotor);
+
+    slaveMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
+    slaveMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
   }
 
   private TalonSRXConfiguration getConfiguration() {

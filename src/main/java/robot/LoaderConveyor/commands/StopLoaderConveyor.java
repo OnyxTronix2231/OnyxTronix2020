@@ -6,12 +6,12 @@ import robot.LoaderConveyor.LoaderConveyor;
 public class StopLoaderConveyor extends InstantCommand {
   private final LoaderConveyor loaderConveyor;
 
-  public StopLoaderConveyor(LoaderConveyor loaderConveyor) {
+  public StopLoaderConveyor(final LoaderConveyor loaderConveyor) {
     this.loaderConveyor = loaderConveyor;
   }
 
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
     loaderConveyor.stopMotor();
   }
 }

@@ -7,7 +7,7 @@ import java.util.function.DoubleSupplier;
 public class ShootByVelocity extends ShootByVelocityWithoutEnd {
 
   private final Shooter shooter;
-  public ShootByVelocity(Shooter shooter, DoubleSupplier velocitySupplier) {
+  public ShootByVelocity(final Shooter shooter,final DoubleSupplier velocitySupplier) {
     super(shooter, velocitySupplier);
     this.shooter = shooter;
   }

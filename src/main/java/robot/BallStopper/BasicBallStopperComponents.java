@@ -4,7 +4,7 @@ package robot.BallStopper;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import static robot.BallStopper.BallStopperConstants.*;
+import static robot.BallStopper.BallStopperConstants.BallStopperComponents.*;
 
 public class BasicBallStopperComponents implements BallStopperComponents {
 

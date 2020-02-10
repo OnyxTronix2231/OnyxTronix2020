@@ -1,8 +1,5 @@
 package robot.shooter;
 
-import static robot.LoaderConveyor.LoaderConveyorConstants.CONTINUOUS_CURRENT_LIMIT;
-import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP;
-import static robot.LoaderConveyor.LoaderConveyorConstants.PICK_AMP_DURATION;
 import static robot.shooter.ShooterConstants.ShooterComponents.*;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;

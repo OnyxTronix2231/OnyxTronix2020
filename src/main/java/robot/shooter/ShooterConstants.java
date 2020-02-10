@@ -20,12 +20,10 @@ public final class ShooterConstants {
     static final double OPEN_LOOP_RAMP = 1;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 1;//TODO: check and change
   }
-
-  static final int MAX_FIRST_RANGE_CM = 550; //TODO check and change very important meters
-  static final int MIN_FIRST_RANGE_CM = 250; //TODO check and change very important meters
-  static final int MAX_THIRD_RANGE_CM = 100000000; //TODO check and change very important meters
-  static final int MIN_THIRD_RANGE_CM = 750; //TODO check and change very important meters
-  static final double SPEED_FIRST = 35000; //TODO check and change very important meters
-  static final double SPEED_MIDDLE = 36000; //TODO check and change very important meters
-  static final double SPEED_THIRD = 38000; //TODO check and change very important meters
+  public static final int MAX_FIRST_RANGE_CM = 550; //TODO check and change very important meters
+  public static final int MIN_FIRST_RANGE_CM = 250; //TODO check and change very important meters
+  public static final int MIN_THIRD_RANGE_CM = 750; //TODO check and change very important meters
+  public static final double SPEED_FIRST = 35000; //TODO check and change very important meters
+  public static final double SPEED_MIDDLE = 36000; //TODO check and change very important meters
+  public static final double SPEED_THIRD = 38000; //TODO check and change very important meters
 }

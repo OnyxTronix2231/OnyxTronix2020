@@ -28,6 +28,7 @@ public final class RouletteConstants {
         public static final double K_D = 0;
 
     }
+
     public final static int TOLERANCE = 50;
     public final static int COLORS_IN_ROTATIONS = 8;
     public final static int ENCODER_UNITS_PER_ROTATION = 4000;

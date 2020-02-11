@@ -2,15 +2,15 @@ package robot.vision.target;
 
 public interface VisionTarget {
 
-    double getHorizontalOffset();
+  double getHorizontalOffset();
 
-    double getVerticalOffset();
+  double getVerticalOffset();
 
-    double getOrientation();
+  double getOrientation();
 
-    double getDistance();
+  double getDistance();
 
-    double getX();
+  double getX();
 
-    double getY();
+  double getY();
 }

@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 import static robot.climber.ClimberConstants.*;
 import static robot.climber.ClimberConstants.CURRENT_LIMIT;
 import static robot.climber.ClimberConstants.TRIGGER_THRESHOLD_CURRENT;

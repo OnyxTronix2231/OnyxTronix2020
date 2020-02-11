@@ -1,20 +1,24 @@
 package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.CLOSED_LOOP_RAMP;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.CURRENT_LIMIT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_D;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_I;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_P;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_VELOCITY;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.OPEN_LOOP_RAMP;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.PERCENTAGE_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_CURRENT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_TIME;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.CURRENT_LIMIT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_D;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_I;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_P;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_MASTER_PORT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_SLAVE_PORT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_CLOSED_LOOP_OUTPUT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_VELOCITY;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.OPEN_LOOP_RAMP;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_MASTER_PORT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_SLAVE_PORT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_CURRENT;
+-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_TIME;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_I;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_P;
+import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -58,7 +62,10 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
+    VelocityController leftVelocityController = new TalonFXVelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT, leftMaster);
+    VelocityController rightVelocityController = new TalonFXVelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT, rightMaster);
+
+    differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
   }
@@ -94,6 +101,10 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
     config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.slot2.kP = VELOCITY_CONTROLLER_P;
+    config.slot2.kI = VELOCITY_CONTROLLER_I;
+    config.slot2.kD = VELOCITY_CONTROLLER_D;
+    config.slot2.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     config.openloopRamp = OPEN_LOOP_RAMP;
     config.closedloopRamp = CLOSED_LOOP_RAMP;
     return config;

@@ -1,6 +1,7 @@
 package robot.vision.target;
 
 import robot.vision.limelight.Limelight;
+
 import java.util.function.DoubleSupplier;
 
 public class VisionTargetFactory {
@@ -14,8 +15,8 @@ public class VisionTargetFactory {
    * @param turretAngleSupplier
    * @param accelerometerAngleSupplier
    */
-  public VisionTargetFactory(final Limelight limelight, final DoubleSupplier turretAngleSupplier,
-                             final DoubleSupplier accelerometerAngleSupplier) {
+  public VisionTargetFactory(final DoubleSupplier turretAngleSupplier, final DoubleSupplier accelerometerAngleSupplier,
+                             final Limelight limelight) {
     this.limelight = limelight;
     this.turretAngleSupplier = turretAngleSupplier;
     this.accelerometerAngleSupplier = accelerometerAngleSupplier;

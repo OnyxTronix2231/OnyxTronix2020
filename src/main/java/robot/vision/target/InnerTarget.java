@@ -14,7 +14,7 @@ public class InnerTarget implements VisionTarget {
   private final double x;
   private final double y;
 
-  InnerTarget(OuterTarget target) {
+  InnerTarget(final OuterTarget target) {
     this.x = target.getX();
     this.y = target.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
     this.orientation = Math.toDegrees(Math.atan(x / y));

@@ -7,14 +7,18 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_P;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_ACCELERATION;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_OUTPUT_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_OUTPUT_REVERSE;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_PARAMS.TRAJECTORY_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_I;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_P;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_CURRENT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_TIME;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_D;
@@ -32,6 +36,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 
 public class BasicDriveTrainComponents implements DriveTrainComponents {
 
@@ -40,6 +46,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
   private final DifferentialDrive differentialDrive;
+  private final PigeonIMU gyro;
+  private DifferentialDriveOdometry odometry;
 
   public BasicDriveTrainComponents() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
@@ -141,7 +149,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     config.motionCruiseVelocity = MAX_VELOCITY;
     config.motionAcceleration = MAX_ACCELERATION;
     config.peakOutputForward = MAX_OUTPUT_FORWARD;
-    config.peakOutputReverse = MAX_OUTPUT_FORWARD;
+    config.peakOutputReverse = MAX_OUTPUT_REVERSE;
     config.openloopRamp = OPEN_LOOP_RAMP;
     config.closedloopRamp = CLOSED_LOOP_RAMP;
     return config;

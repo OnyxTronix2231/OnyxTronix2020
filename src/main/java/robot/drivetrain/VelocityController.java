@@ -2,8 +2,6 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.IMotorController;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public abstract class VelocityController implements SpeedController {
@@ -12,17 +10,17 @@ public abstract class VelocityController implements SpeedController {
   private final int pidSlot;
   private final IMotorController motor;
 
-  public VelocityController(final double maxVelocity, final int pidSlot, final IMotorController motor){
-    this.maxVelocity = maxVelocity;
+  public VelocityController(final int pidSlot, final double maxVelocity, final IMotorController motor) {
     this.pidSlot = pidSlot;
+    this.maxVelocity = maxVelocity;
     this.motor = motor;
   }
 
   public void initVelocityController() {
-    motor.selectProfileSlot(pidSlot,0);
+    motor.selectProfileSlot(pidSlot, 0);
   }
 
-  public double getVelocityBySpeed(final double speed){
+  public double getVelocityBySpeed(final double speed) {
     return maxVelocity * speed;
   }
 
@@ -49,7 +47,7 @@ public abstract class VelocityController implements SpeedController {
 
   @Override
   public void stopMotor() {
-    motor.set(ControlMode.PercentOutput,0);
+    motor.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

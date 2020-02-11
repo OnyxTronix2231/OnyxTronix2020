@@ -6,8 +6,8 @@ public class TalonFXVelocityController extends VelocityController {
 
     private final WPI_TalonFX motor;
 
-    public TalonFXVelocityController(final double maxVelocity, final int pidSlot, final WPI_TalonFX motor) {
-        super(maxVelocity, pidSlot, motor);
+    public TalonFXVelocityController(final int pidSlot, final double maxVelocity, final WPI_TalonFX motor) {
+        super(pidSlot, maxVelocity, motor);
         this.motor = motor;
     }
 

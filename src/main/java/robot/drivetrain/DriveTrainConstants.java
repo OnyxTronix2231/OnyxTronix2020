@@ -23,6 +23,7 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_I = 0;
     static final double VELOCITY_CONTROLLER_D = 0;
   }
+
   static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double ENCODER_UNITS = 1023.0;
@@ -33,5 +34,4 @@ public final class DriveTrainConstants {
   static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
   static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
   static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
-
 }

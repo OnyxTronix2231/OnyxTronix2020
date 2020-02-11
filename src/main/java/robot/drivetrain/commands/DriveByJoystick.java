@@ -7,7 +7,7 @@ import robot.drivetrain.DriveTrain;
 import java.util.function.DoubleSupplier;
 
 public class DriveByJoystick extends DriveBySpeed {
-  public DriveByJoystick(DriveTrain driveTrain, XboxController driveJoystick){
+  public DriveByJoystick( final DriveTrain driveTrain, final XboxController driveJoystick){
     super(driveTrain, () -> -driveJoystick.getY(GenericHID.Hand.kLeft), () -> driveJoystick.getX(GenericHID.Hand.kRight));
   }
 }

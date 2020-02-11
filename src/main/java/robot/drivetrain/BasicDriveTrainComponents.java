@@ -62,8 +62,8 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    VelocityController leftVelocityController = new TalonFXVelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT, leftMaster);
-    VelocityController rightVelocityController = new TalonFXVelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT, rightMaster);
+    final VelocityController leftVelocityController = new TalonFXVelocityController(VELOCITY_CONTROLLER_PID_SLOT, MAX_VELOCITY, leftMaster);
+    final VelocityController rightVelocityController = new TalonFXVelocityController(VELOCITY_CONTROLLER_PID_SLOT, MAX_VELOCITY, rightMaster);
 
     differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);

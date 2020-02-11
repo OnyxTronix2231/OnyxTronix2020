@@ -35,7 +35,6 @@ public class BasicATurretComponents implements TurretComponents {
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;
     config.slot0.kF = VELOCITY_F;
-    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.QuadEncoder;
     config.motionCruiseVelocity = MAX_VELOCITY;
     config.motionAcceleration = MAX_ACCELERATION;
     config.peakCurrentLimit = PEAK_AMP;

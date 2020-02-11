@@ -16,4 +16,6 @@ public class LoaderConveyorConstants {
     static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
     static final int PICK_AMP = 40; //TODO check and change
   }
+
+  static final double TOLERANCE = 50;
 }

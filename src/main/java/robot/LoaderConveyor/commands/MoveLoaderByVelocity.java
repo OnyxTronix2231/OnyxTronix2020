@@ -1,28 +1,19 @@
 package robot.loaderConveyor.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.loaderConveyor.LoaderConveyor;
-
 import java.util.function.DoubleSupplier;
 
-public class MoveLoaderByVelocity extends CommandBase {
+public class MoveLoaderByVelocity extends MoveLoaderByVelocityWhitoutEnd {
 
-    private final LoaderConveyor loaderConveyor;
-    private final DoubleSupplier velocitySupplier;
+  private final LoaderConveyor loaderConveyor;
 
-    public MoveLoaderByVelocity(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
-      this.loaderConveyor = loaderConveyor;
-      this.velocitySupplier = velocitySupplier;
-      addRequirements(loaderConveyor);
-    }
-
-    @Override
-    public void execute() {
-      loaderConveyor.setVelocity(velocitySupplier.getAsDouble());
-    }
-
-    @Override
-    public void end(final boolean interrupted) {
-      loaderConveyor.stopMotor();
-    }
+  public MoveLoaderByVelocity(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
+    super(loaderConveyor, velocitySupplier);
+    this.loaderConveyor =  loaderConveyor;
   }
+
+  @Override
+  public void end(final boolean interrupted) {
+    loaderConveyor.stopMotor();
+  }
+}

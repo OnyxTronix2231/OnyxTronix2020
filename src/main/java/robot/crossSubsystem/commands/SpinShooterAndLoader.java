@@ -1,4 +1,4 @@
-package robot.crossSubsystem;
+package robot.crossSubsystem.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.loaderConveyor.LoaderConveyor;

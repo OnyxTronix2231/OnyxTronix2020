@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
+import robot.crossSubsystem.commands.ShootWithBallStopperTrigger;
+import robot.crossSubsystem.commands.ShootWithLoaderConveyorTrigger;
+import robot.crossSubsystem.commands.SpinShooterAndLoader;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.StopLoaderConveyor;
 import robot.storageConveyor.StorageConveyor;
@@ -14,11 +17,11 @@ import robot.shooter.commands.StopShooter;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.*;
 
-public class CrossSubsystemOi {
+public class SmartShooterOi {
 
-  public CrossSubsystemOi(final UniqueButtonCache driveJoystickButtonCache,
-                          final Shooter shooter, final LoaderConveyor loaderConveyor,
-                          final StorageConveyor storageConveyor, final BallStopper ballStopper) {
+  public SmartShooterOi(final UniqueButtonCache driveJoystickButtonCache,
+                        final Shooter shooter, final LoaderConveyor loaderConveyor,
+                        final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     final JoystickButton loadingShooter =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
     loadingShooter.whenPressed (new SpinShooterAndLoader(shooter, loaderConveyor, () -> SHOOTER_VELOCITY)

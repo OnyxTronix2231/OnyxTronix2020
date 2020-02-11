@@ -1,5 +1,7 @@
 package robot.loaderConveyor;
 
+import static robot.loaderConveyor.LoaderConveyorConstants.TOLERANCE;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,5 +23,9 @@ public class LoaderConveyor extends SubsystemBase {
 
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
+  }
+
+  public boolean isOnTarget() {
+    return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
   }
 }

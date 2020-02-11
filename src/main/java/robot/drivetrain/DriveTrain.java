@@ -6,10 +6,10 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITI
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_PARAMS.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_PARAMS.FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRAJECTORY_PARAMS.TRAJECTORY_PID_SLOT;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.TRAJECTORY_PID_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;

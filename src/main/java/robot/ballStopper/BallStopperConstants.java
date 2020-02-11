@@ -9,6 +9,4 @@ public class BallStopperConstants {
     public static final int PEAK_AMP = 40; //TODO check and change
 
   }
-  public final static double CONVEYOR_SPEED = 1;
-
 }

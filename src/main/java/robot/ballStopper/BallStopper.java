@@ -9,12 +9,12 @@ public class BallStopper {
     this.ballStopperComponents = ballStopperComponents;
   }
 
-  public final void moveBallStopperBySpeed(final double speed) {
+  public void moveBallStopperBySpeed(final double speed) {
     ballStopperComponents.getMotor().set(speed);
   }
 
-  public final void stopMotor() {
-    ballStopperComponents.getMotor().set(0);
+  public void stopMotor() {
+    moveBallStopperBySpeed(0);
   }
 }
 

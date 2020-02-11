@@ -6,22 +6,22 @@ import java.util.function.DoubleSupplier;
 
 public class MoveBallStopperBySpeed extends CommandBase {
 
-  private final BallStopper BallStopper;
+  private final BallStopper ballStopper;
   private final DoubleSupplier speedSupplier;
 
   public MoveBallStopperBySpeed(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
-    this.BallStopper = ballStopper;
+    this.ballStopper = ballStopper;
     this.speedSupplier = speedSupplier;
   }
 
   @Override
   public void execute() {
-    BallStopper.moveBallStopperBySpeed(speedSupplier.getAsDouble());
+    ballStopper.moveBallStopperBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override
   public void end(final boolean interrupted) {
-    BallStopper.stopMotor();
+    ballStopper.stopMotor();
   }
 
 }

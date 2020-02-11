@@ -42,10 +42,6 @@ public class Shooter extends SubsystemBase {
 
   }
 
-  @Override
-  public void periodic() {
-  }
-
   public void shootBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
     velocity = MAX_VELOCITY * speed;
@@ -63,5 +59,5 @@ public class Shooter extends SubsystemBase {
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
     this.velocity = velocity;
-  }
+    }
   }

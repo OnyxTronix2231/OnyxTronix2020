@@ -1,16 +1,18 @@
 package robot.drivetrain;
 
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.*;
+import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
+import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
+import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
+import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.drivetrain.commands.DriveByDistance;
-import robot.drivetrain.commands.DriveBySpeed;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -25,7 +27,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
-    components.getDifferentialDrive().arcadeDrive(forwardSpeed, rotationSpeed, false);
+    components.getDifferentialDrive().arcadeDrive(forwardSpeed * ARCADE_DRIVE_FORWARD_SENSITIVITY,
+        rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
   }
 
   public void driveByMotionMagic(final double distance) {
@@ -39,10 +42,6 @@ public class DriveTrain extends SubsystemBase {
 
   public double getRightDistance() {
     return getRightMaster().getSelectedSensorPosition() / ENCODER_UNITS * PERIMETER;
-  }
-
-  public void arcadeDrive(final  double speed, final double rotation, final boolean square) {
-    components.getDifferentialDrive().arcadeDrive(speed, rotation, square);
   }
 
   public boolean isDriveOnTarget() {
@@ -62,30 +61,6 @@ public class DriveTrain extends SubsystemBase {
 
   private TalonFX getRightMaster() {
     return components.getRightMasterMotor();
-  }
-
-  public double getNavXYaw() {
-    return components.getNavX().getYaw();
-  }
-
-  public void resetGyroPID() {
-    components.getGyroPIDController().reset();
-  }
-
-  public void setGyroPIDSetPoint(final double setPoint) {
-    components.getGyroPIDController().setSetpoint(setPoint);
-  }
-
-  public double calculateGyroPIDProduct() {
-    return components.getGyroPIDController().calculate(getNavXYaw()) + GYRO_F;
-  }
-
-  public double getGyroPIDError() {
-    return components.getGyroPIDController().getPositionError();
-  }
-
-  public boolean isGyroPIDatSetPoint() {
-    return components.getGyroPIDController().atSetpoint();
   }
 
   private double cmToEncoderUnits(final double cm) {

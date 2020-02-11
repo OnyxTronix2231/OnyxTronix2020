@@ -1,4 +1,4 @@
-package robot.ballStopper.Commands;
+package robot.ballStopper.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.ballStopper.BallStopper;

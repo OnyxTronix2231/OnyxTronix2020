@@ -5,16 +5,12 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import static robot.climber.ClimberConstants.*;
 import static robot.climber.ClimberConstants.CURRENT_LIMIT;
 import static robot.climber.ClimberConstants.TRIGGER_THRESHOLD_CURRENT;
 import static robot.climber.ClimberConstants.TRIGGER_THRESHOLD_TIME;
-import static robot.drivetrain.DriveTrainConstants.*;
-import static robot.drivetrain.DriveTrainConstants.MAX_VELOCITY;
 
 public class BasicClimberComponents implements ClimberComponents {
 
@@ -64,10 +60,6 @@ public class BasicClimberComponents implements ClimberComponents {
   }
   private TalonFXConfiguration getFalconConfiguration() {
     final TalonFXConfiguration config = new TalonFXConfiguration();
-    config.slot0.kP = DRIVE_BY_DISTANCE_P;
-    config.slot0.kI = DRIVE_BY_DISTANCE_I;
-    config.slot0.kD = DRIVE_BY_DISTANCE_D;
-    config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     return config;
   }
 

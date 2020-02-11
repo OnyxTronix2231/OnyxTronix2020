@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderConveyor extends SubsystemBase {
 
-  private final BasicLoaderConveyorComponents components;
+  private final robot.loaderConveyor.BasicLoaderConveyorComponents components;
 
-  public LoaderConveyor(final BasicLoaderConveyorComponents moveBySpeed) {
-    this.components = moveBySpeed;
+  public LoaderConveyor(final robot.loaderConveyor.BasicLoaderConveyorComponents components) {
+    this.components = components;
   }
 
   public final void moveLoaderConveyorBySpeed(final double speed) {

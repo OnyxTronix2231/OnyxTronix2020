@@ -4,9 +4,8 @@ public class LoaderConveyorConstants {
 
   public static final class LoaderConveyorComponents {
 
-    static final int MASTER_MOTOR_PORT = 9;
-    static final int SLAVE_MOTOR_PORT = 12;
-    static final double LOADER_SPEED = 1; //TODO check and change
+    static final int MASTER_MOTOR_PORT = 9;//TODO check and change
+    static final int SLAVE_MOTOR_PORT = 12;//TODO check and change
     static final double VELOCITY_P = 0;//TODO check and change
     static final double VELOCITY_I = 0;//TODO check and change
     static final double VELOCITY_D = 0;//TODO check and change

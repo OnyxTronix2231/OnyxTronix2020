@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponents.*;
 
-public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
+public class BasicLoaderConveyorComponents implements robot.loaderConveyor.LoaderConveyorComponents {
 
     private final WPI_TalonSRX masterMotor;
     private final WPI_TalonSRX slaveMotor;
@@ -25,6 +25,17 @@ public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
         slaveMotor.setNeutralMode(NeutralMode.Brake);
         slaveMotor.enableCurrentLimit(true);
         slaveMotor.follow(masterMotor);
+        slaveMotor.setInverted(true);
+    }
+
+    @Override
+    public WPI_TalonSRX getMasterMotor() {
+        return masterMotor;
+    }
+
+    @Override
+    public WPI_TalonSRX getSlaveMotor() {
+        return slaveMotor;
     }
 
     private TalonSRXConfiguration getConfiguration() {
@@ -37,15 +48,5 @@ public class BasicLoaderConveyorComponents implements LoaderConveyorComponents {
         config.peakCurrentDuration = PICK_AMP_DURATION;
         config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
         return config;
-    }
-
-    @Override
-    public WPI_TalonSRX getMasterMotor() {
-        return masterMotor;
-    }
-
-    @Override
-    public WPI_TalonSRX getSlaveMotor() {
-        return slaveMotor;
     }
 }

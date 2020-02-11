@@ -10,22 +10,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Shooter extends SubsystemBase {
 
   private final ShooterComponents components;
-  private double velocity;
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
-    Shuffleboard.getTab("Shooter").add("velocity_p", VELOCITY_P).
-            getEntry().addListener(
+    Shuffleboard.getTab("Shooter").add("velocity_p", VELOCITY_P).getEntry().addListener(
                     p->components.getMasterMotor().config_kP(0, p.value.getDouble()),
-                    EntryListenerFlags.kUpdate);
+        EntryListenerFlags.kUpdate);
 
-    Shuffleboard.getTab("Shooter").add("velocity_I", VELOCITY_I).
-            getEntry().addListener(
+    Shuffleboard.getTab("Shooter").add("velocity_I", VELOCITY_I).getEntry().addListener(
             i->components.getMasterMotor().config_kI(0, i.value.getDouble()),
             EntryListenerFlags.kUpdate);
 
-    Shuffleboard.getTab("Shooter").add("velocity_D", VELOCITY_D).
-            getEntry().addListener(
+    Shuffleboard.getTab("Shooter").add("velocity_D", VELOCITY_D).getEntry().addListener(
             d->components.getMasterMotor().config_kD(0, d.value.getDouble()),
             EntryListenerFlags.kUpdate);
 
@@ -36,17 +32,14 @@ public class Shooter extends SubsystemBase {
             ("outputAMP" ,() -> components.getMasterMotor().getStatorCurrent());
 
     Shuffleboard.getTab("Shooter").addNumber("error",()-> components.getMasterMotor().getClosedLoopError());
-
   }
 
   public void shootBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
-    velocity = MAX_VELOCITY * speed;
   }
 
   public void stopMotor() {
     shootBySpeed(0);
-    velocity = 0;
   }
 
   public void configVelocitySlot() {
@@ -55,6 +48,5 @@ public class Shooter extends SubsystemBase {
 
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
-    this.velocity = velocity;
     }
   }

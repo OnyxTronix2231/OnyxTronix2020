@@ -36,8 +36,8 @@ public class BasicShooterComponents implements ShooterComponents {
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;
     config.slot0.kF = VELOCITY_F;
-    config.peakCurrentLimit = PICK_AMP;
-    config.peakCurrentDuration = PICK_AMP_DURATION;
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
@@ -56,5 +56,4 @@ public class BasicShooterComponents implements ShooterComponents {
   public IMotorController getSlaveMotor() {
     return slaveMotor;
   }
-
 }

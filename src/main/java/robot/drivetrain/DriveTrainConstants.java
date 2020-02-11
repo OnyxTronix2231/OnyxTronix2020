@@ -7,6 +7,9 @@ public final class DriveTrainConstants {
 
   static final class DriveTrainComponents {
 
+    static double ODOMETRY_TARGET_X = 0;
+    static double ODOMETRY_TARGET_Y = 0;
+    static double ODOMETRY_TARGET_ANGLE = 0;
     static final int LEFT_MASTER_PORT = 2;
     static final int LEFT_SLAVE_PORT = 3;
     static final int RIGHT_MASTER_PORT = 0;

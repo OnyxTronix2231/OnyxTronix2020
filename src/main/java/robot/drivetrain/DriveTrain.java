@@ -6,6 +6,9 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITI
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_ANGLE;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_X;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_Y;
 import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
 import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.ENCODER_CPR;
 import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
@@ -20,10 +23,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import java.util.List;
+import java.util.function.DoubleSupplier;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -56,6 +67,10 @@ public class DriveTrain extends SubsystemBase {
 
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
+  }
+
+  public Pose2d getTargetPose() {
+    return new Pose2d(ODOMETRY_TARGET_X, ODOMETRY_TARGET_Y, Rotation2d.fromDegrees(ODOMETRY_TARGET_ANGLE));
   }
 
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
@@ -115,6 +130,18 @@ public class DriveTrain extends SubsystemBase {
   private void resetOdometryToPose(final Pose2d pose) {
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
+  }
+
+  public void setOdometryTargetX(final double x) {
+    ODOMETRY_TARGET_X = x;
+  }
+
+  public void setOdometryTargetY(final double y) {
+    ODOMETRY_TARGET_Y = y;
+  }
+
+  public void setOdometryTargetAngle(final double angle) {
+    ODOMETRY_TARGET_ANGLE = angle;
   }
 
   private double cmToEncoderUnits(final double cm) {

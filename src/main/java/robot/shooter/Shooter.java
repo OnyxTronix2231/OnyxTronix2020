@@ -5,10 +5,7 @@ import static robot.shooter.ShooterConstants.ShooterComponents.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.util.function.DoubleSupplier;
 
 public class Shooter extends SubsystemBase {
 
@@ -52,8 +49,8 @@ public class Shooter extends SubsystemBase {
     velocity = 0;
   }
 
-  public double getSetPoint() {
-    return velocity;
+  public void configVelocitySlot() {
+    components.getMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   public void setVelocity(final double velocity) {

@@ -21,7 +21,6 @@ public class BasicShooterComponents implements ShooterComponents {
     masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
     masterMotor.setInverted(true);
-
     masterMotor.setSensorPhase(true);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
@@ -29,8 +28,6 @@ public class BasicShooterComponents implements ShooterComponents {
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
     slaveMotor.setInverted(true);
-
-    masterMotor.selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -45,8 +42,8 @@ public class BasicShooterComponents implements ShooterComponents {
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
-    masterMotor.configOpenloopRamp(OPEN_LOOP_RAMP);
-    masterMotor.configClosedloopRamp(CLOSE_LOOP_RAMP);
+    config.openloopRamp = OPEN_LOOP_RAMP;
+    config.closedloopRamp = OPEN_LOOP_RAMP;
     return config;
   }
 

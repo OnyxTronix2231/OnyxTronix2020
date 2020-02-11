@@ -4,8 +4,8 @@ import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.DOUBLE_SOLENOID_REVERSE_PORT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.MASTER_MOTOR_PORT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PICK_AMP;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PICK_AMP_DURATION;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PEAK_AMP;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PEAK_AMP_DURATION;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -19,6 +19,7 @@ public class BasicABallCollectorComponents implements BallCollectorComponents {
 
   public BasicABallCollectorComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
+    masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
@@ -29,9 +30,8 @@ public class BasicABallCollectorComponents implements BallCollectorComponents {
 
   public TalonSRXConfiguration getConfiguration(){
     final TalonSRXConfiguration config = new TalonSRXConfiguration();
-    masterMotor.configFactoryDefault();
-    masterMotor.configPeakCurrentLimit(PICK_AMP);
-    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+    masterMotor.configPeakCurrentLimit(PEAK_AMP);
+    masterMotor.configPeakCurrentDuration(PEAK_AMP_DURATION);
     masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
     return config;
   }

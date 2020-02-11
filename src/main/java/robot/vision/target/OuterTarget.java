@@ -1,7 +1,6 @@
 package robot.vision.target;
 
 import robot.vision.VisionCalculations;
-import robot.vision.limelight.target.LimelightTarget;
 
 public class OuterTarget implements VisionTarget {
 

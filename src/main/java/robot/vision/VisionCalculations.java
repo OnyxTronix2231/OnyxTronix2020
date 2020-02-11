@@ -4,7 +4,7 @@ import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_VERTICAL_OFFSET_ANGLE;
 
-import robot.vision.limelight.target.LimelightTarget;
+import vision.
 
 public class VisionCalculations {
 

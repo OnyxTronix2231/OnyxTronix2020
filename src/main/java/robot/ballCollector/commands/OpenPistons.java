@@ -11,7 +11,7 @@ public class OpenPistons extends InstantCommand {
     this.ballCollector = ballCollector;
     addRequirements(ballCollector);
   }
-
+  
   @Override
   public void initialize() {
     ballCollector.openPistons();

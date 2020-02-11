@@ -17,4 +17,3 @@ public class ClosePistons extends InstantCommand {
     ballCollector.closePistons();
   }
 }
-

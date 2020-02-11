@@ -29,9 +29,5 @@ public class ShootByVelocity extends CommandBase {
   public void end(final boolean interrupted) {
     shooter.stopMotor();
   }
-
-  @Override
-  public boolean isFinished() {
-    return velocitySupplier.getAsDouble() == 0;
-  }
 }
+

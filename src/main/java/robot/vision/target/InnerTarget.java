@@ -1,7 +1,9 @@
 package robot.vision.target;
 
-import static robot.vision.VisionConstants.*;
+import static robot.vision.VisionConstants.DISTANCE_BETWEEN_OUTER_INNER_TARGET;
 import static robot.vision.VisionConstants.HEIGHT_OFFSET_INNER_OUTER_CENTER;
+import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
+import static robot.vision.VisionConstants.CAMERA_HEIGHT_CM;
 
 public class InnerTarget implements VisionTarget {
 

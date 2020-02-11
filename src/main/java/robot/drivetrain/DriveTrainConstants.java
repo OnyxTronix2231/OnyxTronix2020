@@ -19,9 +19,9 @@ public final class DriveTrainConstants {
     static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
     static final double OPEN_LOOP_RAMP = 0.3;
     static final double CLOSED_LOOP_RAMP = 0;
-    public static final double VELOCITY_CONTROLLER_P = 0;
-    public static final double VELOCITY_CONTROLLER_I = 0;
-    public static final double VELOCITY_CONTROLLER_D = 0;
+    static final double VELOCITY_CONTROLLER_P = 0;
+    static final double VELOCITY_CONTROLLER_I = 0;
+    static final double VELOCITY_CONTROLLER_D = 0;
   }
   static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required

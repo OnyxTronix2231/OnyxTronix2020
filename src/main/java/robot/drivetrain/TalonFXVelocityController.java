@@ -1,6 +1,5 @@
 package robot.drivetrain;
 
-import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class TalonFXVelocityController extends VelocityController {

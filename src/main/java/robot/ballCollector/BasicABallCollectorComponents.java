@@ -1,13 +1,14 @@
 package robot.ballCollector;
 
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.CONTINUOUS_CURRENT_LIMIT;
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.DOUBLE_SOLENOID_FORWARD_PORT;
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.DOUBLE_SOLENOID_REVERSE_PORT;
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.MASTER_MOTOR_PORT;
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.PICK_AMP;
-import static robot.ballCollector.BallCollectorConstants.RobotAComponents.PICK_AMP_DURATION;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.CONTINUOUS_CURRENT_LIMIT;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.DOUBLE_SOLENOID_FORWARD_PORT;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.DOUBLE_SOLENOID_REVERSE_PORT;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.MASTER_MOTOR_PORT;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PICK_AMP;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents.PICK_AMP_DURATION;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
@@ -18,15 +19,21 @@ public class BasicABallCollectorComponents implements BallCollectorComponents {
 
   public BasicABallCollectorComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
-    masterMotor.configFactoryDefault();
-    masterMotor.configPeakCurrentLimit(PICK_AMP);
-    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
-    masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
+    masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.setInverted(true);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
+  }
+
+  public TalonSRXConfiguration getConfiguration(){
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    masterMotor.configFactoryDefault();
+    masterMotor.configPeakCurrentLimit(PICK_AMP);
+    masterMotor.configPeakCurrentDuration(PICK_AMP_DURATION);
+    masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
+    return config;
   }
 
   @Override

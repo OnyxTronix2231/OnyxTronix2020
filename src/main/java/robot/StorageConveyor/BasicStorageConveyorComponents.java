@@ -1,9 +1,9 @@
 package robot.StorageConveyor;
 
-import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponents.CONTINUOUS_CURRENT_LIMIT;
-import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponents.MASTER_MOTOR_PORT;
-import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponents.PEAK_AMP;
-import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponents.PEAK_AMP_DURATION;
+import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.MASTER_MOTOR_PORT;
+import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.PEAK_AMP;
+import static robot.StorageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.PEAK_AMP_DURATION;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -31,7 +31,7 @@ public class BasicStorageConveyorComponents implements StorageConveyorComponents
   }
 
   @Override
-  public WPI_TalonSRX getMasterMotor() {
+  public IMotorController getMasterMotor() {
     return masterMotor;
   }
 }

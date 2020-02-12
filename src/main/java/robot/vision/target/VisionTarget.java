@@ -4,7 +4,7 @@ import vision.limelight.target.LimelightTarget;
 
 public interface VisionTarget {
 
-  void update(LimelightTarget target, double accelerometerAngle, double turretAngle);
+  void update( double accelerometerAngle, double turretAngle, LimelightTarget target);
 
   double getHorizontalOffset();
 

@@ -1,10 +1,13 @@
 package robot.vision.target;
 
-import robot.vision.VisionCalculations;
+import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
+
 import vision.limelight.target.LimelightTarget;
 
 public class OuterTarget implements VisionTarget {
 
+  private final double cameraOffset;
+  private final double cameraHeight;
   private double horizontalOffset;
   private double verticalOffset;
   private double orientation;
@@ -12,17 +15,21 @@ public class OuterTarget implements VisionTarget {
   private double x;
   private double y;
 
-  OuterTarget(LimelightTarget target, double accelerometerAngle, double turretAngle) {
-    update(target, accelerometerAngle, turretAngle);
+  OuterTarget(final double accelerometerAngle, final double turretAngle,
+              final double cameraHeight, final double cameraOffset, final LimelightTarget target) {
+    this.cameraHeight = cameraHeight;
+    this.cameraOffset = cameraOffset;
+    update(accelerometerAngle, turretAngle, target);
   }
 
   @Override
-  public void update(final LimelightTarget target, final double accelerometerAngle, final double turretAngle) {
+  public void update(final double accelerometerAngle, final double turretAngle, final LimelightTarget target) {
     if (target != null) {
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
-      this.orientation = VisionCalculations.calculateOrientationToTarget(accelerometerAngle, turretAngle, target);
-      this.distance = VisionCalculations.calculateDistance(target);
+      this.orientation = target.getHorizontalOffsetToCrosshair() + accelerometerAngle - turretAngle;
+      this.distance = (TARGET_HEIGHT_CM - cameraOffset) / Math.tan(Math.toRadians(cameraOffset +
+          target.getVerticalOffsetToCrosshair()));
       this.x = distance * Math.sin(Math.toRadians(orientation));
       this.y = distance * Math.cos(Math.toRadians(orientation));
     } else {

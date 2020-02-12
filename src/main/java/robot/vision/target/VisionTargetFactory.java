@@ -8,17 +8,17 @@ public class VisionTargetFactory {
   private final Limelight limelight;
   private final DoubleSupplier turretAngleSupplier;
   private final DoubleSupplier accelerometerAngleSupplier;
+  private final double cameraHeight;
+  private final double cameraOffset;
 
-  /**
-   * @param limelight                  for retrieving raw targets
-   * @param turretAngleSupplier
-   * @param accelerometerAngleSupplier
-   */
+
   public VisionTargetFactory(final DoubleSupplier turretAngleSupplier, final DoubleSupplier accelerometerAngleSupplier,
-                             final Limelight limelight) {
+                             final double cameraAngleOffset, final double cameraHeight,final Limelight limelight) {
     this.limelight = limelight;
     this.turretAngleSupplier = turretAngleSupplier;
     this.accelerometerAngleSupplier = accelerometerAngleSupplier;
+    this.cameraHeight = cameraHeight;
+    this.cameraOffset = cameraAngleOffset;
   }
 
   public final VisionTarget makeTarget(final VisionTargetType visionTargetType) {
@@ -30,11 +30,11 @@ public class VisionTargetFactory {
   }
 
   private OuterTarget generateOuterTarget() {
-    return new OuterTarget(limelight.getTarget(), accelerometerAngleSupplier.getAsDouble(),
-        turretAngleSupplier.getAsDouble());
+    return new OuterTarget(accelerometerAngleSupplier.getAsDouble(),
+        turretAngleSupplier.getAsDouble(),cameraHeight, cameraOffset ,limelight.getTarget());
   }
 
   private InnerTarget generateInnerTarget() {
-    return new InnerTarget(generateOuterTarget());
+    return new InnerTarget(cameraOffset, cameraHeight, generateOuterTarget());
   }
 }

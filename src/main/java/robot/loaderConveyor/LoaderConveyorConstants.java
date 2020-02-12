@@ -2,7 +2,7 @@ package robot.loaderConveyor;
 
 public class LoaderConveyorConstants {
 
-  public static final class LoaderConveyorComponents {
+  public static final class LoaderConveyorComponentsA {
 
     static final int MASTER_MOTOR_PORT = 9;//TODO check and change
     static final int SLAVE_MOTOR_PORT = 12;//TODO check and change

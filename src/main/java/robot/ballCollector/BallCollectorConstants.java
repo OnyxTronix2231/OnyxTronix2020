@@ -2,7 +2,7 @@ package robot.ballCollector;
 
 public final class BallCollectorConstants {
 
-  public static final class BallCollectorComponents {
+  public static final class BallCollectorComponentsA {
     public static final int MASTER_MOTOR_PORT = 6;
     public static final int DOUBLE_SOLENOID_FORWARD_PORT = 0; //TODO check and change to all of the ports
     public static final int DOUBLE_SOLENOID_REVERSE_PORT = 1; //TODO check and change to all of the ports

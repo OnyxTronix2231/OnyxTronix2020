@@ -18,7 +18,7 @@ public class MoveBySpeed extends CommandBase {
 
   @Override
   public void execute() {
-    turret.moveBySpeed(speedSupplier.getAsDouble());
+    turret.moveTurretBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override

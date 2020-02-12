@@ -11,9 +11,9 @@ public class MoveToAngleAndKeep extends CommandBase {
   protected final Turret turret;
   protected double angle;
 
-  public MoveToAngleAndKeep(final Turret turret, final DoubleSupplier supplierAngle) {
+  public MoveToAngleAndKeep(final Turret turret, final DoubleSupplier angleSupplier) {
     this.turret = turret;
-    this.supplierAngle = supplierAngle;
+    this.supplierAngle = angleSupplier;
     addRequirements(turret);
   }
 

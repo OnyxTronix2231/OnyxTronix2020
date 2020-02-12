@@ -24,10 +24,12 @@ public class MoveByAngle extends CommandBase {
     angle = angleSupplier.getAsDouble();
   }
 
+  /**
+   * updates the current angle of the turret only when the angle supplier changes
+   * that way the turret doesn't "chase it's own tail"
+   */
   @Override
   public void execute() {
-    //updates the current angle of the turret only when the angle supplier changes
-    // that way the turret doesn't "chase it's own tail"
     if(angle != angleSupplier.getAsDouble()) {
       turretAngle = turret.getAngleRTR();
       angle = angleSupplier.getAsDouble();

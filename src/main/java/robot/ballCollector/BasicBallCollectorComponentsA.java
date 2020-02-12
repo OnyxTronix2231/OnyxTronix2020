@@ -12,12 +12,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class BasicABallCollectorComponents implements BallCollectorComponents {
+public class BasicBallCollectorComponentsA implements BallCollectorComponents {
 
   private final WPI_TalonSRX masterMotor;
   private final DoubleSolenoid doubleSolenoid;
 
-  public BasicABallCollectorComponents() {
+  public BasicBallCollectorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());

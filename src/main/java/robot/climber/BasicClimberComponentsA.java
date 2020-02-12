@@ -18,14 +18,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
-public class BasicClimberComponents implements ClimberComponents {
+public class BasicClimberComponentsA implements ClimberComponents {
 
   private final WPI_TalonFX masterMotor;
   private final WPI_TalonFX slaveMotor;
   private final DoubleSolenoid rightDoubleSolenoid;
   private final DoubleSolenoid leftDoubleSolenoid;
 
-  public BasicClimberComponents() {
+  public BasicClimberComponentsA() {
     masterMotor = new WPI_TalonFX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getFalconConfiguration());

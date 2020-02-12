@@ -13,21 +13,7 @@ public class OuterTarget implements VisionTarget {
   private double y;
 
   OuterTarget(LimelightTarget target, double accelerometerAngle, double turretAngle) {
-    if (target != null) {
-      this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
-      this.verticalOffset = target.getVerticalOffsetToCrosshair();
-      this.orientation = VisionCalculations.calculateOrientationToTarget(accelerometerAngle, turretAngle, target);
-      this.distance = VisionCalculations.calculateDistance(target);
-      this.x = distance * Math.sin(Math.toRadians(orientation));
-      this.y = distance * Math.cos(Math.toRadians(orientation));
-    } else {
-      this.horizontalOffset = 0;
-      this.verticalOffset = 0;
-      this.orientation = 0;
-      this.distance = 0;
-      this.x = 0;
-      this.y = 0;
-    }
+    update(target, accelerometerAngle, turretAngle);
   }
 
   @Override

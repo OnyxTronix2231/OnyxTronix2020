@@ -1,24 +1,30 @@
 package robot.climber;
 
+import static robot.climber.ClimberConstants.ClimberComponentsA.CURRENT_LIMIT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.LEFT_DOUBLE_SOLENOID_FORWARD_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.LEFT_DOUBLE_SOLENOID_REVERSE_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.MASTER_MOTOR_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.RIGHT_DOUBLE_SOLENOID_FORWARD_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.RIGHT_DOUBLE_SOLENOID_REVERSE_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.SLAVE_MOTOR_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_CURRENT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_TIME;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import static robot.climber.ClimberConstants.*;
-import static robot.climber.ClimberConstants.CURRENT_LIMIT;
-import static robot.climber.ClimberConstants.TRIGGER_THRESHOLD_CURRENT;
-import static robot.climber.ClimberConstants.TRIGGER_THRESHOLD_TIME;
 
-public class BasicClimberComponents implements ClimberComponents {
+
+public class BasicClimberComponentsA implements ClimberComponents {
 
   private final WPI_TalonFX masterMotor;
   private final WPI_TalonFX slaveMotor;
   private final DoubleSolenoid rightDoubleSolenoid;
   private final DoubleSolenoid leftDoubleSolenoid;
 
-  public BasicClimberComponents() {
+  public BasicClimberComponentsA() {
     masterMotor = new WPI_TalonFX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getFalconConfiguration());
@@ -63,7 +69,8 @@ public class BasicClimberComponents implements ClimberComponents {
   }
 
   private SupplyCurrentLimitConfiguration getCurrentConfiguration() {
-    return new SupplyCurrentLimitConfiguration(true, CURRENT_LIMIT, TRIGGER_THRESHOLD_CURRENT, TRIGGER_THRESHOLD_TIME);
+    return new SupplyCurrentLimitConfiguration(true, CURRENT_LIMIT, TRIGGER_THRESHOLD_CURRENT,
+        TRIGGER_THRESHOLD_TIME);
   }
 }
 

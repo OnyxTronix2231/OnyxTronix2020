@@ -22,7 +22,6 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_P = 0; // TODO: check value
     static final double VELOCITY_CONTROLLER_I = 0; // TODO: check value
     static final double VELOCITY_CONTROLLER_D = 0; // TODO: check value
-
   }
 
   static final double INCH_TO_CM = 2.54;

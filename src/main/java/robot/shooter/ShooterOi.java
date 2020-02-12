@@ -9,10 +9,9 @@ import static robot.shooter.ShooterConstants.PERECENT_OUT_PUT;
 
 public class ShooterOi {
 
-    public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
-                           UniqueButtonCache buttonsJoystickButtonCache, final Shooter shooter) {
+    public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache, final Shooter shooter) {
       final Trigger shootBySpeedAxis =
-          buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
+          buttonJoystickAxisCache.createJoystickTrigger(XboxController.Button.kX.value);
       shootBySpeedAxis.whileActiveContinuous(new ShootByPercentOutput(shooter,  ()-> PERECENT_OUT_PUT));
     }
   }

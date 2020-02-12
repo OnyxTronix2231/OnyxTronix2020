@@ -2,7 +2,7 @@ package robot.shooter;
 
 public final class ShooterConstants {
 
-  public static final class ShooterComponents {
+  public static final class ShooterComponentsA {
     static final int MASTER_PORT = 4;//TODO check and change
     static final int SLAVE_PORT = 5;//TODO check and change
     static final int PEAK_AMP = 40;//TODO check and change

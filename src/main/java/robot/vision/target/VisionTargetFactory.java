@@ -1,6 +1,6 @@
 package robot.vision.target;
 
-import robot.vision.limelight.Limelight;
+import vision.limelight.Limelight;
 import java.util.function.DoubleSupplier;
 
 public class VisionTargetFactory {

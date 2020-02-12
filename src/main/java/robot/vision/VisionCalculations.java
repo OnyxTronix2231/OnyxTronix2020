@@ -4,6 +4,8 @@ import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_HEIGHT_CM;
 import static robot.vision.VisionConstants.CAMERA_VERTICAL_OFFSET_ANGLE;
 
+import vision.limelight.target.LimelightTarget;
+
 public class VisionCalculations {
 
   public static double calculateDistance(final LimelightTarget target) {

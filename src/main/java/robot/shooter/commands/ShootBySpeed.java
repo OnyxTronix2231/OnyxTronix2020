@@ -5,12 +5,12 @@ import robot.shooter.Shooter;
 
 import java.util.function.DoubleSupplier;
 
-public class ShootByPercentOutput extends CommandBase {
+public class ShootBySpeed extends CommandBase {
 
   private final DoubleSupplier speedSupplier;
   private final Shooter shooter;
 
-  public ShootByPercentOutput(final Shooter shooter, final DoubleSupplier speedSupplier) {
+  public ShootBySpeed(final Shooter shooter, final DoubleSupplier speedSupplier) {
     this.shooter = shooter;
     this.speedSupplier = speedSupplier;
     addRequirements(shooter);

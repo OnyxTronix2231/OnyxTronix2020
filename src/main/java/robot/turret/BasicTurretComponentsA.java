@@ -16,11 +16,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class BasicATurretComponents implements TurretComponents {
+public class BasicTurretComponentsA implements TurretComponents {
 
   private final WPI_TalonSRX masterMotor;
 
-  public BasicATurretComponents() {
+  public BasicTurretComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());

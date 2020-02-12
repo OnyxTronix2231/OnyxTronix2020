@@ -22,7 +22,7 @@ public class VisionTargetFactory {
   }
 
   public final VisionTarget makeTarget(final VisionTargetType visionTargetType) {
-    if (visionTargetType == VisionTargetType.outerTarget) {
+    if (visionTargetType == VisionTargetType.OUTER_TARGET) {
       return generateOuterTarget();
     } else {
       return generateInnerTarget();

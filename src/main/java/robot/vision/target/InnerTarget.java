@@ -18,20 +18,17 @@ public class InnerTarget implements VisionTarget {
   private OuterTarget outerTarget;
 
   InnerTarget(final OuterTarget target) {
-    this.x = target.getX();
-    this.y = target.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
-    this.orientation = Math.toDegrees(Math.atan(x / y));
-    this.distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    this.horizontalOffset = target.getHorizontalOffset() - 90 + orientation;
-    this.verticalOffset = Math.toDegrees(Math.atan(
-        TARGET_HEIGHT_CM - CAMERA_HEIGHT_CM + HEIGHT_OFFSET_INNER_OUTER_CENTER) /
-        distance);
     outerTarget = target;
+    calculateByOuterTarget();
   }
 
   @Override
   public void update(final LimelightTarget target, final double accelerometerAngle, final double turretAngle) {
     outerTarget.update(target, accelerometerAngle, turretAngle);
+    calculateByOuterTarget();
+  }
+
+  private void calculateByOuterTarget() {
     this.x = outerTarget.getX();
     this.y = outerTarget.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
     this.orientation = Math.toDegrees(Math.atan(x / y));

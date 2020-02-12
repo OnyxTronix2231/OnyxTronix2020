@@ -31,7 +31,7 @@ public class BasicStorageConveyorComponents implements StorageConveyorComponents
   }
 
   @Override
-  public IMotorController getMasterMotor() {
+  public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
   }
 }

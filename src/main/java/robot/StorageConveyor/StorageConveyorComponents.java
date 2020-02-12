@@ -1,8 +1,9 @@
 package robot.StorageConveyor;
 
-import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public interface StorageConveyorComponents {
 
-  IMotorController getMasterMotor();
+  WPI_TalonSRX getMasterMotor();
+  
 }

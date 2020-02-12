@@ -18,7 +18,7 @@ public class MoveLoaderByVelocity extends CommandBase {
 
     @Override
     public void execute() {
-      loaderConveyor.setVelocity(velocitySupplier.getAsDouble());
+      loaderConveyor.moveLoaderConveyorByVelocity(velocitySupplier.getAsDouble());
     }
 
     @Override

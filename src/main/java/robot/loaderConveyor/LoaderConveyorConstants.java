@@ -1,6 +1,6 @@
 package robot.loaderConveyor;
 
-public class LoaderConveyorConstants {
+public final class LoaderConveyorConstants {
 
   public static final class LoaderConveyorComponentsA {
 
@@ -11,8 +11,8 @@ public class LoaderConveyorConstants {
     static final double VELOCITY_D = 0;//TODO check and change
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;//TODO check and change
     static final double MAX_VELOCITY = 1500; //TODO check and change
-    static final int PICK_AMP_DURATION = 0; //TODO check and change
+    static final int PEAK_AMP_DURATION = 0; //TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
-    static final int PICK_AMP = 40; //TODO check and change
+    static final int PEAK_AMP = 40; //TODO check and change
   }
 }

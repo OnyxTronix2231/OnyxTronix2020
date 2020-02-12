@@ -15,11 +15,11 @@ public class LoaderConveyor extends SubsystemBase {
     components.getMasterMotor().set(speed);
   }
 
-  public void setVelocity(final double velocity) {
+  public void moveLoaderConveyorByVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
   }
 
   public final void stopMotor() {
-    components.getMasterMotor().set(0);
+    moveLoaderConveyorBySpeed(0);
   }
 }

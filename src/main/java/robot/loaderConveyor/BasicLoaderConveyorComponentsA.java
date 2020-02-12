@@ -4,13 +4,14 @@ import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorCompone
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.MASTER_MOTOR_PORT;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.MAX_CLOSED_LOOP_OUTPUT;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.MAX_VELOCITY;
-import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PICK_AMP;
-import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PICK_AMP_DURATION;
+import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PEAK_AMP;
+import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PEAK_AMP_DURATION;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.SLAVE_MOTOR_PORT;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_D;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_I;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_P;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -44,7 +45,7 @@ public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents 
     }
 
     @Override
-    public WPI_TalonSRX getSlaveMotor() {
+    public IMotorController getSlaveMotor() {
         return slaveMotor;
     }
 
@@ -54,8 +55,8 @@ public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents 
         config.slot0.kI = VELOCITY_I;
         config.slot0.kD = VELOCITY_D;
         config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-        config.peakCurrentLimit = PICK_AMP;
-        config.peakCurrentDuration = PICK_AMP_DURATION;
+        config.peakCurrentLimit = PEAK_AMP;
+        config.peakCurrentDuration = PEAK_AMP_DURATION;
         config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
         return config;
     }

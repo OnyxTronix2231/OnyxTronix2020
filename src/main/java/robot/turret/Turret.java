@@ -30,9 +30,9 @@ public class Turret extends SubsystemBase {
 
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if (tempAngle < -FLIP_POINT && getAngleRTR() == MIN_ANGLE) {
+    if (tempAngle < -FLIP_POINT && getAngleRTR() <= MIN_ANGLE) {
       tempAngle = MAX_ANGLE;
-    } else if (tempAngle > FLIP_POINT && getAngleRTR() == MAX_ANGLE) {
+    } else if (tempAngle > FLIP_POINT && getAngleRTR() >= MAX_ANGLE) {
       tempAngle = MIN_ANGLE;
     } else if (tempAngle > MAX_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
       tempAngle -= DEGREES_IN_CIRCLE;

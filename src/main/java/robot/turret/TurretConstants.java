@@ -14,7 +14,6 @@ final class TurretConstants {
     static final double VELOCITY_I = 0; //TODO check and change
     static final double VELOCITY_D = 2; //TODO check and change
     static final double VELOCITY_F = (double) MAX_OUTPUT / MAX_VELOCITY;
-
   }
 
   private static final int ENCODER_UNITS = 1023;

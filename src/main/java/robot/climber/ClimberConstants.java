@@ -14,5 +14,6 @@ public final class ClimberConstants {
     static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
   }
 
-  static final double SPEED = 0.5; // TODO: check value
+  static final double UP_SPEED = 0.5; // TODO: check value
+  static final double DOWN_SPEED = 0.5; // TODO: check value
 }

@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import static robot.ballStopper.BallStopperConstants.BallStopperComponents.*;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.*;
 
 public class BasicBallStopperComponents implements BallStopperComponents {
 
@@ -13,9 +13,9 @@ public class BasicBallStopperComponents implements BallStopperComponents {
   public BasicBallStopperComponents() {
     motor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     motor.configFactoryDefault();
+    motor.configAllSettings(getConfiguration());
     motor.setNeutralMode(NeutralMode.Brake);
     motor.enableCurrentLimit(true);
-    motor.configAllSettings(getConfiguration());
   }
 
   private TalonSRXConfiguration getConfiguration() {

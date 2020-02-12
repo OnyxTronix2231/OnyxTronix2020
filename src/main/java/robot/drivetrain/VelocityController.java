@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public abstract class VelocityController implements SpeedController {
 
-  private final double maxVelocity;
   private final int pidSlot;
+  private final double maxVelocity;
   private final IMotorController motor;
 
   public VelocityController(final int pidSlot, final double maxVelocity, final IMotorController motor) {

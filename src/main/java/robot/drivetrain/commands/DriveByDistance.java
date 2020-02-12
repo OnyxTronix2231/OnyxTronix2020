@@ -18,6 +18,11 @@ public class DriveByDistance extends CommandBase {
 
   @Override
   public void initialize() {
+    driveTrain.initMotionProfileSlot();
+  }
+
+  @Override
+  public void execute() {
     driveTrain.driveByMotionMagic(distanceSupplier.getAsDouble());
   }
 

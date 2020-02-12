@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final BasicDriveTrainComponents components;
+  private final BasicDriveTrainComponentsA components;
 
-  public DriveTrain(final BasicDriveTrainComponents components) {
+  public DriveTrain(final BasicDriveTrainComponentsA components) {
     this.components = components;
   }
 
@@ -49,10 +49,18 @@ public class DriveTrain extends SubsystemBase {
         Math.abs(getRightMaster().getClosedLoopError()) < TOLERANCE;
   }
 
+  public void initMotionProfileSlot() {
+    selectProfileSlot(getLeftMaster());
+    selectProfileSlot(getRightMaster());
+  }
+
   private void moveMotorByMotionMagic(final double distance,final TalonFX motor) {
-    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
     motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
+  }
+
+  private void selectProfileSlot(final TalonFX motor){
+    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
   }
 
   private TalonFX getLeftMaster() {

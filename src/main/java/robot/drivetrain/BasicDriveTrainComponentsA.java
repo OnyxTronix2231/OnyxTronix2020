@@ -1,23 +1,23 @@
 package robot.drivetrain;
 
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.CLOSED_LOOP_RAMP;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.CURRENT_LIMIT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_D;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_I;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.DRIVE_BY_DISTANCE_P;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.LEFT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.MAX_VELOCITY;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.OPEN_LOOP_RAMP;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.PERCENTAGE_CLOSED_LOOP_OUTPUT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_MASTER_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.RIGHT_SLAVE_PORT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_CURRENT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.TRIGGER_THRESHOLD_TIME;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_D;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_I;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.VELOCITY_CONTROLLER_P;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.CLOSED_LOOP_RAMP;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.CURRENT_LIMIT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.DRIVE_BY_DISTANCE_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.DRIVE_BY_DISTANCE_I;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.DRIVE_BY_DISTANCE_P;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.LEFT_MASTER_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.LEFT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VELOCITY;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_CURRENT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_TIME;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
 import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
@@ -27,7 +27,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class BasicDriveTrainComponents implements DriveTrainComponents {
+public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
   private final WPI_TalonFX rightMaster;
   private final WPI_TalonFX rightSlave;
@@ -35,7 +35,7 @@ public class BasicDriveTrainComponents implements DriveTrainComponents {
   private final WPI_TalonFX leftSlave;
   private final DifferentialDrive differentialDrive;
 
-  public BasicDriveTrainComponents() {
+  public BasicDriveTrainComponentsA() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
     rightMaster.configFactoryDefault();
     rightMaster.setInverted(true);

@@ -6,6 +6,7 @@ import robot.StorageConveyor.StorageConveyor;
 import java.util.function.DoubleSupplier;
 
 public class MoveStorageConveyorBySpeed extends CommandBase {
+    
     private final StorageConveyor storageConveyance;
     private final DoubleSupplier speedSupplier;
 
@@ -16,7 +17,7 @@ public class MoveStorageConveyorBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        storageConveyance.moveBySpeed(speedSupplier.getAsDouble());
+        storageConveyance.moveStorageConveyorBySpeed(speedSupplier.getAsDouble());
     }
 
     @Override

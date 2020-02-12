@@ -10,8 +10,8 @@ public class MoveStorageConveyorBySpeed extends CommandBase {
     private final StorageConveyor storageConveyance;
     private final DoubleSupplier speedSupplier;
 
-    public MoveStorageConveyorBySpeed(final StorageConveyor storageConveyance, final DoubleSupplier speedSupplier) {
-        this.storageConveyance = storageConveyance;
+    public MoveStorageConveyorBySpeed(final StorageConveyor storageConveyor, final DoubleSupplier speedSupplier) {
+        this.storageConveyance = storageConveyor;
         this.speedSupplier = speedSupplier;
     }
 

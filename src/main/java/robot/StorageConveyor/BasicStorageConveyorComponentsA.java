@@ -10,11 +10,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class BasicStorageConveyorComponents implements StorageConveyorComponents {
+public class BasicStorageConveyorComponentsA implements StorageConveyorComponents {
 
   private final WPI_TalonSRX masterMotor;
 
-  public BasicStorageConveyorComponents() {
+  public BasicStorageConveyorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());

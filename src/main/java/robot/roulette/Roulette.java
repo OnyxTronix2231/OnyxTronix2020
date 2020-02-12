@@ -1,5 +1,10 @@
 package robot.roulette;
 
+import static robot.roulette.RouletteConstants.COLORS_IN_ROTATIONS;
+import static robot.roulette.RouletteConstants.DISTANCE_FROM_FIELD_SENSOR;
+import static robot.roulette.RouletteConstants.RobotAComponents.ROULETTE_ROTATION_TO_WHEEL_ROTATION;
+import static robot.roulette.RouletteConstants.TOLERANCE;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -13,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.DoubleSupplier;
 
-import static robot.roulette.RouletteConstants.*;
 
 public class Roulette extends SubsystemBase {
 

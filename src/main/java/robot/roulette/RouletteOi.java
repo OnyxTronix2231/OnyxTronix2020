@@ -5,7 +5,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.roulette.commands.*;
+import robot.roulette.commands.CloseDoubleSolenoid;
+import robot.roulette.commands.OpenDoubleSolenoid;
+import robot.roulette.commands.SpinRouletteByColorCount;
+import robot.roulette.commands.SpinRouletteBySpeed;
+import robot.roulette.commands.SpinRouletteToColorIfExists;
 
 public class RouletteOi {
 

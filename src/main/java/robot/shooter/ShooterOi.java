@@ -18,7 +18,7 @@ public class ShooterOi {
         buttonJoystickAxisCache.createJoystickTrigger(XboxController.Button.kX.value);
     shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
 
-    final Trigger openSolenoid = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
+    final Trigger openPiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openSolenoid.whileActiveOnce(new OpenShooterPiston(shooter));
 
     final Trigger closeSolenoid = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);

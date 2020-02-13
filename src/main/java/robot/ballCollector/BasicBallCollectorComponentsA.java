@@ -28,7 +28,7 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
-  public TalonSRXConfiguration getConfiguration(){
+  public TalonSRXConfiguration getConfiguration() {
     final TalonSRXConfiguration config = new TalonSRXConfiguration();
     masterMotor.configPeakCurrentLimit(PEAK_AMP);
     masterMotor.configPeakCurrentDuration(PEAK_AMP_DURATION);

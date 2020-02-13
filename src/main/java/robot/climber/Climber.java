@@ -20,12 +20,10 @@ public class Climber extends SubsystemBase {
   }
 
   public void closePistons() {
-    components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
-    components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
   }
 
   public void openPistons() {
-    components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
-    components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 }

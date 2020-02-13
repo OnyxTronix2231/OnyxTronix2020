@@ -56,7 +56,7 @@ public class BasicClimberComponentsA implements ClimberComponents {
   }
 
   @Override
-  public DoubleSolenoid getLeftDoubleSolenoid() {
+  public DoubleSolenoid getDoubleSolenoid() {
     return leftDoubleSolenoid;
   }
 

@@ -6,10 +6,10 @@ import static robot.turret.TurretConstants.TurretComponentsA.MAX_ACCELERATION;
 import static robot.turret.TurretConstants.TurretComponentsA.MAX_VELOCITY;
 import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP;
 import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP_DURATION;
-import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_P;
-import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_I;
 import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_D;
 import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_F;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_I;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_P;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -28,7 +28,7 @@ public class BasicTurretComponentsA implements TurretComponents {
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
   }
-  
+
   private TalonSRXConfiguration getConfiguration() {
     final TalonSRXConfiguration config = new TalonSRXConfiguration();
     config.slot0.kP = VELOCITY_P;

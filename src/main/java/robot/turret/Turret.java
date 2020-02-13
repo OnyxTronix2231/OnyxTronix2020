@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
 
-  private double angleOffset;
   private final TurretComponents components;
+  private double angleOffset;
 
   protected Turret(final TurretComponents components) {
     this.components = components;
@@ -45,12 +45,12 @@ public class Turret extends SubsystemBase {
     components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 
-  public void setOffset(final double offset) {
-    angleOffset += offset;
-  }
-
   public double getOffset() {
     return angleOffset;
+  }
+
+  public void setOffset(final double offset) {
+    angleOffset += offset;
   }
 
   public void zeroOffset() {

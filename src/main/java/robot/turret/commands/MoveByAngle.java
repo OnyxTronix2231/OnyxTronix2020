@@ -30,7 +30,7 @@ public class MoveByAngle extends CommandBase {
    */
   @Override
   public void execute() {
-    if(angle != angleSupplier.getAsDouble()) {
+    if (angle != angleSupplier.getAsDouble()) {
       turretAngle = turret.getAngleRTR();
       angle = angleSupplier.getAsDouble();
     }

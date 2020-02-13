@@ -22,7 +22,7 @@ public class ShooterOi {
     openSolenoid.whileActiveOnce(new OpenShooterSolenoid(shooter)); //TODO check before merge
 
     final Trigger closeSolenoid = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
-    closeSolenoid.whileActiveOnce(new CloseShooterSolenoid(shooter)); //TODO check before merge
+    closeSolenoid.whileActiveOnce(new CloseShooterSolenoid(shooter));
 
   }
 }

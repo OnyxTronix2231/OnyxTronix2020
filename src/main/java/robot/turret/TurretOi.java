@@ -7,11 +7,11 @@ import robot.turret.commands.ChangeAngleOffsetByPercent;
 
 public class TurretOi {
 
-  public TurretOi(final UniqueAxisCache buttonJoystickAxisCache, final Turret turret) {
+  public TurretOi(final Turret turret, final UniqueAxisCache buttonJoystickAxisCache) {
 
     final JoystickAxis changeAngleByPercentAxis =
         buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
     changeAngleByPercentAxis.whileActiveContinuous(new ChangeAngleOffsetByPercent(turret,
-        () -> changeAngleByPercentAxis.getRawAxis()));
+        changeAngleByPercentAxis::getRawAxis));
   }
 }

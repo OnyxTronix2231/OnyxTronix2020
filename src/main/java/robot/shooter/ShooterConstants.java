@@ -1,10 +1,16 @@
 package robot.shooter;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public final class ShooterConstants {
 
   public static final class ShooterComponents {
     static final int MASTER_PORT = 4;//TODO check and change
     static final int SLAVE_PORT = 5;//TODO check and change
+    static final int DOUBLE_SOLENOID_FOWARD_PORT = 26;//TODO check ang change!!!!!
+    static final int DOUBLE_SOLENOID_REVERSE_PORT = 27;//TODO check ang change!!!!!
+    static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
+    static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
     static final int PEAK_AMP = 40;//TODO check and change
     static final int PEAK_AMP_DURATION = 10;//TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change

@@ -8,11 +8,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class BasicShooterComponents implements ShooterComponents {
 
   private final WPI_TalonSRX masterMotor;
   private final WPI_VictorSPX slaveMotor;
+  private final DoubleSolenoid doubleSolenoid;
 
   public BasicShooterComponents() {
     masterMotor = new WPI_TalonSRX(MASTER_PORT);
@@ -28,6 +30,8 @@ public class BasicShooterComponents implements ShooterComponents {
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
     slaveMotor.setInverted(true);
+
+    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FOWARD_PORT,DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -55,5 +59,10 @@ public class BasicShooterComponents implements ShooterComponents {
   @Override
   public IMotorController getSlaveMotor() {
     return slaveMotor;
+  }
+
+  @Override
+  public DoubleSolenoid getDoubleSolenoid() {
+    return doubleSolenoid;
   }
 }

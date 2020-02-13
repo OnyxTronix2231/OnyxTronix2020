@@ -28,7 +28,7 @@ public final class ShooterConstants {
   static final int MAX_FIRST_RANGE_CM = 550; //TODO check and change very important meters
   static final int MIN_FIRST_RANGE_CM = 250; //TODO check and change very important meters
   static final int MIN_THIRD_RANGE_CM = 750; //TODO check and change very important meters
-  static final int PERECENT_OUT_PUT = 1; //TODO check and change very important meters
+  static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final double SPEED_FIRST = 35000; //TODO check and change very important meters
   static final double SPEED_MIDDLE = 36000; //TODO check and change very important meters
   static final double SPEED_THIRD = 38000; //TODO check and change very important meters

@@ -1,5 +1,6 @@
 package robot.drivetrain;
 
+import static robot.RobotConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
@@ -8,7 +9,6 @@ import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
-import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
@@ -40,11 +40,11 @@ public class DriveTrain extends SubsystemBase {
     this.components = components;
     resetEncoders();
 
-    pathChooser.setDefaultOption("Auto1", 1);
-    pathChooser.addOption("Auto2", 2);
-    pathChooser.addOption("Auto3", 3);
-    pathChooser.addOption("Auto4", 4);
-    pathChooser.addOption("Auto5", 5);
+    pathChooser.setDefaultOption("Path 1", 1);
+    pathChooser.addOption("Path 2", 2);
+    pathChooser.addOption("Path 3", 3);
+    pathChooser.addOption("Path 4", 4);
+    pathChooser.addOption("Path 5", 5);
     Shuffleboard.enableActuatorWidgets();
 
     Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
@@ -55,10 +55,6 @@ public class DriveTrain extends SubsystemBase {
   public void periodic() {
     components.getOdometry().update(Rotation2d.fromDegrees(getOdometryHeading()),
         getLeftDistance() / CM_TO_METERS, getRightDistance() / CM_TO_METERS);
-  }
-
-  public void stopDrive() {
-    components.getDifferentialDrive().stopMotor();
   }
 
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
@@ -104,6 +100,10 @@ public class DriveTrain extends SubsystemBase {
     if (getAutonomousPath() > 5 || getAutonomousPath() < 1)
       return getPoseFromVision();
     return PATHS.get(getAutonomousPath());
+  }
+
+  public void stopDrive() {
+    components.getDifferentialDrive().stopMotor();
   }
 
   private void moveMotorByMotionMagic(final TalonFX motor, final double target) {

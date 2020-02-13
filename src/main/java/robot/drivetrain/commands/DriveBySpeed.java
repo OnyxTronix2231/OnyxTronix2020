@@ -1,8 +1,5 @@
 package robot.drivetrain.commands;
 
-import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
-import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.drivetrain.DriveTrain;
 
@@ -24,8 +21,8 @@ public class DriveBySpeed extends CommandBase {
 
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(forwardSpeedCalculationSupplier.getAsDouble() * ARCADE_DRIVE_FORWARD_SENSITIVITY,
-        rotationSpeedCalculationSupplier.getAsDouble() * ARCADE_DRIVE_ROTATION_SENSITIVITY);
+    driveTrain.arcadeDrive(forwardSpeedCalculationSupplier.getAsDouble(),
+        rotationSpeedCalculationSupplier.getAsDouble());
   }
 
   @Override

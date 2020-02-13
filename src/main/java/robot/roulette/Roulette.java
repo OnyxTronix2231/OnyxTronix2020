@@ -2,6 +2,7 @@ package robot.roulette;
 
 import static robot.roulette.RouletteConstants.COLORS_IN_ROTATIONS;
 import static robot.roulette.RouletteConstants.DISTANCE_FROM_FIELD_SENSOR;
+import static robot.roulette.RouletteConstants.ENCODER_UNITS_PER_ROTATION;
 import static robot.roulette.RouletteConstants.RobotAComponents.ROULETTE_ROTATION_TO_WHEEL_ROTATION;
 import static robot.roulette.RouletteConstants.TOLERANCE;
 
@@ -23,26 +24,14 @@ public class Roulette extends SubsystemBase {
 
     private final RouletteComponents components;
     private final List<RouletteColor> rouletteColors;
-    double encoderSetpoint = 0;
     double rouletteRotation = 0;
 
     public Roulette(final RouletteComponents components) {
         this.components = components;
         this.rouletteColors = Arrays.asList(RouletteColor.values());
-        Shuffleboard.getTab("Roulette").addString("Current color", () -> getCurrentColor().toString());
-        Shuffleboard.getTab("Roulette").addNumber("Req color", this::getS);
-        Shuffleboard.getTab("Roulette").addNumber("Encoder Setpoint", () -> encoderSetpoint);
-        Shuffleboard.getTab("Roulette").addNumber("Color count", () -> rouletteRotation);
     }
 
-    private double getS() {
-        if (getRequiredColorFromMatchColor() == null) {
-            return 0;
-        }
-        return getColorCountRequiredToColor(getRequiredColorFromMatchColor());
-    }
-
-    public void spinMotor(final DoubleSupplier speedSupplier) {
+    public void moveRouletteBySpeed(final DoubleSupplier speedSupplier) {
         components.getMasterMotor().set(speedSupplier.getAsDouble());
     }
 
@@ -89,19 +78,17 @@ public class Roulette extends SubsystemBase {
         return roulette.orElse(null);
     }
 
-    public void stopSpin() {
-        components.getMasterMotor().set(0);
+    public void stopMotor() {
+        moveRouletteBySpeed(() -> 0);
     }
 
     public void spinByColorsCount(final double requiredColorCount) {
         rouletteRotation = getRouletteRotationByColorCount(requiredColorCount);
-        encoderSetpoint = getRouletteRotationToEncoderUnits(rouletteRotation);
-        components.getMasterMotor().set(ControlMode.Position, encoderSetpoint +
-                components.getMasterMotor().getSelectedSensorPosition());
+        getRouletteRotationToEncoderUnits(getRouletteRotationByColorCount(requiredColorCount));
     }
 
     public double getRouletteRotationToEncoderUnits(final double rouletteRotations) {
-        return rouletteRotations * RouletteConstants.ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
+        return rouletteRotations * ENCODER_UNITS_PER_ROTATION * ROULETTE_ROTATION_TO_WHEEL_ROTATION;
     }
 
     public double getRouletteRotationByColorCount(final double colorCount) {

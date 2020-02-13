@@ -18,11 +18,11 @@ public class SpinRouletteBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        roulette.spinMotor(speedSupplier);
+        roulette.moveRouletteBySpeed(speedSupplier);
     }
 
     @Override
     public void end(final boolean interrupted) {
-        roulette.stopSpin();
+        roulette.stopMotor();
     }
 }

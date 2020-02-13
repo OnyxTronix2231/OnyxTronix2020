@@ -17,15 +17,15 @@ public final class RouletteConstants {
         public final static int DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL = 3;
         public static final int MAX_VELOCITY = 8000;
         public static final int MAX_ACCELERATION = 8000;
-        public static final int MOTION_CURVE_STRENGTH = 0;  // todo changeeeeee!!!!!
+        public static final int MOTION_CURVE_STRENGTH = 0;  // TODO: check and change
         public final static double WHEEL_RADIUS = 5;
         public final static double WHEEL_PERIMETER = 2 * Math.PI * WHEEL_RADIUS;
         public final static double ROULETTE_RADIUS = 41;
         public final static double ROULETTE_PERIMETER = 2 * Math.PI * ROULETTE_RADIUS;
         public final static double ROULETTE_ROTATION_TO_WHEEL_ROTATION = ROULETTE_PERIMETER / WHEEL_PERIMETER;
-        public static final double K_P = 0.1;
-        public static final double K_I = 0;
-        public static final double K_D = 0;
+        public static final double VELOCITY_P = 0.1;
+        public static final double VELOCITY_I = 0;
+        public static final double VELOCITY_D = 0;
 
     }
 

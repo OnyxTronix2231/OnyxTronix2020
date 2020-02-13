@@ -34,6 +34,6 @@ public class SpinRouletteToColor extends CommandBase {
 
     @Override
     public void end(final boolean interrupted) {
-        roulette.stopSpin();
+        roulette.stopMotor();
     }
 }

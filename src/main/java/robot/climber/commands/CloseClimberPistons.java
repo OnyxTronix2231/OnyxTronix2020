@@ -3,17 +3,17 @@ package robot.climber.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.climber.Climber;
 
-public class OpenPistons extends InstantCommand {
+public class CloseClimberPistons extends InstantCommand {
 
   private final Climber climber;
 
-  public OpenPistons(final Climber climber) {
+  public CloseClimberPistons(final Climber climber) {
     this.climber = climber;
     addRequirements(climber);
   }
 
   @Override
   public void initialize() {
-    climber.openPistons();
+    climber.closePistons();
   }
 }

@@ -8,8 +8,8 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.climber.commands.ClimbBySpeed;
-import robot.climber.commands.ClosePistons;
-import robot.climber.commands.OpenPistons;
+import robot.climber.commands.CloseClimberPistons;
+import robot.climber.commands.OpenClimberPistons;
 
 public class ClimberOi {
 
@@ -25,9 +25,9 @@ public class ClimberOi {
         ()-> -climbDownBySpeedAxis.getRawAxis()));
 
     final Trigger openClimberPistonsButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
-    openClimberPistonsButton.whenActive(new OpenPistons(climber));
+    openClimberPistonsButton.whenActive(new OpenClimberPistons(climber));
 
     final Trigger closeClimberPistonsButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
-    closeClimberPistonsButton.whenActive(new ClosePistons(climber));
+    closeClimberPistonsButton.whenActive(new CloseClimberPistons(climber));
   }
 }

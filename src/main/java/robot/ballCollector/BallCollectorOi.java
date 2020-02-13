@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.ballCollector.commands.ClosePistons;
+import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
-import robot.ballCollector.commands.OpenPistons;
+import robot.ballCollector.commands.OpenBallCollectorPistons;
 
 public final class BallCollectorOi {
 
@@ -20,10 +20,10 @@ public final class BallCollectorOi {
 
     final Trigger openBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
         (XboxController.Button.kBumperRight.value);
-    openBallCollectorPistonsButton.whenActive(new OpenPistons(ballCollector));
+    openBallCollectorPistonsButton.whenActive(new OpenBallCollectorPistons(ballCollector));
 
     final Trigger closeBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
         (XboxController.Button.kBumperLeft.value);
-    closeBallCollectorPistonsButton.whenActive(new ClosePistons(ballCollector));
+    closeBallCollectorPistonsButton.whenActive(new CloseBallCollectorPistons(ballCollector));
   }
 }

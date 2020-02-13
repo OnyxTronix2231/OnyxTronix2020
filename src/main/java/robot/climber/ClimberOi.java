@@ -24,10 +24,10 @@ public class ClimberOi {
     climbUpBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber,
         ()-> -climbDownBySpeedAxis.getRawAxis()));
 
-    final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
-    openDoubleSolenoidsButton.whenActive(new OpenPistons(climber));
+    final Trigger openClimberPistonsButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
+    openClimberPistonsButton.whenActive(new OpenPistons(climber));
 
-    final Trigger closeDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
-    closeDoubleSolenoidsButton.whenActive(new ClosePistons(climber));
+    final Trigger closeClimberPistonsButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
+    closeClimberPistonsButton.whenActive(new ClosePistons(climber));
   }
 }

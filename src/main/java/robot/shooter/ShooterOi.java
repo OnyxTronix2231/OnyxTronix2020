@@ -6,8 +6,8 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import robot.shooter.commands.ShootBySpeed;
 import onyxTronix.UniqueButtonCache;
-import robot.shooter.commands.CloseSolenoid;
-import robot.shooter.commands.OpenSolenoid;
+import robot.shooter.commands.CloseShooterSolenoid;
+import robot.shooter.commands.OpenShooterSolenoid;
 import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
 
 public class ShooterOi {
@@ -19,10 +19,10 @@ public class ShooterOi {
     shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
 
     final Trigger openSolenoid = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
-    openSolenoid.whileActiveOnce(new OpenSolenoid(shooter)); //TODO check before merge
+    openSolenoid.whileActiveOnce(new OpenShooterSolenoid(shooter)); //TODO check before merge
 
     final Trigger closeSolenoid = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
-    closeSolenoid.whileActiveOnce(new CloseSolenoid(shooter)); //TODO check before merge
+    closeSolenoid.whileActiveOnce(new CloseShooterSolenoid(shooter)); //TODO check before merge
 
   }
 }

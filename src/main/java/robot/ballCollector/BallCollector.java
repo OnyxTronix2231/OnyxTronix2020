@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallCollector extends SubsystemBase {
 
-    private final BallCollectorComponents components;
-    private int ballCounter = 3;
+  private final BallCollectorComponents components;
+  private int ballCounter = 3;
 
-    public BallCollector(final BallCollectorComponents components) {
-        this.components = components;
-        Shuffleboard.getTab("ballCollector").addNumber("ballCounter", () -> ballCounter);
-    }
+  public BallCollector(final BallCollectorComponents components) {
+    this.components = components;
+    Shuffleboard.getTab("ballCollector").addNumber("ballCounter", () -> ballCounter);
+  }
 
   public void collectBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
@@ -28,31 +28,31 @@ public class BallCollector extends SubsystemBase {
     components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 
-    public void closePistons() {
-        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
-    }
+  public void closePistons() {
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
+  }
 
-    public boolean isBallCollected(){
-        return getAmp() > MIN_AMP_FOR_ONE;
-    }
+  public boolean isBallCollected() {
+    return getAmp() > MIN_AMP_FOR_ONE;
+  }
 
-    public double getAmp(){
-      return components.getMasterMotor().getStatorCurrent();
-    }
+  public double getAmp() {
+    return components.getMasterMotor().getStatorCurrent();
+  }
 
-    public boolean canCollect(){
-        return ballCounter <= 5;
-    }
+  public boolean canCollect() {
+    return ballCounter <= 5;
+  }
 
-    public int getBallCounter(){
-        return ballCounter;
-    }
+  public int getBallCounter() {
+    return ballCounter;
+  }
 
-    public void addBall(){
-        ballCounter++;
-    }
+  public void addBall() {
+    ballCounter++;
+  }
 
-    public void removeBall(){
-        ballCounter--;
-    }
+  public void removeBall() {
+    ballCounter--;
+  }
 }

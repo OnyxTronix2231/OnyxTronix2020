@@ -31,7 +31,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     slaveMotor.follow(masterMotor);
     slaveMotor.setInverted(true);
 
-    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FOWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
+    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   private TalonSRXConfiguration getConfiguration() {

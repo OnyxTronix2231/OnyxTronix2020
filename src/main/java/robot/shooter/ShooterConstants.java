@@ -7,7 +7,7 @@ public final class ShooterConstants {
   public static final class ShooterComponentsA {
     static final int MASTER_PORT = 4;//TODO check and change
     static final int SLAVE_PORT = 5;//TODO check and change
-    static final int DOUBLE_SOLENOID_FOWARD_PORT = 4;//TODO check ang change!!!!!
+    static final int DOUBLE_SOLENOID_FORWARD_PORT = 4;//TODO check ang change!!!!!
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 5;//TODO check ang change!!!!!
     static final int PEAK_AMP = 40;//TODO check and change
     static final int PEAK_AMP_DURATION = 10;//TODO check and change

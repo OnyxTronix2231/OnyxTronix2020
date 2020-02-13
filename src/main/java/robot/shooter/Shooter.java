@@ -1,6 +1,6 @@
 package robot.shooter;
 
-import static robot.shooter.ShooterConstants.ShooterComponentsA.PRIMARY_PID;
+import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.CLOSE_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.OPEN_SOLENOID_VALUE;

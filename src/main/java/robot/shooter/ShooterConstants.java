@@ -14,9 +14,7 @@ public final class ShooterConstants {
     static final int PEAK_AMP = 40;//TODO check and change
     static final int PEAK_AMP_DURATION = 10;//TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
-    static final int PRIMARY_PID = 0;
     static final int VELOCITY_PID_SLOT = 0;
-    static final int AUX_PID = 1;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double MAX_VELOCITY = 39400; //TODO check and change
     static final double VELOCITY_P = 0.12; //0.15;//TODO check and change

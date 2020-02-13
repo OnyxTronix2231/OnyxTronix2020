@@ -6,19 +6,20 @@ import robot.roulette.Roulette;
 import java.util.function.DoubleSupplier;
 
 public class SpinRouletteToColor extends CommandBase {
+
     protected final Roulette roulette;
-    protected DoubleSupplier supplierColorsRequired;
+    protected final DoubleSupplier colorsRequiredSupplier;
     protected double colorsRequired;
 
-    public SpinRouletteToColor(final Roulette roulette, DoubleSupplier supplierColorsRequired) {
+    public SpinRouletteToColor(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
         this.roulette = roulette;
-        this.supplierColorsRequired = supplierColorsRequired;
+        this.colorsRequiredSupplier = colorsRequiredSupplier;
         addRequirements(roulette);
     }
 
     @Override
     public void initialize() {
-        colorsRequired = supplierColorsRequired.getAsDouble();
+        colorsRequired = colorsRequiredSupplier.getAsDouble();
         roulette.resetEncoder();
     }
 
@@ -29,7 +30,7 @@ public class SpinRouletteToColor extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return colorsRequired == 0;
+        return roulette.isOnTargetColor(colorsRequired);
     }
 
     @Override

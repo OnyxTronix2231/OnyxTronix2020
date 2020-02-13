@@ -72,7 +72,7 @@ public class Roulette extends SubsystemBase {
         final Color detectedColor = components.getColorSensorV3().getColor();
         final RouletteColor[] rouletteColors = RouletteColor.values();
         Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
-                Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
+            Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
         return roulette.orElse(null);
     }
 
@@ -113,4 +113,7 @@ public class Roulette extends SubsystemBase {
         return Math.abs(components.getMasterMotor().getClosedLoopError()) <= TOLERANCE;
     }
 
+    public boolean isOnTargetColor(final double colorsRequired){
+        return colorsRequired == 0;
+    }
 }

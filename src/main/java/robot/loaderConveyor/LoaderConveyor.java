@@ -7,7 +7,7 @@ public class LoaderConveyor extends SubsystemBase {
 
   private final LoaderConveyorComponents components;
 
-  public LoaderConveyor(final BasicLoaderConveyorComponentsA components) {
+  public LoaderConveyor(final LoaderConveyorComponents components) {
     this.components = components;
   }
 

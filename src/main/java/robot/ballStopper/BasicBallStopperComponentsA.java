@@ -1,10 +1,13 @@
 package robot.ballStopper;
 
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.MASTER_MOTOR_PORT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP_DURATION;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.*;
 
 public class BasicBallStopperComponentsA implements BallStopperComponents {
 

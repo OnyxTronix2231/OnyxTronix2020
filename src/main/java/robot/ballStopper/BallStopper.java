@@ -1,6 +1,8 @@
 package robot.ballStopper;
 
-public class BallStopper {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class BallStopper extends SubsystemBase {
 
   private final BallStopperComponents components;
 

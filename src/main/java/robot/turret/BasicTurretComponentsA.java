@@ -26,11 +26,11 @@ public class BasicTurretComponentsA implements TurretComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
-    masterMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
   }
 
   private TalonSRXConfiguration getConfiguration() {
     final TalonSRXConfiguration config = new TalonSRXConfiguration();
+    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.Analog;
     config.slot0.kP = VELOCITY_P;
     config.slot0.kI = VELOCITY_I;
     config.slot0.kD = VELOCITY_D;

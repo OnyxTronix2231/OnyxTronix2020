@@ -1,4 +1,3 @@
-package robot.drivetrain;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public final class DriveTrainConstants {
 
-  static final class DriveTrainComponents {
+  public static final class DriveTrainComponentsA {
 
     static double ODOMETRY_TARGET_X = 0;
     static double ODOMETRY_TARGET_Y = 0;

@@ -14,11 +14,11 @@ import robot.drivetrain.DriveTrain;
 
 public class Robot extends TimedRobot {
 
-    @Override
-    public void robotInit() {
-        XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
-        UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
-        UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
+  @Override
+  public void robotInit() {
+    final XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
+    final UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
+    final UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
 
         XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
         UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
@@ -27,28 +27,28 @@ public class Robot extends TimedRobot {
         final DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponents());
     }
 
-    @Override
-    public void autonomousPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void autonomousPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
-    @Override
-    public void teleopPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void teleopPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
-    @Override
-    public void testInit() {
-        LiveWindow.setEnabled(true);
-    }
+  @Override
+  public void testInit() {
+    LiveWindow.setEnabled(true);
+  }
 
-    @Override
-    public void disabledInit() {
-        LiveWindow.setEnabled(false);
-    }
+  @Override
+  public void disabledInit() {
+    LiveWindow.setEnabled(false);
+  }
 
-    @Override
-    public void disabledPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
+  @Override
+  public void disabledPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 }

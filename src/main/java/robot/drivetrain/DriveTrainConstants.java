@@ -1,20 +1,8 @@
-package robot.drivetrain;
 
+package robot.drivetrain;
 public final class DriveTrainConstants {
 
-  static final double INCH_TO_CM = 2.54;
-  static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
-  static final double ENCODER_UNITS = 1023.0;
-  static final int PRIMARY_PID = 0; //TODO change
-  static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
-  static final double TOLERANCE = 3; // TODO: tuning is required
-  static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
-  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8; // TODO: check value
-  static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8; // TODO: check value
-  static final int VELOCITY_CONTROLLER_PID_SLOT = 2; // TODO: check value
-
   public static final class DriveTrainComponentsA {
-
     static final int LEFT_MASTER_PORT = 2; //TODO check and change
     static final int LEFT_SLAVE_PORT = 3; //TODO check and change
     static final int RIGHT_MASTER_PORT = 0; //TODO check and change
@@ -34,4 +22,15 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_I = 0; // TODO: check value
     static final double VELOCITY_CONTROLLER_D = 0; // TODO: check value
   }
+
+  static final double INCH_TO_CM = 2.54;
+  static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
+  static final double ENCODER_UNITS = 1023.0;
+  static final int PRIMARY_PID = 0; //TODO change
+  static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
+  static final double TOLERANCE = 3; // TODO: tuning is required
+  static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
+  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8; // TODO: check value
+  static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8; // TODO: check value
+  static final int VELOCITY_CONTROLLER_PID_SLOT = 2; // TODO: check value
 }

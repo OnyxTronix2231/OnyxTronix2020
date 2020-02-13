@@ -21,10 +21,6 @@ public class DriveTrain extends SubsystemBase {
     this.components = components;
   }
 
-  public void stopDrive() {
-    components.getDifferentialDrive().stopMotor();
-  }
-
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed * ARCADE_DRIVE_FORWARD_SENSITIVITY,
         rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
@@ -72,5 +68,9 @@ public class DriveTrain extends SubsystemBase {
 
   private double cmToEncoderUnits(final double cm) {
     return ENCODER_UNITS * cm / PERIMETER;
+  }
+
+  public void stopDrive() {
+    components.getDifferentialDrive().stopMotor();
   }
 }

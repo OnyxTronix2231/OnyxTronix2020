@@ -1,10 +1,9 @@
 package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
+import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.CLOSE_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.OPEN_SOLENOID_VALUE;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 

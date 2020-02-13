@@ -1,5 +1,7 @@
 package robot.climber;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public final class ClimberConstants {
 
   public static final class ClimberComponentsA {
@@ -14,6 +16,8 @@ public final class ClimberConstants {
     static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
   }
 
+  static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
+  static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
   static final double UP_SPEED = 0.5; // TODO: check value
   static final double DOWN_SPEED = 0.5; // TODO: check value
 }

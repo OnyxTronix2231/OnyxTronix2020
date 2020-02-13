@@ -2,6 +2,7 @@ package robot.climber.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.climber.Climber;
+
 import java.util.function.DoubleSupplier;
 
 public class ClimbBySpeed extends CommandBase {

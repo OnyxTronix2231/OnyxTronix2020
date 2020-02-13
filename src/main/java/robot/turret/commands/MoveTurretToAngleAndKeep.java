@@ -5,13 +5,13 @@ import robot.turret.Turret;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveToAngleAndKeep extends CommandBase {
+public class MoveTurretToAngleAndKeep extends CommandBase {
 
-  protected final DoubleSupplier supplierAngle;
   protected final Turret turret;
+  protected final DoubleSupplier supplierAngle;
   protected double angle;
 
-  public MoveToAngleAndKeep(final Turret turret, final DoubleSupplier angleSupplier) {
+  public MoveTurretToAngleAndKeep(final Turret turret, final DoubleSupplier angleSupplier) {
     this.turret = turret;
     this.supplierAngle = angleSupplier;
     addRequirements(turret);

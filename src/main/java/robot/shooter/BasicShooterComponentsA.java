@@ -45,7 +45,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
-    config.auxiliaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
+    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
     config.openloopRamp = OPEN_LOOP_RAMP;
     config.closedloopRamp = OPEN_LOOP_RAMP;
     return config;

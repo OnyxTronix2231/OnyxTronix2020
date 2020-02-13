@@ -32,11 +32,11 @@ public class Shooter extends SubsystemBase {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
   }
 
-  public void openShooterSolenoid() {
+  public void openShooterPiston() {
     components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
   }
 
-  public void closeShooterSolenoid() {
+  public void closeShooterPiston() {
     components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
   }
 }

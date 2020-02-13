@@ -1,8 +1,8 @@
 package robot.drivetrain.commands;
 
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DRIVE_KINEMATICS;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.RAMSETE_B;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.RAMSETE_ZETA;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DRIVE_KINEMATICS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.RAMSETE_B;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.RAMSETE_ZETA;
 
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import robot.drivetrain.DriveTrain;

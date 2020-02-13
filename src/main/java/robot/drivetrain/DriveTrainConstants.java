@@ -1,3 +1,4 @@
+package robot.drivetrain;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public final class DriveTrainConstants {
 
-  public static final class DriveTrainComponentsA {
+  static final class DriveTrainComponentsA {
 
     static double ODOMETRY_TARGET_X = 0;
     static double ODOMETRY_TARGET_Y = 0;
@@ -34,28 +35,78 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_D = 0;
     static final double MAX_OUTPUT_FORWARD = 0.9;
     static final double MAX_OUTPUT_REVERSE = 0.9;
-    public static final double TRAJECTORY_P = 0.4;
-    public static final double TRAJECTORY_I = 0;
-    public static final double TRAJECTORY_D = 4;
+    static final double TRAJECTORY_P = 0.4;
+    static final double TRAJECTORY_I = 0;
+    static final double TRAJECTORY_D = 4;
   }
 
-  public static final class TRAJECTORY_PARAMS {
-    public static final int TRAJECTORY_PID_SLOT = 1;
-    public static final double ENCODER_CPR = ENCODER_UNITS * 9.5;
-    public static final double VOLTS = 0.365;
-    public static final double VOLT_SECONDS_PER_METER = 0;
-    public static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333;
-    public static final double MAX_VOLTAGE = 10;
-    public static final double MAX_SPEED_METERS_PER_SECOND = 3;
-    public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
-    public static final double TRACKWIDTH_METERS = 0.679;
-    public static final int DEGREES_IN_FULL_ROTATION = 360;
+  public static final class TrajectoryParams {
+
     public static final double RAMSETE_B = 2;
     public static final double RAMSETE_ZETA = 0.7;
-    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
-    public static final SimpleMotorFeedforward FEED_FORWARD =
+    private static final double TRACKWIDTH_METERS = 0.679;
+    static final int TRAJECTORY_PID_SLOT = 1;
+    static final double ENCODER_CPR = ENCODER_UNITS * 9.5;
+    static final double VOLTS = 0.365;
+    static final double VOLT_SECONDS_PER_METER = 0;
+    static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333;
+    static final double MAX_VOLTAGE = 10;
+    static final double MAX_SPEED_METERS_PER_SECOND = 3;
+    static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
+    static final int DEGREES_IN_FULL_ROTATION = 360;
+    static final SimpleMotorFeedforward FEED_FORWARD =
         new SimpleMotorFeedforward(VOLTS, VOLT_SECONDS_PER_METER, VOLT_SECONDS_SQUARED_PER_METER);
+    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
   }
+
+  static final class Paths {
+
+    private static final List<Pose2d> PATH_1 = List.of(
+        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
+        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(6.1, 4.5, Rotation2d.fromDegrees(40)),
+        new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
+        new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
+        new Pose2d(3.2, 4.2, Rotation2d.fromDegrees(-100))
+    );
+
+    private static final List<Pose2d> PATH_2 = List.of(
+        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
+        new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
+    );
+
+    private static final List<Pose2d> PATH_3 = List.of(
+        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180)),
+        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
+        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
+    );
+
+
+    private static final List<Pose2d> PATH_4 = List.of(
+        new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0)),
+        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
+        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
+        new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
+    );
+
+    private static final List<Pose2d> PATH_5 = List.of(
+        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
+        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
+        new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
+    );
+
+    static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+  }
+
+  private static final double INCH_TO_CM = 2.54;
+  private static final double ENCODER_UNITS = 1023.0;
 
   static final int PRIMARY_PID = 0; //TODO change
   static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
@@ -63,55 +114,10 @@ public final class DriveTrainConstants {
   static final int CM_TO_METERS = 100;
   static final int SEC_TO_100MS= 10;
   static final double CONVERSION_RATE = 9.5;
-  static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
-  static final double ENCODER_UNITS = 1023.0;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
-  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
-  static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
-
-  static final List<Pose2d> PATH_1 = List.of(
-      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
-      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(6.1, 4.5, Rotation2d.fromDegrees(40)),
-      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
-      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
-      new Pose2d(3.2, 4.2, Rotation2d.fromDegrees(-100))
-  );
-
-  static final List<Pose2d> PATH_2 = List.of(
-      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-      new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
-  );
-
-  static final List<Pose2d> PATH_3 = List.of(
-      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180)),
-      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
-  );
-
-
-  static final List<Pose2d> PATH_4 = List.of(
-      new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0)),
-      new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
-      new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
-      new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
-  );
-
-  static final List<Pose2d> PATH_5 = List.of(
-      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
-      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-      new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
-  );
-
-  static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+  public static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
+  public static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
 }

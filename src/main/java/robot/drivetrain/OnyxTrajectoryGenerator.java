@@ -1,10 +1,10 @@
 package robot.drivetrain;
 
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DRIVE_KINEMATICS;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.MAX_SPEED_METERS_PER_SECOND;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.MAX_VOLTAGE;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DRIVE_KINEMATICS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_SPEED_METERS_PER_SECOND;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_VOLTAGE;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;

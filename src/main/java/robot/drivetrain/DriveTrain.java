@@ -1,25 +1,24 @@
 package robot.drivetrain;
 
-import static robot.RobotConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_ANGLE;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_X;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_Y;
-import static robot.drivetrain.DriveTrainConstants.PATHS;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_ANGLE;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_X;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_Y;
+import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.TRAJECTORY_PID_SLOT;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;

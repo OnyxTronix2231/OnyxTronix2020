@@ -26,10 +26,8 @@ public class BasicBallStopperComponents implements BallStopperComponents {
     return config;
   }
 
-    @Override
-    public WPI_TalonSRX getMotor() {
-     return motor;
-    }
-
+  @Override
+  public WPI_TalonSRX getMotor() {
+    return motor;
   }
-
+}

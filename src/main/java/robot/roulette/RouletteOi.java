@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.roulette.commands.CloseDoubleSolenoid;
-import robot.roulette.commands.OpenDoubleSolenoid;
+import robot.roulette.commands.ClosePistons;
 import robot.roulette.commands.SpinRouletteByColorCount;
 import robot.roulette.commands.SpinRouletteBySpeed;
 import robot.roulette.commands.SpinRouletteToColorIfExists;
@@ -20,16 +19,13 @@ public class RouletteOi {
                 driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
         rouletteBySpeedAxis.whileActiveContinuous(new SpinRouletteBySpeed(roulette, rouletteBySpeedAxis::getRawAxis));
 
-        final JoystickButton closeDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-        closeDoubleSolenoid.whenActive(new CloseDoubleSolenoid(roulette));
+        final JoystickButton togglePistons = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
+        togglePistons.whenActive(new ClosePistons(roulette));
 
-        final JoystickButton openDoubleSolenoid = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
-        openDoubleSolenoid.whenActive(new OpenDoubleSolenoid(roulette));
-
-        final JoystickButton spinRouletteByColorExist = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
+        final JoystickButton spinRouletteByColorExist = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
         spinRouletteByColorExist.whenActive(new SpinRouletteToColorIfExists(roulette));
 
-        final JoystickButton spinRouletteByColorCount = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+        final JoystickButton spinRouletteByColorCount = driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
         spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> 8));
     }
 }

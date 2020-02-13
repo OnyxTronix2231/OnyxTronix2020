@@ -6,11 +6,12 @@ import robot.roulette.RouletteColor;
 import java.util.function.DoubleSupplier;
 
 public class SpinRouletteByColorCount extends SpinRouletteToColor {
+    
     private RouletteColor currentColor;
     private RouletteColor previousColor;
 
-    public SpinRouletteByColorCount(final Roulette roulette, DoubleSupplier supplierColorsRequired) {
-        super(roulette, supplierColorsRequired);
+    public SpinRouletteByColorCount(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
+        super(roulette, colorsRequiredSupplier);
         addRequirements(roulette);
     }
 

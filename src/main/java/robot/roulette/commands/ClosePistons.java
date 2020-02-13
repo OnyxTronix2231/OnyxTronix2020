@@ -3,11 +3,11 @@ package robot.roulette.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.roulette.Roulette;
 
-public class CloseDoubleSolenoid extends InstantCommand {
+public class ClosePistons extends InstantCommand {
 
     private final Roulette roulette;
 
-    public CloseDoubleSolenoid(final Roulette roulette) {
+    public ClosePistons(final Roulette roulette) {
         this.roulette = roulette;
         addRequirements(roulette);
     }

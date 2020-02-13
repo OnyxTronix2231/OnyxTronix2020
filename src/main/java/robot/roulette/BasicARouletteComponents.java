@@ -7,7 +7,7 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
 
-import static robot.roulette.RouletteConstants.RobotAComponents.*;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.*;
 
 public class BasicARouletteComponents implements RouletteComponents {
 
@@ -41,8 +41,8 @@ public class BasicARouletteComponents implements RouletteComponents {
         config.motionCruiseVelocity = MAX_VELOCITY;
         config.motionAcceleration = MAX_ACCELERATION;
         config.motionCurveStrength = MOTION_CURVE_STRENGTH;
-        config.peakCurrentLimit = PICK_AMP;
-        config.peakCurrentDuration = PICK_AMP_DURATION;
+        config.peakCurrentLimit = PEAK_AMP;
+        config.peakCurrentDuration = PEAK_AMP_DURATION;
         config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
         return config;
     }

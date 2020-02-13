@@ -3,13 +3,11 @@ package robot.roulette;
 import static robot.roulette.RouletteConstants.COLORS_IN_ROTATIONS;
 import static robot.roulette.RouletteConstants.DISTANCE_FROM_FIELD_SENSOR;
 import static robot.roulette.RouletteConstants.ENCODER_UNITS_PER_ROTATION;
-import static robot.roulette.RouletteConstants.RobotAComponents.ROULETTE_ROTATION_TO_WHEEL_ROTATION;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.ROULETTE_ROTATION_TO_WHEEL_ROTATION;
 import static robot.roulette.RouletteConstants.TOLERANCE;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -114,4 +112,5 @@ public class Roulette extends SubsystemBase {
     public boolean isOnTarget() {
         return Math.abs(components.getMasterMotor().getClosedLoopError()) <= TOLERANCE;
     }
+
 }

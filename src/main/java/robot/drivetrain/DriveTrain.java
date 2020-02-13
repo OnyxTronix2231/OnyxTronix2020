@@ -6,13 +6,10 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITI
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_ANGLE;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_X;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.ODOMETRY_TARGET_Y;
-import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
+import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
@@ -24,7 +21,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -50,13 +46,6 @@ public class DriveTrain extends SubsystemBase {
     pathChooser.addOption("Auto4", 4);
     pathChooser.addOption("Auto5", 5);
     Shuffleboard.enableActuatorWidgets();
-
-    Shuffleboard.getTab("Odometry").add("Target X:", 1).getEntry().addListener(
-        x -> setOdometryTargetX(x.value.getDouble()), EntryListenerFlags.kUpdate);
-    Shuffleboard.getTab("Odometry").add("Target Y:", 0).getEntry().addListener(
-        y -> setOdometryTargetY(y.value.getDouble()), EntryListenerFlags.kUpdate);
-    Shuffleboard.getTab("Odometry").add("Target Angle:", 0).getEntry().addListener(
-        angle -> setOdometryTargetAngle(angle.value.getDouble()), EntryListenerFlags.kUpdate);
 
     Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
     System.out.println(pathChooser.getSelected());
@@ -84,10 +73,6 @@ public class DriveTrain extends SubsystemBase {
 
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
-  }
-
-  public Pose2d getTargetPose() {
-    return new Pose2d(ODOMETRY_TARGET_X, ODOMETRY_TARGET_Y, Rotation2d.fromDegrees(ODOMETRY_TARGET_ANGLE));
   }
 
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
@@ -150,7 +135,7 @@ public class DriveTrain extends SubsystemBase {
     return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
   }
 
-  private void resetOdometryToPose(final Pose2d pose) {
+  private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
   }
@@ -159,20 +144,8 @@ public class DriveTrain extends SubsystemBase {
     return pathChooser.getSelected();
   }
 
-  private List<Pose2d> getPoseFromVision() {
+  private List<Pose2d> getPoseFromVision() {//For future Vision integration - will delete comment pre-merge
     return List.of(new Pose2d());
-  }
-
-  private void setOdometryTargetX(final double x) {
-    ODOMETRY_TARGET_X = x;
-  }
-
-  private void setOdometryTargetY(final double y) {
-    ODOMETRY_TARGET_Y = y;
-  }
-
-  private void setOdometryTargetAngle(final double angle) {
-    ODOMETRY_TARGET_ANGLE = angle;
   }
 
   private double cmToEncoderUnits(final double cm) {

@@ -21,13 +21,13 @@ public class Robot extends TimedRobot {
     final UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
     final UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
 
-        XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
-        UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
-        UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
+    final XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
+    final UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
+    final UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
-        final DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponentsA());
-        driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
-    }
+    final DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponentsA());
+    driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
+  }
 
   @Override
   public void autonomousPeriodic() {

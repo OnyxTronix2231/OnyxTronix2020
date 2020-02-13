@@ -14,6 +14,7 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_OUT
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_CONNECTED_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRAJECTORY_D;
@@ -88,7 +89,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
 
-    gyro = new PigeonIMU(new WPI_TalonSRX(11));
+    gyro = new PigeonIMU(new WPI_TalonSRX(PIGEON_CONNECTED_PORT));
     gyro.setYaw(0);
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));

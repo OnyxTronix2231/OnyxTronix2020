@@ -1,5 +1,11 @@
 package robot.shooter;
 
+import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE_CM;
+import static robot.shooter.ShooterConstants.MIN_FIRST_RANGE_CM;
+import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE_CM;
+import static robot.shooter.ShooterConstants.SPEED_FIRST;
+import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
+import static robot.shooter.ShooterConstants.SPEED_THIRD;
 import static robot.shooter.ShooterConstants.ShooterComponents.*;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
@@ -68,5 +74,17 @@ public class Shooter extends SubsystemBase {
 
   public boolean isOnTarget() {
     return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
+  }
+
+  public int distanceToVelocity(final double distance){
+    if (distance > MIN_THIRD_RANGE_CM) {
+      return SPEED_THIRD;
+    } else if (distance > MAX_FIRST_RANGE_CM && distance < MIN_THIRD_RANGE_CM) {
+      return SPEED_MIDDLE;
+    } else if (distance > MIN_FIRST_RANGE_CM){
+      return SPEED_FIRST;
+    } else {
+      return 0;
+    }
   }
 }

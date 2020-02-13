@@ -8,4 +8,6 @@ public class BallStopperConstants {
     static final int CONTINUOUS_CURRENT_LIMIT = 20; //TODO check and change
     static final int PEAK_AMP = 40; //TODO check and change
   }
+
+  static final double PERCENTAGE_OUTPUT = 0.8;
 }

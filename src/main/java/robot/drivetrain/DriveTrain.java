@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final BasicDriveTrainComponentsA components;
+  private final DriveTrainComponents components;
 
-  public DriveTrain(final BasicDriveTrainComponentsA components) {
+  public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
   }
 

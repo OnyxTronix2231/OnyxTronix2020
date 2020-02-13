@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.*;
 
-public class BasicBallStopperComponents implements BallStopperComponents {
+public class BasicBallStopperComponentsA implements BallStopperComponents {
 
   private final WPI_TalonSRX motor;
 
-  public BasicBallStopperComponents() {
+  public BasicBallStopperComponentsA() {
     motor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     motor.configFactoryDefault();
     motor.configAllSettings(getConfiguration());

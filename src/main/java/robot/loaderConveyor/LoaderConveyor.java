@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LoaderConveyor extends SubsystemBase {
 
-  private final BasicLoaderConveyorComponentsA components;
+  private final LoaderConveyorComponents components;
 
   public LoaderConveyor(final BasicLoaderConveyorComponentsA components) {
     this.components = components;

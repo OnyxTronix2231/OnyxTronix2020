@@ -9,6 +9,7 @@ import static robot.climber.ClimberConstants.ClimberComponentsA.RIGHT_DOUBLE_SOL
 import static robot.climber.ClimberConstants.ClimberComponentsA.SLAVE_MOTOR_PORT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_CURRENT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_TIME;
+
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -63,6 +64,7 @@ public class BasicClimberComponentsA implements ClimberComponents {
   public DoubleSolenoid getRightDoubleSolenoid() {
     return rightDoubleSolenoid;
   }
+
   private TalonFXConfiguration getFalconConfiguration() {
     final TalonFXConfiguration config = new TalonFXConfiguration();
     return config;

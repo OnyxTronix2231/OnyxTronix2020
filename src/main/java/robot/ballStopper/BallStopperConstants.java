@@ -7,6 +7,5 @@ public class BallStopperConstants {
     public static final int PEAK_AMP_DURATION = 0; //TODO check and change
     public static final int CONTINUOUS_CURRENT_LIMIT = 20; //TODO check and change
     public static final int PEAK_AMP = 40; //TODO check and change
-
   }
 }

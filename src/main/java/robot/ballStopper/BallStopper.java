@@ -16,4 +16,3 @@ public class BallStopper {
     moveBallStopperBySpeed(0);
   }
 }
-

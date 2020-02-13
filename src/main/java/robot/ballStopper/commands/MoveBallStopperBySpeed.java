@@ -23,5 +23,4 @@ public class MoveBallStopperBySpeed extends CommandBase {
   public void end(final boolean interrupted) {
     ballStopper.stopMotor();
   }
-
 }

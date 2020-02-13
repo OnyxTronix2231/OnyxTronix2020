@@ -32,8 +32,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveByMotionMagic(final double distance) {
-    moveMotorByMotionMagic(distance, getLeftMaster());
-    moveMotorByMotionMagic(distance, getRightMaster());
+    moveMotorByMotionMagic(getLeftMaster(), distance);
+    moveMotorByMotionMagic(getLeftMaster(), distance);
   }
 
   public double getLeftDistance() {
@@ -54,7 +54,7 @@ public class DriveTrain extends SubsystemBase {
     selectProfileSlot(getRightMaster());
   }
 
-  private void moveMotorByMotionMagic(final double distance, final TalonFX motor) {
+  private void moveMotorByMotionMagic(final TalonFX motor,final double distance) {
     motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }

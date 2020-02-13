@@ -46,6 +46,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
     rightSlave = new WPI_TalonFX(RIGHT_SLAVE_PORT);
     rightSlave.configFactoryDefault();
+    rightSlave.configAllSettings(getFalconConfiguration());
     rightSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     rightSlave.setInverted(true);
     rightSlave.setNeutralMode(NeutralMode.Brake);
@@ -59,6 +60,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
     leftSlave = new WPI_TalonFX(LEFT_SLAVE_PORT);
     leftSlave.configFactoryDefault();
+    leftSlave.configAllSettings(getFalconConfiguration());
     leftSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);

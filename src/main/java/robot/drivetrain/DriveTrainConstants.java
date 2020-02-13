@@ -1,7 +1,11 @@
 package robot.drivetrain;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+
+import java.util.List;
 
 public final class DriveTrainConstants {
 
@@ -69,4 +73,46 @@ public final class DriveTrainConstants {
   static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
   static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
 
+  static final List<Pose2d> PATH_1 = List.of(
+      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
+      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(6.1, 4.5, Rotation2d.fromDegrees(40)),
+      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
+      new Pose2d(5.7, 3.7, Rotation2d.fromDegrees(-140)),
+      new Pose2d(3.2, 4.2, Rotation2d.fromDegrees(-100))
+  );
+
+  static final List<Pose2d> PATH_2 = List.of(
+      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
+      new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
+  );
+
+  static final List<Pose2d> PATH_3 = List.of(
+      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180)),
+      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
+      new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
+  );
+
+
+  static final List<Pose2d> PATH_4 = List.of(
+      new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0)),
+      new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
+      new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
+      new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
+  );
+
+  static final List<Pose2d> PATH_5 = List.of(
+      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
+      new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
+      new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
+  );
+
+  static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
 }

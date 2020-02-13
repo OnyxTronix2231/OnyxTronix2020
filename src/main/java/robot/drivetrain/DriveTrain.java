@@ -9,15 +9,16 @@ import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_ANGLE;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_X;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponents.ODOMETRY_TARGET_Y;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.TRAJECTORY_PID_SLOT;
+import static robot.drivetrain.DriveTrainConstants.PATHS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.FEED_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.TRAJECTORY_PARAMS.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -29,20 +30,37 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import java.util.List;
-import java.util.function.DoubleSupplier;
 
 public class DriveTrain extends SubsystemBase {
 
   private final BasicDriveTrainComponents components;
+  private final SendableChooser<Integer> pathChooser = new SendableChooser<>();
+
 
   public DriveTrain(final BasicDriveTrainComponents components) {
     this.components = components;
     resetEncoders();
+
+    pathChooser.setDefaultOption("Auto1", 1);
+    pathChooser.addOption("Auto2", 2);
+    pathChooser.addOption("Auto3", 3);
+    pathChooser.addOption("Auto4", 4);
+    pathChooser.addOption("Auto5", 5);
+    Shuffleboard.enableActuatorWidgets();
+
+    Shuffleboard.getTab("Odometry").add("Target X:", 1).getEntry().addListener(
+        x -> setOdometryTargetX(x.value.getDouble()), EntryListenerFlags.kUpdate);
+    Shuffleboard.getTab("Odometry").add("Target Y:", 0).getEntry().addListener(
+        y -> setOdometryTargetY(y.value.getDouble()), EntryListenerFlags.kUpdate);
+    Shuffleboard.getTab("Odometry").add("Target Angle:", 0).getEntry().addListener(
+        angle -> setOdometryTargetAngle(angle.value.getDouble()), EntryListenerFlags.kUpdate);
+
+    Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
+    System.out.println(pathChooser.getSelected());
   }
 
   @Override
@@ -98,6 +116,12 @@ public class DriveTrain extends SubsystemBase {
     return getTargetFromDistance(getLeftMaster(), distance);
   }
 
+  public List<Pose2d> getPath() {
+    if (getAutonomousPath() > 5 || getAutonomousPath() < 1)
+      return getPoseFromVision();
+    return PATHS.get(getAutonomousPath());
+  }
+
   private void moveMotorByMotionMagic(final TalonFX motor, final double target) {
     motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
     motor.set(ControlMode.MotionMagic, target, DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
@@ -132,15 +156,23 @@ public class DriveTrain extends SubsystemBase {
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
   }
 
-  public void setOdometryTargetX(final double x) {
+  private int getAutonomousPath() {
+    return pathChooser.getSelected();
+  }
+
+  private List<Pose2d> getPoseFromVision() {
+    return List.of(new Pose2d());
+  }
+
+  private void setOdometryTargetX(final double x) {
     ODOMETRY_TARGET_X = x;
   }
 
-  public void setOdometryTargetY(final double y) {
+  private void setOdometryTargetY(final double y) {
     ODOMETRY_TARGET_Y = y;
   }
 
-  public void setOdometryTargetAngle(final double angle) {
+  private void setOdometryTargetAngle(final double angle) {
     ODOMETRY_TARGET_ANGLE = angle;
   }
 

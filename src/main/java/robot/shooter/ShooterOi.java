@@ -22,7 +22,7 @@ public class ShooterOi {
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));
 
     final Trigger closePiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
-    closeSolenoid.whileActiveOnce(new CloseShooterPiston(shooter));
+    closePiston.whileActiveOnce(new CloseShooterPiston(shooter));
 
   }
 }

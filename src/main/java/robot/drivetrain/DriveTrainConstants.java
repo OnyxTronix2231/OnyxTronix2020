@@ -26,7 +26,6 @@ public final class DriveTrainConstants {
   static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double ENCODER_UNITS = 1023.0;
-  static final int PRIMARY_PID = 0; //TODO change
   static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required

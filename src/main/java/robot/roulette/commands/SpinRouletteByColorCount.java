@@ -29,7 +29,5 @@ public class SpinRouletteByColorCount extends SpinRouletteToColor {
             colorsRequired = Math.copySign(Math.abs(colorsRequired) - 1, colorsRequired);
         }
         super.execute();
-        System.out.println("Req: " + colorsRequired);
-
     }
 }

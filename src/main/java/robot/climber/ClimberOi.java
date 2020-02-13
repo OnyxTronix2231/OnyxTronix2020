@@ -15,14 +15,19 @@ public class ClimberOi {
 
   public ClimberOi(final UniqueButtonCache driverJoystickButtonCache,
                    final UniqueAxisCache driverJoystickAxisCache, final Climber climber) {
-    final JoystickAxis climbBySpeedAxis =
-        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightY.value);
-    climbBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbBySpeedAxis::getRawAxis));
+    final JoystickAxis climbUpBySpeedAxis =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+    climbUpBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber, climbUpBySpeedAxis::getRawAxis));
 
-    final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kY.value);
+    final JoystickAxis climbDownBySpeedAxis =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
+    climbUpBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber,
+        ()-> -climbDownBySpeedAxis.getRawAxis()));
+
+    final Trigger openDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
     openDoubleSolenoidsButton.whenActive(new OpenPistons(climber));
 
-    final Trigger closeDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kX.value);
+    final Trigger closeDoubleSolenoidsButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
     closeDoubleSolenoidsButton.whenActive(new ClosePistons(climber));
   }
 }

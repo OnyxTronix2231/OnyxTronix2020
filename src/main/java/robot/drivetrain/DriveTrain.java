@@ -8,7 +8,6 @@ import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PRIMARY_PID;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -54,7 +53,7 @@ public class DriveTrain extends SubsystemBase {
     selectProfileSlot(getRightMaster());
   }
 
-  private void moveMotorByMotionMagic(final TalonFX motor,final double distance) {
+  private void moveMotorByMotionMagic(final TalonFX motor, final double distance) {
     motor.set(ControlMode.MotionMagic, cmToEncoderUnits(distance) + motor.getSelectedSensorPosition(),
         DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }

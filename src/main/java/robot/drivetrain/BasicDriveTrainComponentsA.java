@@ -19,7 +19,6 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCIT
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
 import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
-
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -65,7 +64,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    final VelocityController leftVelocityController = new VelocityController(MAX_VELOCITY ,VELOCITY_CONTROLLER_PID_SLOT,
+    final VelocityController leftVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
         leftMaster);
     final VelocityController rightVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
         rightMaster);

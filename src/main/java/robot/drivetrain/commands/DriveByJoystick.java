@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import robot.drivetrain.DriveTrain;
 
 public class DriveByJoystick extends DriveBySpeed {
-  public DriveByJoystick(final DriveTrain driveTrain, final XboxController driveJoystick){
+  public DriveByJoystick(final DriveTrain driveTrain, final XboxController driveJoystick) {
     super(driveTrain, () -> -driveJoystick.getY(GenericHID.Hand.kLeft), () -> driveJoystick.getX(GenericHID.Hand.kRight));
   }
 }

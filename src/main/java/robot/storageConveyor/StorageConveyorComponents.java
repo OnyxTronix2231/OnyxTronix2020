@@ -1,4 +1,4 @@
-package robot.StorageConveyor;
+package robot.storageConveyor;
 
 import com.ctre.phoenix.motorcontrol.IMotorController;
 

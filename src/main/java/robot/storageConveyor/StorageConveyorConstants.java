@@ -1,4 +1,4 @@
-package robot.StorageConveyor;
+package robot.storageConveyor;
 
 public final class StorageConveyorConstants {
 

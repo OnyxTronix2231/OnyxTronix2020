@@ -3,6 +3,7 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_AMP_FOR_ONE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -37,5 +38,13 @@ public class Shooter extends SubsystemBase {
 
   public void closeShooterPiston() {
     components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
+  }
+
+  public double getAmp(){
+    return components.getMasterMotor().getStatorCurrent();
+  }
+
+  public boolean isBallShot(){
+    return getAmp() > MIN_AMP_FOR_ONE;
   }
 }

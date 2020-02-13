@@ -16,17 +16,17 @@ public class BallCollector extends SubsystemBase {
         Shuffleboard.getTab("ballCollector").addNumber("ballCounter", () -> ballCounter);
     }
 
-    public final void collectBySpeed(final double speed) {
-        components.getMasterMotor().set(speed);
-    }
+  public void collectBySpeed(final double speed) {
+    components.getMasterMotor().set(speed);
+  }
 
-    public final void stopMotor() {
-        collectBySpeed(0);
-    }
+  public void stopMotor() {
+    collectBySpeed(0);
+  }
 
-    public void openPistons() {
-        components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
-    }
+  public void openPistons() {
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+  }
 
     public void closePistons() {
         components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);

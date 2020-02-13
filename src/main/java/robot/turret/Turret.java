@@ -5,6 +5,8 @@ import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
 import static robot.turret.TurretConstants.FLIP_POINT;
 import static robot.turret.TurretConstants.MAX_ANGLE;
 import static robot.turret.TurretConstants.MIN_ANGLE;
+import static robot.turret.TurretConstants.REVERTED_MAX_ANGLE;
+import static robot.turret.TurretConstants.REVERTED_MIN_ANGLE;
 import static robot.turret.TurretConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -34,9 +36,9 @@ public class Turret extends SubsystemBase {
       tempAngle = MAX_ANGLE;
     } else if (tempAngle > FLIP_POINT && getAngleRTR() >= MAX_ANGLE) {
       tempAngle = MIN_ANGLE;
-    } else if (tempAngle > MAX_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
+    } else if (tempAngle >= REVERTED_MIN_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
       tempAngle -= DEGREES_IN_CIRCLE;
-    } else if (tempAngle < MIN_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
+    } else if (tempAngle < REVERTED_MAX_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
       tempAngle += DEGREES_IN_CIRCLE;
     }
 

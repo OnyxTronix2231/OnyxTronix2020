@@ -1,5 +1,8 @@
 package robot.climber;
 
+import static robot.climber.ClimberConstants.CLOSE_SOLENOID_VALUE;
+import static robot.climber.ClimberConstants.OPEN_SOLENOID_VALUE;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,10 +23,10 @@ public class Climber extends SubsystemBase {
   }
 
   public void closePistons() {
-    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kReverse);
+    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
   }
 
   public void openPistons() {
-    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
   }
 }

@@ -9,8 +9,6 @@ public final class ShooterConstants {
     static final int SLAVE_PORT = 5;//TODO check and change
     static final int DOUBLE_SOLENOID_FOWARD_PORT = 4;//TODO check ang change!!!!!
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 5;//TODO check ang change!!!!!
-    static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
-    static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
     static final int PEAK_AMP = 40;//TODO check and change
     static final int PEAK_AMP_DURATION = 10;//TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
@@ -29,6 +27,8 @@ public final class ShooterConstants {
   static final int MIN_FIRST_RANGE_CM = 250; //TODO check and change very important meters
   static final int MIN_THIRD_RANGE_CM = 750; //TODO check and change very important meters
   static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
+  static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
+  static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
   static final double SPEED_FIRST = 35000; //TODO check and change very important meters
   static final double SPEED_MIDDLE = 36000; //TODO check and change very important meters
   static final double SPEED_THIRD = 38000; //TODO check and change very important meters

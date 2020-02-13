@@ -3,6 +3,7 @@ package robot.shooter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.UniqueAxisCache;
+import robot.shooter.commands.ShootBxySpeed;
 import onyxTronix.UniqueButtonCache;
 import robot.shooter.commands.CloseSolenoid;
 import robot.shooter.commands.OpenSolenoid;
@@ -11,6 +12,10 @@ import static robot.shooter.ShooterConstants.PERECENT_OUT_PUT;
 
 public class ShooterOi {
 
+    public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache, final Shooter shooter) {
+      final JoystickAxis shootBySpeedAxis =
+          buttonJoystickAxisCache.createJoystickTrigger(XboxController.Button.kX.value);
+      shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter,  ()-> PERECENT_OUT_PUT));
     public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
                            UniqueButtonCache buttonsJoystickButtonCache, final Shooter shooter) {
       final Trigger shootBySpeedAxis =

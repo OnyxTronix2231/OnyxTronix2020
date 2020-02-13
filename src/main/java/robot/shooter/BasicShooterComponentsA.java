@@ -1,6 +1,6 @@
 package robot.shooter;
 
-import static robot.shooter.ShooterConstants.ShooterComponents.*;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.*;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -10,13 +10,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class BasicShooterComponents implements ShooterComponents {
+public class BasicShooterComponentsA implements ShooterComponents {
 
   private final WPI_TalonSRX masterMotor;
   private final WPI_VictorSPX slaveMotor;
   private final DoubleSolenoid doubleSolenoid;
 
-  public BasicShooterComponents() {
+  public BasicShooterComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_PORT);
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());

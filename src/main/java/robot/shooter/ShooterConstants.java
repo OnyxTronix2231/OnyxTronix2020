@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public final class ShooterConstants {
 
-  public static final class ShooterComponents {
+  public static final class ShooterComponentsA {
     static final int MASTER_PORT = 4;//TODO check and change
     static final int SLAVE_PORT = 5;//TODO check and change
     static final int DOUBLE_SOLENOID_FOWARD_PORT = 26;//TODO check ang change!!!!!

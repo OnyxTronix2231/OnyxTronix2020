@@ -26,6 +26,7 @@ public final class ShooterConstants {
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 4;
   }
 
+  static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
   public static final int MAX_FIRST_RANGE_CM = 550; //TODO check and change very important meters

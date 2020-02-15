@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.Commands.MoveBallStopperBySpeed;
 import robot.loaderConveyor.LoaderConveyor;
-import robot.loaderConveyor.commands.MoveLoaderByVelocityWhitoutEnd;
+import robot.loaderConveyor.commands.MoveLoaderByVelocityWithoutEnd;
 import robot.loaderConveyor.commands.WaitUntilLoaderVelocityOnTarget;
 import robot.shooter.Shooter;
 import robot.shooter.commands.ShootByVelocityWithoutEnd;
@@ -27,6 +27,6 @@ public class ShootWithBallStopperTriggerWithoutShooterOnTarget extends ParallelC
                 new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
                 new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier)).withTimeout(0.5))),
         new ShootByVelocityWithoutEnd(shooter, velocitySupplier),
-        new MoveLoaderByVelocityWhitoutEnd(loaderConveyor, velocitySupplier));
+        new MoveLoaderByVelocityWithoutEnd(loaderConveyor, velocitySupplier));
   }
 }

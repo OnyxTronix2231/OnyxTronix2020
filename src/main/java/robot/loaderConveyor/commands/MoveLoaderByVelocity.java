@@ -3,7 +3,7 @@ package robot.loaderConveyor.commands;
 import robot.loaderConveyor.LoaderConveyor;
 import java.util.function.DoubleSupplier;
 
-public class MoveLoaderByVelocity extends MoveLoaderByVelocityWhitoutEnd {
+public class MoveLoaderByVelocity extends MoveLoaderByVelocityWithoutEnd {
 
   private final LoaderConveyor loaderConveyor;
 

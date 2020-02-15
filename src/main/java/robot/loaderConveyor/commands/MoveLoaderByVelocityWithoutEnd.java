@@ -20,5 +20,4 @@ public class MoveLoaderByVelocityWithoutEnd extends CommandBase {
   public void execute() {
     loaderConveyor.setVelocity(velocitySupplier.getAsDouble());
   }
-
 }

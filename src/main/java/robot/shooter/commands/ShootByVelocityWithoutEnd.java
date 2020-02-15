@@ -21,5 +21,4 @@ public class ShootByVelocityWithoutEnd extends CommandBase {
     shooter.setVelocity(velocitySupplier.getAsDouble());
   }
 
-
 }

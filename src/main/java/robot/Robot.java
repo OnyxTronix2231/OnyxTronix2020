@@ -34,6 +34,10 @@ import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
 import robot.shooter.ShooterOi;
+import robot.storageConveyor.BasicStorageConveyorComponentsA;
+import robot.storageConveyor.StorageConveyor;
+import robot.storageConveyor.StorageConveyorComponents;
+import robot.storageConveyor.StorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
@@ -57,6 +61,7 @@ public class Robot extends TimedRobot {
     final ClimberComponents climberComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
+    final StorageConveyorComponents storageConveyorComponents;
     final TurretComponents turretComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
@@ -66,6 +71,7 @@ public class Robot extends TimedRobot {
       climberComponents = new BasicClimberComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
+      storageConveyorComponents = new BasicStorageConveyorComponentsA();
       turretComponents = new BasicTurretComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
@@ -74,6 +80,7 @@ public class Robot extends TimedRobot {
       climberComponents = null; //TODO: use BasicClimberComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
+      storageConveyorComponents = null; //TODO: use BasicStorageConveyorComponentsB Here
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
     }
 
@@ -94,6 +101,9 @@ public class Robot extends TimedRobot {
 
     final Shooter shooter = new Shooter(shooterComponents);
     new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
+
+    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
 
     final Turret turret = new Turret(turretComponents);
     new TurretOi(turret, buttonsJoystickAxisCache);

@@ -57,31 +57,31 @@ public class Robot extends TimedRobot {
 
     final DriveTrainComponents driveTrainComponents;
     final BallCollectorComponents ballCollectorComponents;
+    final StorageConveyorComponents storageConveyorComponents;
     final BallStopperComponents ballStopperComponents;
-    final ClimberComponents climberComponents;
+    final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
-    final StorageConveyorComponents storageConveyorComponents;
-    final TurretComponents turretComponents;
+    final ClimberComponents climberComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
       ballCollectorComponents = new BasicBallCollectorComponentsA();
+      storageConveyorComponents = new BasicStorageConveyorComponentsA();
       ballStopperComponents = new BasicBallStopperComponentsA();
-      climberComponents = new BasicClimberComponentsA();
+      turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
-      storageConveyorComponents = new BasicStorageConveyorComponentsA();
-      turretComponents = new BasicTurretComponentsA();
+      climberComponents = new BasicClimberComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
+      storageConveyorComponents = null; //TODO: use BasicStorageConveyorComponentsB Here
       ballStopperComponents = null; //TODO: use BasicBallStopperComponentsB Here
-      climberComponents = null; //TODO: use BasicClimberComponentsB Here
+      turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
-      storageConveyorComponents = null; //TODO: use BasicStorageConveyorComponentsB Here
-      turretComponents = null;  //TODO: use BasicTurretComponentsB Here
+      climberComponents = null; //TODO: use BasicClimberComponentsB Here
     }
 
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
@@ -90,11 +90,14 @@ public class Robot extends TimedRobot {
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
     new BallCollectorOi(ballCollector, driveJoystickAxisCache, driveJoystickButtonCache);
 
+    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
+
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     new BallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
-    final Climber climber = new Climber(climberComponents);
-    new ClimberOi(driveJoystickButtonCache, buttonsJoystickAxisCache, climber);
+    final Turret turret = new Turret(turretComponents);
+    new TurretOi(turret, buttonsJoystickAxisCache);
 
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new LoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
@@ -102,11 +105,8 @@ public class Robot extends TimedRobot {
     final Shooter shooter = new Shooter(shooterComponents);
     new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
-    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
-
-    final Turret turret = new Turret(turretComponents);
-    new TurretOi(turret, buttonsJoystickAxisCache);
+    final Climber climber = new Climber(climberComponents);
+    new ClimberOi(driveJoystickButtonCache, buttonsJoystickAxisCache, climber);
   }
 
   @Override

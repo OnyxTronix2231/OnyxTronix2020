@@ -2,7 +2,7 @@ package robot;
 
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
-import static robot.RobotConstants.ROBOT_NAME;
+import static robot.RobotConstants.ROBOT_TYPE;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
     final ShooterComponents shooterComponents;
     final TurretComponents turretComponents;
 
-    if (ROBOT_NAME == RobotName.A) {
+    if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
       ballCollectorComponents = new BasicBallCollectorComponentsA();
       ballStopperComponents = new BasicBallStopperComponentsA();

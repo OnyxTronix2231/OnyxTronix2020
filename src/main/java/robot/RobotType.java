@@ -1,6 +1,6 @@
 package robot;
 
-public enum RobotName {
+public enum RobotType {
   A,
   B
 }

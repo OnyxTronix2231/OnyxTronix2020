@@ -14,18 +14,16 @@ import robot.crossSubsystem.commands.SpinShooterAndLoaderByDistance;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.StopLoaderConveyor;
 import robot.shooter.Shooter;
-import robot.shooter.commands.ShootByLimelight;
 import robot.shooter.commands.StopShooter;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.VisionCalculations;
-import robot.vision.limelight.Limelight;
 import robot.vision.limelight.target.LimelightTarget;
 
 public class SmartShooterOi {
 
   public SmartShooterOi(final UniqueButtonCache driveJoystickButtonCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
-                        final StorageConveyor storageConveyor, final BallStopper ballStopper , final LimelightTarget target) {
+                        final StorageConveyor storageConveyor, final BallStopper ballStopper, final LimelightTarget target) {
     final JoystickButton loadingShooterByDistance =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
     loadingShooterByDistance.whenPressed(new SpinShooterAndLoaderByDistance(shooter, loaderConveyor,

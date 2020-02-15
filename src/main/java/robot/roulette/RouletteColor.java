@@ -1,6 +1,5 @@
 package robot.roulette;
 
-
 import static robot.roulette.RouletteConstants.BLUE_RGB_VALUE;
 import static robot.roulette.RouletteConstants.GREEN_RGB_VALUE;
 import static robot.roulette.RouletteConstants.RED_RGB_VALUE;

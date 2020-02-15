@@ -1,13 +1,26 @@
 package robot.roulette;
 
+import static robot.roulette.RouletteConstants.RouletteComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.MASTER_MOTOR_PORT;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.MAX_ACCELERATION;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.MAX_VELOCITY;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.MOTION_CURVE_STRENGTH;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.PEAK_AMP;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.PEAK_AMP_DURATION;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.VELOCITY_D;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.VELOCITY_I;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.VELOCITY_P;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.I2C;
-
-import static robot.roulette.RouletteConstants.RouletteComponentsA.*;
 
 public class BasicRouletteComponentsA implements RouletteComponents {
 

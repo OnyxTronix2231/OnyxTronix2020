@@ -30,4 +30,3 @@ public class ShootWithBallStopperTriggerWithoutShooterOnTarget extends ParallelC
         new MoveLoaderByVelocityWhitoutEnd(loaderConveyor, velocitySupplier));
   }
 }
-

@@ -14,6 +14,10 @@ public interface VisionTarget {
 
   double getDistance();
 
+  double getCameraOffset();
+
+  double getCameraHeight();
+
   double getX();
 
   double getY();

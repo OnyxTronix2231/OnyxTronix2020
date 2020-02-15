@@ -63,6 +63,16 @@ public class OuterTarget implements VisionTarget {
   }
 
   @Override
+  public double getCameraOffset() {
+    return cameraOffset;
+  }
+
+  @Override
+  public double getCameraHeight() {
+    return cameraHeight;
+  }
+
+  @Override
   public double getX() {
     return x;
   }

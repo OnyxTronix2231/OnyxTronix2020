@@ -8,19 +8,14 @@ import vision.limelight.target.LimelightTarget;
 
 public class InnerTarget implements VisionTarget {
 
-  private final double cameraOffset;
-  private final double cameraHeight;
   private double horizontalOffset;
   private double verticalOffset;
   private double orientation;
   private double distance;
-  private double x;
   private double y;
   private OuterTarget outerTarget;
 
-  InnerTarget(final double cameraOffset, final double cameraHeight, final OuterTarget target) {
-    this.cameraOffset = cameraOffset;
-    this.cameraHeight = cameraHeight;
+  InnerTarget(final OuterTarget target) {
     outerTarget = target;
     calculateByOuterTarget();
   }
@@ -32,13 +27,12 @@ public class InnerTarget implements VisionTarget {
   }
 
   private void calculateByOuterTarget() {
-    this.x = outerTarget.getX();
     this.y = outerTarget.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
-    this.orientation = Math.toDegrees(Math.atan(x / y));
-    this.distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-    this.horizontalOffset = outerTarget.getHorizontalOffset() - 90 + orientation;
+    this.orientation = Math.toDegrees(Math.atan(outerTarget.getX() / y));
+    this.distance = Math.sqrt(Math.pow(outerTarget.getX(), 2) + Math.pow(y, 2));
+    this.horizontalOffset = outerTarget.getHorizontalOffset() + orientation;
     this.verticalOffset = Math.toDegrees(Math.atan((
-        TARGET_HEIGHT_CM - cameraHeight + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
+        TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
   }
 
   @Override
@@ -62,8 +56,18 @@ public class InnerTarget implements VisionTarget {
   }
 
   @Override
+  public double getCameraOffset() {
+    return outerTarget.getCameraOffset();
+  }
+
+  @Override
+  public double getCameraHeight() {
+    return outerTarget.getCameraHeight();
+  }
+
+  @Override
   public double getX() {
-    return x;
+    return outerTarget.getX();
   }
 
   @Override

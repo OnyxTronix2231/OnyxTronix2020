@@ -14,10 +14,10 @@ import robot.ballCollector.commands.OpenBallCollectorPistons;
 public final class BallCollectorOi {
 
     public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driveJoystickAxisCache,
-                           UniqueButtonCache driverJoystickButtonCache, final CollectAndCount collectAndCount) {
+                           UniqueButtonCache driverJoystickButtonCache) {
         final JoystickAxis collectAndCountAxis =
                 driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-        collectAndCountAxis.whileActiveContinuous(new CollectCondition(collectAndCount, ballCollector));
+        collectAndCountAxis.whileActiveContinuous(new CollectCondition(new CollectAndCount(ballCollector, () -> 1), ballCollector));
 
     final Trigger openBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
         (XboxController.Button.kBumperRight.value);

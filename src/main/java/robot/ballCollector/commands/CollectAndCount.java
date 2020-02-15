@@ -13,7 +13,7 @@ public class CollectAndCount extends ParallelDeadlineGroup {
   private final DoubleSupplier speedSupplier;
 
   public CollectAndCount(final BallCollector ballCollector, final DoubleSupplier speedSupplier){
-    super(new CountBall(ballCollector), new CollectBallBySpeed(ballCollector, speedSupplier));
+    super(new CollectBallBySpeed(ballCollector, speedSupplier), new CountBall(ballCollector));
     this.ballCollector = ballCollector;
     this.speedSupplier = speedSupplier;
   }

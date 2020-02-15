@@ -62,7 +62,6 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
-    final ClimberComponents climberComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -72,7 +71,6 @@ public class Robot extends TimedRobot {
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
-      climberComponents = new BasicClimberComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -81,7 +79,6 @@ public class Robot extends TimedRobot {
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
-      climberComponents = null; //TODO: use BasicClimberComponentsB Here
     }
 
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
@@ -104,9 +101,6 @@ public class Robot extends TimedRobot {
 
     final Shooter shooter = new Shooter(shooterComponents);
     new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
-
-    final Climber climber = new Climber(climberComponents);
-    new ClimberOi(driveJoystickButtonCache, buttonsJoystickAxisCache, climber);
   }
 
   @Override

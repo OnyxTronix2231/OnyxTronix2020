@@ -8,15 +8,16 @@ import onyxTronix.UniqueTriggerCache;
 import robot.ballCollector.commands.CollectAndCount;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
+import robot.ballCollector.commands.CollectCondition;
 import robot.ballCollector.commands.OpenBallCollectorPistons;
 
 public final class BallCollectorOi {
 
     public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driveJoystickAxisCache,
-                           UniqueButtonCache driverJoystickButtonCache) {
-        final JoystickAxis collectBySpeedAxis =
+                           UniqueButtonCache driverJoystickButtonCache, final CollectAndCount collectAndCount) {
+        final JoystickAxis collectAndCountAxis =
                 driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-        collectBySpeedAxis.whileActiveContinuous(new CollectAndCount(ballCollector, () -> 1));
+        collectAndCountAxis.whileActiveContinuous(new CollectCondition(collectAndCount, ballCollector));
 
     final Trigger openBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
         (XboxController.Button.kBumperRight.value);

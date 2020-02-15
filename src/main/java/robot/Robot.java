@@ -9,9 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.drivetrain.BasicDriveTrainComponentsA;
-import robot.drivetrain.DriveTrain;
-import robot.drivetrain.commands.DriveByJoystick;
 
 public class Robot extends TimedRobot {
 
@@ -24,9 +21,6 @@ public class Robot extends TimedRobot {
     final XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
     final UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
     final UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
-
-    final DriveTrain driveTrain = new DriveTrain(new BasicDriveTrainComponentsA());
-    driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
   }
 
   @Override

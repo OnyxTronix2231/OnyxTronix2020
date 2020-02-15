@@ -63,8 +63,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
-    moveMotorByMotionMagic(getLeftMaster(), leftTarget);
-    moveMotorByMotionMagic(getRightMaster(), rightTarget);
+    initMotionProfileSlot(DRIVE_BY_DISTANCE_SLOT);
+    driveMotorByMotionMagic(getLeftMaster(), leftTarget);
+    driveMotorByMotionMagic(getRightMaster(), rightTarget);
   }
 
   public Pose2d getPose() {
@@ -80,8 +81,7 @@ public class DriveTrain extends SubsystemBase {
     final double leftFeedForwardVolts = FEED_FORWARD.calculate(leftVelocity, 0);
     final double rightFeedForwardVolts = FEED_FORWARD.calculate(rightVelocity, 0);
 
-    getLeftMaster().selectProfileSlot(TRAJECTORY_PID_SLOT, 0);
-    getRightMaster().selectProfileSlot(TRAJECTORY_PID_SLOT, 0);
+    initMotionProfileSlot(TRAJECTORY_PID_SLOT);
     getLeftMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(leftVelocity),
         DemandType.ArbitraryFeedForward, leftFeedForwardVolts / RobotController.getBatteryVoltage());
     getRightMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(rightVelocity),
@@ -106,13 +106,8 @@ public class DriveTrain extends SubsystemBase {
     components.getDifferentialDrive().stopMotor();
   }
 
-  private void moveMotorByMotionMagic(final TalonFX motor, final double target) {
-    motor.selectProfileSlot(DRIVE_BY_DISTANCE_SLOT, PRIMARY_PID);
+  private void driveMotorByMotionMagic(final TalonFX motor, final double target) {
     motor.set(ControlMode.MotionMagic, target, DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
-  }
-
-  private double getTargetFromDistance(final TalonFX motor, final double distance) {
-    return cmToEncoderUnits(distance) + motor.getSelectedSensorPosition();
   }
 
   private WPI_TalonFX getLeftMaster() {
@@ -121,6 +116,15 @@ public class DriveTrain extends SubsystemBase {
 
   private WPI_TalonFX getRightMaster() {
     return components.getRightMasterMotor();
+  }
+
+  private double getTargetFromDistance(final TalonFX motor, final double distance) {
+    return cmToEncoderUnits(distance) + motor.getSelectedSensorPosition();
+  }
+
+  private void initMotionProfileSlot(final int slot) {
+    components.getLeftMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
+    components.getRightMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
   }
 
   private double getLeftDistance() {

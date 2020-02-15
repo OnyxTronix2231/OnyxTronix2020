@@ -35,6 +35,6 @@ public class VisionTargetFactory {
   }
 
   private InnerTarget generateInnerTarget() {
-    return new InnerTarget(cameraOffset, cameraHeight, generateOuterTarget());
+    return new InnerTarget(generateOuterTarget());
   }
 }

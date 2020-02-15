@@ -38,7 +38,8 @@ public class SmartShooterOi {
     shootWithBallStopperByDistance.and(shootWithLoaderConveyorByDistance.negate()).
         whileActiveContinuous
             (new ShootWithBallStopperByDistance(shooter, loaderConveyor,
-                storageConveyor, ballStopper, () -> VisionCalculations.calculateDistance(target), () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED))
+                storageConveyor, ballStopper, () -> VisionCalculations.calculateDistance(target),
+                () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED))
         .whenInactive(new StopShooter(shooter).alongWith(new StopLoaderConveyor(loaderConveyor)));
     shootWithLoaderConveyorByDistance.and(shootWithBallStopperByDistance).whileActiveContinuous(
         new ShootWithLoaderConveyorByDistance(shooter, loaderConveyor,

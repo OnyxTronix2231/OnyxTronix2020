@@ -7,7 +7,8 @@ import robot.storageConveyor.StorageConveyor;
 
 import java.util.function.DoubleSupplier;
 
-public class ShootWithBallStopperByDistanceWithoutShooterOnTarget extends ShootWithBallStopperTriggerWithoutShooterOnTarget {
+public class ShootWithBallStopperByDistanceWithoutShooterOnTarget
+    extends ShootWithBallStopperTriggerWithoutShooterOnTarget {
   public ShootWithBallStopperByDistanceWithoutShooterOnTarget(Shooter shooter, LoaderConveyor loaderConveyor,
                                                               StorageConveyor storageConveyor,
                                                               BallStopper ballStopper, DoubleSupplier distanceSupplier,

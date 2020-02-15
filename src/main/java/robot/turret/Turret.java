@@ -36,7 +36,7 @@ public class Turret extends SubsystemBase {
       tempAngle = MIN_ANGLE;
     } else if (tempAngle >= REVERTED_MIN_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
       tempAngle -= DEGREES_IN_CIRCLE;
-    } else if (tempAngle < REVERTED_MAX_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
+    } else if (tempAngle <= REVERTED_MAX_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
       tempAngle += DEGREES_IN_CIRCLE;
     }
 

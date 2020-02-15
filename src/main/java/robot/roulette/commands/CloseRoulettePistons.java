@@ -14,6 +14,6 @@ public class CloseRoulettePistons extends InstantCommand {
 
     @Override
     public void initialize() {
-        roulette.closeDoubleSolenoid();
+        roulette.closePistons();
     }
 }

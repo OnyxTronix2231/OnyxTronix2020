@@ -14,6 +14,6 @@ public class OpenRoulettePistons extends InstantCommand {
 
     @Override
     public void initialize() {
-        roulette.openDoubleSolenoid();
+        roulette.openPistons();
     }
 }

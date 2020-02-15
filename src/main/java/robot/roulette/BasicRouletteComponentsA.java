@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.I2C;
 
 import static robot.roulette.RouletteConstants.RouletteComponentsA.*;
 
-public class BasicARouletteComponents implements RouletteComponents {
+public class BasicRouletteComponentsA implements RouletteComponents {
 
     private final WPI_TalonSRX masterMotor;
     private final DoubleSolenoid doubleRightSolenoid;
     private final DoubleSolenoid doubleLeftSolenoid;
     private final ColorSensorV3 colorSensorV3;
 
-    public BasicARouletteComponents() {
+    public BasicRouletteComponentsA() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
         masterMotor.configFactoryDefault();
         masterMotor.configAllSettings(getConfiguration());

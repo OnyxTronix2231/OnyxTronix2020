@@ -10,12 +10,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.DoubleSupplier;
 
 
 public class Roulette extends SubsystemBase {
@@ -29,16 +27,16 @@ public class Roulette extends SubsystemBase {
         this.rouletteColors = Arrays.asList(RouletteColor.values());
     }
 
-    public void moveRouletteBySpeed(final DoubleSupplier speedSupplier) {
-        components.getMasterMotor().set(speedSupplier.getAsDouble());
+    public void moveRouletteBySpeed(final double speed) {
+        components.getMasterMotor().set(speed);
     }
 
-    public void openDoubleSolenoid() {
+    public void openPistons() {
         components.getDoubleRightSolenoid().set(DoubleSolenoid.Value.kForward);
         components.getDoubleLeftSolenoid().set(DoubleSolenoid.Value.kForward);
     }
 
-    public void closeDoubleSolenoid() {
+    public void closePistons() {
         components.getDoubleRightSolenoid().close();
         components.getDoubleLeftSolenoid().close();
     }
@@ -77,7 +75,7 @@ public class Roulette extends SubsystemBase {
     }
 
     public void stopMotor() {
-        moveRouletteBySpeed(() -> 0);
+        moveRouletteBySpeed(0);
     }
 
     public void spinByColorsCount(final double requiredColorCount) {
@@ -100,8 +98,7 @@ public class Roulette extends SubsystemBase {
     public double getColorCountRequiredToColor(final RouletteColor requiredColor) {
         int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
         int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
-        int colorDistance = indexOfRequiredColor - indexOfCurrentColor;
-        colorDistance = Math.abs(colorDistance);
+        int colorDistance = Math.abs(indexOfRequiredColor - indexOfCurrentColor);
         return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
     }
 

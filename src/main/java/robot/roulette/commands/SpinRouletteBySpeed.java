@@ -18,7 +18,7 @@ public class SpinRouletteBySpeed extends CommandBase {
 
     @Override
     public void execute() {
-        roulette.moveRouletteBySpeed(speedSupplier);
+        roulette.moveRouletteBySpeed(speedSupplier.getAsDouble());
     }
 
     @Override

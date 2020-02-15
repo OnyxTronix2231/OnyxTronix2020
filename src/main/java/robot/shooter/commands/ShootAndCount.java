@@ -9,10 +9,10 @@ import java.util.function.DoubleSupplier;
 public class ShootAndCount extends ParallelCommandGroup {
 
   private final Shooter shooter;
-  private final DoubleSupplier velocitySupplier;
   private final BallCollector ballCollector;
+  private final DoubleSupplier velocitySupplier;
 
-  public ShootAndCount(final Shooter shooter, final DoubleSupplier velocitySupplier, final BallCollector ballCollector){
+  public ShootAndCount(final Shooter shooter, final BallCollector ballCollector, final DoubleSupplier velocitySupplier){
     this.shooter = shooter;
     this.velocitySupplier = velocitySupplier;
     this.ballCollector = ballCollector;

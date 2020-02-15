@@ -19,6 +19,10 @@ public class ShootByVelocity extends CommandBase {
     addRequirements(shooter);
   }
 
+  @Override
+  public void initialize() {
+    shooter.configVelocitySlot();
+  }
 
   @Override
   public void execute() {
@@ -26,12 +30,12 @@ public class ShootByVelocity extends CommandBase {
   }
 
   @Override
-  public void end(final boolean interrupted) {
-    shooter.stopMotor();
+  public boolean isFinished() {
+    return velocitySupplier.getAsDouble() == 0;
   }
 
   @Override
-  public boolean isFinished() {
-    return velocitySupplier.getAsDouble() == 0;
+  public void end(final boolean interrupted) {
+    shooter.stopMotor();
   }
 }

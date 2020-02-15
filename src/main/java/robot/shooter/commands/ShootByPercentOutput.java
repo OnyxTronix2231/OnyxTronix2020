@@ -7,8 +7,8 @@ import java.util.function.DoubleSupplier;
 
 public class ShootByPercentOutput extends CommandBase {
 
-  private final DoubleSupplier speedSupplier;
   private final Shooter shooter;
+  private final DoubleSupplier speedSupplier;
 
   public ShootByPercentOutput(final Shooter shooter, final DoubleSupplier speedSupplier) {
     this.shooter = shooter;

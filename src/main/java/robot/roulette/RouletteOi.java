@@ -1,5 +1,7 @@
 package robot.roulette;
 
+import static robot.roulette.RouletteConstants.SPIN_ROTATIONS_SPEED;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.UniqueButtonCache;
@@ -18,6 +20,6 @@ public class RouletteOi {
     spinRouletteByColorExist.whenActive(new SpinRouletteToColorIfExists(roulette));
 
     final JoystickButton spinRouletteByColorCount = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-    spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> 8));
+    spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> SPIN_ROTATIONS_SPEED));
   }
 }

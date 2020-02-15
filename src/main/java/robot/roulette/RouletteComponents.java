@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public interface RouletteComponents {
 
-    WPI_TalonSRX getMasterMotor();
+  WPI_TalonSRX getMasterMotor();
 
-    DoubleSolenoid getDoubleLeftSolenoid();
+  DoubleSolenoid getDoubleLeftSolenoid();
 
-    DoubleSolenoid getDoubleRightSolenoid();
+  DoubleSolenoid getDoubleRightSolenoid();
 
-    ColorSensorV3 getColorSensorV3();
+  ColorSensorV3 getColorSensorV3();
 }

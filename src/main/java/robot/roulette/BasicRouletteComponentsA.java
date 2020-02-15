@@ -11,59 +11,59 @@ import static robot.roulette.RouletteConstants.RouletteComponentsA.*;
 
 public class BasicRouletteComponentsA implements RouletteComponents {
 
-    private final WPI_TalonSRX masterMotor;
-    private final DoubleSolenoid doubleRightSolenoid;
-    private final DoubleSolenoid doubleLeftSolenoid;
-    private final ColorSensorV3 colorSensorV3;
+  private final WPI_TalonSRX masterMotor;
+  private final DoubleSolenoid doubleRightSolenoid;
+  private final DoubleSolenoid doubleLeftSolenoid;
+  private final ColorSensorV3 colorSensorV3;
 
-    public BasicRouletteComponentsA() {
-        masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
-        masterMotor.configFactoryDefault();
-        masterMotor.configAllSettings(getConfiguration());
-        masterMotor.setNeutralMode(NeutralMode.Brake);
-        masterMotor.enableCurrentLimit(true);
-        masterMotor.setSensorPhase(true);
+  public BasicRouletteComponentsA() {
+    masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
+    masterMotor.configFactoryDefault();
+    masterMotor.configAllSettings(getConfiguration());
+    masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.enableCurrentLimit(true);
+    masterMotor.setSensorPhase(true);
 
-        doubleLeftSolenoid = new DoubleSolenoid
-                (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
+    doubleLeftSolenoid = new DoubleSolenoid
+        (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
 
-        doubleRightSolenoid = new DoubleSolenoid
-                (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL, DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
+    doubleRightSolenoid = new DoubleSolenoid
+        (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL, DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
-        colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
-    }
+    colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
+  }
 
-    private TalonSRXConfiguration getConfiguration() {
-        TalonSRXConfiguration config = new TalonSRXConfiguration();
-        config.slot0.kP = VELOCITY_P;
-        config.slot0.kI = VELOCITY_I;
-        config.slot0.kD = VELOCITY_D;
-        config.motionCruiseVelocity = MAX_VELOCITY;
-        config.motionAcceleration = MAX_ACCELERATION;
-        config.motionCurveStrength = MOTION_CURVE_STRENGTH;
-        config.peakCurrentLimit = PEAK_AMP;
-        config.peakCurrentDuration = PEAK_AMP_DURATION;
-        config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
-        return config;
-    }
+  private TalonSRXConfiguration getConfiguration() {
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    config.slot0.kP = VELOCITY_P;
+    config.slot0.kI = VELOCITY_I;
+    config.slot0.kD = VELOCITY_D;
+    config.motionCruiseVelocity = MAX_VELOCITY;
+    config.motionAcceleration = MAX_ACCELERATION;
+    config.motionCurveStrength = MOTION_CURVE_STRENGTH;
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    return config;
+  }
 
-    @Override
-    public WPI_TalonSRX getMasterMotor() {
-        return masterMotor;
-    }
+  @Override
+  public WPI_TalonSRX getMasterMotor() {
+    return masterMotor;
+  }
 
-    @Override
-    public DoubleSolenoid getDoubleRightSolenoid() {
-        return doubleRightSolenoid;
-    }
+  @Override
+  public DoubleSolenoid getDoubleRightSolenoid() {
+    return doubleRightSolenoid;
+  }
 
-    @Override
-    public DoubleSolenoid getDoubleLeftSolenoid() {
-        return doubleLeftSolenoid;
-    }
+  @Override
+  public DoubleSolenoid getDoubleLeftSolenoid() {
+    return doubleLeftSolenoid;
+  }
 
-    @Override
-    public ColorSensorV3 getColorSensorV3() {
-        return colorSensorV3;
-    }
+  @Override
+  public ColorSensorV3 getColorSensorV3() {
+    return colorSensorV3;
+  }
 }

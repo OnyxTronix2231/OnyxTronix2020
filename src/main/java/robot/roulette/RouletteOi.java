@@ -9,15 +9,15 @@ import robot.roulette.commands.SpinRouletteToColorIfExists;
 
 public class RouletteOi {
 
-    public RouletteOi(final Roulette roulette, final UniqueButtonCache buttonsJoystickButtonCache) {
+  public RouletteOi(final Roulette roulette, final UniqueButtonCache buttonsJoystickButtonCache) {
 
-        final JoystickButton togglePistons = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
-        togglePistons.whenActive(new CloseRoulettePistons(roulette));
+    final JoystickButton togglePistons = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
+    togglePistons.whenActive(new CloseRoulettePistons(roulette));
 
-        final JoystickButton spinRouletteByColorExist = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
-        spinRouletteByColorExist.whenActive(new SpinRouletteToColorIfExists(roulette));
+    final JoystickButton spinRouletteByColorExist = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
+    spinRouletteByColorExist.whenActive(new SpinRouletteToColorIfExists(roulette));
 
-        final JoystickButton spinRouletteByColorCount = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-        spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> 8));
-    }
+    final JoystickButton spinRouletteByColorCount = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
+    spinRouletteByColorCount.whenPressed(new SpinRouletteByColorCount(roulette, () -> 8));
+  }
 }

@@ -1,6 +1,6 @@
 package robot.roulette;
 
-public final class RouletteConstants {
+public final class /**/RouletteConstants {
 
   public static final class RouletteComponentsA {
 

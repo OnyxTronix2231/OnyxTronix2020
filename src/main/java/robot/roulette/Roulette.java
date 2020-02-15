@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.DoubleSupplier;
 
-
 public class Roulette extends SubsystemBase {
 
     private final RouletteComponents components;

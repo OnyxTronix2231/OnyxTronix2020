@@ -1,12 +1,20 @@
 package robot.turret;
 
+import static robot.turret.TurretConstants.TurretComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.turret.TurretConstants.TurretComponentsA.MASTER_MOTOR_PORT;
+import static robot.turret.TurretConstants.TurretComponentsA.MAX_ACCELERATION;
+import static robot.turret.TurretConstants.TurretComponentsA.MAX_VELOCITY;
+import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP;
+import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP_DURATION;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_D;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_F;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_I;
+import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_P;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import static robot.turret.TurretConstants.TurretComponentsA.*;
 
 public class BasicTurretComponentsA implements TurretComponents {
 

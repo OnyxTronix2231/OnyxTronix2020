@@ -21,7 +21,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents {
 
     private final WPI_TalonSRX masterMotor;
-    private final WPI_VictorSPX slaveMotor;
 
     public BasicLoaderConveyorComponentsA() {
         masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -30,22 +29,11 @@ public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents 
         masterMotor.setNeutralMode(NeutralMode.Brake);
         masterMotor.enableCurrentLimit(true);
         masterMotor.setInverted(true);
-
-        slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
-        slaveMotor.configFactoryDefault();
-        slaveMotor.setNeutralMode(NeutralMode.Brake);
-        slaveMotor.follow(masterMotor);
-        slaveMotor.setInverted(true);
     }
 
     @Override
     public WPI_TalonSRX getMasterMotor() {
         return masterMotor;
-    }
-
-    @Override
-    public IMotorController getSlaveMotor() {
-        return slaveMotor;
     }
 
     private TalonSRXConfiguration getConfiguration() {

@@ -14,7 +14,6 @@ import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
 import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -78,8 +77,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveTrainVelocity(final double leftVelocity, final double rightVelocity) {
-    final double leftFeedForwardVolts = FEED_FORWARD.calculate(leftVelocity, 0);
-    final double rightFeedForwardVolts = FEED_FORWARD.calculate(rightVelocity, 0);
+    final double leftFeedForwardVolts = components.getMotorFeedForward().calculate(leftVelocity, 0);
+    final double rightFeedForwardVolts = components.getMotorFeedForward().calculate(rightVelocity, 0);
 
     initMotionProfileSlot(TRAJECTORY_PID_SLOT);
     getLeftMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(leftVelocity),
@@ -104,6 +103,10 @@ public class DriveTrain extends SubsystemBase {
 
   public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
+  }
+
+  public DriveTrainComponents getComponents() {
+    return components;
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {

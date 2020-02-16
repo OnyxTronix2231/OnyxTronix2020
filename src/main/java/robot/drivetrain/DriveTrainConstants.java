@@ -1,9 +1,7 @@
 package robot.drivetrain;
 
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 import java.util.List;
 
@@ -55,6 +53,7 @@ public final class DriveTrainConstants {
     public static final double RAMSETE_B = 2;
     public static final double RAMSETE_ZETA = 0.7;
     static final int TRAJECTORY_PID_SLOT = 1;
+    static final int DEGREES_IN_FULL_ROTATION = 360;
     static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
     static final double VOLTS = 0.365; // TODO: Calibration with A
     static final double VOLT_SECONDS_PER_METER = 0;
@@ -62,11 +61,7 @@ public final class DriveTrainConstants {
     static final double MAX_VOLTAGE = 10; // TODO: Calibration with A
     static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
     static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A
-    static final int DEGREES_IN_FULL_ROTATION = 360;
-    static final SimpleMotorFeedforward FEED_FORWARD =
-        new SimpleMotorFeedforward(VOLTS, VOLT_SECONDS_PER_METER, VOLT_SECONDS_SQUARED_PER_METER);
-    private static final double TRACKWIDTH_METERS = 0.679; // TODO: Calibration with A
-    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
+    static final double TRACKWIDTH_METERS = 0.679; // TODO: Calibration with A
   }
 
   static final class Paths {

@@ -25,6 +25,13 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_SPEED_METERS_PER_SECOND;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_VOLTAGE;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRACKWIDTH_METERS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLTS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLT_SECONDS_PER_METER;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLT_SECONDS_SQUARED_PER_METER;
 import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -36,10 +43,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import controllers.VelocityController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 
 public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
@@ -50,6 +61,10 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final DifferentialDrive differentialDrive;
   private final PigeonIMU gyro;
   private final DifferentialDriveOdometry odometry;
+  private final SimpleMotorFeedforward motorFeedforward;
+  private final DifferentialDriveKinematics driveKinematics;
+  private final DifferentialDriveVoltageConstraint autonomousVoltage;
+  private final TrajectoryConfig trajectoryConfig;
 
   public BasicDriveTrainComponentsA() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
@@ -94,6 +109,15 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
     odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
     odometry.resetPosition(new Pose2d(), new Rotation2d());
+
+    motorFeedforward = new SimpleMotorFeedforward(VOLTS, VOLT_SECONDS_PER_METER, VOLT_SECONDS_SQUARED_PER_METER);
+
+    driveKinematics = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
+
+    autonomousVoltage = new DifferentialDriveVoltageConstraint(motorFeedforward, driveKinematics, MAX_VOLTAGE);
+
+    trajectoryConfig = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+        .setKinematics(driveKinematics).addConstraint(autonomousVoltage);
   }
 
   @Override
@@ -129,6 +153,26 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   @Override
   public DifferentialDriveOdometry getOdometry() {
     return odometry;
+  }
+
+  @Override
+  public SimpleMotorFeedforward getMotorFeedForward() {
+    return motorFeedforward;
+  }
+
+  @Override
+  public DifferentialDriveKinematics getDriveKinematics() {
+    return driveKinematics;
+  }
+
+  @Override
+  public DifferentialDriveVoltageConstraint getAutonomousVoltage() {
+    return autonomousVoltage;
+  }
+
+  @Override
+  public TrajectoryConfig getTrajectoryConfig() {
+    return trajectoryConfig;
   }
 
   private TalonFXConfiguration getFalconConfiguration() {

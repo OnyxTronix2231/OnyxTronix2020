@@ -1,8 +1,8 @@
 package robot.climber;
 
 import static robot.climber.ClimberConstants.ClimberComponentsA.CURRENT_LIMIT;
-import static robot.climber.ClimberConstants.ClimberComponentsA.LEFT_DOUBLE_SOLENOID_FORWARD_PORT;
-import static robot.climber.ClimberConstants.ClimberComponentsA.LEFT_DOUBLE_SOLENOID_REVERSE_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.DOUBLE_SOLENOID_FORWARD_PORT;
+import static robot.climber.ClimberConstants.ClimberComponentsA.DOUBLE_SOLENOID_REVERSE_PORT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.MASTER_MOTOR_PORT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.SLAVE_MOTOR_PORT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_CURRENT;
@@ -34,8 +34,8 @@ public class BasicClimberComponentsA implements ClimberComponents {
     slaveMotor.setNeutralMode(NeutralMode.Brake);
     slaveMotor.follow(masterMotor);
 
-    doubleSolenoid = new DoubleSolenoid(LEFT_DOUBLE_SOLENOID_FORWARD_PORT,
-        LEFT_DOUBLE_SOLENOID_REVERSE_PORT);
+    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT,
+            DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   @Override

@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
 
     final DriveTrainComponents driveTrainComponents;
     final BallCollectorComponents ballCollectorComponents;
-    final StorageConveyorComponents storageConveyorComponents;
     final BallStopperComponents ballStopperComponents;
+    final StorageConveyorComponents storageConveyorComponents;
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;

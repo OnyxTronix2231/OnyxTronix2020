@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     final DriveTrainComponents driveTrainComponents;
     final BallCollectorComponents ballCollectorComponents;
     final StorageConveyorComponents storageConveyorComponents;
-    final BallStopperComponents ballStopperComponents;
+//    final BallStopperComponents ballStopperComponents;
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
       ballCollectorComponents = new BasicBallCollectorComponentsA();
-      ballStopperComponents = new BasicBallStopperComponentsA();
+//      ballStopperComponents = new BasicBallStopperComponentsA();
       storageConveyorComponents = new BasicStorageConveyorComponentsA();
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
-      ballStopperComponents = null; //TODO: use BasicBallStopperComponentsB Here
+//      ballStopperComponents = null; //TODO: use BasicBallStopperComponentsB Here
       storageConveyorComponents = null; //TODO: use BasicStorageConveyorComponentsB Here
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
@@ -90,8 +90,8 @@ public class Robot extends TimedRobot {
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    new BallStopperOi(ballStopper, buttonsJoystickButtonCache);
+//    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+//    new BallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final Turret turret = new Turret(turretComponents);
     new TurretOi(turret, buttonsJoystickAxisCache);

@@ -12,10 +12,9 @@ import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.FEED_FORWARD;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRAJECTORY_PID_SLOT;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -78,8 +77,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveTrainVelocity(final double leftVelocity, final double rightVelocity) {
-    final double leftFeedForwardVolts = FEED_FORWARD.calculate(leftVelocity, 0);
-    final double rightFeedForwardVolts = FEED_FORWARD.calculate(rightVelocity, 0);
+    final double leftFeedForwardVolts = components.getMotorFeedForward().calculate(leftVelocity, 0);
+    final double rightFeedForwardVolts = components.getMotorFeedForward().calculate(rightVelocity, 0);
 
     initMotionProfileSlot(TRAJECTORY_PID_SLOT);
     getLeftMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(leftVelocity),
@@ -104,6 +103,14 @@ public class DriveTrain extends SubsystemBase {
 
   public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
+  }
+
+  public DriveTrainComponents getComponents() {
+    return components;
+  }
+
+  public double getOdometryHeading() {
+    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {
@@ -133,10 +140,6 @@ public class DriveTrain extends SubsystemBase {
 
   private double getRightDistance() {
     return ((double) getRightMaster().getSelectedSensorPosition() / ENCODER_CPR) * PERIMETER;
-  }
-
-  private double getOdometryHeading() {
-    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
   }
 
   private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge

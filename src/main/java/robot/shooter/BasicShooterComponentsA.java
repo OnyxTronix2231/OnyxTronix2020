@@ -22,14 +22,12 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
-    masterMotor.setInverted(false);
     masterMotor.setSensorPhase(false);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
-    slaveMotor.setInverted(false);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }

@@ -7,11 +7,9 @@ import java.util.function.DoubleSupplier;
 
 public class WaitUntilShooterVelocityOnTarget extends CommandBase {
     private final Shooter shooter;
-    private final DoubleSupplier velocitySupplier;
 
-    public WaitUntilShooterVelocityOnTarget(final Shooter shooter, final DoubleSupplier velocitySupplier){
+    public WaitUntilShooterVelocityOnTarget(final Shooter shooter){
         this.shooter = shooter;
-        this.velocitySupplier = velocitySupplier;
     }
 
     @Override

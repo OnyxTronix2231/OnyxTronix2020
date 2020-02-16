@@ -7,11 +7,9 @@ import java.util.function.DoubleSupplier;
 
 public class WaitUntilLoaderVelocityOnTarget extends CommandBase {
   private final LoaderConveyor loaderConveyor;
-  private final DoubleSupplier velocitySupplier;
 
-  public WaitUntilLoaderVelocityOnTarget(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
+  public WaitUntilLoaderVelocityOnTarget(final LoaderConveyor loaderConveyor) {
     this.loaderConveyor = loaderConveyor;
-    this.velocitySupplier = velocitySupplier;
   }
 
   @Override

@@ -22,7 +22,7 @@ public class ClimberOi {
     final JoystickAxis climbDownBySpeedAxis =
         driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
     climbUpBySpeedAxis.whileActiveContinuous(new ClimbBySpeed(climber,
-        ()-> -climbDownBySpeedAxis.getRawAxis()));
+        () -> -climbDownBySpeedAxis.getRawAxis()));
 
     final Trigger openClimberPistonsButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
     openClimberPistonsButton.whenActive(new OpenClimberPistons(climber));

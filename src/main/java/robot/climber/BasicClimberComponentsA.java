@@ -35,7 +35,7 @@ public class BasicClimberComponentsA implements ClimberComponents {
     slaveMotor.follow(masterMotor);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT,
-            DOUBLE_SOLENOID_REVERSE_PORT);
+        DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   @Override

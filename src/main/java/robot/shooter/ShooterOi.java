@@ -8,6 +8,7 @@ import robot.shooter.commands.ShootBySpeed;
 import onyxTronix.UniqueButtonCache;
 import robot.shooter.commands.CloseShooterPiston;
 import robot.shooter.commands.OpenShooterPiston;
+
 import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
 
 public class ShooterOi {

@@ -1,6 +1,7 @@
 package robot.shooter;
 
 import static robot.shooter.ShooterConstants.ShooterComponentsA.*;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;

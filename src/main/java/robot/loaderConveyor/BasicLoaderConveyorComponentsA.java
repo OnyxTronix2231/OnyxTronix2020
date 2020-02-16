@@ -17,31 +17,31 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents {
 
-    private final WPI_TalonSRX masterMotor;
+  private final WPI_TalonSRX masterMotor;
 
-    public BasicLoaderConveyorComponentsA() {
-        masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
-        masterMotor.configFactoryDefault();
-        masterMotor.configAllSettings(getConfiguration());
-        masterMotor.setNeutralMode(NeutralMode.Brake);
-        masterMotor.enableCurrentLimit(true);
-        masterMotor.setInverted(true);
-    }
+  public BasicLoaderConveyorComponentsA() {
+    masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
+    masterMotor.configFactoryDefault();
+    masterMotor.configAllSettings(getConfiguration());
+    masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.enableCurrentLimit(true);
+    masterMotor.setInverted(true);
+  }
 
-    @Override
-    public WPI_TalonSRX getMasterMotor() {
-        return masterMotor;
-    }
+  @Override
+  public WPI_TalonSRX getMasterMotor() {
+    return masterMotor;
+  }
 
-    private TalonSRXConfiguration getConfiguration() {
-        TalonSRXConfiguration config = new TalonSRXConfiguration();
-        config.slot0.kP = VELOCITY_P;
-        config.slot0.kI = VELOCITY_I;
-        config.slot0.kD = VELOCITY_D;
-        config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-        config.peakCurrentLimit = PEAK_AMP;
-        config.peakCurrentDuration = PEAK_AMP_DURATION;
-        config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
-        return config;
-    }
+  private TalonSRXConfiguration getConfiguration() {
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    config.slot0.kP = VELOCITY_P;
+    config.slot0.kI = VELOCITY_I;
+    config.slot0.kD = VELOCITY_D;
+    config.slot0.kF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    return config;
+  }
 }

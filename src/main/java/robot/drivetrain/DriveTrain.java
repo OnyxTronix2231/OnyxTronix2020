@@ -12,9 +12,9 @@ import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRAJECTORY_PID_SLOT;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;

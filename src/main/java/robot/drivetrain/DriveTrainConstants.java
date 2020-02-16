@@ -49,7 +49,7 @@ public final class DriveTrainConstants {
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A
   }
 
-  public static final class TrajectoryParams {
+  public static final class TrajectoryParamsA {
     public static final double RAMSETE_B = 2;
     public static final double RAMSETE_ZETA = 0.7;
     static final int TRAJECTORY_PID_SLOT = 1;

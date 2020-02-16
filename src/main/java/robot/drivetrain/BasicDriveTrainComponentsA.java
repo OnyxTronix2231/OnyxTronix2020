@@ -25,13 +25,13 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_SPEED_METERS_PER_SECOND;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.MAX_VOLTAGE;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.TRACKWIDTH_METERS;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLTS;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLT_SECONDS_PER_METER;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParams.VOLT_SECONDS_SQUARED_PER_METER;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.MAX_SPEED_METERS_PER_SECOND;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.MAX_VOLTAGE;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.TRACKWIDTH_METERS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.VOLTS;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.VOLT_SECONDS_PER_METER;
+import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.VOLT_SECONDS_SQUARED_PER_METER;
 import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;

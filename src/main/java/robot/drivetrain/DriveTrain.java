@@ -109,6 +109,10 @@ public class DriveTrain extends SubsystemBase {
     return components;
   }
 
+  public double getOdometryHeading() {
+    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
+  }
+
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {
     motor.set(ControlMode.MotionMagic, target, DemandType.ArbitraryFeedForward, ARB_FEED_FORWARD);
   }
@@ -136,10 +140,6 @@ public class DriveTrain extends SubsystemBase {
 
   private double getRightDistance() {
     return ((double) getRightMaster().getSelectedSensorPosition() / ENCODER_CPR) * PERIMETER;
-  }
-
-  private double getOdometryHeading() {
-    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
   }
 
   private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge

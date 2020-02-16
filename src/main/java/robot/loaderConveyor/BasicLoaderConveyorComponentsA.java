@@ -6,16 +6,13 @@ import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorCompone
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.MAX_VELOCITY;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PEAK_AMP;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.PEAK_AMP_DURATION;
-import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.SLAVE_MOTOR_PORT;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_D;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_I;
 import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.VELOCITY_P;
 
-import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 
 public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents {

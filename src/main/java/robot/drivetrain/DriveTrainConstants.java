@@ -66,10 +66,11 @@ public final class DriveTrainConstants {
 
   static final class Paths {
     private static final List<Pose2d> PATH_1 = List.of(
-        new Pose2d(3.2, 4.8, Rotation2d.fromDegrees(0)),
-        new Pose2d(5.8, 4.5, Rotation2d.fromDegrees(17)),
-        new Pose2d(5.55, 3.85, Rotation2d.fromDegrees(180)),
-        new Pose2d(5.55, 3.85, Rotation2d.fromDegrees(180))
+        new Pose2d(3.1, 3.5, Rotation2d.fromDegrees(37.5686)),
+        new Pose2d(4.55, 4.55, Rotation2d.fromDegrees(8.70579)),
+        new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-49.3987)),
+        new Pose2d(5.59, 3.93, Rotation2d.fromDegrees(162.64597)),
+        new Pose2d(3, 2.7, Rotation2d.fromDegrees(180))
     );
 
     private static final List<Pose2d> PATH_2 = List.of(

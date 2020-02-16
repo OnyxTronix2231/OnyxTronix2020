@@ -4,6 +4,7 @@ import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 

@@ -12,7 +12,7 @@ public class StorageConveyor extends SubsystemBase {
   }
 
   public final void moveStorageConveyorBySpeed(final double speed) {
-    components.getMasterMotor().set(ControlMode.PercentOutput, speed);
+    components.getMasterMotor().set(speed);
   }
 
   public final void stopMotor() {

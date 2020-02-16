@@ -32,10 +32,10 @@ import java.util.List;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final BasicDriveTrainComponentsA components;
   private final SendableChooser<Integer> pathChooser = new SendableChooser<>();
+  private final DriveTrainComponents components;
 
-  public DriveTrain(final BasicDriveTrainComponentsA components) {
+  public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
     resetEncoders();
 

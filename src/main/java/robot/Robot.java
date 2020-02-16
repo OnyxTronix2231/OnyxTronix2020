@@ -87,11 +87,11 @@ public class Robot extends TimedRobot {
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
     new BallCollectorOi(ballCollector, driveJoystickAxisCache, driveJoystickButtonCache);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
-    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
-
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     new BallStopperOi(ballStopper, buttonsJoystickButtonCache);
+
+    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
 
     final Turret turret = new Turret(turretComponents);
     new TurretOi(turret, buttonsJoystickAxisCache);

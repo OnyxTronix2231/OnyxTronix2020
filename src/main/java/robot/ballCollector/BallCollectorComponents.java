@@ -8,7 +8,5 @@ public interface BallCollectorComponents {
 
   WPI_TalonSRX getMasterMotor();
 
-  IMotorController getSlaveMotor();
-
   DoubleSolenoid getDoubleSolenoid();
 }

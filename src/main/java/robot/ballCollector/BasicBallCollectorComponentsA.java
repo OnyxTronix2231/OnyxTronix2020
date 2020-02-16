@@ -12,7 +12,6 @@ import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents
 public class BasicBallCollectorComponentsA implements BallCollectorComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final WPI_VictorSPX slaveMotor;
   private final DoubleSolenoid doubleSolenoid;
 
   public BasicBallCollectorComponentsA() {
@@ -22,12 +21,6 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.setInverted(true);
-
-    slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
-    slaveMotor.configFactoryDefault();
-    slaveMotor.setNeutralMode(NeutralMode.Brake);
-    slaveMotor.setInverted(true);
-    slaveMotor.follow(masterMotor);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
@@ -43,11 +36,6 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
   @Override
   public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
-  }
-
-  @Override
-  public IMotorController getSlaveMotor() {
-    return slaveMotor;
   }
 
   @Override

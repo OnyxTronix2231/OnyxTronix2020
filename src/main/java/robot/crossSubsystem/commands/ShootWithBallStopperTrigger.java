@@ -2,7 +2,7 @@ package robot.crossSubsystem.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.ballStopper.BallStopper;
-import robot.ballStopper.Commands.MoveBallStopperBySpeed;
+import robot.ballStopper.commands.MoveBallStopperBySpeed;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.MoveLoaderByVelocityWithoutEnd;
 import robot.loaderConveyor.commands.WaitUntilLoaderVelocityOnTarget;

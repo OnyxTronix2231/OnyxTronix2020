@@ -1,26 +1,28 @@
 package robot.shooter;
 
+import static robot.RobotConstants.PRIMARY_PID;
+import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE_CM;
 import static robot.shooter.ShooterConstants.MIN_FIRST_RANGE_CM;
 import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE_CM;
 import static robot.shooter.ShooterConstants.SPEED_FIRST;
 import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
 import static robot.shooter.ShooterConstants.SPEED_THIRD;
-import static robot.shooter.ShooterConstants.ShooterComponents.*;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.util.function.DoubleSupplier;
 
 public class Shooter extends SubsystemBase {
 
   private final ShooterComponents components;
-  private double velocity;
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
@@ -49,34 +51,35 @@ public class Shooter extends SubsystemBase {
 
   }
 
-  @Override
-  public void periodic() {
-  }
-
   public void shootBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
-    velocity = MAX_VELOCITY * speed;
   }
 
   public void stopMotor() {
     shootBySpeed(0);
-    velocity = 0;
   }
 
-  public double getSetPoint() {
-    return velocity;
+  public void configVelocitySlot() {
+    components.getMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   public void setVelocity(final double velocity) {
     components.getMasterMotor().set(ControlMode.Velocity, velocity);
-    this.velocity = velocity;
+  }
+
+  public void openShooterPiston() {
+    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
+  }
+
+  public void closeShooterPiston() {
+    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
   }
 
   public boolean isOnTarget() {
     return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
   }
 
-  public int distanceToVelocity(final double distance){
+  public int distanceToVelocity(final double distance) {
     if (distance > MIN_THIRD_RANGE_CM) {
       return SPEED_THIRD;
     } else if (distance > MAX_FIRST_RANGE_CM && distance < MIN_THIRD_RANGE_CM) {

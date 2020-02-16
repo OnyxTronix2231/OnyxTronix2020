@@ -7,7 +7,7 @@ import java.util.function.DoubleSupplier;
 
 public class MoveLoaderByVelocityWithoutEnd extends CommandBase {
 
-  private final LoaderConveyor loaderConveyor;
+  protected final LoaderConveyor loaderConveyor;
   private final DoubleSupplier velocitySupplier;
 
   public MoveLoaderByVelocityWithoutEnd(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
@@ -18,6 +18,6 @@ public class MoveLoaderByVelocityWithoutEnd extends CommandBase {
 
   @Override
   public void execute() {
-    loaderConveyor.setVelocity(velocitySupplier.getAsDouble());
+    loaderConveyor.moveLoaderConveyorByVelocity(velocitySupplier.getAsDouble());
   }
 }

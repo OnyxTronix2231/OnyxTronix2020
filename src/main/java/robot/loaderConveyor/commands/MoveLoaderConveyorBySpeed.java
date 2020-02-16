@@ -14,6 +14,7 @@ public class MoveLoaderConveyorBySpeed extends CommandBase {
                                    final DoubleSupplier speedSupplier) {
     this.loaderConveyor = loaderConveyor;
     this.speedSupplier = speedSupplier;
+    addRequirements(loaderConveyor);
   }
 
   @Override

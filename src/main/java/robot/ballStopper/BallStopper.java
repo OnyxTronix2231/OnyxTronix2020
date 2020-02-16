@@ -1,20 +1,20 @@
 package robot.ballStopper;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class BallStopper {
+public class BallStopper extends SubsystemBase {
 
-  private final BasicBallStopperComponents ballStopperComponents;
+  private final BallStopperComponents components;
 
-  public BallStopper(final BasicBallStopperComponents ballStopperComponents) {
-    this.ballStopperComponents = ballStopperComponents;
+  public BallStopper(final BallStopperComponents ballStopperComponents) {
+    this.components = ballStopperComponents;
   }
 
-  public final void moveBallStopperBySpeed(final double speed) {
-    ballStopperComponents.getMotor().set(speed);
+  public void moveBallStopperBySpeed(final double speed) {
+    components.getMotor().set(speed);
   }
 
-  public final void stopMotor() {
-    ballStopperComponents.getMotor().set(0);
+  public void stopMotor() {
+    moveBallStopperBySpeed(0);
   }
 }
-

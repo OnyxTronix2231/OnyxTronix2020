@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public final class ShooterConstants {
 
   public static final class ShooterComponentsA {
-    static final int MASTER_PORT = 7;//TODO check and change
-    static final int SLAVE_PORT = 8;//TODO check and change
+    static final int MASTER_PORT = 7;
+    static final int SLAVE_PORT = 8;
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 3;//TODO check ang change!!!!!
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 4;//TODO check ang change!!!!!
     static final int PEAK_AMP = 40;//TODO check and change

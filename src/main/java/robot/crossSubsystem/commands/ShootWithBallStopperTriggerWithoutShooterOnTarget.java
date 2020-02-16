@@ -15,11 +15,11 @@ import java.util.function.DoubleSupplier;
 
 public class ShootWithBallStopperTriggerWithoutShooterOnTarget extends ParallelCommandGroup {
 
-  public ShootWithBallStopperTriggerWithoutShooterOnTarget(Shooter shooter, LoaderConveyor loaderConveyor,
-                                                           StorageConveyor storageConveyor, BallStopper ballStopper,
-                                                           DoubleSupplier velocitySupplier,
-                                                           DoubleSupplier storageSpeedSupplier,
-                                                           DoubleSupplier ballStopperSpeedSupplier) {
+  public ShootWithBallStopperTriggerWithoutShooterOnTarget(final Shooter shooter,final LoaderConveyor loaderConveyor,
+                                                           final StorageConveyor storageConveyor, final BallStopper ballStopper,
+                                                           final DoubleSupplier velocitySupplier,
+                                                           final DoubleSupplier storageSpeedSupplier,
+                                                           final DoubleSupplier ballStopperSpeedSupplier) {
     super(deadline(
         sequence(
             new WaitUntilLoaderVelocityOnTarget(loaderConveyor, velocitySupplier),

@@ -9,7 +9,7 @@ public class WaitUntilLoaderVelocityOnTarget extends CommandBase {
   private final LoaderConveyor loaderConveyor;
   private final DoubleSupplier velocitySupplier;
 
-  public WaitUntilLoaderVelocityOnTarget(final LoaderConveyor loaderConveyor, DoubleSupplier velocitySupplier) {
+  public WaitUntilLoaderVelocityOnTarget(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
     this.loaderConveyor = loaderConveyor;
     this.velocitySupplier = velocitySupplier;
   }

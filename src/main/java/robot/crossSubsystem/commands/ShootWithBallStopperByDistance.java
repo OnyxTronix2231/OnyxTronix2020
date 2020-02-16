@@ -8,9 +8,12 @@ import robot.storageConveyor.StorageConveyor;
 import java.util.function.DoubleSupplier;
 
 public class ShootWithBallStopperByDistance extends ShootWithBallStopperTrigger {
-  public ShootWithBallStopperByDistance(Shooter shooter, LoaderConveyor loaderConveyor, StorageConveyor storageConveyor,
-                                        BallStopper ballStopper, DoubleSupplier distanceSupplier,
-                                        DoubleSupplier storageSpeedSupplier, DoubleSupplier ballStopperSpeedSupplier) {
+  public ShootWithBallStopperByDistance(final Shooter shooter, final LoaderConveyor loaderConveyor,
+                                        final StorageConveyor storageConveyor,
+                                        final BallStopper ballStopper,
+                                        final DoubleSupplier distanceSupplier,
+                                        final DoubleSupplier storageSpeedSupplier,
+                                        final DoubleSupplier ballStopperSpeedSupplier) {
     super(shooter, loaderConveyor, storageConveyor, ballStopper,
         () -> shooter.distanceToVelocity(distanceSupplier.getAsDouble()),
         storageSpeedSupplier, ballStopperSpeedSupplier);

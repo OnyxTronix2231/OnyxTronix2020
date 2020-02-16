@@ -16,10 +16,10 @@ import java.util.function.DoubleSupplier;
 
 public class ShootWithLoaderConveyorTrigger extends ParallelCommandGroup {
 
-  public ShootWithLoaderConveyorTrigger(Shooter shooter, LoaderConveyor loaderConveyor,
-                                        StorageConveyor storageConveyor, BallStopper ballStopper,
-                                        DoubleSupplier velocitySupplier, DoubleSupplier storageSpeedSupplier,
-                                        DoubleSupplier ballStopperSpeedSupplier) {
+  public ShootWithLoaderConveyorTrigger(final Shooter shooter, final LoaderConveyor loaderConveyor,
+                                        final StorageConveyor storageConveyor,final BallStopper ballStopper,
+                                        final DoubleSupplier velocitySupplier,final DoubleSupplier storageSpeedSupplier,
+                                       final DoubleSupplier ballStopperSpeedSupplier) {
     super(new ShootByVelocity(shooter, velocitySupplier),
         new SequentialCommandGroup(
             new WaitUntilShooterVelocityOnTarget(shooter, velocitySupplier),

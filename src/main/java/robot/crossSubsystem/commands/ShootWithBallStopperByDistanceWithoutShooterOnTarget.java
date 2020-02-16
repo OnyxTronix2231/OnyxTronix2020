@@ -9,11 +9,13 @@ import java.util.function.DoubleSupplier;
 
 public class ShootWithBallStopperByDistanceWithoutShooterOnTarget
     extends ShootWithBallStopperTriggerWithoutShooterOnTarget {
-  public ShootWithBallStopperByDistanceWithoutShooterOnTarget(Shooter shooter, LoaderConveyor loaderConveyor,
-                                                              StorageConveyor storageConveyor,
-                                                              BallStopper ballStopper, DoubleSupplier distanceSupplier,
-                                                              DoubleSupplier storageSpeedSupplier,
-                                                              DoubleSupplier ballStopperSpeedSupplier) {
+  public ShootWithBallStopperByDistanceWithoutShooterOnTarget(final Shooter shooter,
+                                                              final LoaderConveyor loaderConveyor,
+                                                              final StorageConveyor storageConveyor,
+                                                              final BallStopper ballStopper,
+                                                              final DoubleSupplier distanceSupplier,
+                                                              final DoubleSupplier storageSpeedSupplier,
+                                                              final DoubleSupplier ballStopperSpeedSupplier) {
     super(shooter, loaderConveyor, storageConveyor, ballStopper,
         () -> shooter.distanceToVelocity(distanceSupplier.getAsDouble()),
         storageSpeedSupplier, ballStopperSpeedSupplier);

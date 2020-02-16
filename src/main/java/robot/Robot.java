@@ -75,8 +75,7 @@ public class Robot extends TimedRobot {
       turretComponents = null;
 //      loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       loaderConveyorComponents = null;
-//      shooterComponents = new BasicShooterComponentsA();
-      shooterComponents = null;
+      shooterComponents = new BasicShooterComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -105,8 +104,8 @@ public class Robot extends TimedRobot {
 //    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
 //    new LoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 //
-//    final Shooter shooter = new Shooter(shooterComponents);
-//    new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
+    final Shooter shooter = new Shooter(shooterComponents);
+    new ShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
   }
 
   @Override

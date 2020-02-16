@@ -7,7 +7,6 @@ import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP_DURATION;
 
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;

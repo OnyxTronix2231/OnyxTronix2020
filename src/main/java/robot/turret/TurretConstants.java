@@ -3,7 +3,7 @@ package robot.turret;
 final class TurretConstants {
 
   static final class TurretComponentsA {
-    static final int MASTER_MOTOR_PORT = 11; //TODO check and change
+    static final int MASTER_MOTOR_PORT = 6;
     static final int PEAK_AMP = 40; //TODO check and change
     static final int PEAK_AMP_DURATION = 0; //TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change

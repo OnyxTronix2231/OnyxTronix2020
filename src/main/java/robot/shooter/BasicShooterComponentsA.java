@@ -1,6 +1,7 @@
 package robot.shooter;
 
 import static robot.shooter.ShooterConstants.ShooterComponentsA.*;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -22,14 +23,12 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
-    masterMotor.setInverted(true);
-    masterMotor.setSensorPhase(true);
+    masterMotor.setSensorPhase(false);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
-    slaveMotor.setInverted(true);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
@@ -47,7 +46,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.CTRE_MagEncoder_Relative;
     config.openloopRamp = OPEN_LOOP_RAMP;
-    config.closedloopRamp = OPEN_LOOP_RAMP;
+    config.closedloopRamp = CLOSE_LOOP_RAMP;
     return config;
   }
 

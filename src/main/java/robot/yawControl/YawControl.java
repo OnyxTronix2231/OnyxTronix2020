@@ -3,7 +3,7 @@ package robot.yawControl;
 import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
-import robot.turret.commands.MoveToAngleAndKeep;
+import robot.turret.commands.MoveTurretToAngleAndKeep;
 
 public class YawControl extends Turret {
 
@@ -23,17 +23,16 @@ public class YawControl extends Turret {
   }
 
   public void setTurretState(final TurretState turretState) {
-    zeroOffsetByPercent();
     if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
       case RTF:
-        setDefaultCommand(new MoveToAngleAndKeep(this, this::getTurretAngleRTF));
+        setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getTurretAngleRTF));
         break;
       case RTR:
-        setDefaultCommand(new MoveToAngleAndKeep(this, this::getAngleRTR));
+        setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getAngleRTR));
         break;
       case Homing:
-        setDefaultCommand(new MoveToAngleAndKeep(this, () -> 0));
+        setDefaultCommand(new MoveTurretToAngleAndKeep(this, () -> 0));
         break;
     }
     this.turretState = turretState;
@@ -43,12 +42,12 @@ public class YawControl extends Turret {
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
     if (turretState == TurretState.RTF) {
-      tempAngle -= driveTrain.getNavXYaw();
+      tempAngle -= driveTrain.getPose().getRotation().getDegrees();
     }
     super.moveToAngle(tempAngle);
   }
 
   public double getTurretAngleRTF() {
-    return driveTrain.getNavXYaw() + getAngleRTR();
+    return driveTrain.getPose().getRotation().getDegrees() + getAngleRTR();
   }
 }

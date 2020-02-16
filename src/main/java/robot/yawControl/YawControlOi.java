@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.yawControl.commands.ChangeAngleOffsetByPercent;
 import robot.yawControl.commands.SetTurretState;
 
 public class YawControlOi {
@@ -19,9 +18,6 @@ public class YawControlOi {
 
     final JoystickButton button3 = buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
     button.whenPressed(new SetTurretState(yawControl, YawControl.TurretState.Homing));
-
-    final JoystickAxis axis = buttonsJoystickAxisCache.createJoystickTrigger(JoystickAxis.AxisMap.kRightX.value);
-    axis.whileActiveContinuous(new ChangeAngleOffsetByPercent(yawControl, axis::getRawAxis));
   }
 }
 

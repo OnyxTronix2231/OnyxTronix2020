@@ -5,12 +5,12 @@ import robot.turret.Turret;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveBySpeed extends CommandBase {
+public class MoveTurretBySpeed extends CommandBase {
 
   private final DoubleSupplier speedSupplier;
   private final Turret turret;
 
-  public MoveBySpeed(final Turret turret, final DoubleSupplier speedSupplier) {
+  public MoveTurretBySpeed(final Turret turret, final DoubleSupplier speedSupplier) {
     this.speedSupplier = speedSupplier;
     this.turret = turret;
     addRequirements(turret);
@@ -18,7 +18,7 @@ public class MoveBySpeed extends CommandBase {
 
   @Override
   public void execute() {
-    turret.moveBySpeed(speedSupplier.getAsDouble());
+    turret.moveTurretBySpeed(speedSupplier.getAsDouble());
   }
 
   @Override

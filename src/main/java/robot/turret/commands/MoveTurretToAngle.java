@@ -4,10 +4,10 @@ import robot.turret.Turret;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveToAngle extends MoveToAngleAndKeep {
+public class MoveTurretToAngle extends MoveTurretToAngleAndKeep {
 
-  public MoveToAngle(final Turret turret, final DoubleSupplier supplierAngle) {
-    super(turret, supplierAngle);
+  public MoveTurretToAngle(final Turret turret, final DoubleSupplier angleSupplier) {
+    super(turret, angleSupplier);
   }
 
   @Override

@@ -1,20 +1,18 @@
 package robot.ballCollector;
 
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.CONTINUOUS_CURRENT_LIMIT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.DOUBLE_SOLENOID_FORWARD_PORT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.DOUBLE_SOLENOID_REVERSE_PORT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.MASTER_MOTOR_PORT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP_DURATION;
-
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.*;
 
 public class BasicBallCollectorComponentsA implements BallCollectorComponents {
 
   private final WPI_TalonSRX masterMotor;
+  private final WPI_VictorSPX slaveMotor;
   private final DoubleSolenoid doubleSolenoid;
 
   public BasicBallCollectorComponentsA() {
@@ -24,6 +22,12 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.setInverted(true);
+
+    slaveMotor = new WPI_VictorSPX(SLAVE_MOTOR_PORT);
+    slaveMotor.configFactoryDefault();
+    slaveMotor.setNeutralMode(NeutralMode.Brake);
+    slaveMotor.setInverted(true);
+    slaveMotor.follow(masterMotor);
 
     doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
@@ -39,6 +43,11 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
   @Override
   public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
+  }
+
+  @Override
+  public IMotorController getSlaveMotor() {
+    return slaveMotor;
   }
 
   @Override

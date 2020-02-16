@@ -14,11 +14,6 @@ public class ShootByVelocity extends ShootByVelocityWithoutEnd {
   }
 
   @Override
-  public void initialize() {
-    shooter.configVelocitySlot();
-  }
-
-  @Override
   public void end(final boolean interrupted) {
     shooter.stopMotor();
   }

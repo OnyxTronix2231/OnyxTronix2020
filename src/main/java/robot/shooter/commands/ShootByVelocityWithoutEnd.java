@@ -17,6 +17,11 @@ public class ShootByVelocityWithoutEnd extends CommandBase {
   }
 
   @Override
+  public void initialize() {
+    shooter.configVelocitySlot();
+  }
+
+  @Override
   public void execute() {
     shooter.setVelocity(velocitySupplier.getAsDouble());
   }

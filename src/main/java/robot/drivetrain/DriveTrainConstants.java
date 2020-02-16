@@ -96,5 +96,15 @@ public final class DriveTrainConstants {
     );
 
     static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+
+    private static Pose2d[] startingPoses() {
+      final Pose2d[] startingPoses = new Pose2d[5];
+      startingPoses[0] = new Pose2d(3.1, 3.5, Rotation2d.fromDegrees(37.5686));
+      startingPoses[1] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0));
+      startingPoses[2] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180));
+      startingPoses[3] = new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0));
+      startingPoses[4] = new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140));
+      return startingPoses;
+    }
   }
 }

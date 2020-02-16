@@ -21,7 +21,7 @@ public final class DriveTrainConstants {
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
   private static final double ENCODER_UNITS = 1023;
 
-  static final class DriveTrainComponentsA {
+  public static final class DriveTrainComponentsA {
     static final int LEFT_MASTER_PORT = 2;
     static final int LEFT_SLAVE_PORT = 3;
     static final int RIGHT_MASTER_PORT = 0;
@@ -47,57 +47,48 @@ public final class DriveTrainConstants {
     static final double TRAJECTORY_P = 0.4; // TODO: Calibration with A
     static final double TRAJECTORY_I = 0; // TODO: Calibration with A
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A
-  }
 
-  public static final class TrajectoryParamsA {
-    public static final double RAMSETE_B = 2;
-    public static final double RAMSETE_ZETA = 0.7;
-    static final int TRAJECTORY_PID_SLOT = 1;
-    static final int DEGREES_IN_FULL_ROTATION = 360;
-    static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
-    static final double VOLTS = 0.365; // TODO: Calibration with A
-    static final double VOLT_SECONDS_PER_METER = 0;
-    static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333; // TODO: Calibration with A
-    static final double MAX_VOLTAGE = 10; // TODO: Calibration with A
-    static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
-    static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A
-    static final double TRACKWIDTH_METERS = 0.679; // TODO: Calibration with A
+    public static final class TrajectoryParams {
+      public static final double RAMSETE_B = 2;
+      public static final double RAMSETE_ZETA = 0.7;
+      static final int TRAJECTORY_PID_SLOT = 1;
+      static final int DEGREES_IN_FULL_ROTATION = 360;
+      static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
+      static final double VOLTS = 0.365; // TODO: Calibration with A
+      static final double VOLT_SECONDS_PER_METER = 0;
+      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333; // TODO: Calibration with A
+      static final double MAX_VOLTAGE = 10; // TODO: Calibration with A
+      static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
+      static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A
+      static final double TRACKWIDTH_METERS = 0.679; // TODO: Calibration with A
+    }
+
   }
 
   static final class Paths {
     private static final List<Pose2d> PATH_1 = List.of(
-        new Pose2d(3.1, 3.5, Rotation2d.fromDegrees(37.5686)),
         new Pose2d(4.55, 4.55, Rotation2d.fromDegrees(8.70579)),
         new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-49.3987)),
         new Pose2d(5.59, 3.93, Rotation2d.fromDegrees(162.64597)),
         new Pose2d(3, 2.7, Rotation2d.fromDegrees(180))
     );
-
     private static final List<Pose2d> PATH_2 = List.of(
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
         new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
         new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
         new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
     );
-
     private static final List<Pose2d> PATH_3 = List.of(
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180)),
         new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
         new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
         new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
         new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
     );
-
-
     private static final List<Pose2d> PATH_4 = List.of(
-        new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0)),
         new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
         new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
         new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
     );
-
     private static final List<Pose2d> PATH_5 = List.of(
-        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140)),
         new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
         new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
         new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),

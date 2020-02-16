@@ -7,14 +7,14 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITI
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.DEGREES_IN_FULL_ROTATION;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRAJECTORY_PID_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;

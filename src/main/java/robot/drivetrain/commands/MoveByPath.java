@@ -1,7 +1,7 @@
 package robot.drivetrain.commands;
 
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.RAMSETE_B;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.RAMSETE_ZETA;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.RAMSETE_B;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.RAMSETE_ZETA;
 
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import robot.drivetrain.DriveTrain;

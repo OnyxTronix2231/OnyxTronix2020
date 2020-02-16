@@ -58,4 +58,8 @@ public class BallCollector extends SubsystemBase {
   public void removeBall() {
     ballCounter--;
   }
+
+  public boolean canShoot(){
+    return ballCounter > 0;
+  }
 }

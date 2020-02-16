@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public interface ShooterComponents {
 
   WPI_TalonSRX getMasterMotor();
-  
+
   IMotorController getSlaveMotor();
 
   DoubleSolenoid getDoubleSolenoid();

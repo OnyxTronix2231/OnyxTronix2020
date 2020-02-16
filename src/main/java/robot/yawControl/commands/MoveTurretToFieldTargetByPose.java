@@ -1,25 +1,26 @@
 package robot.yawControl.commands;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
+import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
-import robot.turret.commands.MoveTurretToAngleAndKeep;
+import robot.turret.commands.MoveTurretToAngle;
+import robot.yawControl.YawControl;
 
 import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
 
-public class MoveTurretToFieldTargetByPose extends MoveTurretToAngleAndKeep {
+public class MoveTurretToFieldTargetByPose extends MoveTurretToAngle {
 
-  private final Supplier<Pose2d> pose2dSupplier;
-  private Pose2d pose2d;
+  private final YawControl yawControl;
+  private final DriveTrain driveTrain;
 
   public MoveTurretToFieldTargetByPose(final Turret turret, final DoubleSupplier angleSupplier,
-                                       final Supplier<Pose2d> pose2dSupplier) {
+                                       final YawControl yawControl, final DriveTrain driveTrain) {
     super(turret, angleSupplier);
-    this.pose2dSupplier = pose2dSupplier;
+    this.yawControl = yawControl;
+    this.driveTrain = driveTrain;
   }
 
   @Override
   public void initialize() {
-    pose2d = pose2dSupplier.get();
+    angle = yawControl.getAngleToTargetFromPose2d(driveTrain.getPose());
   }
 }

@@ -1,5 +1,8 @@
 package robot.yawControl;
 
+import static robot.yawControl.YawControlConstants.targetY;
+
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
@@ -42,12 +45,26 @@ public class YawControl extends Turret {
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
     if (turretState == TurretState.RTF) {
-      tempAngle -= driveTrain.getPose().getRotation().getDegrees();
+      tempAngle -= driveTrain.getOdometryHeading();
     }
     super.moveToAngle(tempAngle);
   }
 
   public double getTurretAngleRTF() {
-    return driveTrain.getPose().getRotation().getDegrees() + getAngleRTR();
+    return driveTrain.getOdometryHeading() + getAngleRTR();
+  }
+
+  public double getAngleToTargetFromPose2d(final Pose2d pose) {
+    final double x = pose.getTranslation().getX();
+    final double y = pose.getTranslation().getY();
+    double angle = pose.getRotation().getDegrees();
+    int side = 1;
+    if (y < targetY) {
+      angle = -angle;
+    }
+    if (angle < 180 && angle > 0) {
+      side = -1;
+    }
+    return 180 + side * (Math.atan(Math.abs(y - targetY) / x) + angle);
   }
 }

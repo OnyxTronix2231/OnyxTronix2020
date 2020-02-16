@@ -19,7 +19,7 @@ public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
   @Override
   public void initialize() {
     super.initialize();
-    initialRobotAngle = driveTrain.getPose().getRotation().getDegrees();
+    initialRobotAngle = driveTrain.getOdometryHeading();
   }
 
   @Override

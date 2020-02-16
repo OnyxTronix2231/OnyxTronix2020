@@ -24,6 +24,8 @@ public interface DriveTrainComponents {
 
   PigeonIMU getGyro();
 
+  double getPigeonYaw();
+
   DifferentialDriveOdometry getOdometry();
 
   SimpleMotorFeedforward getMotorFeedForward();

@@ -170,6 +170,13 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     return trajectoryConfig;
   }
 
+  @Override
+  public double getPigeonYaw() {
+    double[] yawPitchRaw = new double[3];
+    gyro.getYawPitchRoll(yawPitchRaw);
+    return yawPitchRaw[0];
+  }
+
   private TalonFXConfiguration getFalconConfiguration() {
     final TalonFXConfiguration config = new TalonFXConfiguration();
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
@@ -185,7 +192,6 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     config.slot2.kI = VELOCITY_CONTROLLER_I;
     config.slot2.kD = VELOCITY_CONTROLLER_D;
     config.slot2.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
     config.motionCruiseVelocity = MAX_VELOCITY;
     config.motionAcceleration = MAX_ACCELERATION;
     config.peakOutputForward = MAX_OUTPUT_FORWARD;
@@ -197,11 +203,5 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     config.openloopRamp = OPEN_LOOP_RAMP;
     config.closedloopRamp = CLOSED_LOOP_RAMP;
     return config;
-  }
-
-  double getPigeonYaw() {
-    double[] yawPitchRaw = new double[3];
-    gyro.getYawPitchRoll(yawPitchRaw);
-    return yawPitchRaw[0];
   }
 }

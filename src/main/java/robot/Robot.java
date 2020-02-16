@@ -105,7 +105,7 @@ public class Robot extends TimedRobot {
 //    new LoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 //
     final Shooter shooter = new Shooter(shooterComponents);
-    new ShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
+    new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
   }
 
   @Override

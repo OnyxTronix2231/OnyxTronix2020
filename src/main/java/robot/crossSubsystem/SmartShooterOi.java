@@ -16,6 +16,8 @@ import robot.crossSubsystem.commands.SpinShooterAndLoaderByDistance;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.StopLoaderConveyor;
 import robot.shooter.Shooter;
+import robot.shooter.commands.CloseShooterPiston;
+import robot.shooter.commands.OpenShooterPiston;
 import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.shooter.commands.StopShooter;
@@ -63,11 +65,13 @@ public class SmartShooterOi {
     final JoystickButton ShootWithoutLimeLight = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
-    ShootWithoutLimeLight.whileActiveContinuous(new ShootByDistance(shooter, () -> SHOOTER_VELOCITY));
+    ShootWithoutLimeLight.whileActiveContinuous(new OpenShooterPiston(shooter).
+        andThen(new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY)));
 
     ShootWithoutLimeLight.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));
+            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter)
+        .alongWith(new CloseShooterPiston(shooter)));
 
     final JoystickButton MoveShooterWheel = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value,false);

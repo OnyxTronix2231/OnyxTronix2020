@@ -7,7 +7,7 @@ import robot.yawControl.YawControl;
 
 import java.util.function.Supplier;
 
-public class AlignByVisionOrOdometryAndVision extends VisionCondition {
+public class AlignByVisionOrOdometryAndVision extends IsTargetFoundCondition {
 
   public AlignByVisionOrOdometryAndVision(final YawControl yawControl, final DriveTrain driveTrain,
                                           final Supplier<VisionTarget> visionTargetSupplier) {

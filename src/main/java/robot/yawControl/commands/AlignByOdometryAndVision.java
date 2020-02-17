@@ -15,7 +15,7 @@ public class AlignByOdometryAndVision extends SequentialCommandGroup {
                                   final Supplier<VisionTarget> visionTargetSupplier) {
     addCommands(
         new MoveTurretToFieldTargetByPose(yawControl, driveTrain),
-        new VisionCondition(new MoveTurretToAngle(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
+        new IsTargetFoundCondition(new MoveTurretToAngle(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
             new InstantCommand())
     );
   }

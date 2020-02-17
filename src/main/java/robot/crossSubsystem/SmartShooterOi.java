@@ -62,13 +62,13 @@ public class SmartShooterOi {
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
 
-    final JoystickButton ShootWithoutLimeLight = driveJoystickButtonCache
+    final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
-    ShootWithoutLimeLight.whileActiveContinuous(new OpenShooterPiston(shooter).
-        andThen(new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY)));
+    shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
+        .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY)));
 
-    ShootWithoutLimeLight.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter)
         .alongWith(new CloseShooterPiston(shooter)));

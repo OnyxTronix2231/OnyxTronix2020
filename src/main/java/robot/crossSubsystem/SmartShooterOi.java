@@ -2,6 +2,7 @@ package robot.crossSubsystem;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_VELOCITY;
 import static robot.crossSubsystem.CrossSubsystemConstants.SPIN_SHOOTER_AND_LOADER_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
@@ -52,6 +53,18 @@ public class SmartShooterOi {
             () -> VisionCalculations.calculateDistance(target)));
 
     moveConveyorsByLoaderConveyorTriggerButton.and(shootWithBallStopperByDistance).whileActiveContinuous(
+        new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+            storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
+            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));
+
+    final JoystickButton ShootWithoutLimeLight = driveJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBumperRight.value);
+
+    ShootWithoutLimeLight.and(shootWithBallStopperByDistance).
+        whileActiveContinuous(new ShootByDistance(shooter,
+            () -> SHOOTER_VELOCITY));
+
+    ShootWithoutLimeLight.and(shootWithBallStopperByDistance).whileActiveContinuous(
         new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));

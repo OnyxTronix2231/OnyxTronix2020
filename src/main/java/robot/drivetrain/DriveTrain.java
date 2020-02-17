@@ -87,6 +87,10 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, rightFeedForwardVolts / RobotController.getBatteryVoltage());
   }
 
+  public void driveTrainVelocityReverse(final double leftVelocity, final double rightVelocity) {
+    driveTrainVelocity(-leftVelocity, -rightVelocity);
+  }
+
   public double getRightTargetFromDistance(final double distance) {
     return getTargetFromDistance(getRightMaster(), distance);
   }

@@ -16,12 +16,13 @@ public final class DriveTrainConstants {
   static final double CONVERSION_RATE = 9.5;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
+  static final double PERIMETER_IN_METERS = PERIMETER / 100;
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
-  static final double PERIMETER_IN_METERS = PERIMETER / 100;
   private static final double ENCODER_UNITS = 1023;
 
   public static final class DriveTrainComponentsA {
+
     static final int LEFT_MASTER_PORT = 2;
     static final int LEFT_SLAVE_PORT = 3;
     static final int RIGHT_MASTER_PORT = 0;
@@ -49,6 +50,7 @@ public final class DriveTrainConstants {
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A
 
     public static final class TrajectoryParams {
+
       public static final double RAMSETE_B = 2;
       public static final double RAMSETE_ZETA = 0.7;
       static final int TRAJECTORY_PID_SLOT = 1;
@@ -66,6 +68,7 @@ public final class DriveTrainConstants {
   }
 
   static final class Paths {
+
     private static final List<Pose2d> PATH_1 = List.of(
         new Pose2d(4.55, 4.55, Rotation2d.fromDegrees(8.70579)),
         new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-49.3987)),
@@ -94,8 +97,27 @@ public final class DriveTrainConstants {
         new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
         new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
     );
-
     static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+
+    static Path[] PrimaryPath() {
+      final Pose2d startingPose = new Pose2d(1, 1, Rotation2d.fromDegrees(0));
+
+      final List<Pose2d> pathOnePoints = List.of(
+          new Pose2d(),
+          new Pose2d(),
+          new Pose2d()
+      );
+      final Path pathOne = new Path(true, pathOnePoints);
+
+      final List<Pose2d> pathTwoPoints = List.of(
+          new Pose2d(),
+          new Pose2d()
+      );
+      final Path pathTwo = new Path(false, pathTwoPoints);
+
+      final Path[] paths = {pathOne, pathTwo};
+      return paths;
+    }
 
     private static Pose2d[] startingPoses() {
       final Pose2d[] startingPoses = new Pose2d[5];

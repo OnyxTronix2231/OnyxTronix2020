@@ -73,6 +73,5 @@ public class SmartShooterOi {
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value,false);
     MoveShooterWheel.whenPressed(new ShootByDistance(shooter,   () ->
         factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
-
   }
 }

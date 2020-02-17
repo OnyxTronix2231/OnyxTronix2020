@@ -5,17 +5,18 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.drivetrain.DriveTrain;
+import robot.vision.target.ConditionalTargetMaker;
 import robot.vision.target.VisionTargetFactory;
 import robot.yawControl.commands.AlignByVisionOrOdometryAndVision;
 import robot.yawControl.commands.SetTurretState;
 
 public class YawControlOi {
   public YawControlOi(final YawControl yawControl, final DriveTrain driveTrain,
-                      final VisionTargetFactory visionTargetFactory, final UniqueButtonCache buttonJoystickButtonCache,
+                      final ConditionalTargetMaker targetMaker, final UniqueButtonCache buttonJoystickButtonCache,
                       final UniqueAxisCache buttonsJoystickAxisCache) {
     final JoystickButton alignByToTargetButton =
         buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
-    alignByToTargetButton.whenPressed(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, () -> null ));
+    alignByToTargetButton.whenPressed(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetMaker::makeTarget));
 
     final JoystickButton setStateRTFButton = buttonJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value);

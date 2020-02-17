@@ -15,5 +15,6 @@ public final class LoaderConveyorConstants {
     static final int PEAK_AMP = 40; //TODO check and change
   }
 
+  static final int TOLERANCE = 50;
   static final double PERCENTAGE_OUTPUT = 0.8;
 }

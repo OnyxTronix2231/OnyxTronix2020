@@ -2,7 +2,7 @@ package robot.vision.target;
 
 import java.util.function.BooleanSupplier;
 
-public final class ConditionalTargetMaker {
+public class ConditionalTargetMaker {
 
   private final VisionTargetFactory factory;
   private final BooleanSupplier condition;

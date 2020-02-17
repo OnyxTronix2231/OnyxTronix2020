@@ -50,7 +50,6 @@ public class SmartShooterOi {
                  () -> BALL_STOPPER_SPEED))
         .whenInactive(new StopShooter(shooter).alongWith(new StopLoaderConveyor(loaderConveyor)));
 
-
     moveConveyorsByLoaderConveyorTriggerButton.and(shootWithBallStopperByDistance).
         whileActiveContinuous(new ShootByDistance(shooter,
             () -> factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
@@ -58,17 +57,14 @@ public class SmartShooterOi {
     moveConveyorsByLoaderConveyorTriggerButton.and(shootWithBallStopperByDistance).whileActiveContinuous(
         new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));
+            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
 
     final JoystickButton ShootWithoutLimeLight = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
-    ShootWithoutLimeLight.and(shootWithBallStopperByDistance).
-        whileActiveContinuous(new ShootByDistance(shooter,
-            () -> SHOOTER_VELOCITY));
+    ShootWithoutLimeLight.whileActiveContinuous(new ShootByDistance(shooter, () -> SHOOTER_VELOCITY));
 
-    ShootWithoutLimeLight.and(shootWithBallStopperByDistance).whileActiveContinuous(
-        new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+    ShootWithoutLimeLight.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));
   }

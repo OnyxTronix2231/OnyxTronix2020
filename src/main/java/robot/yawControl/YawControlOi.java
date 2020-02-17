@@ -6,25 +6,28 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.drivetrain.DriveTrain;
-import robot.vision.target.ConditionalTargetMaker;
+import robot.vision.target.VisionTarget;
 import robot.yawControl.commands.AlignByVisionOrOdometryAndVision;
 import robot.yawControl.commands.SetTurretState;
 
+import java.util.function.Supplier;
+
 public class YawControlOi {
   public YawControlOi(final YawControl yawControl, final DriveTrain driveTrain,
-                      final ConditionalTargetMaker targetMaker, final UniqueButtonCache buttonJoystickButtonCache,
-                      final UniqueAxisCache buttonsJoystickAxisCache,
-                      final UniqueButtonCache driverJoystickButtonCache) {
-    final JoystickButton alignByToTargetButton =
-        driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
-    alignByToTargetButton.whenPressed(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetMaker::makeTarget));
+                      final Supplier<VisionTarget> targetSupplier, final UniqueButtonCache buttonJoystickButtonCache,
+                      final UniqueAxisCache driverJoystickAxisCache) {
+    final JoystickAxis alignToTargetButton =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Button.kY.value);
+    alignToTargetButton.whenActive(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetSupplier)
+        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTF)).withTimeout(5)
+        .andThen(new SetTurretState(yawControl, YawControl.TurretState.RTR)));
 
-    final JoystickAxis setStateRTFButton = buttonsJoystickAxisCache
-        .createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
+    final JoystickButton setStateRTFButton = buttonJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBack.value);
     setStateRTFButton.whenActive(new SetTurretState(yawControl, YawControl.TurretState.RTF));
 
-    final JoystickAxis setStateRTRButton = buttonsJoystickAxisCache
-        .createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+    final JoystickButton setStateRTRButton = buttonJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kStart.value);
     setStateRTRButton.whenActive(new SetTurretState(yawControl, YawControl.TurretState.RTR));
 
     final JoystickButton setStateHOMINGButton = buttonJoystickButtonCache

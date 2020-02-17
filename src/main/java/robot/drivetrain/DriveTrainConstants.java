@@ -1,12 +1,12 @@
-
 package robot.drivetrain;
+
 public final class DriveTrainConstants {
 
   public static final class DriveTrainComponentsA {
-    static final int LEFT_MASTER_PORT = 2; //TODO check and change
-    static final int LEFT_SLAVE_PORT = 3; //TODO check and change
-    static final int RIGHT_MASTER_PORT = 0; //TODO check and change
-    static final int RIGHT_SLAVE_PORT = 1; //TODO check and change
+    static final int LEFT_MASTER_PORT = 2;
+    static final int LEFT_SLAVE_PORT = 3;
+    static final int RIGHT_MASTER_PORT = 0;
+    static final int RIGHT_SLAVE_PORT = 1;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double MAX_VELOCITY = 800; //TODO: needed to be checked
     static final double DRIVE_BY_DISTANCE_P = 0; //TODO change

@@ -30,9 +30,9 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
 
   public TalonSRXConfiguration getConfiguration() {
     final TalonSRXConfiguration config = new TalonSRXConfiguration();
-    masterMotor.configPeakCurrentLimit(PEAK_AMP);
-    masterMotor.configPeakCurrentDuration(PEAK_AMP_DURATION);
-    masterMotor.configContinuousCurrentLimit(CONTINUOUS_CURRENT_LIMIT);
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
     return config;
   }
 

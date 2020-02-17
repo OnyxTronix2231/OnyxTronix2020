@@ -9,7 +9,7 @@ import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
 public class StorageConveyorOi {
 
-  public StorageConveyorOi(final StorageConveyor storageConveyor, final UniqueButtonCache buttonsJoystickButtonCache){
+  public StorageConveyorOi(final StorageConveyor storageConveyor, final UniqueButtonCache buttonsJoystickButtonCache) {
 
     final JoystickButton moveStorageConveyorBySpeedButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);

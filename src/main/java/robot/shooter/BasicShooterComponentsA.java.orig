@@ -1,5 +1,6 @@
 package robot.shooter;
 
+<<<<<<< HEAD
 import static robot.shooter.ShooterConstants.ShooterComponentsA.CONTINUOUS_CURRENT_LIMIT;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.DOUBLE_SOLENOID_REVERSE_PORT;
@@ -12,6 +13,10 @@ import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_F;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
+=======
+import static robot.shooter.ShooterConstants.ShooterComponentsA.*;
+
+>>>>>>> develop
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.NeutralMode;

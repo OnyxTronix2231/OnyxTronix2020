@@ -19,9 +19,10 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCIT
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
 import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import controllers.VelocityController;
@@ -39,14 +40,12 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
     rightMaster.configFactoryDefault();
     rightMaster.configAllSettings(getFalconConfiguration());
-    rightMaster.configSupplyCurrentLimit(getCurrentConfiguration());
     rightMaster.setInverted(true);
     rightMaster.setNeutralMode(NeutralMode.Brake);
 
     rightSlave = new WPI_TalonFX(RIGHT_SLAVE_PORT);
     rightSlave.configFactoryDefault();
     rightSlave.configAllSettings(getFalconConfiguration());
-    rightSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     rightSlave.setInverted(true);
     rightSlave.setNeutralMode(NeutralMode.Brake);
     rightSlave.follow(rightMaster);
@@ -54,13 +53,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftMaster = new WPI_TalonFX(LEFT_MASTER_PORT);
     leftMaster.configFactoryDefault();
     leftMaster.configAllSettings(getFalconConfiguration());
-    leftMaster.configSupplyCurrentLimit(getCurrentConfiguration());
     leftMaster.setNeutralMode(NeutralMode.Brake);
 
     leftSlave = new WPI_TalonFX(LEFT_SLAVE_PORT);
     leftSlave.configFactoryDefault();
     leftSlave.configAllSettings(getFalconConfiguration());
-    leftSlave.configSupplyCurrentLimit(getCurrentConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
@@ -101,6 +98,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
   private TalonFXConfiguration getFalconConfiguration() {
     final TalonFXConfiguration config = new TalonFXConfiguration();
+    config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
     config.slot0.kP = DRIVE_BY_DISTANCE_P;
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
@@ -109,12 +107,12 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     config.slot2.kI = VELOCITY_CONTROLLER_I;
     config.slot2.kD = VELOCITY_CONTROLLER_D;
     config.slot2.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.supplyCurrLimit.currentLimit = CURRENT_LIMIT;
+    config.supplyCurrLimit.triggerThresholdCurrent = TRIGGER_THRESHOLD_CURRENT;
+    config.supplyCurrLimit.triggerThresholdTime = TRIGGER_THRESHOLD_TIME;
+    config.supplyCurrLimit.enable = true;
     config.openloopRamp = OPEN_LOOP_RAMP;
     config.closedloopRamp = CLOSED_LOOP_RAMP;
     return config;
-  }
-
-  private SupplyCurrentLimitConfiguration getCurrentConfiguration() {
-    return new SupplyCurrentLimitConfiguration(true, CURRENT_LIMIT, TRIGGER_THRESHOLD_CURRENT, TRIGGER_THRESHOLD_TIME);
   }
 }

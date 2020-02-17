@@ -12,16 +12,28 @@ import robot.shooter.commands.ShootBySpeed;
 import onyxTronix.UniqueButtonCache;
 import robot.shooter.commands.CloseShooterPiston;
 import robot.shooter.commands.OpenShooterPiston;
+<<<<<<< HEAD
+import robot.shooter.commands.ShootCondition;
+=======
 
+import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
+>>>>>>> develop
 
 public class ShooterOi {
 
   public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
+<<<<<<< HEAD
                    UniqueButtonCache buttonsJoystickButtonCache, final Shooter shooter,
                    final ShootAndCount shootAndCount, final BallCollector ballCollector) {
     final JoystickAxis shootBySpeedAxis =
         buttonJoystickAxisCache.createJoystickTrigger(XboxController.Button.kX.value);
     shootBySpeedAxis.whileActiveContinuous(new ShootCondition(shootAndCount, ballCollector));
+=======
+                   UniqueButtonCache buttonsJoystickButtonCache, final Shooter shooter) {
+    final Trigger shootBySpeedButton =
+        buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
+    shootBySpeedButton.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
+>>>>>>> develop
 
     final Trigger openPiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

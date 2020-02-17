@@ -8,6 +8,7 @@ import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
 import static robot.drivetrain.DriveTrainConstants.ENCODER_UNITS;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -15,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final BasicDriveTrainComponentsA components;
+  private final DriveTrainComponents components;
 
-  public DriveTrain(final BasicDriveTrainComponentsA components) {
+  public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
   }
 

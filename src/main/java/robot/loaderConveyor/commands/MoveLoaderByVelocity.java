@@ -7,22 +7,22 @@ import java.util.function.DoubleSupplier;
 
 public class MoveLoaderByVelocity extends CommandBase {
 
-    private final LoaderConveyor loaderConveyor;
-    private final DoubleSupplier velocitySupplier;
+  private final LoaderConveyor loaderConveyor;
+  private final DoubleSupplier velocitySupplier;
 
-    public MoveLoaderByVelocity(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
-      this.loaderConveyor = loaderConveyor;
-      this.velocitySupplier = velocitySupplier;
-      addRequirements(loaderConveyor);
-    }
-
-    @Override
-    public void execute() {
-      loaderConveyor.moveLoaderConveyorByVelocity(velocitySupplier.getAsDouble());
-    }
-
-    @Override
-    public void end(final boolean interrupted) {
-      loaderConveyor.stopMotor();
-    }
+  public MoveLoaderByVelocity(final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
+    this.loaderConveyor = loaderConveyor;
+    this.velocitySupplier = velocitySupplier;
+    addRequirements(loaderConveyor);
   }
+
+  @Override
+  public void execute() {
+    loaderConveyor.moveLoaderConveyorByVelocity(velocitySupplier.getAsDouble());
+  }
+
+  @Override
+  public void end(final boolean interrupted) {
+    loaderConveyor.stopMotor();
+  }
+}

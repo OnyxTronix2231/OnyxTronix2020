@@ -26,4 +26,5 @@ public final class ShooterConstants {
   static final double SPEED_FIRST = 35000; //TODO check and change very important meters
   static final double SPEED_MIDDLE = 36000; //TODO check and change very important meters
   static final double SPEED_THIRD = 38000; //TODO check and change very important meters
+  static final double PERCENT_OUT_PUT = 1;
 }

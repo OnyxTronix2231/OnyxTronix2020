@@ -17,6 +17,7 @@ import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.StopLoaderConveyor;
 import robot.shooter.Shooter;
 import robot.shooter.commands.ShootByDistance;
+import robot.shooter.commands.ShootByVelocity;
 import robot.shooter.commands.StopShooter;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.target.VisionTargetFactory;
@@ -67,5 +68,11 @@ public class SmartShooterOi {
     ShootWithoutLimeLight.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter));
+
+    final JoystickButton MoveShooterWheel = driveJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBumperLeft.value,false);
+    MoveShooterWheel.whenPressed(new ShootByDistance(shooter,   () ->
+        factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
+
   }
 }

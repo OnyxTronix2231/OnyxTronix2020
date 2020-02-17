@@ -13,7 +13,7 @@ public class YawControl extends Turret {
   public enum TurretState {
     RTF,
     RTR,
-    Homing;
+    HOMING;
   }
 
   private final DriveTrain driveTrain;
@@ -34,7 +34,7 @@ public class YawControl extends Turret {
       case RTR:
         setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getAngleRTR));
         break;
-      case Homing:
+      case HOMING:
         setDefaultCommand(new MoveTurretToAngleAndKeep(this, () -> 0));
         break;
     }

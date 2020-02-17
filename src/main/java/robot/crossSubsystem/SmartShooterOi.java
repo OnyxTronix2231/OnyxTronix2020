@@ -43,14 +43,14 @@ public class SmartShooterOi {
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
 
     shootWithBallStopperByDistance.and(moveConveyorsByLoaderConveyorTriggerButton.negate()).
-        whileActiveContinuous(new SpinShooterAndLoaderByDistance(shooter,loaderConveyor,
+        whileActiveContinuous(new SpinShooterAndLoaderByDistance(shooter, loaderConveyor,
             () -> factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
 
     shootWithBallStopperByDistance.and(moveConveyorsByLoaderConveyorTriggerButton.negate()).
         whileActiveContinuous
             (new MoveConveyorsByBallStopperTrigger(shooter, loaderConveyor,
                 storageConveyor, ballStopper, () -> STORAGE_SPEED,
-                 () -> BALL_STOPPER_SPEED))
+                () -> BALL_STOPPER_SPEED))
         .whenInactive(new StopShooter(shooter).alongWith(new StopLoaderConveyor(loaderConveyor)));
 
     moveConveyorsByLoaderConveyorTriggerButton.and(shootWithBallStopperByDistance).
@@ -66,16 +66,15 @@ public class SmartShooterOi {
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
-        .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY)));
+        .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY))));
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
-            storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new StopShooter(shooter)
-        .alongWith(new CloseShooterPiston(shooter)));
+        storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
+        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
 
-    final JoystickButton MoveShooterWheel = driveJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBumperLeft.value,false);
-    MoveShooterWheel.whenPressed(new ShootByDistance(shooter,   () ->
-        factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
+    final JoystickButton speedShooter = driveJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
+    speedShooter.whenPressed(new ShootByDistance(shooter, () ->
+        factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()).withTimeout());
   }
 }

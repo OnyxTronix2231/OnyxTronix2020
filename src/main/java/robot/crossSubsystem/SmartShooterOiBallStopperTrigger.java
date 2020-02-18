@@ -23,6 +23,7 @@ import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.shooter.commands.StopShooter;
 import robot.storageConveyor.StorageConveyor;
+import robot.vision.Vision;
 import robot.vision.target.VisionTargetFactory;
 import robot.vision.target.VisionTargetType;
 
@@ -32,12 +33,12 @@ public class SmartShooterOiBallStopperTrigger {
                                           final UniqueAxisCache driveJoystickAxisCache,
                                           final Shooter shooter, final LoaderConveyor loaderConveyor,
                                           final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                                          final VisionTargetFactory factory) {
+                                          final Vision vision) {
     final JoystickAxis shootWithBallStopperByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
     shootWithBallStopperByDistance.whileActiveContinuous(new SpinShooterAndLoaderByDistance(shooter, loaderConveyor,
-        () -> factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()));
+        () -> vision.getOuterTarget().getDistance()));
 
     shootWithBallStopperByDistance.whileActiveContinuous(new MoveConveyorsByBallStopperTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> STORAGE_SPEED,
@@ -57,7 +58,7 @@ public class SmartShooterOiBallStopperTrigger {
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
     spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->
-        factory.makeTarget(VisionTargetType.OUTER_TARGET).getDistance()).withTimeout()); //TODO: Add the timeout from YawControl
+        vision.getOuterTarget().getDistance()).withTimeout()); //TODO: Add the timeout from YawControl
   }
 }
 

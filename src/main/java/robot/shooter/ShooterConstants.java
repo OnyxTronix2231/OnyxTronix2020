@@ -28,10 +28,10 @@ public final class ShooterConstants {
   static final int MIN_THIRD_RANGE_CM = 750; //TODO check and change very important meters
   static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final int TOLERANCE = 50;
-  static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
-  static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
   static final int SPEED_FIRST = 35000; //TODO check and change very important meters
   static final int SPEED_MIDDLE = 36000; //TODO check and change very important meters
   static final int SPEED_THIRD = 38000; //TODO check and change very important meters
+  static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
+  static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
 
 }

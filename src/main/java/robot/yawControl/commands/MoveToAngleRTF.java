@@ -8,10 +8,10 @@ import java.util.function.DoubleSupplier;
 
 public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
 
-  private DriveTrain driveTrain;
+  private final DriveTrain driveTrain;
   private double initialRobotAngle;
 
-  public MoveToAngleRTF(Turret turret, DriveTrain driveTrain, DoubleSupplier supplierAngle) {
+  public MoveToAngleRTF(final Turret turret, final DriveTrain driveTrain, final DoubleSupplier supplierAngle) {
     super(turret, supplierAngle);
     this.driveTrain = driveTrain;
   }

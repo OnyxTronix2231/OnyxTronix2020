@@ -1,5 +1,7 @@
 package robot.yawControl;
 
+import static robot.yawControl.YawControlConstants.TIMEOUT;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
@@ -19,7 +21,7 @@ public class YawControlOi {
     final JoystickAxis alignToTargetButton =
         driverJoystickAxisCache.createJoystickTrigger(XboxController.Button.kY.value);
     alignToTargetButton.whenActive(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetSupplier)
-        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTF)).withTimeout(5)
+        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTF)).withTimeout(TIMEOUT)
         .andThen(new SetTurretState(yawControl, YawControl.TurretState.RTR)));
 
     final JoystickButton setStateRTFButton = buttonJoystickButtonCache

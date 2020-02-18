@@ -1,5 +1,7 @@
 package robot.yawControl;
 
+import static robot.yawControl.YawControlConstants.ONE_EIGHTY_DEGREES;
+import static robot.yawControl.YawControlConstants.SIDE_NUMBER;
 import static robot.yawControl.YawControlConstants.TARGET_Y;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -13,7 +15,7 @@ public class YawControl extends Turret {
   public enum TurretState {
     RTF,
     RTR,
-    HOMING;
+    HOMING
   }
 
   private final DriveTrain driveTrain;
@@ -58,13 +60,13 @@ public class YawControl extends Turret {
     final double x = pose.getTranslation().getX();
     final double y = pose.getTranslation().getY();
     double angle = pose.getRotation().getDegrees();
-    int side = 1;
+    int side = SIDE_NUMBER;
     if (y < TARGET_Y) {
       angle = -angle;
     }
-    if (angle < 180 && angle > 0) {
-      side = -1;
+    if (angle < ONE_EIGHTY_DEGREES && angle > 0) {
+      side = -SIDE_NUMBER;
     }
-    return 180 + side * (Math.atan(Math.abs(y - TARGET_Y) / x) + angle);
+    return ONE_EIGHTY_DEGREES + side * (Math.atan(Math.abs(y - TARGET_Y) / x) + angle);
   }
 }

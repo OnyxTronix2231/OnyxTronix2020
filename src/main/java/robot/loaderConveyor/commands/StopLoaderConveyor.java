@@ -11,7 +11,7 @@ public class StopLoaderConveyor extends InstantCommand {
   }
 
   @Override
-  public void end(final boolean interrupted) {
+  public void initialize() {
     loaderConveyor.stopMotor();
   }
 }

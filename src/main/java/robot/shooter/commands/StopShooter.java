@@ -12,7 +12,7 @@ public class StopShooter extends InstantCommand {
     }
 
   @Override
-  public void end(final boolean interrupted) {
+  public void initialize() {
     shooter.stopMotor();
   }
 }

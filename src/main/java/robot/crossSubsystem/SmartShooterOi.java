@@ -29,7 +29,6 @@ public class SmartShooterOi {
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
                         final VisionTargetFactory factory) {
-
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 

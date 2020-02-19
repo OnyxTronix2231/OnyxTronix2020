@@ -15,7 +15,6 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
-    Shuffleboard.getTab("Shooter").addNumber("RPM", () -> ((components.getMasterMotor().getSelectedSensorVelocity() * 10) / 4096) * 60);
   }
 
   public void shootBySpeed(final double speed) {

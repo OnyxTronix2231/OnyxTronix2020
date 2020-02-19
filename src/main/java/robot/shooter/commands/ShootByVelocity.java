@@ -2,6 +2,7 @@ package robot.shooter.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.shooter.Shooter;
+
 import java.util.function.DoubleSupplier;
 
 public class ShootByVelocity extends CommandBase {

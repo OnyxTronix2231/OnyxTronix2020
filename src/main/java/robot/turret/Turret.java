@@ -14,7 +14,7 @@ public class Turret extends SubsystemBase {
 
   private final TurretComponents components;
 
-  protected Turret(final TurretComponents components) {
+  public Turret(final TurretComponents components) {
     this.components = components;
   }
 

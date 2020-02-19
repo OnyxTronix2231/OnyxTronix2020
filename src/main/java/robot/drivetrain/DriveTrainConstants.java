@@ -26,9 +26,9 @@ public final class DriveTrainConstants {
     static final int LEFT_SLAVE_PORT = 3;
     static final int RIGHT_MASTER_PORT = 0;
     static final int RIGHT_SLAVE_PORT = 1;
-    static final int PIGEON_CONNECTED_PORT = 11;
     static final int MAX_ACCELERATION = 1000; // TODO: Calibration with A
     static final int MAX_VELOCITY = 13400; // TODO: Calibration with A
+    static final int PIGEON_PORT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double DRIVE_BY_DISTANCE_P = 0; // TODO: Calibration with A
     static final double DRIVE_BY_DISTANCE_I = 0; // TODO: Calibration with A

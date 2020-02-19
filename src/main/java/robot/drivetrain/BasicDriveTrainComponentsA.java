@@ -15,6 +15,7 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VEL
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_CONNECTED_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRAJECTORY_D;
@@ -57,6 +58,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
+  private final NormalizedPigeonIMU normalizedPigeonIMU;
   private final DifferentialDrive differentialDrive;
   private final PigeonIMU gyro;
   private final DifferentialDriveOdometry odometry;
@@ -89,6 +91,9 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.configAllSettings(getFalconConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
+
+    normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
+    normalizedPigeonIMU.setYaw(0);
 
     final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
         VELOCITY_CONTROLLER_PID_SLOT);
@@ -133,6 +138,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   @Override
   public IMotorController getLeftSlaveMotor() {
     return leftSlave;
+  }
+
+  @Override
+  public NormalizedPigeonIMU getPigeonIMU() {
+    return null;
   }
 
   @Override

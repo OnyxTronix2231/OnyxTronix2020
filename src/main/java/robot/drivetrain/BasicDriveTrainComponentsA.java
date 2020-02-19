@@ -90,10 +90,10 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    final VelocityController leftVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
-        leftMaster);
-    final VelocityController rightVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
-        rightMaster);
+    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
+    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
 
     differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);

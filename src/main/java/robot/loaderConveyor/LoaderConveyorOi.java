@@ -9,7 +9,7 @@ import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 
 public class LoaderConveyorOi {
   public LoaderConveyorOi(final LoaderConveyor loaderConveyor, final UniqueButtonCache buttonsJoystickButtonCache) {
-    final Trigger moveLoaderConveyorBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kBack.value);
+    final Trigger moveLoaderConveyorBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kA.value);
     moveLoaderConveyorBySpeed.whileActiveContinuous(new MoveLoaderConveyorBySpeed(loaderConveyor,
         () -> PERCENTAGE_OUTPUT));
   }

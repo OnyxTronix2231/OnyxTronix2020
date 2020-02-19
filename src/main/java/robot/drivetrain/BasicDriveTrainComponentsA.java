@@ -27,6 +27,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import controllers.VelocityController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import robot.RobotConstants;
 
 public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
@@ -61,10 +62,10 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    final VelocityController leftVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
-        leftMaster);
-    final VelocityController rightVelocityController = new VelocityController(MAX_VELOCITY, VELOCITY_CONTROLLER_PID_SLOT,
-        rightMaster);
+    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
+    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
 
     differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);

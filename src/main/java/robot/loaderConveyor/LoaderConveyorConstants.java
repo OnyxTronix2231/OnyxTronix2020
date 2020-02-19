@@ -4,7 +4,7 @@ public final class LoaderConveyorConstants {
 
   public static final class LoaderConveyorComponentsA {
 
-    static final int MASTER_MOTOR_PORT = 16;//TODO Reset!!!!!!!!
+    static final int MASTER_MOTOR_PORT = 9;//TODO check and change
     static final double VELOCITY_P = 0;//TODO check and change
     static final double VELOCITY_I = 0;//TODO check and change
     static final double VELOCITY_D = 0;//TODO check and change
@@ -15,5 +15,5 @@ public final class LoaderConveyorConstants {
     static final int PEAK_AMP = 40; //TODO check and change
   }
 
-  static final double SPEED = 0.8;
+  static final double PERCENTAGE_OUTPUT = 0.8;
 }

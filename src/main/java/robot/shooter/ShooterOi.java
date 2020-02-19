@@ -17,15 +17,14 @@ import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
 public class ShooterOi {
 
   public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
-                   UniqueButtonCache buttonsJoystickButtonCache, final Shooter shooter) {
-    final Trigger shootBySpeedButton =
-        buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
-    final JoystickAxis shootBySpeedJoystick = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-    shootBySpeedJoystick.whileActiveContinuous(new ShootBySpeed(shooter, shootBySpeedJoystick::getRawAxis));
-    final Trigger openPiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
+                   UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
+    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, shootBySpeedAxis::getRawAxis));
+
+    final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));
 
-    final Trigger closePiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
+    final Trigger closePiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
     closePiston.whileActiveOnce(new CloseShooterPiston(shooter));
 
   }

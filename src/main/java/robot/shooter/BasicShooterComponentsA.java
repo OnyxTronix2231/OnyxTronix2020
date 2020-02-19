@@ -24,7 +24,6 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
     masterMotor.setSensorPhase(true);
-    masterMotor.setSelectedSensorPosition(0);
 
     slaveMotor = new WPI_TalonSRX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();

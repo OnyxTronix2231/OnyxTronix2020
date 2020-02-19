@@ -42,11 +42,11 @@ public class Turret extends SubsystemBase {
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
-    return angle / ENCODER_TO_ANGLE;
+    return angle / ENCODER_TO_ANGLE + 616;
   }
 
   public double getAngleRTR() {
-    return getEncoderPosition() * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
+    return (getEncoderPosition() - 616) * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
   }
 
   public double getEncoderPosition() {

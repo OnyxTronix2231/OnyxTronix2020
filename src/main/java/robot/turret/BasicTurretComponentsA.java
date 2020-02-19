@@ -26,6 +26,8 @@ public class BasicTurretComponentsA implements TurretComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.enableCurrentLimit(true);
     masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.setInverted(true);
+    masterMotor.setSensorPhase(true);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -40,6 +42,10 @@ public class BasicTurretComponentsA implements TurretComponents {
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    config.forwardSoftLimitThreshold = 1223;
+    config.reverseSoftLimitThreshold = 257;
+    config.forwardSoftLimitEnable = true;
+    config.reverseSoftLimitEnable = true;
     return config;
   }
 

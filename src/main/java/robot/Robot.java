@@ -85,13 +85,13 @@ public class Robot extends TimedRobot {
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new BallCollectorOi(ballCollector, driveJoystickAxisCache, driveJoystickButtonCache);
+    new BallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     new BallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
-    new StorageConveyorOi(storageConveyor, buttonsJoystickButtonCache);
+    new StorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
     final Turret turret = new Turret(turretComponents);
     new TurretOi(turret, buttonsJoystickAxisCache);
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     new LoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
     final Shooter shooter = new Shooter(shooterComponents);
-    new ShooterOi(buttonsJoystickAxisCache, buttonsJoystickButtonCache, shooter);
+    new ShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
   }
 
   @Override

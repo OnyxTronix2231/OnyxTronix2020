@@ -67,12 +67,12 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
     normalizedPigeonIMU.setYaw(0);
 
-//    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
-//        VELOCITY_CONTROLLER_PID_SLOT);
-//    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
-//        VELOCITY_CONTROLLER_PID_SLOT);
+    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
+    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
 
-    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
+    differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
   }

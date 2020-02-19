@@ -11,6 +11,7 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_CLO
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_CURRENT;
@@ -35,6 +36,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
+  private final NormalizedPigeonIMU normalizedPigeonIMU;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponentsA() {
@@ -62,12 +64,15 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
 
-    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
-    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
+    normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
+    normalizedPigeonIMU.setYaw(0);
 
-    differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
+//    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
+//        VELOCITY_CONTROLLER_PID_SLOT);
+//    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
+//        VELOCITY_CONTROLLER_PID_SLOT);
+
+    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
   }
@@ -90,6 +95,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   @Override
   public IMotorController getLeftSlaveMotor() {
     return leftSlave;
+  }
+
+  @Override
+  public NormalizedPigeonIMU getPigeonIMU() {
+    return null;
   }
 
   @Override

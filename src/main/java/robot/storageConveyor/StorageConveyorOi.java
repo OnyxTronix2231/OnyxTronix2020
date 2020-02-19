@@ -1,6 +1,6 @@
 package robot.storageConveyor;
 
-import static robot.storageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.ENGINE_SPEED;
+import static robot.storageConveyor.StorageConveyorConstants.StorageConveyorComponentsA.SPEED;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -13,6 +13,6 @@ public class StorageConveyorOi {
 
     final JoystickButton moveStorageConveyorBySpeedButton =
         buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kY.value);
-    moveStorageConveyorBySpeedButton.whileHeld(new MoveStorageConveyorBySpeed(storageConveyor, () -> ENGINE_SPEED));
+    moveStorageConveyorBySpeedButton.whileHeld(new MoveStorageConveyorBySpeed(storageConveyor, () -> SPEED));
   }
 }

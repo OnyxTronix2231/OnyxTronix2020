@@ -15,7 +15,7 @@ public final class BallCollectorOi {
   public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driverJoystickAxisCache,
                          final UniqueButtonCache driverJoystickButtonCache) {
     final Trigger collectBySpeed =
-        driverJoystickAxisCache.createJoystickTrigger(XboxController.Button.kB.value);
+        driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
     collectBySpeed.whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> SPEED));
 
     final Trigger openBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger

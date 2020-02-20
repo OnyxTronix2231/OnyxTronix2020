@@ -28,7 +28,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import controllers.VelocityController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import robot.RobotConstants;
 
 public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 

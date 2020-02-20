@@ -17,13 +17,13 @@ import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveConveyorsByLoaderConveyorTrigger extends ParallelCommandGroup {
+public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
 
-  public MoveConveyorsByLoaderConveyorTrigger(final Shooter shooter, final LoaderConveyor loaderConveyor,
-                                              final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                                              final DoubleSupplier loaderSpeed,
-                                              final DoubleSupplier storageSpeedSupplier,
-                                              final DoubleSupplier ballStopperSpeedSupplier) {
+  public MoveConveyorsByLoaderAsTrigger(final Shooter shooter, final LoaderConveyor loaderConveyor,
+                                        final StorageConveyor storageConveyor, final BallStopper ballStopper,
+                                        final DoubleSupplier loaderSpeed,
+                                        final DoubleSupplier storageSpeedSupplier,
+                                        final DoubleSupplier ballStopperSpeedSupplier) {
     super(sequence(
         new WaitCommand(DELAY_AFTER_SHOOT),
         new WaitUntilShooterVelocityOnTarget(shooter),

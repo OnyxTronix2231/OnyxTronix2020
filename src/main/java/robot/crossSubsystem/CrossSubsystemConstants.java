@@ -10,6 +10,5 @@ public class CrossSubsystemConstants {
   public static final double DELAY_AFTER_SHOOT = 0; //TODO check and  change if need
   public static final double LOADER_DELAY = 0.3; //TODO check and  change if need
   static final double SHOOTER_VELOCITY = 39000; //TODO check and change
-
 }
 

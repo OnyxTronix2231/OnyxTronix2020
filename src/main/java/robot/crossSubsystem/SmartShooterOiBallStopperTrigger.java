@@ -12,7 +12,7 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByBallStopperTrigger;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderConveyorTrigger;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.crossSubsystem.commands.SpinShooterAndLoaderByDistance;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.StopLoaderConveyor;
@@ -49,7 +49,7 @@ public class SmartShooterOiBallStopperTrigger {
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
         .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY))));
 
-    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
         () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
 

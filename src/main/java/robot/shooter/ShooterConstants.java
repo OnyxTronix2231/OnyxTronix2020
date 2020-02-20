@@ -33,5 +33,4 @@ public final class ShooterConstants {
   static final int SPEED_THIRD = 38000; //TODO check and change very important meters
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
-
 }

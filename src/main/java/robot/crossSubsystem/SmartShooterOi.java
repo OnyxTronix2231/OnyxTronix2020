@@ -11,7 +11,7 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderConveyorTrigger;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.shooter.Shooter;
 import robot.shooter.commands.CloseShooterPiston;
@@ -35,7 +35,7 @@ public class SmartShooterOi {
         () -> vision.getOuterTarget().getDistance()));
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(
-        new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+        new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
 
@@ -45,7 +45,7 @@ public class SmartShooterOi {
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
         .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY))));
 
-    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,
+    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
         () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
 

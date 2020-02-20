@@ -7,15 +7,28 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.DRIVE_B
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.DRIVE_BY_DISTANCE_P;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.LEFT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.LEFT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_ACCELERATION;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_OUTPUT_FORWARD;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_OUTPUT_REVERSE;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRAJECTORY_D;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRAJECTORY_I;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRAJECTORY_P;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_CURRENT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_TIME;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.MAX_SPEED_METERS_PER_SECOND;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.MAX_VOLTAGE;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRACKWIDTH_METERS;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.VOLTS;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.VOLT_SECONDS_PER_METER;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.VOLT_SECONDS_SQUARED_PER_METER;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
@@ -27,7 +40,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import controllers.VelocityController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 
 public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
@@ -37,6 +57,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final WPI_TalonFX leftSlave;
   private final NormalizedPigeonIMU normalizedPigeonIMU;
   private final DifferentialDrive differentialDrive;
+  private final DifferentialDriveOdometry odometry;
+  private final SimpleMotorFeedforward motorFeedforward;
+  private final DifferentialDriveKinematics driveKinematics;
+  private final DifferentialDriveVoltageConstraint autonomousVoltage;
+  private final TrajectoryConfig trajectoryConfig;
 
   public BasicDriveTrainComponentsA() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
@@ -74,6 +99,18 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
+
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
+    odometry.resetPosition(new Pose2d(), new Rotation2d());
+
+    motorFeedforward = new SimpleMotorFeedforward(VOLTS, VOLT_SECONDS_PER_METER, VOLT_SECONDS_SQUARED_PER_METER);
+
+    driveKinematics = new DifferentialDriveKinematics(TRACKWIDTH_METERS);
+
+    autonomousVoltage = new DifferentialDriveVoltageConstraint(motorFeedforward, driveKinematics, MAX_VOLTAGE);
+
+    trajectoryConfig = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+        .setKinematics(driveKinematics).addConstraint(autonomousVoltage);
   }
 
   @Override
@@ -106,6 +143,31 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     return differentialDrive;
   }
 
+  @Override
+  public DifferentialDriveOdometry getOdometry() {
+    return odometry;
+  }
+
+  @Override
+  public SimpleMotorFeedforward getMotorFeedForward() {
+    return motorFeedforward;
+  }
+
+  @Override
+  public DifferentialDriveKinematics getDriveKinematics() {
+    return driveKinematics;
+  }
+
+  @Override
+  public DifferentialDriveVoltageConstraint getAutonomousVoltage() {
+    return autonomousVoltage;
+  }
+
+  @Override
+  public TrajectoryConfig getTrajectoryConfig() {
+    return trajectoryConfig;
+  }
+
   private TalonFXConfiguration getFalconConfiguration() {
     final TalonFXConfiguration config = new TalonFXConfiguration();
     config.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
@@ -113,10 +175,18 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     config.slot0.kI = DRIVE_BY_DISTANCE_I;
     config.slot0.kD = DRIVE_BY_DISTANCE_D;
     config.slot0.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.slot1.kP = TRAJECTORY_P;
+    config.slot1.kI = TRAJECTORY_I;
+    config.slot1.kD = TRAJECTORY_D;
+    config.slot1.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     config.slot2.kP = VELOCITY_CONTROLLER_P;
     config.slot2.kI = VELOCITY_CONTROLLER_I;
     config.slot2.kD = VELOCITY_CONTROLLER_D;
     config.slot2.kF = PERCENTAGE_CLOSED_LOOP_OUTPUT * MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
+    config.motionCruiseVelocity = MAX_VELOCITY;
+    config.motionAcceleration = MAX_ACCELERATION;
+    config.peakOutputForward = MAX_OUTPUT_FORWARD;
+    config.peakOutputReverse = MAX_OUTPUT_REVERSE;
     config.supplyCurrLimit.currentLimit = CURRENT_LIMIT;
     config.supplyCurrLimit.triggerThresholdCurrent = TRIGGER_THRESHOLD_CURRENT;
     config.supplyCurrLimit.triggerThresholdTime = TRIGGER_THRESHOLD_TIME;

@@ -28,10 +28,10 @@ public class MoveConveyorsByLoaderConveyorTrigger extends ParallelCommandGroup {
         new WaitCommand(DELAY_AFTER_SHOOT),
         new WaitUntilShooterVelocityOnTarget(shooter),
         new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(LOADER_DELAY),
-            parallel(
-                new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
-                new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
-                .withTimeout(TIME_BETWEEN_BALLS)));
+        parallel(
+            new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
+            new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
+            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
+            .withTimeout(TIME_BETWEEN_BALLS)));
   }
 }

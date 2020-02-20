@@ -10,7 +10,7 @@ import java.util.function.DoubleSupplier;
 
 public class SpinShooterAndLoader extends ParallelCommandGroup {
 
-  public SpinShooterAndLoader(final Shooter shooter,final LoaderConveyor loaderConveyor,final DoubleSupplier velocitySupplier) {
+  public SpinShooterAndLoader(final Shooter shooter, final LoaderConveyor loaderConveyor, final DoubleSupplier velocitySupplier) {
     super(new ShootByVelocity(shooter, velocitySupplier),
         new MoveLoaderByVelocity(loaderConveyor, velocitySupplier));
   }

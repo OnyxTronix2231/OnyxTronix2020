@@ -24,8 +24,6 @@ import robot.shooter.commands.ShootByVelocity;
 import robot.shooter.commands.StopShooter;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
-import robot.vision.target.VisionTargetFactory;
-import robot.vision.target.VisionTargetType;
 
 public class SmartShooterOiBallStopperTrigger {
 

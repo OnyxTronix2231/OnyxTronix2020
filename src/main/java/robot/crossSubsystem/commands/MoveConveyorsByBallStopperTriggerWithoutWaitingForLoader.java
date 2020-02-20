@@ -22,7 +22,7 @@ public class MoveConveyorsByBallStopperTriggerWithoutWaitingForLoader extends Pa
                                                                   final DoubleSupplier ballStopperSpeedSupplier) {
     super(sequence(new WaitUntilShooterVelocityOnTarget(shooter),
         parallel(
-                new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier)).withTimeout(TIME_BETWEEN_BALLS)));
+            new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
+            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier)).withTimeout(TIME_BETWEEN_BALLS)));
   }
 }

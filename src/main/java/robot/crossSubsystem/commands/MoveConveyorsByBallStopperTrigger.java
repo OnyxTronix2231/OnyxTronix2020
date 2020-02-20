@@ -21,12 +21,12 @@ public class MoveConveyorsByBallStopperTrigger extends ParallelCommandGroup {
                                            final DoubleSupplier storageSpeedSupplier,
                                            final DoubleSupplier ballStopperSpeedSupplier) {
     super(
-            sequence(
-                new WaitUntilShooterVelocityOnTarget(shooter),
-                new WaitUntilLoaderVelocityOnTarget(loaderConveyor),
-                parallel(
-                    new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-                    new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
-                    .withTimeout(TIME_BETWEEN_BALLS)));
+        sequence(
+            new WaitUntilShooterVelocityOnTarget(shooter),
+            new WaitUntilLoaderVelocityOnTarget(loaderConveyor),
+            parallel(
+                new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
+                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
+                .withTimeout(TIME_BETWEEN_BALLS)));
   }
 }

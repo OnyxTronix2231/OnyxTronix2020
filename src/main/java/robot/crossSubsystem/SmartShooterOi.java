@@ -20,8 +20,6 @@ import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
-import robot.vision.target.VisionTargetFactory;
-import robot.vision.target.VisionTargetType;
 
 public class SmartShooterOi {
 
@@ -34,7 +32,7 @@ public class SmartShooterOi {
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-            () -> vision.getOuterTarget().getDistance()));
+        () -> vision.getOuterTarget().getDistance()));
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(
         new MoveConveyorsByLoaderConveyorTrigger(shooter, loaderConveyor,

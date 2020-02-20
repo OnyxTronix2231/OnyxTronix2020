@@ -1,6 +1,6 @@
 package robot.ballCollector;
 
-import static robot.ballCollector.BallCollectorConstants.SPEED;
+import static robot.ballCollector.BallCollectorConstants.PERCENT_OUTPUT;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -13,17 +13,14 @@ import robot.ballCollector.commands.OpenBallCollectorPistons;
 public final class BallCollectorOi {
 
   public BallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driverJoystickAxisCache,
+                         UniqueAxisCache buttonsJoystickAxisCache,
                          final UniqueButtonCache driverJoystickButtonCache) {
-    final Trigger collectBySpeed =
-        driverJoystickAxisCache.createJoystickTrigger(XboxController.Button.kB.value);
-    collectBySpeed.whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> SPEED));
+    final Trigger driveCollectBySpeed =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
+    final Trigger buttonsCollectBySpeed =
+        buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
 
-    final Trigger openBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
-        (XboxController.Button.kBumperRight.value);
-    openBallCollectorPistonsButton.whenActive(new OpenBallCollectorPistons(ballCollector));
-
-    final Trigger closeBallCollectorPistonsButton = driverJoystickButtonCache.createJoystickTrigger
-        (XboxController.Button.kBumperLeft.value);
-    closeBallCollectorPistonsButton.whenActive(new CloseBallCollectorPistons(ballCollector));
+    buttonsCollectBySpeed.or(driveCollectBySpeed).
+        whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT));
   }
 }

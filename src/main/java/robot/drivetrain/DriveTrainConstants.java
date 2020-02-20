@@ -7,9 +7,9 @@ import java.util.List;
 
 public final class DriveTrainConstants {
 
+  public static final int DRIVE_BY_DISTANCE_SLOT = 0;
   static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
   static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
-  static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
   static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
   static final int CM_TO_METERS = 100;
   static final int SEC_TO_100MS = 10;
@@ -27,9 +27,9 @@ public final class DriveTrainConstants {
     static final int LEFT_SLAVE_PORT = 3;
     static final int RIGHT_MASTER_PORT = 0;
     static final int RIGHT_SLAVE_PORT = 1;
-    static final int PIGEON_CONNECTED_PORT = 11;
     static final int MAX_ACCELERATION = 1000; // TODO: Calibration with A
     static final int MAX_VELOCITY = 13400; // TODO: Calibration with A
+    static final int PIGEON_PORT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double DRIVE_BY_DISTANCE_P = 0; // TODO: Calibration with A
     static final double DRIVE_BY_DISTANCE_I = 0; // TODO: Calibration with A
@@ -44,7 +44,7 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_I = 0; // TODO: Calibration with A
     static final double VELOCITY_CONTROLLER_D = 0; // TODO: Calibration with A
     static final double MAX_OUTPUT_FORWARD = 0.9;
-    static final double MAX_OUTPUT_REVERSE = 0.9;
+    static final double MAX_OUTPUT_REVERSE = -0.9;
     static final double TRAJECTORY_P = 0.4; // TODO: Calibration with A
     static final double TRAJECTORY_I = 0; // TODO: Calibration with A
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A

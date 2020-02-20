@@ -7,9 +7,9 @@ import java.util.List;
 
 public final class DriveTrainConstants {
 
+  public static final int DRIVE_BY_DISTANCE_SLOT = 0;
   static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
   static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
-  static final int DRIVE_BY_DISTANCE_SLOT = 0; //TODO change
   static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
   static final int CM_TO_METERS = 100;
   static final int SEC_TO_100MS = 10;

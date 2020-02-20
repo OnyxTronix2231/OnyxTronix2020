@@ -3,23 +3,23 @@ package robot.yawControl.commands;
 import robot.drivetrain.DriveTrain;
 import robot.turret.Turret;
 import robot.turret.commands.MoveTurretToAngleAndKeep;
+import robot.yawControl.YawControl;
 
 import java.util.function.DoubleSupplier;
 
 public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
 
-  private final DriveTrain driveTrain;
+  private YawControl yawControl;
   private double initialRobotAngle;
 
-  public MoveToAngleRTF(final Turret turret, final DriveTrain driveTrain, final DoubleSupplier supplierAngle) {
-    super(turret, supplierAngle);
-    this.driveTrain = driveTrain;
+  public MoveToAngleRTF(final YawControl yawControl, final DoubleSupplier supplierAngle) {
+    super(yawControl, supplierAngle);
   }
 
   @Override
   public void initialize() {
     super.initialize();
-    initialRobotAngle = driveTrain.getOdometryHeading();
+    initialRobotAngle = yawControl.getRobotHeading();
   }
 
   @Override

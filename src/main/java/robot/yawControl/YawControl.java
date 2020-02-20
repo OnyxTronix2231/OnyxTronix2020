@@ -20,10 +20,12 @@ public class YawControl extends Turret {
 
   private final DriveTrain driveTrain;
   private TurretState turretState;
+  private double robotHeadingOffset;
 
   public YawControl(final TurretComponents turretComponents, final DriveTrain driveTrain) {
     super(turretComponents);
     this.driveTrain = driveTrain;
+    robotHeadingOffset = 0;
     setTurretState(TurretState.RTR);
   }
 
@@ -31,8 +33,7 @@ public class YawControl extends Turret {
     if (getDefaultCommand() != null) getDefaultCommand().cancel();
     switch (turretState) {
       case RTF:
-        setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getTurretAngleRTF));
-        break;
+        robotHeadingOffset = getTurretAngleRTF();
       case RTR:
         setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getAngleRTR));
         break;
@@ -47,13 +48,18 @@ public class YawControl extends Turret {
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
     if (turretState == TurretState.RTF) {
-      tempAngle -= driveTrain.getOdometryHeading();
+      tempAngle += getTurretAngleRTF() - robotHeadingOffset;
+      robotHeadingOffset = driveTrain.getRawRobotHeading();
     }
     super.moveToAngle(tempAngle);
   }
 
   public double getTurretAngleRTF() {
-    return driveTrain.getOdometryHeading() + getAngleRTR();
+    return getRobotHeading() + getAngleRTR();
+  }
+
+  public double getRobotHeading() {
+    return driveTrain.getRawRobotHeading();
   }
 
   public double getAngleToTargetFromPose2d(final Pose2d pose) {

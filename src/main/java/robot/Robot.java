@@ -127,7 +127,8 @@ public class Robot extends TimedRobot {
 
     new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickAxisCache);
 
-    pathChooser.setDefaultOption("Path 1", 1);
+    pathChooser.setDefaultOption("None", 0);
+    pathChooser.addOption("Path 1", 1);
     pathChooser.addOption("Path 2", 2);
     pathChooser.addOption("Path 3", 3);
     pathChooser.addOption("Path 4", 4);
@@ -146,7 +147,7 @@ public class Robot extends TimedRobot {
         new PrimaryPath(shooter, driveTrain, trajectoryGenerator, ballCollector).schedule();
         break;
       case 2:
-        new SecondaryPath().schedule();
+        new SecondaryPath(driveTrain, trajectoryGenerator, ballCollector, shooter).schedule();
         break;
     }
   }

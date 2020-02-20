@@ -1,5 +1,6 @@
 package robot.crossSubsystem;
 
+import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.CLOSE_RANGE_VELOCITY;
@@ -52,6 +53,6 @@ public class SmartShooterOi {
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
     spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->
-        vision.getOuterTarget().getDistance()).withTimeout(5)); //TODO: Add the timeout from YawControl
+        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT)); //TODO: Add the timeout from YawControl
   }
 }

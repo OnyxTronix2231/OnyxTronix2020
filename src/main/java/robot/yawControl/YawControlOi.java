@@ -1,5 +1,6 @@
 package robot.yawControl;
 
+import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.yawControl.YawControlConstants.TIMEOUT;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -19,9 +20,9 @@ public class YawControlOi {
                       final Supplier<VisionTarget> targetSupplier, final UniqueButtonCache buttonJoystickButtonCache,
                       final UniqueAxisCache driverJoystickAxisCache) {
     final JoystickAxis alignToTargetButton =
-        driverJoystickAxisCache.createJoystickTrigger(XboxController.Button.kY.value);
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
     alignToTargetButton.whenActive(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetSupplier)
-        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTF)).withTimeout(TIMEOUT)
+        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTF)).withTimeout(ALIGNING_TIME_OUT)
         .andThen(new SetTurretState(yawControl, YawControl.TurretState.RTR)));
 
     final JoystickButton setStateRTFButton = buttonJoystickButtonCache

@@ -14,10 +14,10 @@ public final class ShooterConstants {
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
-    static final double MAX_VELOCITY = 38000; //TODO check and change
-    static final double VELOCITY_P = 0.25; //0.15;//TODO check and change
+    static final double MAX_VELOCITY = 37000; //TODO check and change
+    static final double VELOCITY_P = 0.2; //0.15;//TODO check and change
     static final double VELOCITY_I = 0.0;//TODO check and change
-    static final double VELOCITY_D = 15;//TODO check and change
+    static final double VELOCITY_D = 0.5;//TODO check and change
     static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     static final double OPEN_LOOP_RAMP = 1;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 0;//TODO: check and change

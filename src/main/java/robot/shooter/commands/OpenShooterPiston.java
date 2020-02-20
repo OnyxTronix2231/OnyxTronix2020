@@ -9,7 +9,6 @@ public class OpenShooterPiston extends InstantCommand {
 
   public OpenShooterPiston(final Shooter shooter) {
     this.shooter = shooter;
-    addRequirements(shooter);
   }
 
   @Override

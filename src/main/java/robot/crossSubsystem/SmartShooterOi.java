@@ -52,7 +52,7 @@ public class SmartShooterOi {
 
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
-    spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->
-        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT)); //TODO: Add the timeout from YawControl
+//    spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->
+//        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT));
   }
 }

@@ -3,6 +3,7 @@ package robot.yawControl.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import robot.drivetrain.DriveTrain;
+import robot.turret.commands.MoveTurretByAngle;
 import robot.turret.commands.MoveTurretToAngle;
 import robot.vision.target.VisionTarget;
 import robot.yawControl.YawControl;
@@ -15,7 +16,7 @@ public class AlignByOdometryAndVision extends SequentialCommandGroup {
                                   final Supplier<VisionTarget> visionTargetSupplier) {
     addCommands(
         new MoveTurretToFieldTargetByPose(yawControl, driveTrain),
-        new IsTargetFoundCondition(new MoveTurretToAngle(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
+        new IsTargetFoundCondition(new MoveTurretByAngle(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
             new InstantCommand())
     );
   }

@@ -6,15 +6,13 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIV
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
-import static robot.drivetrain.DriveTrainConstants.DRIVE_BY_DISTANCE_SLOT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.ENCODER_CPR;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRAJECTORY_PID_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.DEGREES_IN_FULL_ROTATION;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.TrajectoryParamsA.TRAJECTORY_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -56,13 +54,17 @@ public class DriveTrain extends SubsystemBase {
         getLeftDistance() / CM_TO_METERS, getRightDistance() / CM_TO_METERS);
   }
 
+  public void initMotionProfileSlot(final int slot) {
+    components.getLeftMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
+    components.getRightMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
+  }
+
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed * ARCADE_DRIVE_FORWARD_SENSITIVITY,
         rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
   }
 
   public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
-    initMotionProfileSlot(DRIVE_BY_DISTANCE_SLOT);
     driveMotorByMotionMagic(getLeftMaster(), leftTarget);
     driveMotorByMotionMagic(getRightMaster(), rightTarget);
   }
@@ -85,6 +87,10 @@ public class DriveTrain extends SubsystemBase {
         DemandType.ArbitraryFeedForward, leftFeedForwardVolts / RobotController.getBatteryVoltage());
     getRightMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(rightVelocity),
         DemandType.ArbitraryFeedForward, rightFeedForwardVolts / RobotController.getBatteryVoltage());
+  }
+
+  public void driveTrainVelocityReverse(final double leftVelocity, final double rightVelocity) {
+    driveTrainVelocity(-leftVelocity, -rightVelocity);
   }
 
   public double getRightTargetFromDistance(final double distance) {
@@ -110,7 +116,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getOdometryHeading() {
-    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
+    return components.getPigeonIMU().getNormalizedYaw();
+  }
+
+  public double getRawRobotHeading() {
+    return components.getPigeonIMU().getRawYaw();
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {
@@ -127,11 +137,6 @@ public class DriveTrain extends SubsystemBase {
 
   private double getTargetFromDistance(final TalonFX motor, final double distance) {
     return cmToEncoderUnits(distance) + motor.getSelectedSensorPosition();
-  }
-
-  private void initMotionProfileSlot(final int slot) {
-    components.getLeftMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
-    components.getRightMasterMotor().selectProfileSlot(slot, PRIMARY_PID);
   }
 
   private double getLeftDistance() {

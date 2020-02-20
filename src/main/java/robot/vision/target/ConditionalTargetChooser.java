@@ -16,7 +16,7 @@ public class ConditionalTargetChooser {
   }
 
   public final VisionTarget chooseTarget() {
-    if(condition.getAsBoolean()) {
+    if (condition.getAsBoolean()) {
       return trueTargetSupplier.getAsVisionTarget();
     }
     return falseTargetSupplier.getAsVisionTarget();

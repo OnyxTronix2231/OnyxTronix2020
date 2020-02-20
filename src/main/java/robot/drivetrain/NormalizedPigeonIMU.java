@@ -26,9 +26,9 @@ public class NormalizedPigeonIMU extends PigeonIMU implements Sendable {
 
   public double getNormalizedYaw() {
     final double rawYaw = getRawYaw();
-    if(rawYaw > 180) {
+    if (rawYaw > 180) {
       return rawYaw - 360;
-    } else if(rawYaw < -180) {
+    } else if (rawYaw < -180) {
       return rawYaw + 360;
     }
     return rawYaw;

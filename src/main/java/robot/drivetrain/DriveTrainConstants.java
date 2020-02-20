@@ -16,6 +16,7 @@ public final class DriveTrainConstants {
   static final double CONVERSION_RATE = 9.5;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
+  static final Pose2d TARGET_POSE = new Pose2d(0, 2.4, Rotation2d.fromDegrees(0));
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
@@ -54,7 +55,6 @@ public final class DriveTrainConstants {
       public static final double RAMSETE_B = 2;
       public static final double RAMSETE_ZETA = 0.7;
       static final int TRAJECTORY_PID_SLOT = 1;
-      static final int DEGREES_IN_FULL_ROTATION = 360;
       static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
       static final double VOLTS = 0.365; // TODO: Calibration with A
       static final double VOLT_SECONDS_PER_METER = 0;
@@ -69,35 +69,7 @@ public final class DriveTrainConstants {
 
   static final class Paths {
 
-    private static final List<Pose2d> PATH_1 = List.of(
-        new Pose2d(4.55, 4.55, Rotation2d.fromDegrees(8.70579)),
-        new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-49.3987)),
-        new Pose2d(5.59, 3.93, Rotation2d.fromDegrees(162.64597)),
-        new Pose2d(3, 2.7, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_2 = List.of(
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-        new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_3 = List.of(
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_4 = List.of(
-        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
-        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
-        new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
-    );
-    private static final List<Pose2d> PATH_5 = List.of(
-        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
-    );
-    static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+    static final Path[][] PATHS = {PRIMARY_PATH(), SECONDARY_PATH()};
 
     static Path[] PRIMARY_PATH() {
       final List<Pose2d> pathOnePoints = List.of(
@@ -141,16 +113,6 @@ public final class DriveTrainConstants {
       final Path pathTwo = new Path(false, pathTwoPoints);
 
       return new Path[]{pathOne, pathTwo};
-    }
-
-    private static Pose2d[] startingPoses() {
-      final Pose2d[] startingPoses = new Pose2d[5];
-      startingPoses[0] = new Pose2d(3.1, 3.5, Rotation2d.fromDegrees(37.5686));
-      startingPoses[1] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0));
-      startingPoses[2] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180));
-      startingPoses[3] = new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0));
-      startingPoses[4] = new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140));
-      return startingPoses;
     }
   }
 }

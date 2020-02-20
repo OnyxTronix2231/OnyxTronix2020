@@ -12,6 +12,7 @@ import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
 import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
+import static robot.drivetrain.DriveTrainConstants.TARGET_POSE;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -64,9 +65,8 @@ public class DriveTrain extends SubsystemBase {
         rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
   }
 
-  public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
-    driveMotorByMotionMagic(getLeftMaster(), leftTarget);
-    driveMotorByMotionMagic(getRightMaster(), rightTarget);
+  public double getAngleToTargetFromCurrentPose() {
+    return getPose().relativeTo(TARGET_POSE).getRotation().getDegrees();
   }
 
   public Pose2d getPose() {
@@ -81,6 +81,11 @@ public class DriveTrain extends SubsystemBase {
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
     return Math.abs(leftTarget - getLeftMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE) &&
         Math.abs(rightTarget - getRightMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);
+  }
+
+  public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
+    driveMotorByMotionMagic(getLeftMaster(), leftTarget);
+    driveMotorByMotionMagic(getRightMaster(), rightTarget);
   }
 
   public void driveTrainVelocity(final double leftVelocity, final double rightVelocity) {
@@ -106,10 +111,10 @@ public class DriveTrain extends SubsystemBase {
     return getTargetFromDistance(getLeftMaster(), distance);
   }
 
-  public List<Pose2d> getPath() {
-    if (getAutonomousPath() > 5 || getAutonomousPath() < 1)
-      return getPoseFromVision();
-    return PATHS.get(getAutonomousPath());
+  public Path[] getFullAutonomousPath() {
+    if (getAutonomousPath() > PATHS.length || getAutonomousPath() <= 0)
+      return new Path[]{new Path(true, List.of(getPoseFromVision()))};
+    return PATHS[getAutonomousPath() - 1];
   }
 
   public void stopDrive() {
@@ -161,8 +166,8 @@ public class DriveTrain extends SubsystemBase {
     return pathChooser.getSelected();
   }
 
-  private List<Pose2d> getPoseFromVision() {//For future Vision integration - will delete comment pre-merge
-    return List.of(new Pose2d());
+  private Pose2d getPoseFromVision() {//For future Vision integration - will delete comment pre-merge
+    return null;
   }
 
   private double cmToEncoderUnits(final double cm) {

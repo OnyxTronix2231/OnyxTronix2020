@@ -12,7 +12,6 @@ public class VisionTargetFactory {
   private final double cameraHeight;
   private final double cameraOffset;
 
-
   public VisionTargetFactory(final DoubleSupplier turretAngleSupplier, final DoubleSupplier accelerometerAngleSupplier,
                              final double cameraAngleOffset, final double cameraHeight, final Limelight limelight) {
     this.limelight = limelight;

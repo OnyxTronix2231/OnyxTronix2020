@@ -1,11 +1,16 @@
 package robot.turret;
 
+import static robot.turret.TurretConstants.TurretComponentsA.ABSOLUTE_ENCODER_OFFSET;
 import static robot.turret.TurretConstants.TurretComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.turret.TurretConstants.TurretComponentsA.FORWARD_SOFT_LIMIT_ENABLE;
+import static robot.turret.TurretConstants.TurretComponentsA.FORWARD_SOFT_LIMIT_THRESHOLD;
 import static robot.turret.TurretConstants.TurretComponentsA.MASTER_MOTOR_PORT;
 import static robot.turret.TurretConstants.TurretComponentsA.MAX_ACCELERATION;
 import static robot.turret.TurretConstants.TurretComponentsA.MAX_VELOCITY;
 import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP;
 import static robot.turret.TurretConstants.TurretComponentsA.PEAK_AMP_DURATION;
+import static robot.turret.TurretConstants.TurretComponentsA.REVERSE_SOFT_LIMIT_ENABLE;
+import static robot.turret.TurretConstants.TurretComponentsA.REVERSE_SOFT_LIMIT_THRESHOLD;
 import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_D;
 import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_F;
 import static robot.turret.TurretConstants.TurretComponentsA.VELOCITY_I;
@@ -42,10 +47,10 @@ public class BasicTurretComponentsA implements TurretComponents {
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
-    config.forwardSoftLimitThreshold = 1223;
-    config.reverseSoftLimitThreshold = 257;
-    config.forwardSoftLimitEnable = true;
-    config.reverseSoftLimitEnable = true;
+    config.forwardSoftLimitThreshold = FORWARD_SOFT_LIMIT_THRESHOLD;
+    config.reverseSoftLimitThreshold = REVERSE_SOFT_LIMIT_THRESHOLD;
+    config.forwardSoftLimitEnable = FORWARD_SOFT_LIMIT_ENABLE;
+    config.reverseSoftLimitEnable = REVERSE_SOFT_LIMIT_ENABLE;
     return config;
   }
 
@@ -53,4 +58,10 @@ public class BasicTurretComponentsA implements TurretComponents {
   public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
   }
+
+  @Override
+  public double getAbsoluteEncoderOffset() {
+    return ABSOLUTE_ENCODER_OFFSET;
+  }
+
 }

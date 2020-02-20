@@ -9,7 +9,7 @@ import robot.ballStopper.commands.MoveBallStopperBySpeed;
 
 public class TestingBallStopperOi {
   public TestingBallStopperOi(final BallStopper ballStopper, final UniqueButtonCache buttonsJoystickButtonCache) {
-    final Trigger moveBallStopperBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kStart.value);
+    final Trigger moveBallStopperBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kBumperRight.value);
     moveBallStopperBySpeed.whileActiveContinuous(new MoveBallStopperBySpeed(ballStopper, () -> PERCENTAGE_OUTPUT));
   }
 }

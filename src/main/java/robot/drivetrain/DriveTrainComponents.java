@@ -20,6 +20,8 @@ public interface DriveTrainComponents {
 
   IMotorController getLeftSlaveMotor();
 
+  NormalizedPigeonIMU getPigeonIMU();
+
   DifferentialDrive getDifferentialDrive();
 
   PigeonIMU getGyro();

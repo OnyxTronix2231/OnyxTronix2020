@@ -17,9 +17,9 @@ public final class DriveTrainConstants {
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
   static final Pose2d TARGET_POSE = new Pose2d(0, 2.4, Rotation2d.fromDegrees(0));
+  static final double PERIMETER_IN_METERS = PERIMETER / 100;
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
-  static final double PERIMETER_IN_METERS = PERIMETER / 100;
   private static final double ENCODER_UNITS = 1023;
 
   public static final class DriveTrainComponentsA {
@@ -67,9 +67,9 @@ public final class DriveTrainConstants {
 
   }
 
-  static final class Paths {
+  public static final class Paths {
 
-    static final Path[][] PATHS = {PRIMARY_PATH(), SECONDARY_PATH()};
+    public static final Path[][] PATHS = {PRIMARY_PATH(), SECONDARY_PATH()};
 
     static Path[] PRIMARY_PATH() {
       final List<Pose2d> pathOnePoints = List.of(

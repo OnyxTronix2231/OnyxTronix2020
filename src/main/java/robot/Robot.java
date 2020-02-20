@@ -7,9 +7,15 @@ import static robot.RobotConstants.ROBOT_TYPE;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.PrimaryPath;
+import robot.autonomous.SecondaryPath;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.TestingBallCollectorOi;
@@ -22,6 +28,7 @@ import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
+import robot.drivetrain.OnyxTrajectoryGenerator;
 import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
@@ -45,6 +52,15 @@ import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
+
+  private SendableChooser<Integer> pathChooser = new SendableChooser<>();
+  private DriveTrain driveTrain;
+  private BallCollector ballCollector;
+  private BallStopper ballStopper;
+  private StorageConveyor storageConveyor;
+  private YawControl yawControl;
+  private LoaderConveyor loaderConveyor;
+  private Shooter shooter;
 
   @Override
   public void robotInit() {
@@ -82,25 +98,25 @@ public class Robot extends TimedRobot {
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
     }
 
-    final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
+    driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+    ballCollector = new BallCollector(ballCollectorComponents);
     new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+    ballStopper = new BallStopper(ballStopperComponents);
     new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+    storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
-    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
+    yawControl = new YawControl(turretComponents, driveTrain);
     new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
-    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
+    loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
-    final Shooter shooter = new Shooter(shooterComponents);
+    shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
     Vision vision = new Vision(new VisionTargetFactory(driveTrain::getOdometryHeading,
@@ -110,11 +126,37 @@ public class Robot extends TimedRobot {
         storageConveyor, ballStopper, vision);
 
     new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickAxisCache);
+
+    pathChooser.setDefaultOption("Path 1", 1);
+    pathChooser.addOption("Path 2", 2);
+    pathChooser.addOption("Path 3", 3);
+    pathChooser.addOption("Path 4", 4);
+    pathChooser.addOption("Path 5", 5);
+    Shuffleboard.enableActuatorWidgets();
+
+    Shuffleboard.getTab("Autonomous").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
   }
 
   @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
+    final Command selectedPathCommand;
+    final OnyxTrajectoryGenerator trajectoryGenerator = new OnyxTrajectoryGenerator();
+    switch (pathChooser.getSelected()) {
+      case 1:
+        selectedPathCommand = new PrimaryPath(shooter, driveTrain, trajectoryGenerator, ballCollector);
+        break;
+      case 2:
+        selectedPathCommand = new SecondaryPath();
+        break;
+        default:
+          selectedPathCommand = null;
+    }
+    selectedPathCommand.initialize();
+    while (!selectedPathCommand.isFinished()) {
+      selectedPathCommand.execute();
+    }
+    selectedPathCommand.end(false);
   }
 
   @Override

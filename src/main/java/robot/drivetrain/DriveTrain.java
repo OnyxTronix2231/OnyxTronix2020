@@ -10,7 +10,6 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.Traject
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRAJECTORY_PID_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
-import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
 import static robot.drivetrain.DriveTrainConstants.TARGET_POSE;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
@@ -22,31 +21,15 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import java.util.List;
 
 public class DriveTrain extends SubsystemBase {
 
-  private final SendableChooser<Integer> pathChooser = new SendableChooser<>();
   private final DriveTrainComponents components;
 
   public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
     resetEncoders();
-
-    pathChooser.setDefaultOption("Path 1", 1);
-    pathChooser.addOption("Path 2", 2);
-    pathChooser.addOption("Path 3", 3);
-    pathChooser.addOption("Path 4", 4);
-    pathChooser.addOption("Path 5", 5);
-    Shuffleboard.enableActuatorWidgets();
-
-    Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
-    System.out.println(pathChooser.getSelected());
   }
 
   @Override
@@ -111,12 +94,6 @@ public class DriveTrain extends SubsystemBase {
     return getTargetFromDistance(getLeftMaster(), distance);
   }
 
-  public Path[] getFullAutonomousPath() {
-    if (getAutonomousPath() > PATHS.length || getAutonomousPath() <= 0)
-      return new Path[]{new Path(true, List.of(getPoseFromVision()))};
-    return PATHS[getAutonomousPath() - 1];
-  }
-
   public void stopDrive() {
     components.getDifferentialDrive().stopMotor();
   }
@@ -160,10 +137,6 @@ public class DriveTrain extends SubsystemBase {
   private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
-  }
-
-  private int getAutonomousPath() {
-    return pathChooser.getSelected();
   }
 
   private Pose2d getPoseFromVision() {//For future Vision integration - will delete comment pre-merge

@@ -1,7 +1,7 @@
 package robot.vision;
 
-import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
+import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robot.vision.target.ConditionalTargetChooser;
@@ -27,7 +27,7 @@ public class Vision extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(Limelight.getInstance().targetFound()) {
+    if (Limelight.getInstance().targetFound()) {
       innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
       outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     }

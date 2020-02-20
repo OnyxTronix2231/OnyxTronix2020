@@ -56,7 +56,7 @@ public class SmartShooterOiBallStopperTrigger {
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
     spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->
-        vision.getOuterTarget().getDistance()).withTimeout()); //TODO: Add the timeout from YawControl
+        vision.getOuterTarget().getDistance()).withTimeout(5)); //TODO: Add the timeout from YawControl
   }
 }
 

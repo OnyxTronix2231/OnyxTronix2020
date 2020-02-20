@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Turret extends SubsystemBase {
 
   private final TurretComponents components;
+  private final double absoluteEncoderOffset;
 
   public Turret(final TurretComponents components) {
     this.components = components;
+    absoluteEncoderOffset = components.getAbsoluteEncoderOffset();
   }
 
   public void moveTurretBySpeed(final double speed) {
@@ -42,11 +44,11 @@ public class Turret extends SubsystemBase {
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
-    return angle / ENCODER_TO_ANGLE;
+    return angle / ENCODER_TO_ANGLE + absoluteEncoderOffset;
   }
 
   public double getAngleRTR() {
-    return getEncoderPosition() * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
+    return (getEncoderPosition() - absoluteEncoderOffset) * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
   }
 
   public double getEncoderPosition() {

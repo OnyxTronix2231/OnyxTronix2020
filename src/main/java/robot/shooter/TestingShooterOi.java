@@ -14,10 +14,10 @@ import robot.shooter.commands.ShootByVelocity;
 
 import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
 
-public class ShooterOi {
+public class TestingShooterOi {
 
-  public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
-                   UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
+  public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
+                          UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
     final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
     shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, shootBySpeedAxis::getRawAxis));
 

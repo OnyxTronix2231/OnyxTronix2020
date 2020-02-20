@@ -114,7 +114,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getOdometryHeading() {
-    return Math.IEEEremainder(components.getPigeonYaw(), DEGREES_IN_FULL_ROTATION);
+    return components.getPigeonIMU().getNormalizedYaw();
+  }
+
+  public double getRawRobotHeading() {
+    return components.getPigeonIMU().getRawYaw();
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {

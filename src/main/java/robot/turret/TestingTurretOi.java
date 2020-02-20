@@ -5,9 +5,9 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import robot.turret.commands.MoveTurretByJoystick;
 
-public class TurretOi {
+public class TestingTurretOi {
 
-  public TurretOi(final Turret turret, final UniqueAxisCache buttonJoystickAxisCache) {
+  public TestingTurretOi(final Turret turret, final UniqueAxisCache buttonJoystickAxisCache) {
 
     final JoystickAxis changeAngleByPercentAxis =
         buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);

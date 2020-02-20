@@ -99,7 +99,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
   @Override
   public NormalizedPigeonIMU getPigeonIMU() {
-    return null;
+    return normalizedPigeonIMU;
   }
 
   @Override

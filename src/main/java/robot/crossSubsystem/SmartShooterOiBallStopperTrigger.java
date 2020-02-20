@@ -2,7 +2,7 @@ package robot.crossSubsystem;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_VELOCITY;
+import static robot.crossSubsystem.CrossSubsystemConstants.CLOSE_RANGE_VELOCITY;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -47,7 +47,7 @@ public class SmartShooterOiBallStopperTrigger {
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
-        .alongWith((new ShootByVelocity(shooter, () -> SHOOTER_VELOCITY))));
+        .alongWith((new ShootByVelocity(shooter, () -> CLOSE_RANGE_VELOCITY))));
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,

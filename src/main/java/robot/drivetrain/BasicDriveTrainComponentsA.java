@@ -11,6 +11,7 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_CLO
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.MAX_VELOCITY;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.OPEN_LOOP_RAMP;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PERCENTAGE_CLOSED_LOOP_OUTPUT;
+import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.PIGEON_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_MASTER_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.RIGHT_SLAVE_PORT;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TRIGGER_THRESHOLD_CURRENT;
@@ -27,7 +28,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import controllers.VelocityController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import robot.RobotConstants;
 
 public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
@@ -35,6 +35,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final WPI_TalonFX rightSlave;
   private final WPI_TalonFX leftMaster;
   private final WPI_TalonFX leftSlave;
+  private final NormalizedPigeonIMU normalizedPigeonIMU;
   private final DifferentialDrive differentialDrive;
 
   public BasicDriveTrainComponentsA() {
@@ -61,6 +62,9 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.configAllSettings(getFalconConfiguration());
     leftSlave.setNeutralMode(NeutralMode.Brake);
     leftSlave.follow(leftMaster);
+
+    normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
+    normalizedPigeonIMU.setYaw(0);
 
     final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
         VELOCITY_CONTROLLER_PID_SLOT);
@@ -90,6 +94,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   @Override
   public IMotorController getLeftSlaveMotor() {
     return leftSlave;
+  }
+
+  @Override
+  public NormalizedPigeonIMU getPigeonIMU() {
+    return normalizedPigeonIMU;
   }
 
   @Override

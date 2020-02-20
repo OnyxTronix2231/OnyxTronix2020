@@ -16,7 +16,7 @@ public final class DriveTrainConstants {
   static final double CONVERSION_RATE = 9.5;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
-  static final Pose2d TARGET_POSE = new Pose2d(0, 2.4, Rotation2d.fromDegrees(0));
+  static final Pose2d TARGET_POSE = new Pose2d(6.8, 0, Rotation2d.fromDegrees(180));
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
@@ -56,9 +56,9 @@ public final class DriveTrainConstants {
       public static final double RAMSETE_ZETA = 0.7;
       static final int TRAJECTORY_PID_SLOT = 1;
       static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
-      static final double VOLTS = 0.365; // TODO: Calibration with A
-      static final double VOLT_SECONDS_PER_METER = 0;
-      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333; // TODO: Calibration with A
+      static final double VOLTS = 0.149; // TODO: Calibration with A
+      static final double VOLT_SECONDS_PER_METER = 2.14;
+      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.34; // TODO: Calibration with A
       static final double MAX_VOLTAGE = 10; // TODO: Calibration with A
       static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
       static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A

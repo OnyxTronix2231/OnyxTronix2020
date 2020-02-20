@@ -21,6 +21,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrain extends SubsystemBase {
@@ -30,6 +31,10 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
     resetEncoders();
+    Shuffleboard.getTab("Odometry").addNumber("Angle From Target", this::getAngleToTargetFromCurrentPose);
+    Shuffleboard.getTab("Odometry").addNumber("Angle", this::getOdometryHeading);
+    Shuffleboard.getTab("Odometry").addNumber("X", () -> getPose().getTranslation().getX());
+    Shuffleboard.getTab("Odometry").addNumber("Y", () -> getPose().getTranslation().getY());
   }
 
   @Override
@@ -49,7 +54,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getAngleToTargetFromCurrentPose() {
-    return getPose().relativeTo(TARGET_POSE).getRotation().getDegrees();
+    return Math.abs(getPose().getRotation().getDegrees() - Math.toDegrees(Math.atan2(getPose().getTranslation().getY() - TARGET_POSE.getTranslation().getY(),
+        getPose().getTranslation().getX() - TARGET_POSE.getTranslation().getX()))) - TARGET_POSE.getRotation().getDegrees();
   }
 
   public Pose2d getPose() {

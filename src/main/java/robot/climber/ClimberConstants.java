@@ -12,6 +12,13 @@ public final class ClimberConstants {
     static final double CURRENT_LIMIT = 30; // TODO: check value
     static final double TRIGGER_THRESHOLD_CURRENT = 50; // TODO: check value
     static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
+    static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
+    static final double MAX_VELOCITY = 37000; //TODO check and change
+    static final double VELOCITY_KP = 0;
+    static final double VELOCITY_KI = 0;
+    static final double VELOCITY_KD = 0;
+    static final double VELOCITY_KF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;;
+
   }
 
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;

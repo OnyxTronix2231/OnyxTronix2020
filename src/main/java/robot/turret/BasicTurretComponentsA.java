@@ -63,5 +63,4 @@ public class BasicTurretComponentsA implements TurretComponents {
   public double getAbsoluteEncoderOffset() {
     return ABSOLUTE_ENCODER_OFFSET;
   }
-
 }

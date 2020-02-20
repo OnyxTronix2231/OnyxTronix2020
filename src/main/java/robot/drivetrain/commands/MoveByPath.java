@@ -8,9 +8,11 @@ import robot.drivetrain.DriveTrain;
 import robot.drivetrain.OnyxTrajectoryGenerator;
 
 public class MoveByPath extends OnyxRamseteCommand {
-  public MoveByPath(final DriveTrain driveTrain, final OnyxTrajectoryGenerator trajectoryGenerator, final boolean isForward) {
-    super(() -> trajectoryGenerator.getTrajectoryFromPoseList(driveTrain.getPath(), driveTrain.getComponents()),
-        driveTrain::getPose, (isForward ? driveTrain::driveTrainVelocity : driveTrain::driveTrainVelocityReverse), new RamseteController(RAMSETE_B, RAMSETE_ZETA),
-        driveTrain.getComponents().getDriveKinematics(), driveTrain);
+  public MoveByPath(final DriveTrain driveTrain, final OnyxTrajectoryGenerator trajectoryGenerator,
+                    final boolean isForward) {
+    super(() -> trajectoryGenerator.getTrajectoryFromPoseList(driveTrain.getPath(),
+        driveTrain.getComponents()), (isForward ? driveTrain::getPose : driveTrain::getAngleReversedPose),
+        (isForward ? driveTrain::driveTrainVelocity : driveTrain::driveTrainVelocityReverse), new RamseteController(
+            RAMSETE_B, RAMSETE_ZETA), driveTrain.getComponents().getDriveKinematics(), driveTrain);
   }
 }

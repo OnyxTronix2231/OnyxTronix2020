@@ -71,6 +71,11 @@ public class DriveTrain extends SubsystemBase {
     return components.getOdometry().getPoseMeters();
   }
 
+  public Pose2d getAngleReversedPose() {
+    return new Pose2d(getPose().getTranslation().getX(), getPose().getTranslation().getY(),
+        Rotation2d.fromDegrees(-getPose().getRotation().getDegrees()));
+  }
+
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
     return Math.abs(leftTarget - getLeftMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE) &&
         Math.abs(rightTarget - getRightMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);

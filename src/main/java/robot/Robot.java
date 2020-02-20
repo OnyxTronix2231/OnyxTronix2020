@@ -140,23 +140,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
-    final Command selectedPathCommand;
     final OnyxTrajectoryGenerator trajectoryGenerator = new OnyxTrajectoryGenerator();
     switch (pathChooser.getSelected()) {
       case 1:
-        selectedPathCommand = new PrimaryPath(shooter, driveTrain, trajectoryGenerator, ballCollector);
+        new PrimaryPath(shooter, driveTrain, trajectoryGenerator, ballCollector).schedule();
         break;
       case 2:
-        selectedPathCommand = new SecondaryPath();
+        new SecondaryPath().schedule();
         break;
-        default:
-          selectedPathCommand = null;
     }
-    selectedPathCommand.initialize();
-    while (!selectedPathCommand.isFinished()) {
-      selectedPathCommand.execute();
-    }
-    selectedPathCommand.end(false);
   }
 
   @Override

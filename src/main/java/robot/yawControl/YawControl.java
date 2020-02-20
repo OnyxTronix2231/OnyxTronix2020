@@ -48,7 +48,7 @@ public class YawControl extends Turret {
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
     if (turretState == TurretState.RTF) {
-      tempAngle += getRobotHeading() - robotHeadingOffset;
+      tempAngle += robotHeadingOffset - getRobotHeading();
       robotHeadingOffset = driveTrain.getRawRobotHeading();
     }
     super.moveToAngle(tempAngle);

@@ -134,12 +134,12 @@ public class DriveTrain extends SubsystemBase {
     return ((double) getRightMaster().getSelectedSensorPosition() / ENCODER_CPR) * PERIMETER;
   }
 
-  private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge
+  private void resetOdometryToPose(final Pose2d pose) {
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
   }
 
-  private Pose2d getPoseFromVision() {//For future Vision integration - will delete comment pre-merge
+  private Pose2d getPoseFromVision() {
     return null;
   }
 

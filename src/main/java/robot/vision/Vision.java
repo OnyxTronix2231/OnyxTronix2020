@@ -24,7 +24,7 @@ public class Vision extends SubsystemBase {
     targetMaker = new DistanceOrientationConditionalChooser(this, MAX_INNER_DISTANCE, MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
-    Shuffleboard.getTab("Vision").addNumber("Outer Distance", () ->
+    Shuffleboard.getTab("Vision").addNumber("Outer Target Distance", () ->
         outerTarget.getDistance());
   }
 

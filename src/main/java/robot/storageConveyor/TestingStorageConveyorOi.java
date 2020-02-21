@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.UniqueButtonCache;
 import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
-public class StorageConveyorOi {
+public class TestingStorageConveyorOi {
 
-  public StorageConveyorOi(final StorageConveyor storageConveyor, final UniqueButtonCache driveJoystickButtonCache) {
+  public TestingStorageConveyorOi(final StorageConveyor storageConveyor, final UniqueButtonCache driveJoystickButtonCache) {
     final JoystickButton moveStorageConveyorBySpeedButton =
         driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
     moveStorageConveyorBySpeedButton.whileHeld(new MoveStorageConveyorBySpeed(storageConveyor, () -> PERCENT_OUTPUT));

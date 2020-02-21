@@ -16,17 +16,17 @@ import robot.shooter.commands.ShootByVelocity;
 
 import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
 
-public class ShooterOi {
+public class TestingShooterOi {
 
-  public ShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
-                   UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
+  public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
+                          UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
     final NetworkTable shooterTable = NetworkTableInstance.getDefault().getTable("Shooter");
 
     final NetworkTableEntry setPointEntry = shooterTable.getEntry("SetPoint");
     setPointEntry.setDefaultDouble(0);
-
     final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, shootBySpeedAxis::getRawAxis));
+    shootBySpeedAxis.whenActive(new ShootByVelocity(shooter, () ->
+        setPointEntry.getDouble(0)));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

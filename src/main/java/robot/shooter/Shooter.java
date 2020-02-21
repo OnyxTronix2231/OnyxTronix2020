@@ -13,6 +13,7 @@ import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLO
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -21,6 +22,14 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
+  }
+
+  @Override
+  public void periodic() {
+    NetworkTableInstance.getDefault().getTable("Shooter").getEntry("PID Error")
+        .setValue(components.getMasterMotor().getClosedLoopError());
+    NetworkTableInstance.getDefault().getTable("Shooter").getEntry("Velocity")
+        .setValue(components.getMasterMotor().getSelectedSensorVelocity());
   }
 
   public void shootBySpeed(final double speed) {

@@ -4,9 +4,11 @@ import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
@@ -39,6 +41,7 @@ import robot.turret.BasicTurretComponentsA;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
+import robot.vision.VisionConstants;
 import robot.vision.target.VisionTargetFactory;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
@@ -95,7 +98,7 @@ public class Robot extends TimedRobot {
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
     final YawControl yawControl = new YawControl(turretComponents, driveTrain);
-    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
+//    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
@@ -109,7 +112,10 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);
 
-    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+//    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+
+    Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
+        () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
   }
 
   @Override

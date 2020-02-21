@@ -13,7 +13,10 @@ import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLO
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseTalonPIDSetConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -22,14 +25,10 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
-  }
-
-  @Override
-  public void periodic() {
-    NetworkTableInstance.getDefault().getTable("Shooter").getEntry("PID Error")
-        .setValue(components.getMasterMotor().getClosedLoopError());
-    NetworkTableInstance.getDefault().getTable("Shooter").getEntry("Velocity")
-        .setValue(components.getMasterMotor().getSelectedSensorVelocity());
+    Shuffleboard.getTab("Shooter").addNumber("PID Error",
+        () -> components.getMasterMotor().getClosedLoopError());
+    Shuffleboard.getTab("Shooter").addNumber("Current velocity",
+        () -> components.getMasterMotor().getClosedLoopError());
   }
 
   public void shootBySpeed(final double speed) {
@@ -41,7 +40,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isOnTarget() {
-    return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
+    return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
   public void configVelocitySlot() {
@@ -60,15 +59,8 @@ public class Shooter extends SubsystemBase {
     components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
   }
 
-  public int distanceToVelocity(final double distance) {
-    if (distance > MIN_THIRD_RANGE_CM) {
-      return SPEED_THIRD;
-    } else if (distance > MAX_FIRST_RANGE_CM && distance < MIN_THIRD_RANGE_CM) {
-      return SPEED_MIDDLE;
-    } else if (distance > MIN_FIRST_RANGE_CM) {
-      return SPEED_FIRST;
-    } else {
-      return 0;
-    }
+  public double distanceToVelocity(double distance) {
+    return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
   }
+  //y = -0.0121x2 + 26.707x + 24130: 7 -> 4.5 meters
 }

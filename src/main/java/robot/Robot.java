@@ -106,8 +106,8 @@ public class Robot extends TimedRobot {
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
-    Vision vision = new Vision(new VisionTargetFactory(driveTrain::getOdometryHeading,
-        yawControl::getTurretAngleRTF, 30.0, 25, Limelight.getInstance()));
+    Vision vision = new Vision(new VisionTargetFactory(() -> 0,
+        driveTrain::getOdometryHeading, VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE, VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);

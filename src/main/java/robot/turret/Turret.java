@@ -20,6 +20,10 @@ public class Turret extends SubsystemBase {
     absoluteEncoderOffset = components.getAbsoluteEncoderOffset();
   }
 
+  public void initMoveMotionMagic() {
+
+  }
+
   public void moveTurretBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }

@@ -1,6 +1,7 @@
 package robot.turret.commands;
 
 import robot.turret.Turret;
+import robot.yawControl.YawControl;
 
 import java.util.function.DoubleSupplier;
 

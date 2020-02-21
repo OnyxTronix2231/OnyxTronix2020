@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);
 
-    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickAxisCache);
+    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
   }
 
   @Override

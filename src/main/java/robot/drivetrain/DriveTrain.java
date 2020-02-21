@@ -42,10 +42,8 @@ public class DriveTrain extends SubsystemBase {
     pathChooser.addOption("Path 3", 3);
     pathChooser.addOption("Path 4", 4);
     pathChooser.addOption("Path 5", 5);
-    Shuffleboard.enableActuatorWidgets();
 
     Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
-    System.out.println(pathChooser.getSelected());
   }
 
   @Override

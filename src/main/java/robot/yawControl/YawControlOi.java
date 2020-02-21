@@ -18,13 +18,11 @@ import java.util.function.Supplier;
 public class YawControlOi {
   public YawControlOi(final YawControl yawControl, final DriveTrain driveTrain,
                       final Supplier<VisionTarget> targetSupplier, final UniqueButtonCache buttonJoystickButtonCache,
-                      final UniqueButtonCache driveJoystickUniqueButtonCache) {
+                      final UniqueButtonCache driverJoystickButtonCache) {
     final JoystickButton alignToTargetButton =
-        driveJoystickUniqueButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+        driverJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
     alignToTargetButton.whenActive(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain, targetSupplier)
-        .alongWith(new SetTurretState(yawControl, YawControl.TurretState.RTR))
-        //.withTimeout(ALIGNING_TIME_OUT)
-        .andThen(new SetTurretState(yawControl, YawControl.TurretState.RTR)));
+        .withTimeout(ALIGNING_TIME_OUT));
 
     final JoystickButton setStateRTFButton = buttonJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBack.value);

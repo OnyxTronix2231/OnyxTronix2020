@@ -11,6 +11,7 @@ import robot.vision.target.VisionTarget;
 import robot.vision.target.VisionTargetFactory;
 import robot.vision.target.VisionTargetType;
 import vision.limelight.Limelight;
+import vision.limelight.enums.LimelightLedMode;
 
 public class Vision extends SubsystemBase {
 
@@ -26,6 +27,7 @@ public class Vision extends SubsystemBase {
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     Shuffleboard.getTab("Vision").addNumber("Outer Target Distance", () ->
         outerTarget.getDistance());
+    Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
   }
 
   @Override
@@ -46,5 +48,13 @@ public class Vision extends SubsystemBase {
 
   public VisionTarget getOuterTarget() {
     return outerTarget;
+  }
+
+  public void setLedMode(final LimelightLedMode ledMode) {
+    Limelight.getInstance().setLedMode(ledMode);
+  }
+
+  public void setPipeline(final int index) {
+    Limelight.getInstance().setPipeline(index);
   }
 }

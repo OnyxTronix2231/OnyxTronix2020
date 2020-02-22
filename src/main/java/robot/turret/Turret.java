@@ -5,8 +5,6 @@ import static robot.turret.TurretConstants.ENCODER_TO_ANGLE;
 import static robot.turret.TurretConstants.FLIP_POINT;
 import static robot.turret.TurretConstants.MAX_ANGLE;
 import static robot.turret.TurretConstants.MIN_ANGLE;
-import static robot.turret.TurretConstants.REVERTED_MAX_ANGLE;
-import static robot.turret.TurretConstants.REVERTED_MIN_ANGLE;
 import static robot.turret.TurretConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -15,9 +13,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Turret extends SubsystemBase {
 
   private final TurretComponents components;
+  private final double absoluteEncoderOffset;
 
   public Turret(final TurretComponents components) {
     this.components = components;
+    absoluteEncoderOffset = components.getAbsoluteEncoderOffset();
   }
 
   public void moveTurretBySpeed(final double speed) {
@@ -34,9 +34,9 @@ public class Turret extends SubsystemBase {
       tempAngle = MAX_ANGLE;
     } else if (tempAngle > FLIP_POINT && getAngleRTR() >= MAX_ANGLE) {
       tempAngle = MIN_ANGLE;
-    } else if (tempAngle >= REVERTED_MIN_ANGLE && tempAngle < DEGREES_IN_CIRCLE) {
+    } else if (tempAngle > DEGREES_IN_CIRCLE + MIN_ANGLE) {
       tempAngle -= DEGREES_IN_CIRCLE;
-    } else if (tempAngle < REVERTED_MAX_ANGLE && tempAngle > -DEGREES_IN_CIRCLE) {
+    } else if (tempAngle < -DEGREES_IN_CIRCLE + MAX_ANGLE) {
       tempAngle += DEGREES_IN_CIRCLE;
     }
 
@@ -44,11 +44,11 @@ public class Turret extends SubsystemBase {
   }
 
   public double convertAngleToEncoderUnits(final double angle) {
-    return angle / ENCODER_TO_ANGLE;
+    return angle / ENCODER_TO_ANGLE + absoluteEncoderOffset;
   }
 
   public double getAngleRTR() {
-    return getEncoderPosition() * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
+    return (getEncoderPosition() - absoluteEncoderOffset) * ENCODER_TO_ANGLE % DEGREES_IN_CIRCLE;
   }
 
   public double getEncoderPosition() {

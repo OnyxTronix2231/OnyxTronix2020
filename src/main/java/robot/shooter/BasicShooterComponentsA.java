@@ -33,7 +33,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Coast);
     masterMotor.enableCurrentLimit(true);
-    masterMotor.setSensorPhase(false);
+    masterMotor.setSensorPhase(true);
 
     slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();

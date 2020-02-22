@@ -38,6 +38,7 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
+import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
@@ -97,8 +98,8 @@ public class Robot extends TimedRobot {
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
-//    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
-//    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
+    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
+    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
@@ -106,16 +107,13 @@ public class Robot extends TimedRobot {
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
-//    Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
-//        driveTrain::getOdometryHeading, VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE, VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
-
-    Vision vision = new Vision(new VisionTargetFactory(() -> 0,
+    Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading, VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE, VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);
 
-//   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));

@@ -5,12 +5,12 @@ import robot.ballStopper.BallStopper;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveRightMotor extends CommandBase {
+public class MoveBallStopper extends CommandBase {
 
-  private final BallStopper ballStopper;
+  private final robot.ballStopper.BallStopper ballStopper;
   private final DoubleSupplier speedSupplier;
 
-  public MoveRightMotor(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
+  public MoveBallStopper(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
     this.ballStopper = ballStopper;
     this.speedSupplier = speedSupplier;
     addRequirements(ballStopper);
@@ -18,6 +18,6 @@ public class MoveRightMotor extends CommandBase {
 
   @Override
   public void execute() {
-    ballStopper.moveRightMotor(speedSupplier.getAsDouble());
+    ballStopper.moveBallStopperMotor(speedSupplier.getAsDouble());
   }
 }

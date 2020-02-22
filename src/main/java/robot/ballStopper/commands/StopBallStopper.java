@@ -13,7 +13,7 @@ public class StopBallStopper extends InstantCommand {
 
   @Override
   public void initialize() {
-    ballStopper.moveLeftMotor(0);
-    ballStopper.moveRightMotor(0);
+    ballStopper.moveBallStopperMotor(0);
+    ballStopper.moveBallStopperDelayMotor(0);
   }
 }

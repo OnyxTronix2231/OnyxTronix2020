@@ -2,17 +2,13 @@ package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE_CM;
-import static robot.shooter.ShooterConstants.MIN_FIRST_RANGE_CM;
-import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE_CM;
 import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.SPEED_FIRST;
-import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
-import static robot.shooter.ShooterConstants.SPEED_THIRD;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -21,6 +17,10 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
+    Shuffleboard.getTab("Shooter").addNumber("PID Error",
+        () -> components.getMasterMotor().getClosedLoopError());
+    Shuffleboard.getTab("Shooter").addNumber("Current velocity",
+        () -> components.getMasterMotor().getClosedLoopError());
   }
 
   public void shootBySpeed(final double speed) {
@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isOnTarget() {
-    return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
+    return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
   public void configVelocitySlot() {
@@ -51,15 +51,14 @@ public class Shooter extends SubsystemBase {
     components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
   }
 
-  public int distanceToVelocity(final double distance) {
-    if (distance > MIN_THIRD_RANGE_CM) {
-      return SPEED_THIRD;
-    } else if (distance > MAX_FIRST_RANGE_CM && distance < MIN_THIRD_RANGE_CM) {
-      return SPEED_MIDDLE;
-    } else if (distance > MIN_FIRST_RANGE_CM) {
-      return SPEED_FIRST;
-    } else {
-      return 0;
+  public double distanceToVelocity(double distance) {
+    if (distance > MIDDLE_DISTANCE) {
+      return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
     }
+    return 0.1912 * Math.pow(distance, 2) - 161.44 * distance +67791;
   }
+
+  // y= -0.0121x2 +26.707x + 24130 > 450
+  //y = 0.1912x2 - 161.44x +67791 < 450
+
 }

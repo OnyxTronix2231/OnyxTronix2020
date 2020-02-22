@@ -1,6 +1,8 @@
 package robot.shooter;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -18,8 +20,9 @@ public class TestingShooterOi {
 
   public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
                           UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
+
     final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, shootBySpeedAxis::getRawAxis));
+    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

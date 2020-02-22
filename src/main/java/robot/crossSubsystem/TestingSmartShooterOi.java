@@ -1,14 +1,10 @@
 package robot.crossSubsystem;
 
-import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.CLOSE_RANGE_VELOCITY;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
-import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,13 +22,13 @@ import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
 
-public class SmartShooterOi {
+public class TestingSmartShooterOi {
 
-  public SmartShooterOi(final UniqueButtonCache driveJoystickButtonCache,
-                        final UniqueAxisCache driveJoystickAxisCache,
-                        final Shooter shooter, final LoaderConveyor loaderConveyor,
-                        final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision) {
+  public TestingSmartShooterOi(final UniqueButtonCache driveJoystickButtonCache,
+                               final UniqueAxisCache driveJoystickAxisCache,
+                               final Shooter shooter, final LoaderConveyor loaderConveyor,
+                               final StorageConveyor storageConveyor, final BallStopper ballStopper,
+                               final Vision vision) {
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
@@ -44,19 +40,17 @@ public class SmartShooterOi {
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
             () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
 
+    final NetworkTableEntry setPointEntry = Shuffleboard.getTab("Shooter").add("SetPoint", 0)
+        .getEntry();
+
     final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
-    .alongWith(new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance())));
+        .alongWith((new ShootByVelocity(shooter, () -> setPointEntry.getDouble(0)))));
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
         () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
-
-    final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
-//    spinShooterWhileAligning.toggleWhenPressed(new ShootByDistance(shooter, () ->
-//        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT));
   }
 }

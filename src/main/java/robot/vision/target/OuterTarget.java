@@ -37,7 +37,6 @@ public class OuterTarget implements VisionTarget {
       this.orientation = Math.toDegrees(Math.asin(x / y));
       this.horizontalOffset = Math.toDegrees(Math.atan((distance * Math.sin(Math.toRadians(target.getHorizontalOffsetToCrosshair())))
           / (distance + LIMELIGHT_TURRET_CENTER_CM) * Math.cos(Math.toRadians(target.getHorizontalOffsetToCrosshair()))));
-      System.out.println("horizontalOffset: " + horizontalOffset);
     } else {
       this.horizontalOffset = 0;
       this.verticalOffset = 0;

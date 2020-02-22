@@ -2,6 +2,7 @@ package robot.delayConveyor;
 
 import static robot.delayConveyor.DelayConveyorConstants.DelayConveyorComponentsA.MASTER_MOTOR_PORT;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -16,7 +17,7 @@ public class BasicDelayConveyorComponentsA implements DelayConveyorComponents {
   }
 
   @Override
-  public WPI_VictorSPX getMotor() {
+  public IMotorController getMotor() {
     return motor;
   }
 }

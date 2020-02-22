@@ -1,8 +1,8 @@
 package robot.delayConveyor;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.IMotorController;
 
 public interface DelayConveyorComponents {
 
-  WPI_VictorSPX getMotor();
+  IMotorController getMotor();
 }

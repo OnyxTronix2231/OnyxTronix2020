@@ -9,6 +9,7 @@ import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.SPEED_FIRST;
 import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
 import static robot.shooter.ShooterConstants.SPEED_THIRD;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
@@ -60,7 +61,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double distanceToVelocity(double distance) {
-    if (distance > 450) {
+    if (distance > MIDDLE_DISTANCE) {
       return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
     }
     return 0.1912 * Math.pow(distance, 2) - 161.44 * distance +67791;

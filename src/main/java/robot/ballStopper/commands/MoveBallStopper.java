@@ -13,7 +13,6 @@ public class MoveBallStopper extends CommandBase {
   public MoveBallStopper(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
     this.ballStopper = ballStopper;
     this.speedSupplier = speedSupplier;
-    addRequirements(ballStopper);
   }
 
   @Override

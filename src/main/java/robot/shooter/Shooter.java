@@ -3,7 +3,9 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
 import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.AT_SHOOTING_VELOCITY;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_VELOCITY_ERROR;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
@@ -62,11 +64,15 @@ public class Shooter extends SubsystemBase {
   //y = 0.1912x2 - 161.44x +67791 < 450
 
 
-  public double getAmp(){
-    return components.getMasterMotor().getStatorCurrent();
+  public double getVelocityError(){
+    return components.getMasterMotor().getClosedLoopError();
   }
 
   public boolean isBallShot(){
-    return getAmp() > MIN_AMP_FOR_ONE;
+    return getVelocityError() > MIN_VELOCITY_ERROR;
+  }
+
+  public boolean isReadyToShoot() {
+    return getVelocityError() < AT_SHOOTING_VELOCITY;
   }
 }

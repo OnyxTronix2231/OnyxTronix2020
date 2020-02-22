@@ -1,5 +1,6 @@
 package robot.shooter;
 
+import static robot.shooter.ShooterConstants.ShooterComponentsA.CLOSE_LOOP_RAMP;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.CONTINUOUS_CURRENT_LIMIT;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.DOUBLE_SOLENOID_FORWARD_PORT;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.DOUBLE_SOLENOID_REVERSE_PORT;

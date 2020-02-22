@@ -7,7 +7,7 @@ import robot.ballCollector.BallCollector;
 
 public class ShootCondition extends ConditionalCommand {
 
-  public ShootCondition(final ShootAndCount shootAndCount, final BallCollector ballCollector){
-    super(shootAndCount, new InstantCommand(), ballCollector::canShoot);
+  public ShootCondition(final IsReadyToShoot isReadyToShoot, final BallCollector ballCollector){
+    super(isReadyToShoot, new InstantCommand(), ballCollector::canShoot);
   }
 }

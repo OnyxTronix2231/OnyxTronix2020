@@ -2,6 +2,7 @@ package robot.crossSubsystem;
 
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_BETWEEN_LEFT_TO_RIGHT_BALL_STOPPER;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.CLOSE_RANGE_VELOCITY;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
@@ -12,6 +13,7 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
+import robot.ballStopper.commands.StopBallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.shooter.Shooter;
@@ -38,7 +40,7 @@ public class SmartShooterOi {
     shootWithLoaderTriggerByDistance.whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
+            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED, DELAY_BETWEEN_LEFT_TO_RIGHT_BALL_STOPPER));
 
     final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
@@ -48,7 +50,9 @@ public class SmartShooterOi {
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
+        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED, DELAY_BETWEEN_LEFT_TO_RIGHT_BALL_STOPPER))
+        .whenInactive(new CloseShooterPiston(shooter)
+        .alongWith(new StopBallStopper(ballStopper))) ;
 
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);

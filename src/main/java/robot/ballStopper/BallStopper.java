@@ -10,11 +10,16 @@ public class BallStopper extends SubsystemBase {
     this.components = ballStopperComponents;
   }
 
-  public void moveBallStopperBySpeed(final double speed) {
-    components.getMotor().set(speed);
+  public void moveLeftMotor(final double speed) {
+    components.getLeftMotor().set(speed);
+  }
+
+  public void moveRightMotor(final double speed) {
+    components.getRightMotor().set(speed);
   }
 
   public void stopMotor() {
-    moveBallStopperBySpeed(0);
+    moveLeftMotor(0);
+    moveRightMotor(0);
   }
 }

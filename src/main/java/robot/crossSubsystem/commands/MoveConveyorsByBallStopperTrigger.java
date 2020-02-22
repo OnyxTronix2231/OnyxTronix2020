@@ -4,7 +4,7 @@ import static robot.crossSubsystem.CrossSubsystemConstants.TIME_BETWEEN_BALLS;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.ballStopper.BallStopper;
-import robot.ballStopper.commands.MoveBallStopperBySpeed;
+import robot.ballStopper.commands.MoveLeftMotor;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.WaitUntilLoaderVelocityOnTarget;
 import robot.shooter.Shooter;
@@ -26,7 +26,7 @@ public class MoveConveyorsByBallStopperTrigger extends ParallelCommandGroup {
             new WaitUntilLoaderVelocityOnTarget(loaderConveyor),
             parallel(
                 new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
+                new MoveLeftMotor(ballStopper, ballStopperSpeedSupplier))
                 .withTimeout(TIME_BETWEEN_BALLS)));
   }
 }

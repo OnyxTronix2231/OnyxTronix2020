@@ -7,17 +7,17 @@ final class TurretConstants {
     static final int PEAK_AMP = 40; //TODO check and change
     static final int PEAK_AMP_DURATION = 0; //TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
-    static final int MAX_ACCELERATION = 200; //TODO check and change
+    static final int MAX_ACCELERATION = 1000; //TODO check and change
     static final int MAX_VELOCITY = 200; //TODO check and change
     static final int MAX_OUTPUT = 1023;
     static final int ABSOLUTE_ENCODER_OFFSET = 399;
-    static final int FORWARD_SOFT_LIMIT_THRESHOLD = 1223;
-    static final int REVERSE_SOFT_LIMIT_THRESHOLD = 257;
+    static final int FORWARD_SOFT_LIMIT_THRESHOLD = 613 + ABSOLUTE_ENCODER_OFFSET;
+    static final int REVERSE_SOFT_LIMIT_THRESHOLD = ABSOLUTE_ENCODER_OFFSET - 357;
     static final boolean FORWARD_SOFT_LIMIT_ENABLE = true;
     static final boolean REVERSE_SOFT_LIMIT_ENABLE = true;
-    static final double VELOCITY_P = 4; //TODO check and change
+    static final double VELOCITY_P = 25; //TODO check and change
     static final double VELOCITY_I = 0; //TODO check and change
-    static final double VELOCITY_D = 0; //TODO check and change
+    static final double VELOCITY_D = 50; //TODO check and change
     static final double VELOCITY_F = (double) MAX_OUTPUT / MAX_VELOCITY;
   }
 

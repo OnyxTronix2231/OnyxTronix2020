@@ -12,6 +12,8 @@ import robot.turret.commands.MoveTurretToAngleAndKeep;
 
 public class YawControl extends Turret {
 
+  private double initRobotAngleRTF;
+
   public enum TurretState {
     RTF,
     RTR,
@@ -45,10 +47,15 @@ public class YawControl extends Turret {
   }
 
   @Override
+  public void initMoveMotionMagic() {
+    initRobotAngleRTF = getRobotHeading();
+  }
+
+  @Override
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
     if (turretState == TurretState.RTF) {
-      tempAngle += robotHeadingOffset - getRobotHeading();
+      tempAngle -= getRobotHeading() - initRobotAngleRTF;
       robotHeadingOffset = driveTrain.getRawRobotHeading();
     }
     super.moveToAngle(tempAngle);

@@ -2,6 +2,7 @@ package robot.turret.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.turret.Turret;
+import robot.yawControl.YawControl;
 
 import java.util.function.DoubleSupplier;
 
@@ -20,6 +21,8 @@ public class MoveTurretToAngleAndKeep extends CommandBase {
   @Override
   public void initialize() {
     angle = supplierAngle.getAsDouble();
+
+    turret.initMoveMotionMagic();
   }
 
   @Override

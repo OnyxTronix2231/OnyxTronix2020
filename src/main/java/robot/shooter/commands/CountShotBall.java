@@ -13,6 +13,7 @@ public class CountShotBall extends SequentialCommandGroup {
   public CountShotBall(final BallCollector ballCollector, final Shooter shooter) {
     this.ballCollector = ballCollector;
     this.shooter = shooter;
-    addCommands(new WaitTillRightAmp(shooter), new RemoveBallFromCounter(ballCollector));
+    addCommands(new WaitTillRightAmp(shooter), new RemoveBallFromCounter(ballCollector),
+        new StopShootingCondition(this, ballCollector));
   }
 }

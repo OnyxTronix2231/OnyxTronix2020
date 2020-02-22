@@ -3,19 +3,15 @@ package robot.crossSubsystem;
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.CLOSE_RANGE_VELOCITY;
 import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.ballCollector.BallCollector;
 import robot.ballStopper.BallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;
@@ -33,12 +29,14 @@ public class SmartShooterOi {
                         final UniqueAxisCache driveJoystickAxisCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision) {
+                        final BallCollector ballCollector, final Vision vision) {
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
-    shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-        () -> vision.getOuterTarget().getDistance()));
+//    shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
+//        () -> vision.getOuterTarget().getDistance()));
+//    shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootAndCountByDistance(shooter, ballCollector,
+//            () -> vision.getOuterTarget().getDistance()));
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,

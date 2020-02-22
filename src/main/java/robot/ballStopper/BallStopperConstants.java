@@ -7,5 +7,6 @@ public class BallStopperConstants {
     static final int RIGHT_MOTOR_PORT = 11;
   }
 
+  static final double DELAY_BETWEEN_LEFT_TO_RIGHT_BALL_STOPPER = 1;
   static final double PERCENTAGE_OUTPUT = 0.8;
 }

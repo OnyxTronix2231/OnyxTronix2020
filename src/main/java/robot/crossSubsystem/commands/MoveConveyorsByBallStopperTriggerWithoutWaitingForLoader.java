@@ -2,11 +2,13 @@ package robot.crossSubsystem.commands;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_DELAY;
 import static robot.crossSubsystem.CrossSubsystemConstants.TIME_BETWEEN_BALLS;
+import static robot.crossSubsystem.CrossSubsystemConstants.WAIT_FOR_VELOCITY;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.ballStopper.commands.MoveBallStopper;
 import robot.ballStopper.commands.MoveBallStopperBySpeed;
 import robot.loaderConveyor.LoaderConveyor;
+import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.shooter.Shooter;
 import robot.shooter.commands.WaitUntilShooterVelocityOnTarget;
 import robot.storageConveyor.StorageConveyor;
@@ -21,8 +23,9 @@ public class MoveConveyorsByBallStopperTriggerWithoutWaitingForLoader extends Pa
                                                                   final DoubleSupplier velocitySupplier,
                                                                   final DoubleSupplier storageSpeedSupplier,
                                                                   final DoubleSupplier ballStopperSpeedSupplier) {
-    super(sequence(new WaitUntilShooterVelocityOnTarget(shooter),
+    super(sequence(new WaitUntilShooterVelocityOnTarget(shooter, WAIT_FOR_VELOCITY),
         parallel(
+            new MoveLoaderConveyorBySpeed(loaderConveyor, velocitySupplier),
             new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
             new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier, BALL_STOPPER_DELAY))
             .withTimeout(TIME_BETWEEN_BALLS)));

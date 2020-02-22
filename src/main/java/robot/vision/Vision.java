@@ -3,6 +3,7 @@ package robot.vision;
 import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robot.vision.target.ConditionalTargetChooser;
 import robot.vision.target.DistanceOrientationConditionalChooser;
@@ -10,6 +11,7 @@ import robot.vision.target.VisionTarget;
 import robot.vision.target.VisionTargetFactory;
 import robot.vision.target.VisionTargetType;
 import vision.limelight.Limelight;
+import vision.limelight.enums.LimelightLedMode;
 
 public class Vision extends SubsystemBase {
 
@@ -23,6 +25,9 @@ public class Vision extends SubsystemBase {
     targetMaker = new DistanceOrientationConditionalChooser(this, MAX_INNER_DISTANCE, MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
+    Shuffleboard.getTab("Vision").addNumber("Outer Target Distance", () ->
+        outerTarget.getDistance());
+    Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
   }
 
   @Override
@@ -43,5 +48,13 @@ public class Vision extends SubsystemBase {
 
   public VisionTarget getOuterTarget() {
     return outerTarget;
+  }
+
+  public void setLedMode(final LimelightLedMode ledMode) {
+    Limelight.getInstance().setLedMode(ledMode);
+  }
+
+  public void setPipeline(final int index) {
+    Limelight.getInstance().setPipeline(index);
   }
 }

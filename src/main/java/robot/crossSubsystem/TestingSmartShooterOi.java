@@ -46,11 +46,11 @@ public class TestingSmartShooterOi {
     final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
-    shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
+    shootWithoutVision.whileActiveContinuous(new CloseShooterPiston(shooter)
         .alongWith((new ShootByVelocity(shooter, () -> setPointEntry.getDouble(0)))));
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new CloseShooterPiston(shooter));
+        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
   }
 }

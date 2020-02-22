@@ -37,10 +37,10 @@ public class YawControl extends Turret {
       case RTF:
         robotHeadingOffset = getRobotHeading();
       case RTR:
-//        setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getAngleRTR));
+        setDefaultCommand(new MoveTurretToAngleAndKeep(this, this::getAngleRTR));
         break;
       case HOMING:
-//        setDefaultCommand(new MoveTurretToAngleAndKeep(this, () -> 0));
+        setDefaultCommand(new MoveTurretToAngleAndKeep(this, () -> 0));
         break;
     }
     this.turretState = turretState;

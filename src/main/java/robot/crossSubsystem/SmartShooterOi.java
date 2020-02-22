@@ -56,7 +56,7 @@ public class SmartShooterOi {
 
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
-    spinShooterWhileAligning.toggleWhenPressed(new ShootByDistance(shooter, () ->
-        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT));
+//    spinShooterWhileAligning.toggleWhenPressed(new ShootByDistance(shooter, () ->
+//        vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT));
   }
 }

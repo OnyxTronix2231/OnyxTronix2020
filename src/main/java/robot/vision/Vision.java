@@ -34,6 +34,7 @@ public class Vision extends SubsystemBase {
       innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
       outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     }
+    System.out.printf("Distance %f\n", outerTarget.getDistance());
   }
 
   public VisionTarget getDependableTarget() {

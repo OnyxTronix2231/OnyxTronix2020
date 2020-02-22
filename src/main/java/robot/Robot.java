@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
     final YawControl yawControl = new YawControl(turretComponents, driveTrain);
-//    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
+    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);
 
-//    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));

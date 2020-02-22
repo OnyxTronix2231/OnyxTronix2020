@@ -2,21 +2,12 @@ package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.MAX_FIRST_RANGE_CM;
-import static robot.shooter.ShooterConstants.MIN_FIRST_RANGE_CM;
-import static robot.shooter.ShooterConstants.MIN_THIRD_RANGE_CM;
 import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.SPEED_FIRST;
-import static robot.shooter.ShooterConstants.SPEED_MIDDLE;
-import static robot.shooter.ShooterConstants.SPEED_THIRD;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.BaseTalonPIDSetConfiguration;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXPIDSetConfiguration;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 

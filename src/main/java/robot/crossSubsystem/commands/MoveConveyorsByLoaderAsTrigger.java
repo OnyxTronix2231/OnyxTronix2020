@@ -1,12 +1,9 @@
 package robot.crossSubsystem.commands;
 
 import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_AFTER_SHOOT;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_DELAY;
-import static robot.crossSubsystem.CrossSubsystemConstants.TIME_BETWEEN_BALLS;
 import static robot.crossSubsystem.CrossSubsystemConstants.WAIT_FOR_VELOCITY;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.commands.MoveBallStopperBySpeed;
 import robot.loaderConveyor.LoaderConveyor;
@@ -26,13 +23,13 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
                                         final DoubleSupplier storageSpeedSupplier,
                                         final DoubleSupplier ballStopperSpeedSupplier) {
     super(sequence(
-        new WaitCommand(DELAY_AFTER_SHOOT),
         new WaitUntilShooterVelocityOnTarget(shooter, WAIT_FOR_VELOCITY),
-        new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(LOADER_DELAY),
-        parallel(
-            new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
-            new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))
-            .withTimeout(TIME_BETWEEN_BALLS)));
+        sequence(
+            new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(DELAY_AFTER_SHOOT) ,
+            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier).withTimeout(DELAY_AFTER_SHOOT)),
+            parallel(
+                new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
+                new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(DELAY_AFTER_SHOOT),
+                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier).withTimeout(DELAY_AFTER_SHOOT))));
   }
 }

@@ -1,8 +1,6 @@
 package robot.ballCollector;
 
 import static robot.ballCollector.BallCollectorConstants.MIN_AMP_FOR_ONE;
-import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID_VALUE;
-import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID_VALUE;
 import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID;
 import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID;
 
@@ -13,11 +11,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class BallCollector extends SubsystemBase {
 
   private final BallCollectorComponents components;
-  private int ballCounter = 3;
 
   public BallCollector(final BallCollectorComponents components) {
     this.components = components;
-    Shuffleboard.getTab("ballCollector").addNumber("ballCounter", () -> ballCounter);
   }
 
   public void collectBySpeed(final double speed) {
@@ -37,30 +33,10 @@ public class BallCollector extends SubsystemBase {
   }
 
   public boolean isBallCollected() {
-    return getAmp() > MIN_AMP_FOR_ONE;
+    return getAmp() > MIN_AMP_FOR_ONE && getAmp() < 30;
   }
 
   public double getAmp() {
     return components.getMasterMotor().getStatorCurrent();
-  }
-
-  public boolean canCollect() {
-    return ballCounter <= 5;
-  }
-
-  public int getBallCounter() {
-    return ballCounter;
-  }
-
-  public void addBall() {
-    ballCounter++;
-  }
-
-  public void removeBall() {
-    ballCounter--;
-  }
-
-  public boolean canShoot(){
-    return ballCounter > 0;
   }
 }

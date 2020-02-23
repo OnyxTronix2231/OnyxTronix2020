@@ -13,6 +13,6 @@ public final class BallCollectorConstants {
 
   static final boolean OPEN_SOLENOID = true;
   static final boolean CLOSE_SOLENOID = false;
-  static final double PERCENT_OUTPUT = 1; // TODO: check value
-  public static final double MIN_AMP_FOR_ONE = 39.199; //TODO: check and change
+  public static final double PERCENT_OUTPUT = 1; // TODO: check value
+  public static final double MIN_AMP_FOR_ONE = 20;
 }

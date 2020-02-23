@@ -1,20 +1,14 @@
 package robot.ballCollector.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import robot.ballCollector.BallCollector;
-
-import java.util.function.DoubleSupplier;
+import robot.ballCounter.BallCounter;
+import robot.ballCounter.commands.CountCollectedBall;
 
 public class CollectAndCount extends ParallelDeadlineGroup {
 
-  private final BallCollector ballCollector;
-  private final DoubleSupplier speedSupplier;
-
-  public CollectAndCount(final BallCollector ballCollector, final DoubleSupplier speedSupplier){
-    super(new CollectBallBySpeed(ballCollector, speedSupplier), new CountBall(ballCollector));
-    this.ballCollector = ballCollector;
-    this.speedSupplier = speedSupplier;
+  public CollectAndCount(final BallCounter ballCounter, final BallCollector ballCollector){
+    super(new CountCollectedBall(ballCounter, ballCollector::isBallCollected, true),
+        new OpenAndCollect(ballCollector));
   }
 }

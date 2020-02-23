@@ -18,6 +18,7 @@ import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
+import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.TestingBallStopperOi;
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    LiveWindow.disableAllTelemetry();
     final XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
     final UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
     final UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
@@ -76,6 +78,7 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
+    final BallCounter ballCounter = new BallCounter();
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -99,7 +102,7 @@ public class Robot extends TimedRobot {
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
+    new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache, ballCounter);
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
@@ -122,7 +125,7 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, ballCollector, vision);
+        storageConveyor, ballStopper, ballCollector, vision, ballCounter);
 
     new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 

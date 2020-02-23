@@ -12,6 +12,7 @@ public final class LoaderConveyorConstants {
     static final double MAX_VELOCITY = 1500; //TODO check and change
     static final int PEAK_AMP_DURATION = 0; //TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
+    public static final double TIME_TO_MOVE_LOADER = 0.5;
     static final int PEAK_AMP = 40; //TODO check and change
   }
 

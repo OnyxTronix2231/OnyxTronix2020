@@ -1,6 +1,7 @@
 package robot.storageConveyor.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.storageConveyor.StorageConveyor;
 
 import java.util.function.DoubleSupplier;

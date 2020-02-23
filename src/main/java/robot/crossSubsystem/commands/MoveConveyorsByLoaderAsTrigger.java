@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.commands.MoveBallStopperBySpeed;
+import robot.ballStopper.commands.MoveBallStopperBySpeedWithTime;
 import robot.loaderConveyor.LoaderConveyor;
+import robot.loaderConveyor.commands.MoveLoaderBySpeedWithTime;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.shooter.Shooter;
 import robot.shooter.commands.WaitUntilShooterVelocityOnTarget;
@@ -27,9 +29,11 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
                                         final DoubleSupplier ballStopperSpeedSupplier) {
     super(sequence(
         new WaitUntilShooterVelocityOnTarget(shooter, WAIT_FOR_VELOCITY),
-        parallel(
-            new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
-//            new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
-            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier))));
+        sequence(sequence(
+            new MoveLoaderBySpeedWithTime(loaderConveyor, loaderSpeed, 0.2) ,
+            new MoveBallStopperBySpeedWithTime(ballStopper, ballStopperSpeedSupplier, 0.2)),
+            parallel(new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier),
+                new MoveLoaderBySpeedWithTime(loaderConveyor, loaderSpeed, 0.2),
+                new MoveBallStopperBySpeedWithTime(ballStopper, ballStopperSpeedSupplier, 0.2)))));
   }
 }

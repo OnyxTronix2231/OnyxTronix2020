@@ -1,7 +1,6 @@
 package robot.ballStopper.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.ballStopper.BallStopper;
 
 import java.util.function.DoubleSupplier;

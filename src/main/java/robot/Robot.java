@@ -3,8 +3,10 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
+import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -12,6 +14,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.TestingBallCollectorOi;
@@ -38,7 +41,6 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
-import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
@@ -49,6 +51,14 @@ import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
+
+  private DriveTrain driveTrain;
+  private LoaderConveyor loaderConveyor;
+  private StorageConveyor storageConveyor;
+  private BallStopper ballStopper;
+  private YawControl yawControl;
+  private Shooter shooter;
+  private Vision vision;
 
   @Override
   public void robotInit() {
@@ -87,28 +97,28 @@ public class Robot extends TimedRobot {
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
     }
 
-    final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
+    driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
     new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+    ballStopper = new BallStopper(ballStopperComponents);
     new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+    storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
-    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
+    yawControl = new YawControl(turretComponents, driveTrain);
     new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
-    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
+    loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
-    final Shooter shooter = new Shooter(shooterComponents);
+    shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
-    Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
+    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
@@ -120,6 +130,12 @@ public class Robot extends TimedRobot {
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
+  }
+
+  @Override
+  public void autonomousInit() {
+    new AutonomousShooting(yawControl, driveTrain, shooter, loaderConveyor, storageConveyor, ballStopper, vision,
+        () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY);
   }
 
   @Override

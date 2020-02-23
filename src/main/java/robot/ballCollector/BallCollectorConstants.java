@@ -1,8 +1,10 @@
 package robot.ballCollector;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 public final class BallCollectorConstants {
+
+  static final boolean OPEN_SOLENOID = true;
+  static final boolean CLOSE_SOLENOID = false;
+  static final double PERCENT_OUTPUT = 1; // TODO: check value
 
   public static final class BallCollectorComponentsA {
     static final int MASTER_MOTOR_PORT = 10;
@@ -12,8 +14,4 @@ public final class BallCollectorConstants {
     static final int PEAK_AMP_DURATION = 0; // TODO: check value
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check value
   }
-
-  static final boolean OPEN_SOLENOID = true;
-  static final boolean CLOSE_SOLENOID = false;
-  static final double PERCENT_OUTPUT = 1; // TODO: check value
 }

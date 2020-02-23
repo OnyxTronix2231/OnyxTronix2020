@@ -22,8 +22,8 @@ public final class TestingBallCollectorOi {
         buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
 
     final Trigger openAndCollectThenCloseButton = buttonsOpenAndCollectThenClose.or(driveOpenAndCollectCollectThenClose);
-        openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-            new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
-        openAndCollectThenCloseButton.whenInactive(new CloseBallCollectorPistons(ballCollector));
+    openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
+        new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
+    openAndCollectThenCloseButton.whenInactive(new CloseBallCollectorPistons(ballCollector));
   }
 }

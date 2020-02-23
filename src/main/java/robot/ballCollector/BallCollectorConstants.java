@@ -1,7 +1,5 @@
 package robot.ballCollector;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 public final class BallCollectorConstants {
 
   public static final class BallCollectorComponentsA {
@@ -13,8 +11,8 @@ public final class BallCollectorConstants {
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check value
   }
 
-  static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
-  static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
+  static final boolean OPEN_SOLENOID = true;
+  static final boolean CLOSE_SOLENOID = false;
   static final double PERCENT_OUTPUT = 1; // TODO: check value
   public static final double MIN_AMP_FOR_ONE = 39.199; //TODO: check and change
 }

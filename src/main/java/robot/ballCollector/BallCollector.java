@@ -1,9 +1,10 @@
 package robot.ballCollector;
 
 import static robot.ballCollector.BallCollectorConstants.MIN_AMP_FOR_ONE;
-
 import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID_VALUE;
 import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID_VALUE;
+import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID;
+import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -28,11 +29,11 @@ public class BallCollector extends SubsystemBase {
   }
 
   public void openPistons() {
-    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
+    components.getSolenoid().set(OPEN_SOLENOID);
   }
 
   public void closePistons() {
-    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
+    components.getSolenoid().set(CLOSE_SOLENOID);
   }
 
   public boolean isBallCollected() {

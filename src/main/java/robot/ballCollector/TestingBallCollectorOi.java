@@ -8,6 +8,7 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
+import robot.ballCollector.commands.OpenAndCollect;
 import robot.ballCollector.commands.OpenBallCollectorPistons;
 
 public final class TestingBallCollectorOi {
@@ -15,12 +16,14 @@ public final class TestingBallCollectorOi {
   public TestingBallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driverJoystickAxisCache,
                                 UniqueAxisCache buttonsJoystickAxisCache,
                                 final UniqueButtonCache driverJoystickButtonCache) {
-    final Trigger driveCollectBySpeed =
+    final Trigger driveOpenAndCollectCollectThenClose =
         driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-    final Trigger buttonsCollectBySpeed =
+    final Trigger buttonsOpenAndCollectThenClose =
         buttonsJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
 
-    buttonsCollectBySpeed.or(driveCollectBySpeed).
-        whileActiveContinuous(new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT));
+    final Trigger openAndCollectThenCloseButton = buttonsOpenAndCollectThenClose.or(driveOpenAndCollectCollectThenClose);
+        openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
+            new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
+        openAndCollectThenCloseButton.whenInactive(new CloseBallCollectorPistons(ballCollector));
   }
 }

@@ -23,6 +23,7 @@ public final class ClimberConstants {
     static final double ARB_FEED_FORWARD = 0; // TODO: tuning is required
     static final double ENCODER_CPR = ENCODER_UNITS * CONVERSION_RATE; // TODO: Calibration with A
     static final double PERIMETER = 0; // TODO: Check and change
+    static final double ENCODER_TOLARANCE =  CONVERSION_RATE * ENCODER_CPR * TOLERANCE_IN_ENCODER / PERIMETER;
 
 
   }

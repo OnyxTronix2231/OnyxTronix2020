@@ -50,7 +50,8 @@ public class Climber extends SubsystemBase {
   }
 
   public boolean isClimberOnTarget(final double Target) {
-    return Math.abs(Target - components.getMasterMotor().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE_IN_ENCODER);
+    return Math.abs(Target - components.getMasterMotor().getSelectedSensorPosition()) <
+        ClimberConstants.ClimberComponentsA.ENCODER_TOLARANCE;
   }
 
   private double cmToEncoderUnits(final double cm) {

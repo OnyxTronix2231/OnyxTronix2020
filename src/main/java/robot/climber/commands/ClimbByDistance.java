@@ -11,10 +11,9 @@ public class ClimbByDistance extends CommandBase {
 
   private final Climber climber;
   private final DoubleSupplier distance;
-  private double Target;
+  private double target;
 
-
-  public ClimbByDistance(Climber climber, DoubleSupplier distance) {
+  public ClimbByDistance(final Climber climber,final DoubleSupplier distance) {
     this.climber = climber;
     this.distance = distance;
     addRequirements(climber);
@@ -23,17 +22,17 @@ public class ClimbByDistance extends CommandBase {
   @Override
   public void initialize() {
     climber.initMotionProfileSlot(DRIVE_BY_DISTANCE_SLOT);
-    Target = climber.getTargetFromDistance(distance.getAsDouble());
+    target = climber.getTargetFromDistance(distance.getAsDouble());
   }
 
   @Override
   public void execute() {
-    climber.climbByMotionMagic(Target);
+    climber.climbByMotionMagic(target);
   }
 
   @Override
   public boolean isFinished() {
-    return climber.isClimberOnTarget(Target);
+    return climber.isClimberOnTarget(target);
   }
 
   @Override

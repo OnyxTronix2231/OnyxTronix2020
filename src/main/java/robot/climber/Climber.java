@@ -7,7 +7,7 @@ import static robot.climber.ClimberConstants.ClimberComponentsA.ENCODER_CPR;
 import static robot.climber.ClimberConstants.ClimberComponentsA.PERIMETER;
 import static robot.climber.ClimberConstants.OPEN_SOLENOID_VALUE;
 import static robot.climber.ClimberConstants.ClimberComponentsA.ARB_FEED_FORWARD;
-import static robot.climber.ClimberConstants.TOLERANCE;
+import static robot.climber.ClimberConstants.TOLERANCE_IN_ENCODER;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
@@ -50,7 +50,7 @@ public class Climber extends SubsystemBase {
   }
 
   public boolean isClimberOnTarget(final double Target) {
-    return Math.abs(Target - components.getMasterMotor().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);
+    return Math.abs(Target - components.getMasterMotor().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE_IN_ENCODER);
   }
 
   private double cmToEncoderUnits(final double cm) {

@@ -15,11 +15,11 @@ import robot.climber.commands.OpenClimberPistons;
 public class ClimberOi {
 
   public ClimberOi(final UniqueButtonCache driverJoystickButtonCache,
-                   final UniqueAxisCache driverJoystickAxisCache, final Climber climber) {
+                   final UniqueAxisCache driverJoystickAxisCache, final Climber ClimbByDistance) {
     final Trigger openClimberButton = driverJoystickButtonCache.createJoystickTrigger(kStart.value);
-    openClimberButton.whenActive(new OpenClimberPistons(climber));
+    openClimberButton.whenActive(new OpenClimberPistons(ClimbByDistance));
 
     final Trigger climbButton = driverJoystickButtonCache.createJoystickTrigger(kBack.value);
-    climbButton.whenActive(new Climb(climber));
+    climbButton.whenActive(new Climb(ClimbByDistance));
   }
 }

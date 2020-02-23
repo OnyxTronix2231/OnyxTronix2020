@@ -11,8 +11,9 @@ import robot.climber.ClimberConstants;
 
 public class Climb extends SequentialCommandGroup {
 
-  public Climb(Climber climber) {
-    super(new CloseClimberPistons(climber), new WaitCommand(0.5), new ClimbBySpeed(climber, () -> UP_SPEED));
+  public Climb(final Climber climbByDistance) {
+    super(new CloseClimberPistons(climbByDistance),
+        new WaitCommand(0.5), new ClimbBySpeed(climbByDistance, () -> UP_SPEED));
   }
 
 }

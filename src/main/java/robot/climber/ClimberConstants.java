@@ -24,11 +24,12 @@ public final class ClimberConstants {
     static final double ENCODER_CPR = ENCODER_UNITS * CONVERSION_RATE; // TODO: Calibration with A
     static final double PERIMETER = 0; // TODO: Check and change
 
+
   }
 
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
-  public static final double UP_SPEED = 0.5; // TODO: check value
-  static final double TOLERANCE = 3; // TODO: tuning is required
+  public static final double UP_SPEED = 1; // TODO: check value
+  static final double TOLERANCE_IN_ENCODER = 3; // TODO: tuning is required
 
 }

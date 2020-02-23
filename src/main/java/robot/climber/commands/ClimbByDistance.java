@@ -14,7 +14,7 @@ public class ClimbByDistance extends CommandBase {
   private double Target;
 
 
-  public ClimbByDistance(Climber climber, DoubleSupplier distance, double target) {
+  public ClimbByDistance(Climber climber, DoubleSupplier distance) {
     this.climber = climber;
     this.distance = distance;
     addRequirements(climber);

@@ -68,7 +68,6 @@ public class BasicClimberComponentsA implements ClimberComponents {
     config.supplyCurrLimit.triggerThresholdCurrent = TRIGGER_THRESHOLD_CURRENT;
     config.supplyCurrLimit.triggerThresholdTime = TRIGGER_THRESHOLD_TIME;
     config.supplyCurrLimit.enable = true;
-    config.statorCurrLimit
     return config;
   }
 }

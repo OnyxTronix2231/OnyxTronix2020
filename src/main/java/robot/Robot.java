@@ -45,8 +45,11 @@ import robot.vision.target.VisionTargetFactory;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
+import vision.limelight.enums.LimelightLedMode;
 
 public class Robot extends TimedRobot {
+
+  Vision vision;
 
   @Override
   public void robotInit() {
@@ -109,7 +112,7 @@ public class Robot extends TimedRobot {
         ballCollector, loaderConveyor,
         storageConveyor, ballStopper);
 
-    Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
+    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
@@ -124,8 +127,18 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void autonomousInit() {
+    vision.setLEDMode(LimelightLedMode.forceOn);
+  }
+
+  @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
+  }
+
+  @Override
+  public void teleopInit() {
+    vision.setLEDMode(LimelightLedMode.forceOn);
   }
 
   @Override
@@ -141,6 +154,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     LiveWindow.setEnabled(false);
+    vision.setLEDMode(LimelightLedMode.forceOff);
   }
 
   @Override

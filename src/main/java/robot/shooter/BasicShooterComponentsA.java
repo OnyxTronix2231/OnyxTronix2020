@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class BasicShooterComponentsA implements ShooterComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final WPI_VictorSPX slaveMotor;
+  private final WPI_TalonSRX slaveMotor;
   private final Solenoid solenoid;
 
   public BasicShooterComponentsA() {
@@ -36,7 +36,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setSensorPhase(true);
 
-    slaveMotor = new WPI_VictorSPX(SLAVE_PORT);
+    slaveMotor = new WPI_TalonSRX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);

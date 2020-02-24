@@ -4,7 +4,6 @@ import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -14,13 +13,13 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
-import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.TestingBallStopperOi;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartShooterOi;
+import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
@@ -38,7 +37,6 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
-import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
@@ -90,9 +88,6 @@ public class Robot extends TimedRobot {
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
-
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
@@ -107,6 +102,12 @@ public class Robot extends TimedRobot {
 
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
+
+    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+    new SmartBallCollectorOi(driveJoystickButtonCache,
+        driveJoystickAxisCache,
+        ballCollector, loaderConveyor,
+        storageConveyor, ballStopper);
 
     Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,

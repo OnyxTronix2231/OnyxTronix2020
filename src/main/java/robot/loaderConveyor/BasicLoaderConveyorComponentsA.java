@@ -13,11 +13,17 @@ import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorCompone
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.ColorSensorV3;
+import com.revrobotics.Rev2mDistanceSensor;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 
 public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents {
 
   private final WPI_TalonSRX masterMotor;
+
+  private final Rev2mDistanceSensor distSensor;
 
   public BasicLoaderConveyorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -26,11 +32,20 @@ public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents 
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.enableCurrentLimit(true);
     masterMotor.setInverted(true);
+    distSensor = new Rev2mDistanceSensor(Rev2mDistanceSensor.Port.kOnboard);
+    distSensor.setDistanceUnits(Rev2mDistanceSensor.Unit.kMillimeters);
+    distSensor.setAutomaticMode(true);
+    Shuffleboard.getTab("Loader").addNumber("distance", () -> getCurrentDistance());
   }
 
   @Override
   public WPI_TalonSRX getMasterMotor() {
     return masterMotor;
+  }
+
+  @Override
+  public double getCurrentDistance() {
+    return distSensor.getRange();
   }
 
   private TalonSRXConfiguration getConfiguration() {

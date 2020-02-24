@@ -1,5 +1,6 @@
 package robot.crossSubsystem;
 
+import static robot.ballCollector.BallCollectorConstants.PERCENT_OUTPUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
@@ -8,9 +9,14 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.ballCollector.commands.CloseBallCollectorPistons;
+import robot.ballCollector.commands.CollectBallBySpeed;
+import robot.ballCollector.commands.OpenAndCollect;
+import robot.ballCollector.commands.OpenBallCollectorPistons;
 import robot.ballStopper.BallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;

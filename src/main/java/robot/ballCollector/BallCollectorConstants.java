@@ -2,9 +2,9 @@ package robot.ballCollector;
 
 public final class BallCollectorConstants {
 
+  public static final double PERCENT_OUTPUT = 1;
   static final boolean OPEN_SOLENOID = true;
   static final boolean CLOSE_SOLENOID = false;
-  static final double PERCENT_OUTPUT = 1; // TODO: check value
 
   public static final class BallCollectorComponentsA {
     static final int MASTER_MOTOR_PORT = 10;

@@ -3,13 +3,10 @@ package robot.crossSubsystem;
 import static robot.ballCollector.BallCollectorConstants.PERCENT_OUTPUT;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
-import robot.ballCollector.BallCollectorConstants;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
 import robot.ballCollector.commands.OpenAndCollect;
@@ -32,7 +29,7 @@ public class SmartBallCollectorOi {
     openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
         new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
     openAndCollectThenCloseButton.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
-        storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT, BallStopperConstants.PERCENTAGE_OUTPUT,
+        storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, BallStopperConstants.PERCENTAGE_OUTPUT,
         StorageConveyorConstants.PERCENTAGE_OUTPUT));
     openAndCollectThenCloseButton.whenInactive(new CloseBallCollectorPistons(ballCollector));
   }

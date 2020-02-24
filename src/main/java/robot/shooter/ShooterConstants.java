@@ -11,16 +11,16 @@ public final class ShooterConstants {
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 3;//TODO check ang change!!!!!
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 4;//TODO check ang change!!!!!
     static final int PEAK_AMP = 40;//TODO check and change
-    static final int PEAK_AMP_DURATION = 10;//TODO check and change
+    static final int PEAK_AMP_DURATION = 100;//TODO check and change
+    static final int CONTINUOUS_CURRENT_LIMIT = 30; // TODO: check and change
     static final int MIDDLE_DISTANCE = 450;
-    static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double VELOCITY_P = 1.6;
     static final double VELOCITY_I = 0;
     static final double VELOCITY_D = 40;
     static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-    static final double OPEN_LOOP_RAMP = 1;//TODO: check and change
+    static final double OPEN_LOOP_RAMP = 0;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 0;//TODO: check and change
   }
 

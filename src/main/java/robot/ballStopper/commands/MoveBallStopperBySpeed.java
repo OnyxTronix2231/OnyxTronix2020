@@ -9,7 +9,8 @@ import java.util.function.DoubleSupplier;
 
 public class MoveBallStopperBySpeed extends SequentialCommandGroup {
 
-  public MoveBallStopperBySpeed(BallStopper ballStopper, DoubleSupplier ballStopperSpeed, double ballStopperDelay) {
+  public MoveBallStopperBySpeed(robot.ballStopper.BallStopper ballStopper, DoubleSupplier ballStopperSpeed,
+                                double ballStopperDelay) {
     super(
         new MoveBallStopper(ballStopper, ballStopperSpeed).withTimeout(ballStopperDelay),
         parallel(

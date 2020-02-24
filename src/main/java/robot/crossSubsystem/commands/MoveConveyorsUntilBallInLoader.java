@@ -14,8 +14,8 @@ public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
                                         final double loaderSpeed, final double storageSpeed, final double stopperSpeed) {
     super(deadline(new WaitUntilBallInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
-    loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(0.3),
+    loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(0.1),
         deadline(new WaitUntilBallInLoader(loaderConveyor),
-            new MoveLoaderConveyorBySpeed(loaderConveyor, () -> -0.3)));
+            new MoveLoaderConveyorBySpeed(loaderConveyor, () -> -0.3).withTimeout(0.3)));
   }
 }

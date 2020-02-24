@@ -13,6 +13,7 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
+import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
@@ -102,7 +103,8 @@ public class Robot extends TimedRobot {
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new SmartBallCollectorOi(driveJoystickButtonCache,
+    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
         driveJoystickAxisCache,
         ballCollector, loaderConveyor,
         storageConveyor, ballStopper);
@@ -113,7 +115,7 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision);
+        storageConveyor, ballStopper, vision, yawControl, driveTrain);
 
    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 

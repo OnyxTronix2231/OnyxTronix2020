@@ -96,7 +96,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
         VELOCITY_CONTROLLER_PID_SLOT);
 
-    differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
+    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
 

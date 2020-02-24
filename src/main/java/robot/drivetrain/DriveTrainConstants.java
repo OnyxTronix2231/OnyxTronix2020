@@ -8,7 +8,7 @@ import java.util.List;
 public final class DriveTrainConstants {
 
   public static final int DRIVE_BY_DISTANCE_SLOT = 0;
-  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.8;
+  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.6;
   static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
   static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
   static final int CM_TO_METERS = 100;
@@ -34,17 +34,17 @@ public final class DriveTrainConstants {
     static final double DRIVE_BY_DISTANCE_P = 0; // TODO: Calibration with A
     static final double DRIVE_BY_DISTANCE_I = 0; // TODO: Calibration with A
     static final double DRIVE_BY_DISTANCE_D = 0; // TODO: Calibration with A
-    static final double CURRENT_LIMIT = 35; // TODO: check value
-    static final double TRIGGER_THRESHOLD_CURRENT = 50; // TODO: check value
-    static final double TRIGGER_THRESHOLD_TIME = 2.5; // TODO: check value
+    static final double CURRENT_LIMIT = 40; // TODO: check value
+    static final double TRIGGER_THRESHOLD_CURRENT = 40; // TODO: check value
+    static final double TRIGGER_THRESHOLD_TIME = 30; // TODO: check value
     static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
-    static final double OPEN_LOOP_RAMP = 0.3; // TODO: Calibration with A
+    static final double OPEN_LOOP_RAMP = 0; // TODO: Calibration with A
     static final double CLOSED_LOOP_RAMP = 0;
     static final double VELOCITY_CONTROLLER_P = 0; // TODO: Calibration with A
     static final double VELOCITY_CONTROLLER_I = 0; // TODO: Calibration with A
     static final double VELOCITY_CONTROLLER_D = 0; // TODO: Calibration with A
-    static final double MAX_OUTPUT_FORWARD = 0.9;
-    static final double MAX_OUTPUT_REVERSE = -0.9;
+    static final double MAX_OUTPUT_FORWARD = 0.6;
+    static final double MAX_OUTPUT_REVERSE = -0.6;
     static final double TRAJECTORY_P = 0.4; // TODO: Calibration with A
     static final double TRAJECTORY_I = 0; // TODO: Calibration with A
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A

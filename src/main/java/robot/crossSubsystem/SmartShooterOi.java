@@ -13,6 +13,7 @@ import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
+import robot.drivetrain.DriveTrain;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorConstants;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
@@ -23,6 +24,9 @@ import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
+import robot.yawControl.YawControl;
+import robot.yawControl.commands.AlignByOdometryAndVision;
+import robot.yawControl.commands.AlignByVisionOrOdometryAndVision;
 
 public class SmartShooterOi {
 
@@ -30,12 +34,13 @@ public class SmartShooterOi {
                         final UniqueAxisCache driveJoystickAxisCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision) {
+                        final Vision vision, final YawControl yawControl, final DriveTrain driveTrain) {
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-        () -> vision.getOuterTarget().getDistance()));
+        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain,
+        vision::getOuterTarget)));
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,

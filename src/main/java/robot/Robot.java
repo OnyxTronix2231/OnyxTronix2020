@@ -16,7 +16,6 @@ import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
-import robot.ballStopper.TestingBallStopperOi;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.crossSubsystem.SmartBallCollectorOi;
@@ -89,7 +88,6 @@ public class Robot extends TimedRobot {
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);

@@ -2,6 +2,7 @@ package robot.crossSubsystem;
 
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_DELAY;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
@@ -14,6 +15,7 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
+import robot.ballStopper.commands.StopBallStopper;
 import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.shooter.Shooter;
@@ -53,9 +55,10 @@ public class SmartShooterOi {
     shootWithoutVision.whileActiveContinuous(new CloseShooterPiston(shooter)
     .alongWith(new ShootByVelocity(shooter,() -> SHOOTER_SPEED)));
 
-    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
-        storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
+  shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
+      storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
+     () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter)
+        .alongWith(new StopBallStopper(ballStopper)));
 
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);

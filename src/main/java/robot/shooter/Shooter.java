@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
-        () -> components.getMasterMotor().getClosedLoopError());
+        () -> components.getMasterMotor().getSelectedSensorVelocity());
   }
 
   public void shootBySpeed(final double speed) {

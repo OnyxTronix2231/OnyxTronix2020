@@ -10,12 +10,12 @@ import static robot.ballCollector.BallCollectorConstants.BallCollectorComponents
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class BasicBallCollectorComponentsA implements BallCollectorComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final DoubleSolenoid doubleSolenoid;
+  private final Solenoid solenoid;
 
   public BasicBallCollectorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -25,7 +25,7 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.setInverted(true);
 
-    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
+    solenoid = new Solenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
   }
 
   public TalonSRXConfiguration getConfiguration() {
@@ -42,7 +42,7 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
   }
 
   @Override
-  public DoubleSolenoid getDoubleSolenoid() {
-    return doubleSolenoid;
+  public Solenoid getSolenoid() {
+    return solenoid;
   }
 }

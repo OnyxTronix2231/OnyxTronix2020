@@ -32,4 +32,12 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
                 LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, StorageConveyorConstants.PERCENTAGE_OUTPUT,
                 BallStopperConstants.PERCENTAGE_OUTPUT))));
   }
+
+  @Override
+  public boolean isFinished() {
+    if (super.isFinished()){
+      initialize();
+    }
+    return false;
+  }
 }

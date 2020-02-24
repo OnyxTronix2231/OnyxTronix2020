@@ -10,19 +10,20 @@ public final class ShooterConstants {
     static final int SLAVE_PORT = 8;
     static final int SOLENOID_PORT = 1;
     static final int PEAK_AMP = 40;//TODO check and change
-    static final int PEAK_AMP_DURATION = 10;//TODO check and change
+    static final int PEAK_AMP_DURATION = 100;//TODO check and change
+    static final int CONTINUOUS_CURRENT_LIMIT = 30; // TODO: check and change
     static final int MIDDLE_DISTANCE = 450;
-    static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double VELOCITY_P = 2.3;
     static final double VELOCITY_I = 0;
     static final double VELOCITY_D = 60;
     static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-    static final double OPEN_LOOP_RAMP = 1;//TODO: check and change
+    static final double OPEN_LOOP_RAMP = 0;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 0;//TODO: check and change
   }
 
+  static final boolean IS_PISTON_OPEN = false;
   static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final int TOLERANCE = 100;
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;

@@ -18,8 +18,4 @@ public class BallStopper extends SubsystemBase {
     components.getDelayMotor().set(speed);
   }
 
-  public void stopMotor() {
-    moveBallStopperMotor(0);
-    moveBallStopperDelayMotor(0);
-  }
 }

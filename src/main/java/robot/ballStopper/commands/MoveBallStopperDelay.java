@@ -22,6 +22,7 @@ public class MoveBallStopperDelay extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    ballStopper.stopMotor();
+    ballStopper.moveBallStopperDelayMotor(0);
   }
 }
+

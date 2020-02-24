@@ -3,6 +3,7 @@ package robot.ballStopper.commands;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import robot.ballStopper.BallStopper;
 
 import java.util.function.DoubleSupplier;
 

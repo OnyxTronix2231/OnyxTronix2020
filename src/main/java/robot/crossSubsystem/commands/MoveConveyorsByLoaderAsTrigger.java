@@ -33,4 +33,12 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
                 new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(DELAY_AFTER_SHOOT),
                 new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier, BALL_STOPPER_DELAY).withTimeout(DELAY_AFTER_SHOOT))));
   }
+
+  @Override
+  public boolean isFinished() {
+    if (super.isFinished()){
+      initialize();
+    }
+    return false;
+  }
 }

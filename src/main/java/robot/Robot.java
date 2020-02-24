@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+    LiveWindow.disableAllTelemetry();
     final XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
     final UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
     final UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);

@@ -57,4 +57,8 @@ public class Vision extends SubsystemBase {
   public void setPipeline(final int index) {
     Limelight.getInstance().setPipeline(index);
   }
+
+  public void setLEDMode(LimelightLedMode ledMode) {
+    Limelight.getInstance().setLedMode(ledMode);
+  }
 }

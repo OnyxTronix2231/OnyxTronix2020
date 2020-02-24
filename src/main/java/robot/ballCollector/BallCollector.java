@@ -1,9 +1,8 @@
 package robot.ballCollector;
 
-import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID_VALUE;
-import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID_VALUE;
+import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID;
+import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallCollector extends SubsystemBase {
@@ -23,10 +22,10 @@ public class BallCollector extends SubsystemBase {
   }
 
   public void openPistons() {
-    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
+    components.getSolenoid().set(OPEN_SOLENOID);
   }
 
   public void closePistons() {
-    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
+    components.getSolenoid().set(CLOSE_SOLENOID);
   }
 }

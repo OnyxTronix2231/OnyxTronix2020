@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
-        () -> components.getMasterMotor().getClosedLoopError());
+        () -> components.getMasterMotor().getSelectedSensorVelocity());
   }
 
   public void shootBySpeed(final double speed) {
@@ -44,11 +44,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public void openShooterPiston() {
-    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
+    components.getSolenoid().set(true);
   }
 
   public void closeShooterPiston() {
-    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
+    components.getSolenoid().set(false);
   }
 
   public double distanceToVelocity(double distance) {

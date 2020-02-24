@@ -1,8 +1,7 @@
 package robot.ballCollector;
 
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.CONTINUOUS_CURRENT_LIMIT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.DOUBLE_SOLENOID_FORWARD_PORT;
-import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.DOUBLE_SOLENOID_REVERSE_PORT;
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.SOLENOID_PORT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.MASTER_MOTOR_PORT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.PEAK_AMP_DURATION;
@@ -25,7 +24,7 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.setInverted(true);
 
-    solenoid = new Solenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
+    solenoid = new Solenoid(SOLENOID_PORT);
   }
 
   public TalonSRXConfiguration getConfiguration() {

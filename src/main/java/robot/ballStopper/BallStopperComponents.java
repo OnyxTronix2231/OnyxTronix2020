@@ -5,5 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public interface BallStopperComponents {
 
-  WPI_TalonSRX getMotor();
+  WPI_VictorSPX getBallStopperMotor();
+
+  WPI_VictorSPX getDelayMotor();
 }

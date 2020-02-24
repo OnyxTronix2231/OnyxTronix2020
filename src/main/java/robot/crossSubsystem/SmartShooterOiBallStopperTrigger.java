@@ -49,13 +49,13 @@ public class SmartShooterOiBallStopperTrigger {
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new OpenShooterPiston(shooter)
-        .alongWith((new ShootByVelocity(shooter, () -> CLOSE_RANGE_VELOCITY))));
+        .andThen(((new ShootByVelocity(shooter, () -> CLOSE_RANGE_VELOCITY)))));
 
-//    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
-//        storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-//        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED, BALL_STOPPER_DELAY))
-//        .whenInactive(new CloseShooterPiston(shooter));
-//
+    shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
+        storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
+        () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED))
+        .whenInactive(new CloseShooterPiston(shooter));
+
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
     spinShooterWhileAligning.whenPressed(new ShootByDistance(shooter, () ->

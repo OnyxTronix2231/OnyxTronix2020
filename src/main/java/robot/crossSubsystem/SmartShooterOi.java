@@ -49,7 +49,7 @@ public class SmartShooterOi {
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new CloseShooterPiston(shooter)
-    .alongWith(new ShootByVelocity(shooter,() -> SHOOTER_SPEED)));
+    .andThen(new ShootByVelocity(shooter,() -> SHOOTER_SPEED)));
 
     shootWithoutVision.whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
         storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,

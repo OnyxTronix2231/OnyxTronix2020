@@ -44,11 +44,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public void openShooterPiston() {
-    components.getSolenoid().set(true);
+    components.getSolenoid().set(false);
   }
 
   public void closeShooterPiston() {
-    components.getSolenoid().set(false);
+    components.getSolenoid().set(true);
   }
 
   public double distanceToVelocity(double distance) {

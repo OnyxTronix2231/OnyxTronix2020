@@ -16,4 +16,3 @@ public class MoveBallStopperBySpeed extends SequentialCommandGroup {
             new MoveBallStopper(ballStopper, ballStopperSpeed)));
   }
 }
-

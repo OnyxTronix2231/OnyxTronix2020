@@ -8,6 +8,7 @@ public final class BallCollectorConstants {
     static final int PEAK_AMP = 40; // TODO: check value
     static final int PEAK_AMP_DURATION = 0; // TODO: check value
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check value
+    static final double BALL_COLLECTOR_RAMP = 1;
   }
 
   static final boolean OPEN_SOLENOID = true;

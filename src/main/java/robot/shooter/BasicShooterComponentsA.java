@@ -38,8 +38,11 @@ public class BasicShooterComponentsA implements ShooterComponents {
 
     slaveMotor = new WPI_TalonSRX(SLAVE_PORT);
     slaveMotor.configFactoryDefault();
+    slaveMotor.configAllSettings(getConfiguration());
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
+    masterMotor.enableCurrentLimit(true);
+    masterMotor.setSensorPhase(true);
 
     solenoid = new Solenoid(SOLENOID_PORT);
   }

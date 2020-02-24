@@ -2,10 +2,13 @@ package robot.ballStopper;
 
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.BALL_STOPPER_MOTOR_PORT;
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.BALL_STOPPER_DELAYED_MOTOR_PORT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP_DURATION;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class BasicBallStopperComponentsA implements BallStopperComponents {
 
@@ -13,13 +16,29 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
   private final WPI_TalonSRX delayMotor;
 
   public BasicBallStopperComponentsA() {
+
     ballStopperMotor = new WPI_TalonSRX(BALL_STOPPER_MOTOR_PORT);
     ballStopperMotor.configFactoryDefault();
     ballStopperMotor.setNeutralMode(NeutralMode.Brake);
+    ballStopperMotor.configAllSettings(getConfiguration());
+    ballStopperMotor.enableCurrentLimit(true);
+    ballStopperMotor.setSensorPhase(true);
+
 
     delayMotor = new WPI_TalonSRX(BALL_STOPPER_DELAYED_MOTOR_PORT);
     delayMotor.configFactoryDefault();
     delayMotor.setNeutralMode(NeutralMode.Brake);
+    delayMotor.configAllSettings(getConfiguration());
+    delayMotor.enableCurrentLimit(true);
+    delayMotor.setSensorPhase(true);
+  }
+
+  private TalonSRXConfiguration getConfiguration() {
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    return config;
   }
 
   @Override

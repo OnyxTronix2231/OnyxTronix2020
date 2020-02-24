@@ -8,8 +8,7 @@ public final class ShooterConstants {
     public static final double MAX_VELOCITY = 39000;
     static final int MASTER_PORT = 7;
     static final int SLAVE_PORT = 8;
-    static final int DOUBLE_SOLENOID_FORWARD_PORT = 3;//TODO check ang change!!!!!
-    static final int DOUBLE_SOLENOID_REVERSE_PORT = 4;//TODO check ang change!!!!!
+    static final int SOLENOID_PORT = 1;
     static final int PEAK_AMP = 40;//TODO check and change
     static final int PEAK_AMP_DURATION = 10;//TODO check and change
     static final int MIDDLE_DISTANCE = 450;

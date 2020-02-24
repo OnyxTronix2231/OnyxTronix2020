@@ -1,5 +1,6 @@
 package robot.crossSubsystem.commands;
 
+import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_DELAY;
 import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_AFTER_SHOOT;
 import static robot.crossSubsystem.CrossSubsystemConstants.WAIT_FOR_VELOCITY;
 
@@ -26,11 +27,11 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
         new WaitUntilShooterVelocityOnTarget(shooter, WAIT_FOR_VELOCITY),
         sequence(
             new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(DELAY_AFTER_SHOOT) ,
-            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier).withTimeout(DELAY_AFTER_SHOOT)),
+            new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier, BALL_STOPPER_DELAY).withTimeout(DELAY_AFTER_SHOOT)),
             parallel(
                 new MoveStorageConveyorBySpeed(storageConveyor, storageSpeedSupplier).withTimeout(DELAY_AFTER_SHOOT),
                 new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).withTimeout(DELAY_AFTER_SHOOT),
-                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier).withTimeout(DELAY_AFTER_SHOOT))));
+                new MoveBallStopperBySpeed(ballStopper, ballStopperSpeedSupplier, BALL_STOPPER_DELAY).withTimeout(DELAY_AFTER_SHOOT))));
   }
 
   @Override

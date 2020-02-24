@@ -4,7 +4,6 @@ import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,7 +17,6 @@ import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
-import robot.ballStopper.TestingBallStopperOi;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
@@ -38,7 +36,6 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
-import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
@@ -94,7 +91,6 @@ public class Robot extends TimedRobot {
     new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);

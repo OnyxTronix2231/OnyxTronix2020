@@ -5,6 +5,7 @@ public final class BallCollectorConstants {
   static final boolean OPEN_SOLENOID = true;
   static final boolean CLOSE_SOLENOID = false;
   static final double PERCENT_OUTPUT = 1; // TODO: check value
+  public static final double BALL_COLLECTOR_RAMP = 0.8; //TODO: check and change
 
   public static final class BallCollectorComponentsA {
     static final int MASTER_MOTOR_PORT = 10;

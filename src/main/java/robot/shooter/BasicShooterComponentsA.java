@@ -1,6 +1,17 @@
 package robot.shooter;
 
-import static robot.shooter.ShooterConstants.ShooterComponentsA.*;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.CLOSE_LOOP_RAMP;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MASTER_PORT;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.OPEN_LOOP_RAMP;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.PEAK_AMP;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.PEAK_AMP_DURATION;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.SLAVE_PORT;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.SOLENOID_PORT;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_F;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -9,13 +20,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class BasicShooterComponentsA implements ShooterComponents {
 
   private final WPI_TalonSRX masterMotor;
   private final WPI_VictorSPX slaveMotor;
-  private final DoubleSolenoid doubleSolenoid;
+  private final Solenoid solenoid;
 
   public BasicShooterComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_PORT);
@@ -30,7 +41,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
 
-    doubleSolenoid = new DoubleSolenoid(DOUBLE_SOLENOID_FORWARD_PORT, DOUBLE_SOLENOID_REVERSE_PORT);
+    solenoid = new Solenoid(SOLENOID_PORT);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -61,7 +72,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
   }
 
   @Override
-  public DoubleSolenoid getDoubleSolenoid() {
-    return doubleSolenoid;
+  public Solenoid getSolenoid() {
+    return solenoid;
   }
 }

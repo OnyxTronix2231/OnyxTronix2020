@@ -23,6 +23,7 @@ public final class ShooterConstants {
     static final double CLOSE_LOOP_RAMP = 0;//TODO: check and change
   }
 
+  static final boolean IS_PISTON_OPEN = false;
   static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final int TOLERANCE = 100;
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;

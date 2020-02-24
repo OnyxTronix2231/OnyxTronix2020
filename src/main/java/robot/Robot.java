@@ -91,7 +91,6 @@ public class Robot extends TimedRobot {
     new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);

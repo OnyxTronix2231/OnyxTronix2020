@@ -2,14 +2,14 @@ package robot.vision.target;
 
 import java.util.function.BooleanSupplier;
 
-public class ConditionalTargetChooser {
+public class TargetChooser {
 
   private final VisionTargetSupplier trueTargetSupplier;
   private final VisionTargetSupplier falseTargetSupplier;
   protected final BooleanSupplier condition;
 
-  public ConditionalTargetChooser(final VisionTargetSupplier trueTargetSupplier,
-                                  final VisionTargetSupplier falseTargetSupplier, final BooleanSupplier condition) {
+  public TargetChooser(final VisionTargetSupplier trueTargetSupplier,
+                       final VisionTargetSupplier falseTargetSupplier, final BooleanSupplier condition) {
     this.condition = condition;
     this.trueTargetSupplier = trueTargetSupplier;
     this.falseTargetSupplier = falseTargetSupplier;

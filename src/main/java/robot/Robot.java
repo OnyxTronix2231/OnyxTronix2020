@@ -48,7 +48,7 @@ import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
 
-  AutonomousShooting autonomousShooting;
+  private AutonomousShooting autonomousShooting;
 
   @Override
   public void robotInit() {

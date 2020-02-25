@@ -7,11 +7,12 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectAndCount;
 import robot.ballCounter.BallCounter;
+import robot.loaderConveyor.LoaderConveyor;
 
 public final class TestingBallCollectorOi {
 
   public TestingBallCollectorOi(final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-                                UniqueAxisCache buttonsJoystickAxisCache,
+                                UniqueAxisCache buttonsJoystickAxisCache, final UniqueAxisCache driverJoystickAxisCache,
                                 final UniqueButtonCache driverJoystickButtonCache, final BallCounter ballCounter) {
     final Trigger driveOpenAndCollectCollectThenClose =
         driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);

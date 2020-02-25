@@ -2,6 +2,7 @@ package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.AT_SHOOTING_VELOCITY;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_VELOCITY_ERROR;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;

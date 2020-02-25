@@ -3,6 +3,7 @@ package robot.ballCollector;
 public final class BallCollectorConstants {
 
   public static final double PERCENT_OUTPUT = 1;
+  public static final double REVERSE_OUTPUT = -1;
   public static final double DURING_CLOSED_PERCENT_OUTPUT = 0.3;
   static final boolean OPEN_SOLENOID = true;
   static final boolean CLOSE_SOLENOID = false;

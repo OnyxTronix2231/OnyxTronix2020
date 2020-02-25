@@ -1,6 +1,6 @@
 package robot.crossSubsystem.commands;
 
-import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_UNTIL_BALL_LOADING_END;
+import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_UNTIL_BALL_LOADING_ENDS;
 import static robot.crossSubsystem.CrossSubsystemConstants.REVERSE_LOADER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.REVERSE_LOADER_TIMEOUT;
 
@@ -18,7 +18,7 @@ public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
                                         final double loaderSpeed, final double storageSpeed, final double stopperSpeed) {
     super(deadline(new WaitUntilBallInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
-    loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_END),
+    loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
         deadline(new WaitUntilBallInLoader(loaderConveyor),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> REVERSE_LOADER_SPEED).withTimeout(REVERSE_LOADER_TIMEOUT)));
   }

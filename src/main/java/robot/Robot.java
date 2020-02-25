@@ -3,11 +3,7 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
-import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
-import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
-import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,11 +14,11 @@ import onyxTronix.UniqueButtonCache;
 import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
-import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
+import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
@@ -95,6 +91,7 @@ public class Robot extends TimedRobot {
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
+    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
@@ -105,13 +102,14 @@ public class Robot extends TimedRobot {
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
-
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, loaderConveyor, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
+    new SmartBallCollectorOi(driveJoystickButtonCache,
+        driveJoystickAxisCache,
+        ballCollector, loaderConveyor,
+        storageConveyor, ballStopper);
 
     final Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,

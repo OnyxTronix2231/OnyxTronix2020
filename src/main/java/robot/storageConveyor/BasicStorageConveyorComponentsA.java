@@ -17,6 +17,7 @@ public class BasicStorageConveyorComponentsA implements StorageConveyorComponent
   public BasicStorageConveyorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
     masterMotor.configFactoryDefault();
+    masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -25,7 +26,8 @@ public class BasicStorageConveyorComponentsA implements StorageConveyorComponent
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
-    return config;}
+    return config;
+  }
 
   @Override
   public IMotorController getMasterMotor() {

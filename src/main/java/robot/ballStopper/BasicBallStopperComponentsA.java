@@ -23,15 +23,12 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
     ballStopperMotor.setNeutralMode(NeutralMode.Brake);
     ballStopperMotor.configAllSettings(getConfiguration());
     ballStopperMotor.enableCurrentLimit(true);
-    ballStopperMotor.setSensorPhase(true);
-
 
     delayMotor = new WPI_TalonSRX(BALL_STOPPER_DELAYED_MOTOR_PORT);
     delayMotor.configFactoryDefault();
     delayMotor.setNeutralMode(NeutralMode.Brake);
     delayMotor.configAllSettings(getConfiguration());
     delayMotor.enableCurrentLimit(true);
-    delayMotor.setSensorPhase(true);
   }
 
   private TalonSRXConfiguration getConfiguration() {

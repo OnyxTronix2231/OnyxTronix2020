@@ -13,7 +13,7 @@ public class ClimbByDistance extends CommandBase {
   private final DoubleSupplier distance;
   private double target;
 
-  public ClimbByDistance(final Climber climber,final DoubleSupplier distance) {
+  public ClimbByDistance(final Climber climber, final DoubleSupplier distance) {
     this.climber = climber;
     this.distance = distance;
     addRequirements(climber);
@@ -40,4 +40,3 @@ public class ClimbByDistance extends CommandBase {
     climber.stopMotor();
   }
 }
-

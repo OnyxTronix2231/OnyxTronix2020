@@ -7,10 +7,10 @@ import static robot.climber.ClimberConstants.ClimberComponentsA.MASTER_MOTOR_POR
 import static robot.climber.ClimberConstants.ClimberComponentsA.SLAVE_MOTOR_PORT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_CURRENT;
 import static robot.climber.ClimberConstants.ClimberComponentsA.TRIGGER_THRESHOLD_TIME;
-import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KP;
-import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KI;
 import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KD;
 import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KF;
+import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KI;
+import static robot.climber.ClimberConstants.ClimberComponentsA.VELOCITY_KP;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;

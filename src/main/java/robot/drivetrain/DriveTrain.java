@@ -37,6 +37,7 @@ public class DriveTrain extends SubsystemBase {
     this.components = components;
     resetEncoders();
 
+    Shuffleboard.getTab("Odometry").addNumber("Yaw angle", () -> getRawRobotHeading());
     pathChooser.setDefaultOption("Path 1", 1);
     pathChooser.addOption("Path 2", 2);
     pathChooser.addOption("Path 3", 3);

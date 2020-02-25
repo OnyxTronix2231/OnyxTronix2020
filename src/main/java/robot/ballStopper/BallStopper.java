@@ -1,5 +1,6 @@
 package robot.ballStopper;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class BallStopper extends SubsystemBase {
@@ -10,11 +11,12 @@ public class BallStopper extends SubsystemBase {
     this.components = ballStopperComponents;
   }
 
-  public void moveBallStopperBySpeed(final double speed) {
-    components.getMotor().set(speed);
+  public void moveBallStopperMotor(final double speed) {
+    components.getBallStopperMotor().set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopMotor() {
-    moveBallStopperBySpeed(0);
+  public void moveBallStopperDelayMotor(final double speed) {
+    components.getDelayMotor().set(ControlMode.PercentOutput, speed);
   }
+
 }

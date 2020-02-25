@@ -1,28 +1,20 @@
 package robot.ballStopper.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import robot.ballStopper.BallStopper;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveBallStopperBySpeed extends CommandBase {
+public class MoveBallStopperBySpeed extends SequentialCommandGroup {
 
-  private final BallStopper ballStopper;
-  private final DoubleSupplier speedSupplier;
-
-  public MoveBallStopperBySpeed(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
-    this.ballStopper = ballStopper;
-    this.speedSupplier = speedSupplier;
-    addRequirements(ballStopper);
-  }
-
-  @Override
-  public void execute() {
-    ballStopper.moveBallStopperBySpeed(speedSupplier.getAsDouble());
-  }
-
-  @Override
-  public void end(final boolean interrupted) {
-    ballStopper.stopMotor();
+  public MoveBallStopperBySpeed(robot.ballStopper.BallStopper ballStopper, DoubleSupplier ballStopperSpeed,
+                                double ballStopperDelay) {
+    super(
+        new MoveBallStopper(ballStopper, ballStopperSpeed).withTimeout(ballStopperDelay),
+        parallel(
+            new MoveBallStopperDelay(ballStopper, ballStopperSpeed),
+            new MoveBallStopper(ballStopper, ballStopperSpeed)));
   }
 }

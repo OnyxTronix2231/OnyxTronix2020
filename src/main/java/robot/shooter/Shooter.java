@@ -1,8 +1,7 @@
 package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
-import static robot.shooter.ShooterConstants.CLOSE_SOLENOID_VALUE;
-import static robot.shooter.ShooterConstants.OPEN_SOLENOID_VALUE;
+import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
@@ -44,11 +43,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public void openShooterPiston() {
-    components.getDoubleSolenoid().set(OPEN_SOLENOID_VALUE);
+    components.getSolenoid().set(IS_PISTON_OPEN);
   }
 
   public void closeShooterPiston() {
-    components.getDoubleSolenoid().set(CLOSE_SOLENOID_VALUE);
+    components.getSolenoid().set(!IS_PISTON_OPEN);
   }
 
   public double distanceToVelocity(double distance) {

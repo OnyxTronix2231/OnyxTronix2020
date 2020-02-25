@@ -1,5 +1,6 @@
 package robot.loaderConveyor;
 
+import static robot.loaderConveyor.LoaderConveyorConstants.LoaderConveyorComponentsA.DISTANCE_WITH_BALL;
 import static robot.loaderConveyor.LoaderConveyorConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -27,5 +28,9 @@ public class LoaderConveyor extends SubsystemBase {
 
   public boolean isOnTarget() {
     return components.getMasterMotor().getClosedLoopError() < TOLERANCE;
+  }
+
+  public boolean isBallInLoader() {
+      return (components.getCurrentDistance() <= DISTANCE_WITH_BALL);
   }
 }

@@ -22,10 +22,10 @@ import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
 
 public class AutonomousShooting extends SequentialCommandGroup {
 
-  public AutonomousShooting(YawControl yawControl, DriveTrain driveTrain, Shooter shooter,
-                            LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
-                            Vision vision) {
-    super(deadline( new WaitCommand(TIMER), parallel(
+  public AutonomousShooting(final YawControl yawControl, final DriveTrain driveTrain, final Shooter shooter,
+                            final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
+                            final BallStopper ballStopper, final Vision vision) {
+    super(deadline(new WaitCommand(TIMER), parallel(
         new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, vision::getDependableTarget),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor, storageConveyor, ballStopper,

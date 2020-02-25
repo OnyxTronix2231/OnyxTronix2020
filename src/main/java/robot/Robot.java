@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BasicBallCollectorComponentsA;
@@ -46,6 +47,8 @@ import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
+
+  private AutonomousShooting autonomousShooting;
 
   @Override
   public void robotInit() {
@@ -107,7 +110,7 @@ public class Robot extends TimedRobot {
         ballCollector, loaderConveyor,
         storageConveyor, ballStopper);
 
-    Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
+    final Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
@@ -115,10 +118,18 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision);
 
-   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+
+    autonomousShooting = new AutonomousShooting(yawControl, driveTrain, shooter,
+        loaderConveyor, storageConveyor, ballStopper, vision);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
+  }
+
+  @Override
+  public void autonomousInit() {
+    autonomousShooting.schedule();
   }
 
   @Override

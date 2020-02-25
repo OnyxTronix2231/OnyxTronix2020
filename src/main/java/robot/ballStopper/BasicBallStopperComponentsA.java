@@ -2,32 +2,50 @@ package robot.ballStopper;
 
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.BALL_STOPPER_MOTOR_PORT;
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.BALL_STOPPER_DELAYED_MOTOR_PORT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.CONTINUOUS_CURRENT_LIMIT;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP;
+import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP_DURATION;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class BasicBallStopperComponentsA implements BallStopperComponents {
 
-  private final WPI_VictorSPX ballStopperMotor;
-  private final WPI_VictorSPX delayMotor;
+  private final WPI_TalonSRX ballStopperMotor;
+  private final WPI_TalonSRX delayMotor;
 
   public BasicBallStopperComponentsA() {
-    ballStopperMotor = new WPI_VictorSPX(BALL_STOPPER_MOTOR_PORT);
+
+    ballStopperMotor = new WPI_TalonSRX(BALL_STOPPER_MOTOR_PORT);
     ballStopperMotor.configFactoryDefault();
     ballStopperMotor.setNeutralMode(NeutralMode.Brake);
+    ballStopperMotor.configAllSettings(getConfiguration());
+    ballStopperMotor.enableCurrentLimit(true);
 
-    delayMotor = new WPI_VictorSPX(BALL_STOPPER_DELAYED_MOTOR_PORT);
+    delayMotor = new WPI_TalonSRX(BALL_STOPPER_DELAYED_MOTOR_PORT);
     delayMotor.configFactoryDefault();
     delayMotor.setNeutralMode(NeutralMode.Brake);
+    delayMotor.configAllSettings(getConfiguration());
+    delayMotor.enableCurrentLimit(true);
+  }
+
+  private TalonSRXConfiguration getConfiguration() {
+    TalonSRXConfiguration config = new TalonSRXConfiguration();
+    config.peakCurrentLimit = PEAK_AMP;
+    config.peakCurrentDuration = PEAK_AMP_DURATION;
+    config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    return config;
   }
 
   @Override
-  public WPI_VictorSPX getBallStopperMotor() {
+  public IMotorController getBallStopperMotor() {
     return ballStopperMotor;
   }
 
   @Override
-  public WPI_VictorSPX getDelayMotor() {
+  public IMotorController getDelayMotor() {
     return delayMotor;
   }
 }

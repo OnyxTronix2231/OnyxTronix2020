@@ -10,8 +10,8 @@ import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 public class TestingStorageConveyorOi {
 
   public TestingStorageConveyorOi(final StorageConveyor storageConveyor, final UniqueButtonCache driveJoystickButtonCache) {
-    final JoystickButton moveStorageConveyorBySpeedButton =
-        driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
-    moveStorageConveyorBySpeedButton.whileHeld(new MoveStorageConveyorBySpeed(storageConveyor, () -> PERCENTAGE_OUTPUT));
+//    final JoystickButton moveStorageConveyorBySpeedButton =
+//        driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
+//    moveStorageConveyorBySpeedButton.whileHeld(new MoveStorageConveyorBySpeed(storageConveyor, () -> PERCENTAGE_OUTPUT));
   }
 }

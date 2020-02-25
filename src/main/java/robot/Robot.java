@@ -18,6 +18,7 @@ import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
+import robot.crossSubsystem.SmartConveyorsOi;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
@@ -27,7 +28,7 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
-import robot.loaderConveyor.TestingLoaderConveyorOi;
+import robot.loaderConveyor.LoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
@@ -35,10 +36,8 @@ import robot.shooter.TestingShooterOi;
 import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
-import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
 import robot.turret.TurretComponents;
-import robot.turret.TestingTurretOi;
 import robot.vision.Vision;
 import robot.vision.VisionConstants;
 import robot.vision.target.VisionTargetFactory;
@@ -94,23 +93,19 @@ public class Robot extends TimedRobot {
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
-    new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
 
     final YawControl yawControl = new YawControl(turretComponents, driveTrain);
-    new TestingTurretOi(yawControl, buttonsJoystickAxisCache);
 
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
-    new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
     final Shooter shooter = new Shooter(shooterComponents);
-    new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
     new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
         driveJoystickAxisCache,
         ballCollector, loaderConveyor,
         storageConveyor, ballStopper);
+    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
     vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
@@ -120,7 +115,9 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision, yawControl, driveTrain);
 
-   new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
+       driveJoystickButtonCache);
+   new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));

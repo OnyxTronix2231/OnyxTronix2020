@@ -31,7 +31,7 @@ public class Vision extends SubsystemBase {
     Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getLimelightOrientation());
     Shuffleboard.getTab("Vision").addBoolean("Can Hit Inner", () ->
         getDependableTarget() == innerTarget);
-    Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
+    Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 
   @Override

@@ -29,6 +29,7 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
     delayMotor.setNeutralMode(NeutralMode.Brake);
     delayMotor.configAllSettings(getConfiguration());
     delayMotor.enableCurrentLimit(true);
+    delayMotor.setInverted(true);
   }
 
   private TalonSRXConfiguration getConfiguration() {

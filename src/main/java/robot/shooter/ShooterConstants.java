@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public final class ShooterConstants {
 
   public static final class ShooterComponentsA {
-    public static final double MAX_VELOCITY = 39000;
+    public static final double MAX_VELOCITY = 37350;
     static final int MASTER_PORT = 7;
     static final int SLAVE_PORT = 8;
     static final int SOLENOID_PORT = 1;
@@ -15,9 +15,9 @@ public final class ShooterConstants {
     static final int MIDDLE_DISTANCE = 450;
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
-    static final double VELOCITY_P = 2.3;
+    static final double VELOCITY_P = 0.7;
     static final double VELOCITY_I = 0;
-    static final double VELOCITY_D = 60;
+    static final double VELOCITY_D = 56;
     static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     static final double OPEN_LOOP_RAMP = 0;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 0;//TODO: check and change

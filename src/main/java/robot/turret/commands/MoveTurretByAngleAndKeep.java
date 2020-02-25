@@ -6,14 +6,14 @@ import robot.yawControl.YawControl;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveTurretByAngle extends CommandBase {
+public class MoveTurretByAngleAndKeep extends CommandBase {
 
   private final Turret turret;
   private final DoubleSupplier angleSupplier;
   private double angle;
   private double turretAngle;
 
-  public MoveTurretByAngle(final Turret turret, final DoubleSupplier angleSupplier) {
+  public MoveTurretByAngleAndKeep(final Turret turret, final DoubleSupplier angleSupplier) {
     this.turret = turret;
     this.angleSupplier = angleSupplier;
     addRequirements(turret);

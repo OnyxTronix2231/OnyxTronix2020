@@ -11,11 +11,13 @@ public final class LoaderConveyorConstants {
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;//TODO check and change
     static final double MAX_VELOCITY = 1500; //TODO check and change
     static final int PEAK_AMP_DURATION = 0; //TODO check and change
-    static final int CONTINUOUS_CURRENT_LIMIT = 25; //TODO check and change
-    static final int PEAK_AMP = 25; //TODO check and change
-    public static final double TIME_TO_MOVE_LOADER = 0.5;
+    static final int CONTINUOUS_CURRENT_LIMIT = 40; //TODO check and change
+    static final double DISTANCE_WITH_BALL = 180; // TODO: check and change
+    static final int PEAK_AMP = 40; //TODO check and change
   }
 
   static final int TOLERANCE = 50;
-  static final double PERCENTAGE_OUTPUT = 0.8;
+  public static final double PERCENTAGE_OUTPUT_MIN = 0.45;
+  public static final double PERCENTAGE_OUTPUT_MAX = 0.8;
+
 }

@@ -18,7 +18,7 @@ import robot.shooter.commands.ShootByDistance;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
 import robot.yawControl.YawControl;
-import robot.yawControl.commands.AlignByOdometryAndVision;
+import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
 
 public class AutonomousShooting extends SequentialCommandGroup {
 
@@ -26,7 +26,7 @@ public class AutonomousShooting extends SequentialCommandGroup {
                             LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
                             Vision vision) {
     super(deadline( new WaitCommand(TIMER), parallel(
-        new AlignByOdometryAndVision(yawControl, driveTrain, vision::getOuterTarget),
+        new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, vision::getDependableTarget),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor, storageConveyor, ballStopper,
             () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY))));

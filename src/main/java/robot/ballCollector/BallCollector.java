@@ -33,7 +33,7 @@ public class BallCollector extends SubsystemBase {
   }
 
   public boolean isBallCollected() {
-    return getAmp() > MIN_AMP_FOR_ONE && getAmp() < 30;
+    return getAmp() > MIN_AMP_FOR_ONE;
   }
 
   public double getAmp() {

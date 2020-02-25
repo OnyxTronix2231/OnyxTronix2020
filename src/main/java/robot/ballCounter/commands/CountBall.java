@@ -5,7 +5,7 @@ import robot.ballCounter.BallCounter;
 
 import java.util.function.BooleanSupplier;
 
-public class CountCollectedBall extends CommandBase {
+public class CountBall extends CommandBase {
 
   private final BallCounter ballCounter;
   private final BooleanSupplier booleanSupplier;
@@ -13,8 +13,8 @@ public class CountCollectedBall extends CommandBase {
   private final boolean isCollecting;
   private int delayCounter;
 
-  public CountCollectedBall(final BallCounter ballCounter, final BooleanSupplier booleanSupplier,
-                            final boolean collectingNotShooting) {
+  public CountBall(final BallCounter ballCounter, final BooleanSupplier booleanSupplier,
+                   final boolean collectingNotShooting) {
     this.ballCounter = ballCounter;
     this.booleanSupplier = booleanSupplier;
     this.isCollecting = collectingNotShooting;
@@ -25,7 +25,7 @@ public class CountCollectedBall extends CommandBase {
   public void execute() {
     if (booleanSupplier.getAsBoolean()){
       delayCounter++;
-      if (delayCounter <= 3){
+      if (delayCounter >= 2){
         isBallCollecting = true;
         delayCounter = 0;
       }

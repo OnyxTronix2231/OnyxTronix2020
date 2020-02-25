@@ -26,8 +26,7 @@ public class SmartBallCollectorOi {
                               final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     final Trigger openAndCollectThenCloseButton = driveJoystickAxisCache.createJoystickTrigger(
         XboxController.Axis.kLeftTrigger.value);
-    openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-        new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
+    openAndCollectThenCloseButton.whileActiveContinuous(new OpenAndCollect(ballCollector));
     openAndCollectThenCloseButton.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
         storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, BallStopperConstants.PERCENTAGE_OUTPUT,
         StorageConveyorConstants.PERCENTAGE_OUTPUT));

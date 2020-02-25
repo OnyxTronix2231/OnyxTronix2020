@@ -14,6 +14,7 @@ public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
 
   public MoveToAngleRTF(final YawControl yawControl, final DoubleSupplier supplierAngle) {
     super(yawControl, supplierAngle);
+    this.yawControl = yawControl;
   }
 
   @Override

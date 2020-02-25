@@ -27,6 +27,8 @@ public class Vision extends SubsystemBase {
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     Shuffleboard.getTab("Vision").addNumber("Outer Target Distance", () ->
         outerTarget.getDistance());
+    Shuffleboard.getTab("Vision").addNumber("Orientation", () ->
+        outerTarget.getOrientation());
     Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
   }
 

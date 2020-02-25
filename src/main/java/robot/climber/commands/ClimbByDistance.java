@@ -10,10 +10,10 @@ import java.util.function.DoubleSupplier;
 public class ClimbByDistance extends CommandBase {
 
   private final Climber climber;
-  private final DoubleSupplier distance;
+  private final double distance;
   private double target;
 
-  public ClimbByDistance(final Climber climber, final DoubleSupplier distance) {
+  public ClimbByDistance(final Climber climber, final double distance) {
     this.climber = climber;
     this.distance = distance;
     addRequirements(climber);
@@ -22,7 +22,7 @@ public class ClimbByDistance extends CommandBase {
   @Override
   public void initialize() {
     climber.initMotionProfileSlot(DRIVE_BY_DISTANCE_SLOT);
-    target = climber.getTargetFromDistance(distance.getAsDouble());
+    target = climber.getTargetFromDistance(distance);
   }
 
   @Override

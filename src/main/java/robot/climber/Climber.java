@@ -2,10 +2,11 @@ package robot.climber;
 
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.climber.ClimberConstants.CLOSE_SOLENOID_VALUE;
+import static robot.climber.ClimberConstants.ClimberComponentsA.*;
 import static robot.climber.ClimberConstants.ClimberComponentsA.ARB_FEED_FORWARD;
 import static robot.climber.ClimberConstants.ClimberComponentsA.CONVERSION_RATE;
-import static robot.climber.ClimberConstants.ClimberComponentsA.ENCODER_CPR;
 import static robot.climber.ClimberConstants.ClimberComponentsA.PERIMETER;
+import static robot.climber.ClimberConstants.ENCODER_UNITS;
 import static robot.climber.ClimberConstants.OPEN_SOLENOID_VALUE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -49,12 +50,12 @@ public class Climber extends SubsystemBase {
   }
 
 
-  public boolean isClimberOnTarget(final double Target) {
-    return Math.abs(Target - components.getMasterMotor().getSelectedSensorPosition()) <
-        ClimberConstants.ClimberComponentsA.ENCODER_TOLERANCE;
+  public boolean isClimberOnTarget(final double target) {
+    return Math.abs(target - components.getMasterMotor().getSelectedSensorPosition()) <
+        ENCODER_TOLERANCE;
   }
 
   private double cmToEncoderUnits(final double cm) {
-    return CONVERSION_RATE * ENCODER_CPR * cm / PERIMETER;
+    return CONVERSION_RATE * ENCODER_UNITS * cm / PERIMETER;
   }
 }

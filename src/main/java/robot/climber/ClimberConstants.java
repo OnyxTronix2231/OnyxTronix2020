@@ -8,9 +8,9 @@ public final class ClimberConstants {
   public static final double SET_POINT_ON_BAR = 1; //TODO: check and change
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double TOLERANCE_IN_ENCODER = 3; // TODO: tuning is required
+  static final double ENCODER_UNITS = 1023;
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
-  private static final double ENCODER_UNITS = 1023;
 
   public static final class ClimberComponentsA {
     static final int MASTER_MOTOR_PORT = 9; // TODO: check value
@@ -26,10 +26,10 @@ public final class ClimberConstants {
     static final double VELOCITY_KI = 0; //TODO check and change
     static final double VELOCITY_KD = 0; //TODO check and change
     static final double VELOCITY_KF = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
-    static final double CONVERSION_RATE = 0; //TODO check and change
+    static final double CONVERSION_RATE = 19.8; //TODO check and change
     static final double ARB_FEED_FORWARD = 0; // TODO: tuning is required
-    static final double ENCODER_CPR = ENCODER_UNITS * CONVERSION_RATE; // TODO: Calibration with A
-    static final double PERIMETER = 0; // TODO: Check and change
-    static final double ENCODER_TOLERANCE = CONVERSION_RATE * ENCODER_CPR * TOLERANCE_IN_ENCODER / PERIMETER;
+    static final double PERIMETER = 0.00286004 * Math.PI; // TODO: Check and change
+    static final double ENCODER_TOLERANCE = CONVERSION_RATE * ENCODER_UNITS * TOLERANCE_IN_ENCODER / PERIMETER;
+    public static final double WAIT_UNTIL_CLIMB = 0.5; // TODO: Check and change
   }
 }

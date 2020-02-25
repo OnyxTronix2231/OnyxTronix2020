@@ -1,5 +1,8 @@
 package robot.climber.commands;
 
+import static robot.climber.ClimberConstants.*;
+import static robot.climber.ClimberConstants.ClimberComponentsA.WAIT_UNTIL_CLIMB;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.climber.Climber;
@@ -9,6 +12,6 @@ public class Climb extends SequentialCommandGroup {
 
   public Climb(final Climber climber) {
     super(new CloseClimberPistons(climber),
-        new WaitCommand(0.5), new ClimbByDistance(climber, () -> ClimberConstants.SET_POINT_ON_BAR));
+        new WaitCommand(WAIT_UNTIL_CLIMB), new ClimbByDistance(climber, SET_POINT_ON_BAR));
   }
 }

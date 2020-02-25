@@ -6,6 +6,7 @@ import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.CONT
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP;
 import static robot.ballStopper.BallStopperConstants.BallStopperComponentsA.PEAK_AMP_DURATION;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -42,12 +43,12 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
   }
 
   @Override
-  public WPI_TalonSRX getBallStopperMotor() {
+  public IMotorController getBallStopperMotor() {
     return ballStopperMotor;
   }
 
   @Override
-  public WPI_TalonSRX getDelayMotor() {
+  public IMotorController getDelayMotor() {
     return delayMotor;
   }
 }

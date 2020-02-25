@@ -25,8 +25,7 @@ import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
 import robot.yawControl.YawControl;
-import robot.yawControl.commands.AlignByOdometryAndVision;
-import robot.yawControl.commands.AlignByVisionOrOdometryAndVision;
+import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
 
 public class SmartShooterOi {
 
@@ -39,7 +38,7 @@ public class SmartShooterOi {
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOdometryAndVision(yawControl, driveTrain,
+        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl, driveTrain,
         vision::getOuterTarget)));
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(

@@ -10,20 +10,14 @@ import vision.limelight.Limelight;
 
 import java.util.function.DoubleSupplier;
 
-public class AlignByVisionUntilTargetNotFound extends SequentialCommandGroup {
-  YawControl yawControl;
+public class AlignByVisionUntilTargetNotFound extends MoveTurretByAngleAndKeep {
+
   public AlignByVisionUntilTargetNotFound(YawControl yawControl, DoubleSupplier angleSupplier) {
-    super(new MoveTurretByAngleAndKeep(yawControl, angleSupplier).withInterrupt(() -> !Limelight.getInstance().targetFound()),
-        new SetTurretState(yawControl, YawControl.TurretState.RTF), new WaitUntilCommand(() -> Limelight.getInstance().targetFound()));
-    this.yawControl =yawControl;
+    super(yawControl, angleSupplier);
   }
 
   @Override
   public boolean isFinished() {
-    if(super.isFinished()) {
-      super.initialize();
-    }
-    return false;
+    return Limelight.getInstance().targetFound();
   }
-
 }

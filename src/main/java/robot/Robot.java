@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision, yawControl, driveTrain);
 
-   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));

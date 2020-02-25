@@ -3,6 +3,9 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
+import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -12,13 +15,13 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
-import robot.ballStopper.TestingBallStopperOi;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
@@ -49,6 +52,8 @@ import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
+
+  AutonomousShooting autonomousShooting;
 
   @Override
   public void robotInit() {
@@ -90,12 +95,6 @@ public class Robot extends TimedRobot {
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
-
-    ballStopper = new BallStopper(ballStopperComponents);
-    new TestingBallStopperOi(ballStopper, buttonsJoystickButtonCache);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
     new TestingStorageConveyorOi(storageConveyor, driveJoystickButtonCache);
@@ -106,10 +105,14 @@ public class Robot extends TimedRobot {
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
+    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+    new TestingBallCollectorOi(ballCollector, loaderConveyor, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
+
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
-    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
+    final Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
@@ -119,14 +122,15 @@ public class Robot extends TimedRobot {
 
    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 
+    autonomousShooting = new AutonomousShooting(yawControl, driveTrain, shooter, loaderConveyor, storageConveyor, ballStopper, vision);
+
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
   }
 
   @Override
   public void autonomousInit() {
-    new AutonomousShooting(yawControl, driveTrain, shooter, loaderConveyor, storageConveyor, ballStopper, vision,
-        () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY);
+    autonomousShooting.schedule();
   }
 
   @Override

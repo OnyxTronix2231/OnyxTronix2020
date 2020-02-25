@@ -19,6 +19,7 @@ public class BasicStorageConveyorComponentsA implements StorageConveyorComponent
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Brake);
+    masterMotor.enableCurrentLimit(true);
   }
 
   private TalonSRXConfiguration getConfiguration() {

@@ -20,6 +20,7 @@ public class Shooter extends SubsystemBase {
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
+    Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", this::isOnTarget);
   }
 
   public void shootBySpeed(final double speed) {

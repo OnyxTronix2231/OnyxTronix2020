@@ -11,24 +11,18 @@ public class CountBall extends CommandBase {
   private final BooleanSupplier booleanSupplier;
   private boolean isBallCollectingOrShooting;
   private final boolean isCollecting;
-  private int delayCounter;
 
   public CountBall(final BallCounter ballCounter, final BooleanSupplier booleanSupplier,
                    final boolean collectingNotShooting) {
     this.ballCounter = ballCounter;
     this.booleanSupplier = booleanSupplier;
     this.isCollecting = collectingNotShooting;
-    delayCounter = 0;
   }
 
   @Override
   public void execute() {
     if (booleanSupplier.getAsBoolean()){
-      delayCounter++;
       isBallCollectingOrShooting = true;
-      if (delayCounter >= 2) {
-        delayCounter = 0;
-      }
     }else if (isBallCollectingOrShooting){
       isBallCollectingOrShooting = false;
       if (isCollecting){

@@ -3,13 +3,10 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -23,18 +20,6 @@ public class Shooter extends SubsystemBase {
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
-
-    Shuffleboard.getTab("Shooter").add("P", VELOCITY_P).getEntry()
-        .addListener(p -> components.getMasterMotor().config_kP(0, p.value.getDouble()),
-            EntryListenerFlags.kUpdate);
-
-    Shuffleboard.getTab("Shooter").add("I", VELOCITY_I).getEntry()
-        .addListener(i -> components.getMasterMotor().config_kI(0, i.value.getDouble()),
-            EntryListenerFlags.kUpdate);
-
-  Shuffleboard.getTab("Shooter").add("D", VELOCITY_I).getEntry()
-        .addListener(d -> components.getMasterMotor().config_kD(0, d.value.getDouble()),
-            EntryListenerFlags.kUpdate);
   }
 
   public void shootBySpeed(final double speed) {

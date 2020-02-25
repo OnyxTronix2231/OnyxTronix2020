@@ -1,6 +1,5 @@
 package robot;
 
-import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
@@ -10,25 +9,19 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
-import robot.ballCollector.TestingBallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
-import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
-import robot.basicautonomous.AutonomousShootCommand;
 import robot.crossSubsystem.SmartShooterOi;
-import robot.crossSubsystem.commands.SpinShooterAndLoaderByDistance;
+import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
-import robot.drivetrain.commands.DriveByDistance;
 import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
@@ -38,7 +31,6 @@ import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
 import robot.shooter.TestingShooterOi;
-import robot.shooter.commands.ShootAndCount;
 import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
@@ -46,18 +38,14 @@ import robot.storageConveyor.TestingStorageConveyorOi;
 import robot.turret.BasicTurretComponentsA;
 import robot.turret.TurretComponents;
 import robot.turret.TestingTurretOi;
-import robot.turret.commands.MoveTurretByAngle;
 import robot.vision.Vision;
 import robot.vision.VisionConstants;
 import robot.vision.target.VisionTargetFactory;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOi;
-import robot.yawControl.commands.AlignByVisionOrOdometryAndVision;
 import vision.limelight.Limelight;
 
 public class Robot extends TimedRobot {
-
-  private AutonomousShootCommand autonomousShootCommand;
 
   @Override
   public void robotInit() {
@@ -77,7 +65,6 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
-    final BallCounter ballCounter = new BallCounter();
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -100,9 +87,6 @@ public class Robot extends TimedRobot {
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache, ballCounter);
-
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
 
     final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
@@ -117,32 +101,24 @@ public class Robot extends TimedRobot {
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
 
+    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+    new SmartBallCollectorOi(driveJoystickButtonCache,
+        driveJoystickAxisCache,
+        ballCollector, loaderConveyor,
+        storageConveyor, ballStopper);
+
     Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, ballCollector, vision, ballCounter);
+        storageConveyor, ballStopper, vision);
 
-    new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
+   new YawControlOi(yawControl, driveTrain, vision::getOuterTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
-
-//    autonomousShootCommand = new AutonomousShootCommand(new MoveTurretByAngle(yawControl, () ->
-//        vision.getOuterTarget().getHorizontalOffset()), new ShootAndCount(new SpinShooterAndLoaderByDistance(shooter,
-//        loaderConveyor, () -> vision.getOuterTarget().getDistance()),
-//        ballCollector, shooter),
-//        new DriveByDistance(driveTrain, () -> 0.5));
-//
-//    final JoystickButton alignToTargetButton =
-//        driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kA.value);
-//    alignToTargetButton.whenActive(autonomousShootCommand);
-  }
-  @Override
-  public void autonomousInit() {
-//    if(autonomousShootCommand != null) autonomousShootCommand.schedule();
   }
 
   @Override

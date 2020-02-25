@@ -19,4 +19,10 @@ public class MoveBallStopperDelay extends CommandBase {
   public void execute() {
     ballStopper.moveBallStopperDelayMotor(speedSupplier.getAsDouble());
   }
+
+  @Override
+  public void end(boolean interrupted) {
+    ballStopper.moveBallStopperDelayMotor(0);
+  }
 }
+

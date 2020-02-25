@@ -10,7 +10,7 @@ import robot.ballCounter.BallCounter;
 
 public final class TestingBallCollectorOi {
 
-  public TestingBallCollectorOi(final BallCollector ballCollector, final UniqueAxisCache driverJoystickAxisCache,
+  public TestingBallCollectorOi(final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
                                 UniqueAxisCache buttonsJoystickAxisCache,
                                 final UniqueButtonCache driverJoystickButtonCache, final BallCounter ballCounter) {
     final Trigger driveOpenAndCollectCollectThenClose =

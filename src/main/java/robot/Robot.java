@@ -105,12 +105,13 @@ public class Robot extends TimedRobot {
     final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
     new TestingLoaderConveyorOi(loaderConveyor, buttonsJoystickButtonCache);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new TestingBallCollectorOi(ballCollector, loaderConveyor, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
     final Shooter shooter = new Shooter(shooterComponents);
     new TestingShooterOi(buttonsJoystickAxisCache, driveJoystickButtonCache, shooter);
+
+    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+    new TestingBallCollectorOi(ballCollector, loaderConveyor, driveJoystickAxisCache, buttonsJoystickAxisCache, driveJoystickButtonCache);
 
     final Vision vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,

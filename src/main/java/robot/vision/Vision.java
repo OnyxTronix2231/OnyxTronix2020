@@ -2,6 +2,7 @@ package robot.vision;
 
 import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
+import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,7 +23,8 @@ public class Vision extends SubsystemBase {
 
   public Vision(VisionTargetFactory factory) {
     this.factory = factory;
-    targetMaker = new DistanceOrientationConditionalChooser(this, MAX_INNER_DISTANCE, MAX_INNER_ORIENTATION);
+    targetMaker = new DistanceOrientationConditionalChooser(this, MAX_INNER_DISTANCE, MIN_INNER_DISTANCE,
+        MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     Shuffleboard.getTab("Vision").addNumber("Outer Target Distance", () ->

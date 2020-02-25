@@ -1,5 +1,7 @@
 package robot.vision.target;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+
 import java.util.function.BooleanSupplier;
 
 public class ConditionalTargetChooser {

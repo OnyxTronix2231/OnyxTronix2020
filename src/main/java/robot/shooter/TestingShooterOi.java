@@ -21,8 +21,12 @@ public class TestingShooterOi {
   public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
                           UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
 
-    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
+    final NetworkTableEntry setPointEntry = Shuffleboard.getTab("Shooter").add("Set Point", 0)
+        .getEntry();
+
+    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.
+        createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    shootBySpeedAxis.whileActiveContinuous(new ShootByVelocity(shooter, () -> setPointEntry.getDouble(0)));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

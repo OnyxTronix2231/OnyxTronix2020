@@ -9,6 +9,6 @@ public class DistanceOrientationTargetChooser extends TargetChooser {
     super(vision::getInnerTarget, vision::getOuterTarget, () ->
         vision.getOuterTarget().getDistance() < maxDistance &&
         vision.getOuterTarget().getDistance() > minDistance &&
-            Math.abs(vision.getOuterTarget().getTurretOrientation()) < maxAbsOrientation);
+            Math.abs(vision.getOuterTarget().getRobotOrientation()) < maxAbsOrientation);
   }
 }

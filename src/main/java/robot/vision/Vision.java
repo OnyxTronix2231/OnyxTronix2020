@@ -28,9 +28,7 @@ public class Vision extends SubsystemBase {
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     Shuffleboard.getTab("Vision").addNumber("Distance Outer", () -> outerTarget.getDistance());
-    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getLimelightOrientation());
-    Shuffleboard.getTab("Drive").addBoolean("Can Hit Inner", () ->
-        getDependableTarget() == innerTarget);
+    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getRobotOrientation());
     Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 
@@ -44,6 +42,10 @@ public class Vision extends SubsystemBase {
 
   public VisionTarget getDependableTarget() {
     return targetChooser.chooseTarget();
+  }
+
+  public boolean canHitOuterTarget() {
+    return targetChooser.chooseTarget() == innerTarget;
   }
 
   public VisionTarget getInnerTarget() {

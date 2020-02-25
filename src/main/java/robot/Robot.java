@@ -18,9 +18,9 @@ import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
+import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.crossSubsystem.SmartConveyorsOi;
 import robot.crossSubsystem.SmartShooterOi;
-import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
@@ -28,15 +28,14 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
-import robot.loaderConveyor.LoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
-import robot.shooter.TestingShooterOi;
 import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.turret.BasicTurretComponentsA;
+import robot.turret.TurretOi;
 import robot.turret.TurretComponents;
 import robot.vision.Vision;
 import robot.vision.VisionConstants;
@@ -101,26 +100,35 @@ public class Robot extends TimedRobot {
     final Shooter shooter = new Shooter(shooterComponents);
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
-        driveJoystickAxisCache,
-        ballCollector, loaderConveyor,
-        storageConveyor, ballStopper);
-    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
     vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
+    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
+        driveJoystickAxisCache,
+        ballCollector, loaderConveyor,
+        storageConveyor, ballStopper);
+
+    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
         storageConveyor, ballStopper, vision, yawControl, driveTrain);
 
-   new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
-       driveJoystickButtonCache);
-   new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
+    new TurretOi(yawControl, buttonsJoystickAxisCache);
+
+    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
+        driveJoystickButtonCache);
+
+    new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
+    Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", shooter::isOnTarget);
+    Shuffleboard.getTab("Drive").addBoolean("Can Hit Inner", () ->
+        vision.canHitOuterTarget());
+
   }
 
   @Override

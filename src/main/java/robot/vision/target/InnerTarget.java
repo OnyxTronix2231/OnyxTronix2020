@@ -30,7 +30,7 @@ public class InnerTarget implements VisionTarget {
     this.y = outerTarget.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
     this.orientation = Math.toDegrees(Math.atan(outerTarget.getX() / y));
     this.distance = Math.sqrt(Math.pow(outerTarget.getX(), 2) + Math.pow(y, 2));
-    this.horizontalOffset = orientation - (outerTarget.getOrientation() - outerTarget.getHorizontalOffset());
+    this.horizontalOffset = outerTarget.getHorizontalOffset() + (orientation - outerTarget.getOrientation());
     this.verticalOffset = Math.toDegrees(Math.atan((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
   }

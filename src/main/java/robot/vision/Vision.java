@@ -4,6 +4,7 @@ import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robot.vision.target.ConditionalTargetChooser;
 import robot.vision.target.DistanceOrientationConditionalChooser;
@@ -26,6 +27,8 @@ public class Vision extends SubsystemBase {
         MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
+    Shuffleboard.getTab("Vision").addNumber("Distance Outer", () -> outerTarget.getDistance());
+    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getOrientation());
     Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
   }
 

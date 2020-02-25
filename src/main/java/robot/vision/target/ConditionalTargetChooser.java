@@ -6,7 +6,7 @@ public class ConditionalTargetChooser {
 
   private final VisionTargetSupplier trueTargetSupplier;
   private final VisionTargetSupplier falseTargetSupplier;
-  private final BooleanSupplier condition;
+  protected final BooleanSupplier condition;
 
   public ConditionalTargetChooser(final VisionTargetSupplier trueTargetSupplier,
                                   final VisionTargetSupplier falseTargetSupplier, final BooleanSupplier condition) {

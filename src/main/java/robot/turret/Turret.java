@@ -8,7 +8,6 @@ import static robot.turret.TurretConstants.MIN_ANGLE;
 import static robot.turret.TurretConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Turret extends SubsystemBase {
@@ -19,7 +18,6 @@ public class Turret extends SubsystemBase {
   public Turret(final TurretComponents components) {
     this.components = components;
     absoluteEncoderOffset = components.getAbsoluteEncoderOffset();
-    Shuffleboard.getTab("Turret").addNumber("AngleRTR", this::getAngleRTR);
   }
 
   public void initMoveMotionMagic() {

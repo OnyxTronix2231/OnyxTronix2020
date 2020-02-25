@@ -18,10 +18,9 @@ public class BallCollectorOi {
     ejectBalls.whenActive(new OpenBallCollectorPistons(ballCollector));
     ejectBalls.whenInactive(new CloseBallCollectorPistons(ballCollector));
 
-    Trigger openPistonButton = buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperRight.value);
-    openPistonButton.whenActive(new OpenBallCollectorPistons(ballCollector));
+    Trigger openClosePistonButton = buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperRight.value);
+    openClosePistonButton.whenActive(new OpenBallCollectorPistons(ballCollector));
 
-    Trigger closePistonButton = buttonJoystickButtonCache.createJoystickTrigger(XboxController.Button.kBumperLeft.value);
-    closePistonButton.whenActive(new CloseBallCollectorPistons(ballCollector));
+    openClosePistonButton.whenInactive(new CloseBallCollectorPistons(ballCollector));
   }
 }

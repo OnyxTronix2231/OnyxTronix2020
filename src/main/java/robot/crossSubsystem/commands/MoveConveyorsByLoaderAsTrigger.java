@@ -1,6 +1,7 @@
 package robot.crossSubsystem.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.loaderConveyor.LoaderConveyor;
@@ -14,15 +15,14 @@ import robot.storageConveyor.StorageConveyorConstants;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
+public class MoveConveyorsByLoaderAsTrigger extends SequentialCommandGroup {
 
   public MoveConveyorsByLoaderAsTrigger(final Shooter shooter, final LoaderConveyor loaderConveyor,
                                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
                                         final DoubleSupplier loaderSpeed,
                                         final DoubleSupplier storageSpeedSupplier,
                                         final DoubleSupplier ballStopperSpeedSupplier) {
-    super(sequence(
-        deadline(new WaitUntilShooterVelocityIsntOnTarget(shooter, 0.1),
+    super(deadline(new WaitUntilShooterVelocityIsntOnTarget(shooter, 0.1),
             sequence(new WaitUntilShooterVelocityOnTarget(shooter, 0),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX).
                 withTimeout(0.3))),
@@ -30,7 +30,7 @@ public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
             new WaitUntilShooterVelocityOnTarget(shooter, 0.1),
             new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor,
                 LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, StorageConveyorConstants.PERCENTAGE_OUTPUT,
-                BallStopperConstants.PERCENTAGE_OUTPUT))));
+                BallStopperConstants.PERCENTAGE_OUTPUT)));
   }
 
   @Override

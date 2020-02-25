@@ -14,6 +14,9 @@ public class CrossSubsystemConstants {
   public static final double WAIT_FOR_VELOCITY = 0.3; //TODO check and  change if need
   public static final double LOADER_DELAY = 0.3; //TODO check and  change if need
   public static final double BALL_STOPPER_DELAY = 1;
+  public static final double DELAY_UNTIL_BALL_LOADING_END = 0.1;
+  public static final double REVERSE_LOADER_SPEED = -0.3;
+  public static final double REVERSE_LOADER_TIMEOUT = 0.3;
   static final double CLOSE_RANGE_VELOCITY = MAX_VELOCITY; //TODO check and change
 }
 

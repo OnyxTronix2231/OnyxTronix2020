@@ -3,6 +3,7 @@ package robot.crossSubsystem;
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_OVERRIDE_TIMEOUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
@@ -54,7 +55,8 @@ public class SmartShooterOi {
         vision::getDependableTarget)));
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
-        () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT).withTimeout(0.2));
+        () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
+        .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
 
     shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
@@ -74,7 +76,8 @@ public class SmartShooterOi {
      () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
 
   shootWithoutVision.and(overrideTrigger).whileActiveOnce(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
-      () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT).withTimeout(0.2));
+      () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
+      .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
 
     final JoystickButton spinShooterWhileAligningDrive = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);

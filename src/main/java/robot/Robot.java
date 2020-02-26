@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BallCollectorOi;
@@ -29,6 +30,7 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
+import robot.loaderConveyor.TestingLoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
@@ -47,6 +49,8 @@ import vision.limelight.Limelight;
 import vision.limelight.enums.LimelightLedMode;
 
 public class Robot extends TimedRobot {
+
+  private AutonomousShooting autonomousShooting;
 
   Vision vision;
   DriveTrain driveTrain;
@@ -125,6 +129,9 @@ public class Robot extends TimedRobot {
 
     new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
+    autonomousShooting = new AutonomousShooting(yawControl, driveTrain, shooter,
+        loaderConveyor, storageConveyor, ballStopper, vision);
+
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
     Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", shooter::isOnTarget);
@@ -139,6 +146,11 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
     driveTrain.setNeutralModeToBrake();
+  }
+
+  @Override
+  public void autonomousInit() {
+    autonomousShooting.schedule();
   }
 
   @Override

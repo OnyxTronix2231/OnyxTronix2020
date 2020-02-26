@@ -139,6 +139,7 @@ public class Robot extends TimedRobot {
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
 
+    driveTrain.setNeutralModeToCoast();
   }
 
   @Override

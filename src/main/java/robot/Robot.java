@@ -30,7 +30,6 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
-import robot.loaderConveyor.TestingLoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
@@ -146,10 +145,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
     driveTrain.setNeutralModeToBrake();
-  }
-
-  @Override
-  public void autonomousInit() {
     autonomousShooting.schedule();
   }
 

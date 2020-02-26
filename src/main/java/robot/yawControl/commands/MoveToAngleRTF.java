@@ -26,6 +26,7 @@ public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
   @Override
   public void execute() {
     angle = supplierAngle.getAsDouble() - initialRobotAngle;
+    System.out.println("angle = " + angle);
     super.execute();
   }
 }

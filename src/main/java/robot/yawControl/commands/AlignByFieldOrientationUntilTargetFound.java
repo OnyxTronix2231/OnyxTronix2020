@@ -3,10 +3,13 @@ package robot.yawControl.commands;
 import robot.yawControl.YawControl;
 import vision.limelight.Limelight;
 
-public class AlignByFieldOrientationUntilVisionTargetFound extends MoveToAngleRTF{
+public class AlignByFieldOrientationUntilTargetFound extends MoveToAngleRTF{
 
-  public AlignByFieldOrientationUntilVisionTargetFound(YawControl yawControl) {
+  private final YawControl yawControl;
+
+  public AlignByFieldOrientationUntilTargetFound(YawControl yawControl) {
     super(yawControl, () -> 0);
+    this.yawControl = yawControl;
   }
 
   @Override

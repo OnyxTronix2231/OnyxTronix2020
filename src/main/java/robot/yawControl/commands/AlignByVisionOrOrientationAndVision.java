@@ -11,14 +11,16 @@ public class AlignByVisionOrOrientationAndVision extends IsTargetFoundCondition 
 
   public AlignByVisionOrOrientationAndVision(final YawControl yawControl, final DriveTrain driveTrain,
                                              final Supplier<VisionTarget> visionTargetSupplier) {
-    super(new AlignByVisionUntilTargetNotFound(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
-        new AlignByFieldOrientationUntilVisionTargetFound(yawControl));
+//    super(new AlignByVisionUntilTargetNotFound(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
+//        new AlignByFieldOrientation(yawControl));
+    super(new MoveTurretByAngleAndKeep(yawControl, () -> visionTargetSupplier.get().getHorizontalOffset()),
+        new AlignByFieldOrientationUntilTargetFound(yawControl));
   }
 
   @Override
   public boolean isFinished() {
     if(super.isFinished()) {
-      super.initialize();
+      initialize();
     }
     return false;
   }

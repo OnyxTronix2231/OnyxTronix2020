@@ -38,6 +38,7 @@ public class SmartShooterOi {
 
   public SmartShooterOi(final UniqueButtonCache driveJoystickButtonCache,
                         final UniqueAxisCache driveJoystickAxisCache,
+                        final UniqueButtonCache buttonsJoystickButtonCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
                         final Vision vision, final YawControl yawControl, final DriveTrain driveTrain) {
@@ -49,10 +50,7 @@ public class SmartShooterOi {
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
         () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl, driveTrain,
-        vision::getOuterTarget)));
-
-
-
+        vision::getDependableTarget)));
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whileActiveOnce(new ParallelDeadlineGroup(new WaitUntilBallIsNotInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
@@ -77,9 +75,12 @@ public class SmartShooterOi {
       new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
           () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)));
 
-    final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
+    final JoystickButton spinShooterWhileAligningDrive = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);
-      spinShooterWhileAligning.toggleWhenPressed(new ShootByDistance(shooter, () ->
+    final JoystickButton spinShooterWhileAligningButton = buttonsJoystickButtonCache.createJoystickTrigger(
+        XboxController.Button.kA.value, false
+    );
+      spinShooterWhileAligningDrive.or(spinShooterWhileAligningButton).toggleWhenActive(new ShootByDistance(shooter, () ->
       vision.getOuterTarget().getDistance()).withTimeout(ALIGNING_TIME_OUT));
   }
 }

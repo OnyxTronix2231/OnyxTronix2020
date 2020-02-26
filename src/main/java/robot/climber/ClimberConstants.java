@@ -13,8 +13,8 @@ public final class ClimberConstants {
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
 
   public static final class ClimberComponentsA {
-    static final int MASTER_MOTOR_PORT = 9; // TODO: check value
-    static final int SLAVE_MOTOR_PORT = 10; // TODO: check value
+    static final int MASTER_MOTOR_PORT = 14; // TODO: check value
+    static final int SLAVE_MOTOR_PORT = 15; // TODO: check value
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 2; // TODO: check value
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 3; // TODO: check value
     static final double CURRENT_LIMIT = 40; // TODO: check value

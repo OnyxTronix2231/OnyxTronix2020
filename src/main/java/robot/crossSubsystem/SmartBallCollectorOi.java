@@ -44,6 +44,6 @@ public class SmartBallCollectorOi {
     openAndCollectTrigger.whenInactive(new CloseBallCollectorPistons(ballCollector).andThen(new WaitCommand(
         CLOSING_SEQUENCE_DELAY))
         .andThen(new CollectBallBySpeed(ballCollector,
-        () -> DURING_CLOSED_PERCENT_OUTPUT).withTimeout(CLOSING_SEQUENCE_DELAY)));
+        () -> DURING_CLOSED_PERCENT_OUTPUT).withTimeout(0.2)));
   }
 }

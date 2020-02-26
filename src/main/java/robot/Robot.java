@@ -140,6 +140,7 @@ public class Robot extends TimedRobot {
         vision.canHitOuterTarget());
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
+    Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
 
 
 

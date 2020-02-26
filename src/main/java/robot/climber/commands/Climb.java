@@ -12,6 +12,6 @@ public class Climb extends SequentialCommandGroup {
 
   public Climb(final Climber climber) {
     super(new CloseClimberPistons(climber),
-        new WaitCommand(WAIT_UNTIL_CLIMB), new ClimbByDistance(climber, SET_POINT_ON_BAR));
+        new WaitCommand(WAIT_UNTIL_CLIMB), new ClimbBySpeed(climber, () -> 1));
   }
 }

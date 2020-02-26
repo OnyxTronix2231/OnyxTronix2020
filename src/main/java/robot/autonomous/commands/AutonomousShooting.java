@@ -26,11 +26,11 @@ public class AutonomousShooting extends SequentialCommandGroup {
                             final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
                             final BallStopper ballStopper, final Vision vision) {
     super(new DriveByDistance(driveTrain, () -> AUTONOMOUS_DISTANCE).withTimeout(5),
-        deadline(new WaitCommand(TIMER), parallel(
+            parallel(
         new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, vision::getDependableTarget),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor, storageConveyor, ballStopper,
-            () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY))));
+            () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY)));
 
   }
 }

@@ -4,6 +4,7 @@ import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
 
+import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -48,6 +49,7 @@ import vision.limelight.enums.LimelightLedMode;
 public class Robot extends TimedRobot {
 
   Vision vision;
+  DriveTrain driveTrain;
 
   @Override
   public void robotInit() {
@@ -86,7 +88,7 @@ public class Robot extends TimedRobot {
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
     }
 
-    final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
+    driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
@@ -124,16 +126,19 @@ public class Robot extends TimedRobot {
     new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
-        () -> shooter.distanceToVelocity(vision.getOuterTarget().getDistance()));
+        () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
     Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", shooter::isOnTarget);
     Shuffleboard.getTab("Drive").addBoolean("Can Hit Inner", () ->
         vision.canHitOuterTarget());
+    Shuffleboard.getTab("Drive").add("Starting angle", 180).
+        getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
 
   }
 
   @Override
   public void autonomousInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
+    driveTrain.setNeutralModeToBrake();
   }
 
   @Override
@@ -144,6 +149,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
+    driveTrain.setNeutralModeToBrake();
   }
 
   @Override
@@ -160,6 +166,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     LiveWindow.setEnabled(false);
     vision.setLEDMode(LimelightLedMode.forceOff);
+    driveTrain.setNeutralModeToCoast();
   }
 
   @Override

@@ -87,7 +87,6 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.follow(leftMaster);
 
     normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
-    normalizedPigeonIMU.setYaw(0);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);

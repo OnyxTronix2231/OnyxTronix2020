@@ -16,7 +16,7 @@ final class TurretConstants {
     static final boolean FORWARD_SOFT_LIMIT_ENABLE = true;
     static final boolean REVERSE_SOFT_LIMIT_ENABLE = true;
     static final double VELOCITY_P = 25; //TODO check and change
-    static final double VELOCITY_I = 0; //TODO check and change
+    static final double VELOCITY_I = 0.1; //TODO check and change
     static final double VELOCITY_D = 50; //TODO check and change
     static final double VELOCITY_F = (double) MAX_OUTPUT / MAX_VELOCITY;
   }

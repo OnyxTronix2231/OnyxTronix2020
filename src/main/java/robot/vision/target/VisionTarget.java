@@ -10,9 +10,7 @@ public interface VisionTarget {
 
   double getVerticalOffset();
 
-  double getLimelightOrientation();
-
-  double getTurretOrientation();
+  double getRobotOrientation();
 
   double getDistance();
 

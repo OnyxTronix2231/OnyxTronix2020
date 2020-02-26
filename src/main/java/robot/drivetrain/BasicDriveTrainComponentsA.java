@@ -32,14 +32,12 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.Traject
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
-import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import controllers.VelocityController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -89,14 +87,8 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.follow(leftMaster);
 
     normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
-    normalizedPigeonIMU.setYaw(0);
 
-    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
-    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
-
-    differentialDrive = new DifferentialDrive(leftVelocityController, rightVelocityController);
+    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
 

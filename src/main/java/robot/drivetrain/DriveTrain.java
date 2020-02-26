@@ -16,6 +16,7 @@ import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.RobotController;
@@ -120,6 +121,24 @@ public class DriveTrain extends SubsystemBase {
 
   public double getRawRobotHeading() {
     return components.getPigeonIMU().getRawYaw();
+  }
+
+  public void setNeutralModeToCoast() {
+    components.getLeftMasterMotor().setNeutralMode(NeutralMode.Coast);
+    components.getLeftSlaveMotor().setNeutralMode(NeutralMode.Coast);
+    components.getRightMasterMotor().setNeutralMode(NeutralMode.Coast);
+    components.getRightSlaveMotor().setNeutralMode(NeutralMode.Coast);
+  }
+
+  public void setNeutralModeToBrake() {
+    components.getLeftMasterMotor().setNeutralMode(NeutralMode.Brake);
+    components.getLeftSlaveMotor().setNeutralMode(NeutralMode.Brake);
+    components.getRightMasterMotor().setNeutralMode(NeutralMode.Brake);
+    components.getRightSlaveMotor().setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setGyroAngle(double angle) {
+    components.getPigeonIMU().setYaw(angle);
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {

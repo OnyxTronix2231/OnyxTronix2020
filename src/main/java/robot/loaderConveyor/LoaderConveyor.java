@@ -14,6 +14,13 @@ public class LoaderConveyor extends SubsystemBase {
     this.components = components;
   }
 
+  @Override
+  public void periodic() {
+    if(!components.getDistanceSensor().isRangeValid()) {
+      components.reinitializeDistanceSensor();
+    }
+  }
+
   public final void moveLoaderConveyorBySpeed(final double speed) {
     components.getMasterMotor().set(speed);
   }

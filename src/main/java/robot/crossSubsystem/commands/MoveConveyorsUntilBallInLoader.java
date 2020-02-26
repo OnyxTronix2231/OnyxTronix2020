@@ -11,11 +11,14 @@ import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.storageConveyor.StorageConveyor;
 
+import java.util.function.DoubleSupplier;
+
 public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
 
   public MoveConveyorsUntilBallInLoader(LoaderConveyor loaderConveyor, BallStopper ballStopper,
                                         StorageConveyor storageConveyor,
-                                        final double loaderSpeed, final double storageSpeed, final double stopperSpeed) {
+                                        final DoubleSupplier loaderSpeed, final DoubleSupplier storageSpeed,
+                                        final DoubleSupplier stopperSpeed) {
     super(deadline(new WaitUntilBallInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
     loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),

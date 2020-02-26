@@ -9,13 +9,16 @@ import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
+import java.util.function.DoubleSupplier;
+
 public class MoveAllConveyors extends ParallelCommandGroup {
 
   public MoveAllConveyors(LoaderConveyor loaderConveyor, BallStopper ballStopper, StorageConveyor storageConveyor,
-  final double loaderSpeed, final double storageSpeed, final double stopperSpeed) {
-   super(new MoveBallStopperBySpeed(ballStopper ,() -> stopperSpeed, BallStopperConstants.DELAY),
-       new MoveLoaderConveyorBySpeed(loaderConveyor, () -> loaderSpeed),
-       new MoveStorageConveyorBySpeed(storageConveyor, () -> storageSpeed));
+                          final DoubleSupplier loaderSpeed, final DoubleSupplier storageSpeed, final DoubleSupplier
+                              stopperSpeed) {
+   super(new MoveBallStopperBySpeed(ballStopper ,stopperSpeed, BallStopperConstants.DELAY),
+       new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
+       new MoveStorageConveyorBySpeed(storageConveyor, storageSpeed));
   }
 
 }

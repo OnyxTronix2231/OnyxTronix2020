@@ -55,8 +55,8 @@ public class SmartShooterOi {
 
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whileActiveOnce(new ParallelDeadlineGroup(new WaitUntilBallIsNotInLoader(loaderConveyor),
-        new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
-            StorageConveyorConstants.PERCENTAGE_OUTPUT, BallStopperConstants.PERCENTAGE_OUTPUT)));
+        new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
+            () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)));
 
     shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
@@ -74,8 +74,8 @@ public class SmartShooterOi {
      () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
 
   shootWithoutVision.and(overrideTrigger).whileActiveOnce(new ParallelDeadlineGroup(new WaitUntilBallIsNotInLoader(loaderConveyor),
-      new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
-          StorageConveyorConstants.PERCENTAGE_OUTPUT, BallStopperConstants.PERCENTAGE_OUTPUT)));
+      new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
+          () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)));
 
     final JoystickButton spinShooterWhileAligning = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);

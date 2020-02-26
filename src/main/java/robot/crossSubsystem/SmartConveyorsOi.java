@@ -24,6 +24,6 @@ public class SmartConveyorsOi {
     final Trigger moveConveyorsBack = driveJoystickButtonCache.createJoystickTrigger(
         XboxController.Button.kX.value);
     moveConveyorsBack.whileActiveContinuous(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
-        MOVE_LOADER_BACK, MOVE_STORAGE_BACK, MOVE_STOPPER_BACK));
+        () -> MOVE_LOADER_BACK, () ->  MOVE_STORAGE_BACK, () -> MOVE_STOPPER_BACK));
   }
 }

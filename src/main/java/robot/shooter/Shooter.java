@@ -3,7 +3,6 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;

@@ -13,7 +13,6 @@ public final class ShooterConstants {
     static final int PEAK_AMP_DURATION = 100;//TODO check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 30; // TODO: check and change
     static final int MIDDLE_DISTANCE = 450;
-    static final int MIN_DISTANCE = 290;
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double VELOCITY_P = 0.7;

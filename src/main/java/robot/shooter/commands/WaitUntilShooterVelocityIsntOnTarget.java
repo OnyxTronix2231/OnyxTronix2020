@@ -13,6 +13,6 @@ public class WaitUntilShooterVelocityIsntOnTarget extends WaitCommand {
 
   @Override
   public boolean isFinished() {
-    return !(shooter.isOnTarget()) && super.isFinished();
+    return !shooter.isOnTarget() && super.isFinished();
   }
 }

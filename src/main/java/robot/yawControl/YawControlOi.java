@@ -19,7 +19,8 @@ public class YawControlOi {
     final JoystickButton alignToTargetButtonJoystick = buttonJoystickButtonCache.createJoystickTrigger(
         XboxController.Button.kA.value
     );
-    alignToTargetDriveJoystick.or(alignToTargetButtonJoystick).whenActive(new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, targetSupplier));
+    alignToTargetDriveJoystick.or(alignToTargetButtonJoystick).whenActive(new
+        AlignByVisionOrOrientationAndVision(yawControl, driveTrain, targetSupplier));
 
     final JoystickButton setStateRTFButton = buttonJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBack.value);

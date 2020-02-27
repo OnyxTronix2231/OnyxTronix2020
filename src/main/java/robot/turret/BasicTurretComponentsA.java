@@ -51,6 +51,7 @@ public class BasicTurretComponentsA implements TurretComponents {
     config.reverseSoftLimitThreshold = REVERSE_SOFT_LIMIT_THRESHOLD;
     config.forwardSoftLimitEnable = FORWARD_SOFT_LIMIT_ENABLE;
     config.reverseSoftLimitEnable = REVERSE_SOFT_LIMIT_ENABLE;
+    config.slot0.integralZone = 50;
     return config;
   }
 

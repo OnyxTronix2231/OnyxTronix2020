@@ -24,6 +24,8 @@ public class AlignByFieldOrientationUntilTargetFound extends MoveToAngleRTF{
     super.execute();
     if(yawControl.isOnTarget())
       counter++;
+    else
+      counter = 0;
   }
 
   @Override

@@ -4,12 +4,10 @@ import static robot.autonomous.AutonomousConstants.AUTONOMOUS_DISTANCE;
 import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
 import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
 import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
-import static robot.autonomous.AutonomousConstants.TIMER;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.ballStopper.BallStopper;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTriggerWithVision;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.commands.DriveByDistance;
 import robot.loaderConveyor.LoaderConveyor;
@@ -29,7 +27,7 @@ public class AutonomousShooting extends SequentialCommandGroup {
             parallel(
         new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, vision::getDependableTarget),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
-        new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor, storageConveyor, ballStopper,
+        new MoveConveyorsByLoaderAsTriggerWithVision(shooter, loaderConveyor, storageConveyor, ballStopper, yawControl,
             () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY)));
 
   }

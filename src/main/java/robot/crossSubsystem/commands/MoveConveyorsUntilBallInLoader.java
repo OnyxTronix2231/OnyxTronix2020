@@ -21,8 +21,13 @@ public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
                                         final DoubleSupplier stopperSpeed) {
     super(deadline(new WaitUntilBallInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
-    loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
-        deadline(new WaitUntilBallInLoader(loaderConveyor),
+            loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
+        race(new WaitUntilBallInLoader(loaderConveyor),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> REVERSE_LOADER_SPEED).withTimeout(REVERSE_LOADER_TIMEOUT)));
+  }
+
+  @Override
+  public void execute() {
+    super.execute();
   }
 }

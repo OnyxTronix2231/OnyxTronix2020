@@ -8,7 +8,6 @@ import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
@@ -17,13 +16,11 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveAllConveyors;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
-import robot.crossSubsystem.commands.WaitUntilBallInLoader;
-import robot.crossSubsystem.commands.WaitUntilBallIsNotInLoader;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTriggerWithVision;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTriggerWithoutVision;
 import robot.drivetrain.DriveTrain;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorConstants;
-import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.shooter.Shooter;
 import robot.shooter.commands.CloseShooterPiston;
 import robot.shooter.commands.OpenShooterPiston;
@@ -31,7 +28,7 @@ import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorConstants;
-import robot.turret.commands.MoveTurretToAngle;
+import robot.turret.commands.MoveTurretToAngleAndKeep;
 import robot.vision.Vision;
 import robot.yawControl.YawControl;
 import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
@@ -54,14 +51,15 @@ public class SmartShooterOi {
         () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl, driveTrain,
         vision::getDependableTarget)));
 
+    shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
+        new MoveConveyorsByLoaderAsTriggerWithVision(shooter, loaderConveyor,
+            storageConveyor, ballStopper, yawControl, () -> LOADER_CONVEYOR_SPEED,
+            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
+
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
         () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
         .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
 
-    shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
-        new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
-            storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
 
     final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
@@ -69,10 +67,10 @@ public class SmartShooterOi {
     shootWithoutVision.whileActiveContinuous(new CloseShooterPiston(shooter)
     .andThen(new ShootByVelocity(shooter,() -> SHOOTER_SPEED))).whenInactive(new OpenShooterPiston(shooter));
 
-    shootWithoutVision.whileActiveOnce(new MoveTurretToAngle(yawControl, () -> 0));
+    shootWithoutVision.whileActiveOnce(new MoveTurretToAngleAndKeep(yawControl, () -> 0));
 
-  shootWithoutVision.and(overrideTrigger.negate()).whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
-      storageConveyor, ballStopper, () -> LOADER_CONVEYOR_SPEED,
+  shootWithoutVision.and(overrideTrigger.negate()).whileActiveContinuous(new MoveConveyorsByLoaderAsTriggerWithoutVision(shooter, loaderConveyor,
+      storageConveyor, ballStopper, yawControl, () -> LOADER_CONVEYOR_SPEED,
      () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
 
   shootWithoutVision.and(overrideTrigger).whileActiveOnce(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,

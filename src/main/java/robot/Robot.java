@@ -3,6 +3,9 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
+import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
 import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;

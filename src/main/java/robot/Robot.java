@@ -3,12 +3,7 @@ package robot;
 import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
 import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
-import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
-import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
-import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
-import edu.wpi.cscore.VideoSource;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,7 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.autonomous.commands.AutonomousShooting;
+import robot.autonomous.commands.DriveThenShootAutonomous;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BallCollectorOi;
@@ -54,7 +49,7 @@ import vision.limelight.enums.LimelightLedMode;
 
 public class Robot extends TimedRobot {
 
-  private AutonomousShooting autonomousShooting;
+  private DriveThenShootAutonomous autonomousShooting;
 
   Vision vision;
   DriveTrain driveTrain;
@@ -133,7 +128,7 @@ public class Robot extends TimedRobot {
 
     new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
-    autonomousShooting = new AutonomousShooting(yawControl, driveTrain, shooter,
+    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",

@@ -40,7 +40,7 @@ public class SmartShooterOi {
                         final UniqueButtonCache buttonsJoystickButtonCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision, final YawControl yawControl, final DriveTrain driveTrain) {
+                        final Vision vision, final YawControl yawControl) {
 
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
@@ -48,7 +48,7 @@ public class SmartShooterOi {
     final Trigger overrideTrigger = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl, driveTrain,
+        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl,
         vision::getDependableTarget)));
 
     shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(

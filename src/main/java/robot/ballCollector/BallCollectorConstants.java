@@ -6,7 +6,7 @@ public final class BallCollectorConstants {
   public static final double REVERSE_OUTPUT = -1;
   public static final double DURING_CLOSED_PERCENT_OUTPUT = 0.3;
   public static final double CLOSING_SEQUENCE_DELAY = 0.3;
-  public static final double CLOSING_SEQUENCE_TIMEOUT = 0.25;
+  public static final double CLOSING_SEQUENCE_TIMEOUT = 0.2;
   static final boolean OPEN_SOLENOID = true;
   static final boolean CLOSE_SOLENOID = false;
 

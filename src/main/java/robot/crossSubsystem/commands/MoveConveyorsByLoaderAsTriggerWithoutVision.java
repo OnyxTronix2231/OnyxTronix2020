@@ -1,7 +1,8 @@
 package robot.crossSubsystem.commands;
 
-import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_AFTER_SHOOT;
 import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_DELAY;
+import static robot.crossSubsystem.CrossSubsystemConstants.MIN_CHECKS_SHOOTER;
+import static robot.crossSubsystem.CrossSubsystemConstants.MIN_CHECKS_TURRET;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
@@ -10,10 +11,8 @@ import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.shooter.Shooter;
 import robot.shooter.commands.WaitUntilShooterVelocityIsntOnTarget;
-import robot.shooter.commands.WaitUntilShooterVelocityOnTarget;
 import robot.storageConveyor.StorageConveyor;
 import robot.yawControl.YawControl;
-import vision.limelight.Limelight;
 
 import java.util.function.DoubleSupplier;
 
@@ -26,22 +25,18 @@ public class MoveConveyorsByLoaderAsTriggerWithoutVision extends SequentialComma
                                                      final DoubleSupplier ballStopperSpeedSupplier) {
     super(
         race(new WaitUntilShooterVelocityIsntOnTarget(shooter, 0),
-            new WaitUntilWithCounter(shooter::isOnTarget).andThen(
+            new WaitUntilWithCounter(shooter::isOnTarget, MIN_CHECKS_SHOOTER).andThen(
 
                 race(new WaitUntilBallIsNotInLoader(loaderConveyor),
 
-
                     race(new WaitUntilCommand(() -> !yawControl.isOnTarget()),
-                    new WaitUntilWithCounter(yawControl::isOnTarget).andThen(
+                    new WaitUntilWithCounter(yawControl::isOnTarget, MIN_CHECKS_TURRET).andThen(
 
-//                    sequence(new WaitUntilShooterVelocityOnTarget(shooter, DELAY_AFTER_SHOOT),
                         new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).
                             withTimeout(LOADER_DELAY)))))),
-//        deadline(new WaitUntilShooterVelocityOnTarget(shooter, DELAY_BEFORE_CHECK),
-//            sequence(new WaitUntilShooterVelocityIsntOnTarget(shooter, DELAY_AFTER_SHOOT),
         new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor,
             loaderSpeed, storageSpeedSupplier,
-            ballStopperSpeedSupplier)); //));
+            ballStopperSpeedSupplier));
   }
 
   @Override

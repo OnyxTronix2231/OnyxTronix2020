@@ -2,6 +2,7 @@ package robot.autonomous.commands;
 
 import static robot.autonomous.AutonomousConstants.AUTONOMOUS_DISTANCE;
 import static robot.autonomous.AutonomousConstants.BALL_STOPPER_VELOCITY;
+import static robot.autonomous.AutonomousConstants.DRIVE_AUTONOMOUS_TIMEOUT;
 import static robot.autonomous.AutonomousConstants.LOADER_VELOCITY;
 import static robot.autonomous.AutonomousConstants.STORAGE_VELOCITY;
 
@@ -18,14 +19,14 @@ import robot.vision.Vision;
 import robot.yawControl.YawControl;
 import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
 
-public class AutonomousShooting extends SequentialCommandGroup {
+public class DriveThenShootAutonomous extends SequentialCommandGroup {
 
-  public AutonomousShooting(final YawControl yawControl, final DriveTrain driveTrain, final Shooter shooter,
-                            final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
-                            final BallStopper ballStopper, final Vision vision) {
-    super(new DriveByDistance(driveTrain, () -> AUTONOMOUS_DISTANCE).withTimeout(5),
+  public DriveThenShootAutonomous(final YawControl yawControl, final DriveTrain driveTrain, final Shooter shooter,
+                                  final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
+                                  final BallStopper ballStopper, final Vision vision) {
+    super(new DriveByDistance(driveTrain, () -> AUTONOMOUS_DISTANCE).withTimeout(DRIVE_AUTONOMOUS_TIMEOUT),
             parallel(
-        new AlignByVisionOrOrientationAndVision(yawControl, driveTrain, vision::getDependableTarget),
+        new AlignByVisionOrOrientationAndVision(yawControl, vision::getDependableTarget),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
         new MoveConveyorsByLoaderAsTriggerWithVision(shooter, loaderConveyor, storageConveyor, ballStopper, yawControl,
             () -> LOADER_VELOCITY, () -> STORAGE_VELOCITY, () -> BALL_STOPPER_VELOCITY)));

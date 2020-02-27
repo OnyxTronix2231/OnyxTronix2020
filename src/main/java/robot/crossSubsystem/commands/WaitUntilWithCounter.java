@@ -7,9 +7,11 @@ import java.util.function.BooleanSupplier;
 public class WaitUntilWithCounter extends WaitUntilCommand {
 
   private double counter;
+  private final double minChecksRequired;
 
-  public WaitUntilWithCounter(BooleanSupplier condition) {
+  public WaitUntilWithCounter(BooleanSupplier condition, double minChecksRequired) {
     super(condition);
+    this.minChecksRequired = minChecksRequired;
   }
 
   @Override
@@ -29,6 +31,6 @@ public class WaitUntilWithCounter extends WaitUntilCommand {
 
   @Override
   public boolean isFinished() {
-    return super.isFinished() && counter > 5;
+    return super.isFinished() && counter > minChecksRequired;
   }
 }

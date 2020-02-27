@@ -14,6 +14,9 @@ public class CrossSubsystemConstants {
   public static final double REVERSE_LOADER_SPEED = -0.3;
   public static final double REVERSE_LOADER_TIMEOUT = 0.3;
   public static final double DELAY_BEFORE_CHECK = 0.1; //TODO check and change
+  public static final int MIN_CHECKS_SHOOTER = 5;
+  public static final int MIN_CHECKS_TURRET = 5;
+  public static final int MIN_CHECKS_VISION = 5;
   static final double STORAGE_SPEED = 0.8; //TODO check and change
   static final double BALL_STOPPER_SPEED = 0.8; //TODO check and change
   static final double LOADER_CONVEYOR_SPEED = 0.8; //TODO check and change

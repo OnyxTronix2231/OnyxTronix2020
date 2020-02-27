@@ -38,9 +38,8 @@ public class MoveConveyorsByLoaderAsTriggerWithVision extends SequentialCommandG
                     race(new WaitUntilCommand(() -> !yawControl.isOnTarget()),
                     new WaitUntilWithCounter(yawControl::isOnTarget).andThen(
 
-                    sequence(new WaitUntilShooterVelocityOnTarget(shooter, DELAY_AFTER_SHOOT),
                         new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed).
-                            withTimeout(LOADER_DELAY))))))))),
+                            withTimeout(LOADER_DELAY)))))))),
 //        deadline(new WaitUntilShooterVelocityOnTarget(shooter, DELAY_BEFORE_CHECK),
 //            sequence(new WaitUntilShooterVelocityIsntOnTarget(shooter, DELAY_AFTER_SHOOT),
         new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor,

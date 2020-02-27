@@ -38,11 +38,6 @@ public class Vision extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(!DriverStation.getInstance().isDisabled()) {
-      Limelight.getInstance().setLedMode(LimelightLedMode.forceOn);
-    } else {
-      setLEDMode(LimelightLedMode.forceOff);
-    }
     if (Limelight.getInstance().targetFound()) {
       innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
       outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);

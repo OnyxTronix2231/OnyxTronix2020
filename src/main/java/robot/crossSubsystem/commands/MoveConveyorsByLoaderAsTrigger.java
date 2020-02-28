@@ -1,7 +1,8 @@
 package robot.crossSubsystem.commands;
 
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_DELAY;
+import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_SHOT_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.MAKE_A_SHOT_TIMEOUT;
+import static robot.crossSubsystem.CrossSubsystemConstants.WAIT_FOR_CONSISTENT_TARGET;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -24,9 +25,9 @@ public class MoveConveyorsByLoaderAsTrigger extends SequentialCommandGroup {
             race(new WaitUntilCommand(() -> !shooter.isOnTarget()),
                 race(new WaitUntilCommand(() -> !Limelight.getInstance().targetFound() && withVision),
                     race(new WaitUntilCommand(() -> !yawControl.isOnTarget()),
-                        sequence(new WaitCommand(0.1),
-                            (new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_SPEED).
-                                withTimeout(LOADER_DELAY))))))),
+                        sequence(new WaitCommand(WAIT_FOR_CONSISTENT_TARGET),
+                            (new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_SHOT_SPEED).
+                                withTimeout(MAKE_A_SHOT_TIMEOUT))))))),
 
         new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor));
   }

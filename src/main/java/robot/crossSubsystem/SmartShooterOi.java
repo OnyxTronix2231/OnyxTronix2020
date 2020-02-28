@@ -1,8 +1,8 @@
 package robot.crossSubsystem;
 
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
-import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_OVERRIDE_TIMEOUT;
-import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.OVERRIDE_SHOT_TIMEOUT;
+import static robot.crossSubsystem.CrossSubsystemConstants.SHOOT_WITHOUT_VISION_SPEED;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -54,14 +54,14 @@ public class SmartShooterOi {
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
             () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
         () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
-        .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
+        .withTimeout(OVERRIDE_SHOT_TIMEOUT));
 
 
     final JoystickButton shootWithoutVision = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     shootWithoutVision.whileActiveContinuous(new CloseShooterPiston(shooter)
-    .andThen(new ShootByVelocity(shooter,() -> SHOOTER_SPEED))).whenInactive(new OpenShooterPiston(shooter));
+    .andThen(new ShootByVelocity(shooter,() -> SHOOT_WITHOUT_VISION_SPEED))).whenInactive(new OpenShooterPiston(shooter));
 
     shootWithoutVision.whileActiveOnce(new MoveTurretToAngleAndKeep(yawControl, () -> 0));
 
@@ -71,7 +71,7 @@ public class SmartShooterOi {
   shootWithoutVision.and(overrideTrigger).whileActiveOnce(
       new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
       () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
-      .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
+      .withTimeout(OVERRIDE_SHOT_TIMEOUT));
 
     final JoystickButton spinShooterWhileAligningDrive = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value, false);

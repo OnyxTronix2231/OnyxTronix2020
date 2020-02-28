@@ -21,7 +21,7 @@ import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartBallCollectorOi;
-import robot.crossSubsystem.SmartConveyorsOi;
+import robot.crossSubsystem.ConveyorsOi;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
@@ -126,7 +126,7 @@ public class Robot extends TimedRobot {
     new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
         driveJoystickButtonCache);
 
-    new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
+    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision);

@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public final class ClimberConstants {
 
   public static final class ClimberComponentsA {
-    static final int MASTER_MOTOR_PORT = 14; // TODO: check value
-    static final int SLAVE_MOTOR_PORT = 15; // TODO: check value
+    static final int MASTER_MOTOR_PORT = 9; // TODO: check value
+    static final int SLAVE_MOTOR_PORT = 10; // TODO: check value
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 2; // TODO: check value
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 3; // TODO: check value
     static final double CURRENT_LIMIT = 30; // TODO: check value

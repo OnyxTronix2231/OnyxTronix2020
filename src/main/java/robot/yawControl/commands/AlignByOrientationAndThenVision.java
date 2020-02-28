@@ -23,10 +23,4 @@ public class AlignByOrientationAndThenVision extends SequentialCommandGroup {
     }
     return false;
   }
-
-  @Override
-  public void end(boolean interrupted) {
-    super.end(interrupted);
-    Limelight.getInstance().setTakeSnapshots(false);
-  }
 }

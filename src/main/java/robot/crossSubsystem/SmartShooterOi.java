@@ -50,7 +50,9 @@ public class SmartShooterOi {
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, yawControl, true));
 
-    overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
+    overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(
+        new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
+            () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
         () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
         .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
 
@@ -66,7 +68,8 @@ public class SmartShooterOi {
   shootWithoutVision.and(overrideTrigger.negate()).whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
       storageConveyor, ballStopper, yawControl, false)).whenInactive(new OpenShooterPiston(shooter));
 
-  shootWithoutVision.and(overrideTrigger).whileActiveOnce(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
+  shootWithoutVision.and(overrideTrigger).whileActiveOnce(
+      new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
       () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
       .withTimeout(SHOOTER_OVERRIDE_TIMEOUT));
 

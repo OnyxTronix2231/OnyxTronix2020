@@ -13,7 +13,7 @@ import java.util.function.DoubleSupplier;
 
 public class MoveAllConveyors extends ParallelCommandGroup {
 
-  public MoveAllConveyors(LoaderConveyor loaderConveyor, BallStopper ballStopper, StorageConveyor storageConveyor,
+  public MoveAllConveyors(LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
                           final DoubleSupplier loaderSpeed, final DoubleSupplier storageSpeed, final DoubleSupplier
                               stopperSpeed) {
    super(new MoveBallStopperBySpeed(ballStopper ,stopperSpeed, BallStopperConstants.DELAY),

@@ -12,7 +12,8 @@ public class AlignByOrientationAndThenVision extends SequentialCommandGroup {
   public AlignByOrientationAndThenVision(final YawControl yawControl,
                                          final VisionTargetSupplier visionTargetSupplier) {
     super(
-        new AlignByFieldOrientation(yawControl), new AlignByVision(yawControl, visionTargetSupplier));
+        new AlignByFieldOrientation(yawControl), new AlignByVision(yawControl, visionTargetSupplier),
+        new AlignByVision(yawControl, visionTargetSupplier));
   }
 
   @Override

@@ -38,9 +38,7 @@ public class SmartBallCollectorOi {
         new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
 
     openAndCollectTrigger.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
-        storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, () ->
-        StorageConveyorConstants.PERCENTAGE_OUTPUT,
-        () -> BallStopperConstants.PERCENTAGE_OUTPUT));
+        storageConveyor));
 
     openAndCollectTrigger.whenInactive(new CloseBallCollectorPistons(ballCollector).andThen(new WaitCommand(
         CLOSING_SEQUENCE_DELAY))

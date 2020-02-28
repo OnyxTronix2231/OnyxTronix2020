@@ -24,12 +24,6 @@ public class Shooter extends SubsystemBase {
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
-//    Shuffleboard.getTab("Shooter").add("P", VELOCITY_P).getEntry().addListener(
-//        p -> components.getMasterMotor().config_kP(PRIMARY_PID, p.value.getDouble()), EntryListenerFlags.kUpdate);
-//    Shuffleboard.getTab("Shooter").add("I", VELOCITY_I).getEntry().addListener(
-//        i -> components.getMasterMotor().config_kI(PRIMARY_PID, i.value.getDouble()), EntryListenerFlags.kUpdate);
-//    Shuffleboard.getTab("Shooter").add("D", VELOCITY_D).getEntry().addListener(
-//        i -> components.getMasterMotor().config_kD(PRIMARY_PID, i.value.getDouble()), EntryListenerFlags.kUpdate);
   }
 
   public void shootBySpeed(final double speed) {

@@ -1,11 +1,8 @@
 package robot.crossSubsystem;
 
 import static robot.RobotConstants.ALIGNING_TIME_OUT;
-import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_CONVEYOR_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_OVERRIDE_TIMEOUT;
 import static robot.crossSubsystem.CrossSubsystemConstants.SHOOTER_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -16,9 +13,7 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveAllConveyors;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTriggerWithVision;
-import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTriggerWithoutVision;
-import robot.drivetrain.DriveTrain;
+import robot.crossSubsystem.commands.MoveConveyorsByLoaderAsTrigger;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorConstants;
 import robot.shooter.Shooter;
@@ -28,10 +23,10 @@ import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootByVelocity;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorConstants;
+import robot.turret.commands.AlignByVision;
 import robot.turret.commands.MoveTurretToAngleAndKeep;
 import robot.vision.Vision;
 import robot.yawControl.YawControl;
-import robot.yawControl.commands.AlignByVisionOrOrientationAndVision;
 
 public class SmartShooterOi {
 
@@ -48,13 +43,12 @@ public class SmartShooterOi {
     final Trigger overrideTrigger = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
 
     shootWithLoaderTriggerByDistance.whileActiveContinuous(new ShootByDistance(shooter,
-        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVisionOrOrientationAndVision(yawControl,
+        () -> vision.getOuterTarget().getDistance()).alongWith(new AlignByVision(yawControl,
         vision::getDependableTarget)));
 
     shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
-        new MoveConveyorsByLoaderAsTriggerWithVision(shooter, loaderConveyor,
-            storageConveyor, ballStopper, yawControl, () -> LOADER_CONVEYOR_SPEED,
-            () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED));
+        new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
+            storageConveyor, ballStopper, yawControl, true));
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
         () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)
@@ -69,9 +63,8 @@ public class SmartShooterOi {
 
     shootWithoutVision.whileActiveOnce(new MoveTurretToAngleAndKeep(yawControl, () -> 0));
 
-  shootWithoutVision.and(overrideTrigger.negate()).whileActiveContinuous(new MoveConveyorsByLoaderAsTriggerWithoutVision(shooter, loaderConveyor,
-      storageConveyor, ballStopper, yawControl, () -> LOADER_CONVEYOR_SPEED,
-     () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)).whenInactive(new OpenShooterPiston(shooter));
+  shootWithoutVision.and(overrideTrigger.negate()).whileActiveContinuous(new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
+      storageConveyor, ballStopper, yawControl, false)).whenInactive(new OpenShooterPiston(shooter));
 
   shootWithoutVision.and(overrideTrigger).whileActiveOnce(new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
       () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)

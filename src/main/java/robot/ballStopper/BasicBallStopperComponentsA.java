@@ -28,7 +28,7 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
     delayMotor = new WPI_TalonSRX(BALL_STOPPER_DELAYED_MOTOR_PORT);
     delayMotor.configFactoryDefault();
     delayMotor.setNeutralMode(NeutralMode.Brake);
-    delayMotor.configAllSettings(getConfigurationB());
+    delayMotor.configAllSettings(getConfigurationA());
     delayMotor.enableCurrentLimit(true);
     delayMotor.setInverted(true);
   }
@@ -38,16 +38,6 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
-    config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
-    config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
-    return config;
-  }
-
-  private TalonSRXConfiguration getConfigurationB() {
-    TalonSRXConfiguration config = new TalonSRXConfiguration();
-    config.peakCurrentLimit = 10;
-    config.peakCurrentDuration = 10;
-    config.continuousCurrentLimit = 10;
     config.forwardLimitSwitchNormal = LimitSwitchNormal.Disabled;
     config.reverseLimitSwitchNormal = LimitSwitchNormal.Disabled;
     return config;

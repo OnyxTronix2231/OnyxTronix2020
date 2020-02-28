@@ -1,26 +1,14 @@
 package robot.crossSubsystem;
 
-import static robot.shooter.ShooterConstants.ShooterComponentsA.MAX_VELOCITY;
-
 public class CrossSubsystemConstants {
 
-  public static final double TIME_BETWEEN_BALLS = 0.5; //TODO check and  change if need
-  public static final double DELAY_AFTER_SHOOT = 0.1; //TODO check and  change if need
-  public static final double WAIT_FOR_VELOCITY = 0.3; //TODO check and  change if need
   public static final double LOADER_DELAY = 0.2; //TODO check and  change if need
-  public static final double BALL_STOPPER_DELAY = 1;
   public static final double SHOOTER_OVERRIDE_TIMEOUT = 0.2;
   public static final double DELAY_UNTIL_BALL_LOADING_ENDS = 0.1;
   public static final double REVERSE_LOADER_SPEED = -0.3;
   public static final double REVERSE_LOADER_TIMEOUT = 0.3;
-  public static final double DELAY_BEFORE_CHECK = 0.1; //TODO check and change
-  public static final int MIN_CHECKS_SHOOTER = 5;
-  public static final int MIN_CHECKS_TURRET = 5;
-  public static final int MIN_CHECKS_VISION = 5;
-  static final double STORAGE_SPEED = 0.8; //TODO check and change
-  static final double BALL_STOPPER_SPEED = 0.8; //TODO check and change
-  static final double LOADER_CONVEYOR_SPEED = 0.8; //TODO check and change
-  static final double SHOOTER_SPEED = 35500; //TODO check and change
-  static final double SPIN_SHOOTER_AND_LOADER_TIME_OUT = 3; //TODO check and change
-  static final double CLOSE_RANGE_VELOCITY = MAX_VELOCITY; //TODO check and change
+  public static final double STORAGE_SPEED = 0.8; //TODO check and change
+  public static final double BALL_STOPPER_SPEED = 0.8; //TODO check and change
+  public static final double LOADER_SPEED = 0.8; //TODO check and change
+  public static final double SHOOTER_SPEED = 35500; //TODO check and change
 }

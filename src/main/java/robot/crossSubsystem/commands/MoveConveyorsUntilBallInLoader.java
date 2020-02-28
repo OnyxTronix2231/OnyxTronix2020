@@ -1,8 +1,11 @@
 package robot.crossSubsystem.commands;
 
+import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_UNTIL_BALL_LOADING_ENDS;
+import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.REVERSE_LOADER_SPEED;
 import static robot.crossSubsystem.CrossSubsystemConstants.REVERSE_LOADER_TIMEOUT;
+import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -16,12 +19,10 @@ import java.util.function.DoubleSupplier;
 public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
 
   public MoveConveyorsUntilBallInLoader(LoaderConveyor loaderConveyor, BallStopper ballStopper,
-                                        StorageConveyor storageConveyor,
-                                        final DoubleSupplier loaderSpeed, final DoubleSupplier storageSpeed,
-                                        final DoubleSupplier stopperSpeed) {
+                                        StorageConveyor storageConveyor) {
     super(deadline(new WaitUntilBallInLoader(loaderConveyor),
         new MoveAllConveyors(loaderConveyor, ballStopper, storageConveyor,
-            loaderSpeed, storageSpeed, stopperSpeed)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
+            () -> LOADER_SPEED, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)), new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
         race(new WaitUntilBallInLoader(loaderConveyor),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> REVERSE_LOADER_SPEED).withTimeout(REVERSE_LOADER_TIMEOUT)));
   }

@@ -119,7 +119,7 @@ public class Robot extends TimedRobot {
     new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl, driveTrain);
+        storageConveyor, ballStopper, vision, yawControl);
 
     new TurretOi(yawControl, buttonsJoystickAxisCache);
 
@@ -139,10 +139,6 @@ public class Robot extends TimedRobot {
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
     Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
-
-
-
-    driveTrain.setNeutralModeToCoast();
   }
 
   @Override

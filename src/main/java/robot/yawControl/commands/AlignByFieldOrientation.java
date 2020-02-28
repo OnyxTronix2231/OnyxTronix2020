@@ -3,12 +3,12 @@ package robot.yawControl.commands;
 import robot.yawControl.YawControl;
 import vision.limelight.Limelight;
 
-public class AlignByFieldOrientationUntilTargetFound extends MoveToAngleRTF{
+public class AlignByFieldOrientation extends MoveToAngleRTF {
 
   private final YawControl yawControl;
   private double counter;
 
-  public AlignByFieldOrientationUntilTargetFound(YawControl yawControl) {
+  public AlignByFieldOrientation(YawControl yawControl) {
     super(yawControl, () -> 0);
     this.yawControl = yawControl;
   }
@@ -22,14 +22,15 @@ public class AlignByFieldOrientationUntilTargetFound extends MoveToAngleRTF{
   @Override
   public void execute() {
     super.execute();
-    if(yawControl.isOnTarget())
+    if (yawControl.isOnTarget()) {
       counter++;
-    else
+    } else {
       counter = 0;
+    }
   }
 
   @Override
   public boolean isFinished() {
-    return yawControl.isOnTarget() && counter > 10;
+    return yawControl.isOnTarget() && counter > 5;
   }
 }

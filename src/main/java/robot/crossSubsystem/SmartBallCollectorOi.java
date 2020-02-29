@@ -1,6 +1,7 @@
 package robot.crossSubsystem;
 
 import static robot.ballCollector.BallCollectorConstants.CLOSING_SEQUENCE_DELAY;
+import static robot.ballCollector.BallCollectorConstants.CLOSING_SEQUENCE_TIMEOUT;
 import static robot.ballCollector.BallCollectorConstants.DURING_CLOSED_PERCENT_OUTPUT;
 import static robot.ballCollector.BallCollectorConstants.PERCENT_OUTPUT;
 
@@ -37,12 +38,11 @@ public class SmartBallCollectorOi {
         new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
 
     openAndCollectTrigger.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
-        storageConveyor, LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, StorageConveyorConstants.PERCENTAGE_OUTPUT,
-        BallStopperConstants.PERCENTAGE_OUTPUT));
+        storageConveyor));
 
     openAndCollectTrigger.whenInactive(new CloseBallCollectorPistons(ballCollector).andThen(new WaitCommand(
         CLOSING_SEQUENCE_DELAY))
         .andThen(new CollectBallBySpeed(ballCollector,
-        () -> DURING_CLOSED_PERCENT_OUTPUT).withTimeout(CLOSING_SEQUENCE_DELAY)));
+        () -> DURING_CLOSED_PERCENT_OUTPUT).withTimeout(CLOSING_SEQUENCE_TIMEOUT)));
   }
 }

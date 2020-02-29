@@ -22,18 +22,18 @@ public class BasicBallStopperComponentsA implements BallStopperComponents {
     ballStopperMotor = new WPI_TalonSRX(BALL_STOPPER_MOTOR_PORT);
     ballStopperMotor.configFactoryDefault();
     ballStopperMotor.setNeutralMode(NeutralMode.Brake);
-    ballStopperMotor.configAllSettings(getConfiguration());
+    ballStopperMotor.configAllSettings(getConfigurationA());
     ballStopperMotor.enableCurrentLimit(true);
 
     delayMotor = new WPI_TalonSRX(BALL_STOPPER_DELAYED_MOTOR_PORT);
     delayMotor.configFactoryDefault();
     delayMotor.setNeutralMode(NeutralMode.Brake);
-    delayMotor.configAllSettings(getConfiguration());
+    delayMotor.configAllSettings(getConfigurationA());
     delayMotor.enableCurrentLimit(true);
     delayMotor.setInverted(true);
   }
 
-  private TalonSRXConfiguration getConfiguration() {
+  private TalonSRXConfiguration getConfigurationA() {
     TalonSRXConfiguration config = new TalonSRXConfiguration();
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;

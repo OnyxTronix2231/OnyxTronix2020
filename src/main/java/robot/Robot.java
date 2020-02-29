@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.autonomous.commands.AutonomousShooting;
+import robot.autonomous.commands.DriveThenShootAutonomous;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BallCollectorOi;
@@ -21,7 +21,7 @@ import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.crossSubsystem.SmartBallCollectorOi;
-import robot.crossSubsystem.SmartConveyorsOi;
+import robot.crossSubsystem.ConveyorsOi;
 import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
@@ -49,7 +49,7 @@ import vision.limelight.enums.LimelightLedMode;
 
 public class Robot extends TimedRobot {
 
-  private AutonomousShooting autonomousShooting;
+  private DriveThenShootAutonomous autonomousShooting;
 
   Vision vision;
   DriveTrain driveTrain;
@@ -118,17 +118,17 @@ public class Robot extends TimedRobot {
 
     new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
-    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl, driveTrain);
+    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
+        storageConveyor, ballStopper, vision, yawControl);
 
     new TurretOi(yawControl, buttonsJoystickAxisCache);
 
     new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
         driveJoystickButtonCache);
 
-    new SmartConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
+    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
-    autonomousShooting = new AutonomousShooting(yawControl, driveTrain, shooter,
+    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision);
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
         vision.canHitOuterTarget());
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
-
+    Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
   }
 
   @Override

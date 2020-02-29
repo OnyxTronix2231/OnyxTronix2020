@@ -1,41 +1,40 @@
 package robot.crossSubsystem.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_SHOT_SPEED;
+import static robot.crossSubsystem.CrossSubsystemConstants.MAKE_A_SHOT_TIMEOUT;
+import static robot.crossSubsystem.CrossSubsystemConstants.WAIT_FOR_CONSISTENT_TARGET;
+
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import robot.ballStopper.BallStopper;
-import robot.ballStopper.BallStopperConstants;
 import robot.loaderConveyor.LoaderConveyor;
-import robot.loaderConveyor.LoaderConveyorConstants;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.shooter.Shooter;
-import robot.shooter.commands.WaitUntilShooterVelocityIsntOnTarget;
-import robot.shooter.commands.WaitUntilShooterVelocityOnTarget;
 import robot.storageConveyor.StorageConveyor;
-import robot.storageConveyor.StorageConveyorConstants;
+import robot.yawControl.YawControl;
+import vision.limelight.Limelight;
 
-import java.util.function.DoubleSupplier;
-
-public class MoveConveyorsByLoaderAsTrigger extends ParallelCommandGroup {
+public class MoveConveyorsByLoaderAsTrigger extends SequentialCommandGroup {
 
   public MoveConveyorsByLoaderAsTrigger(final Shooter shooter, final LoaderConveyor loaderConveyor,
                                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                                        final DoubleSupplier loaderSpeed,
-                                        final DoubleSupplier storageSpeedSupplier,
-                                        final DoubleSupplier ballStopperSpeedSupplier) {
-    super(sequence(
-        deadline(new WaitUntilShooterVelocityIsntOnTarget(shooter, 0.1),
-            sequence(new WaitUntilShooterVelocityOnTarget(shooter, 0),
-            new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX).
-                withTimeout(0.3))),
-        deadline(
-            new WaitUntilShooterVelocityOnTarget(shooter, 0.1),
-            new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor,
-                LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX, StorageConveyorConstants.PERCENTAGE_OUTPUT,
-                BallStopperConstants.PERCENTAGE_OUTPUT))));
+                                        final YawControl yawControl, boolean withVision) {
+    super(
+        race(new WaitUntilCommand(() -> !loaderConveyor.isBallInLoader()),
+            race(new WaitUntilCommand(() -> !shooter.isOnTarget()),
+                race(new WaitUntilCommand(() -> !Limelight.getInstance().targetFound() && withVision),
+                    race(new WaitUntilCommand(() -> !yawControl.isOnTarget()),
+                        sequence(new WaitCommand(WAIT_FOR_CONSISTENT_TARGET),
+                            (new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_SHOT_SPEED).
+                                withTimeout(MAKE_A_SHOT_TIMEOUT))))))),
+
+        new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper, storageConveyor));
   }
 
   @Override
   public boolean isFinished() {
-    if (super.isFinished()){
+    if (super.isFinished()) {
       initialize();
     }
     return false;

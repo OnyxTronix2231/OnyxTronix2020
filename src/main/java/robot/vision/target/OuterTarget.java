@@ -10,7 +10,7 @@ public class OuterTarget implements VisionTarget {
   private final double cameraHeight;
   private double horizontalOffset;
   private double verticalOffset;
-  private double limelightOrientation;
+  private double robotOrientation;
   private double turretOrientation;
   private double distance;
   private double x;
@@ -29,15 +29,14 @@ public class OuterTarget implements VisionTarget {
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
           target.getVerticalOffsetToCrosshair()));
-      this.limelightOrientation = accelerometerAngle + turretAngle - target.getHorizontalOffsetToCrosshair();
-      this.turretOrientation = limelightOrientation + 2 * target.getHorizontalOffsetToCrosshair();
-      this.x = distance * Math.sin(Math.toRadians(limelightOrientation));
-      this.y = distance * Math.cos(Math.toRadians(limelightOrientation));
+      this.robotOrientation = turretAngle + target.getHorizontalOffsetToCrosshair() + accelerometerAngle;
+      this.x = distance * Math.sin(Math.toRadians(robotOrientation));
+      this.y = distance * Math.cos(Math.toRadians(robotOrientation));
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
     } else {
       this.horizontalOffset = 0;
       this.verticalOffset = 0;
-      this.limelightOrientation = 0;
+      this.robotOrientation = 0;
       this.distance = 0;
       this.x = 0;
       this.y = 0;
@@ -55,13 +54,8 @@ public class OuterTarget implements VisionTarget {
   }
 
   @Override
-  public double getLimelightOrientation() {
-    return limelightOrientation;
-  }
-
-  @Override
-  public double getTurretOrientation() {
-    return turretOrientation;
+  public double getRobotOrientation() {
+    return robotOrientation;
   }
 
   @Override

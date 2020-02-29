@@ -10,8 +10,7 @@ public class InnerTarget implements VisionTarget {
 
   private double horizontalOffset;
   private double verticalOffset;
-  private double limelightOrientation;
-  private double turretOrientation;
+  private double robotOrientation;
   private double distance;
   private double y;
   private OuterTarget outerTarget;
@@ -29,10 +28,9 @@ public class InnerTarget implements VisionTarget {
 
   private void calculateByOuterTarget() {
     this.y = outerTarget.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
-    this.limelightOrientation = Math.toDegrees(Math.atan(outerTarget.getX() / y));
-    this.turretOrientation = limelightOrientation + 2 * horizontalOffset;
+    this.robotOrientation = Math.toDegrees(Math.atan(outerTarget.getX() / y));
     this.distance = Math.sqrt(Math.pow(outerTarget.getX(), 2) + Math.pow(y, 2));
-    this.horizontalOffset = outerTarget.getHorizontalOffset() + (limelightOrientation - outerTarget.getLimelightOrientation());
+    this.horizontalOffset = outerTarget.getHorizontalOffset() + (robotOrientation - outerTarget.getRobotOrientation());
     this.verticalOffset = Math.toDegrees(Math.atan((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
   }
@@ -48,13 +46,8 @@ public class InnerTarget implements VisionTarget {
   }
 
   @Override
-  public double getLimelightOrientation() {
-    return limelightOrientation;
-  }
-
-  @Override
-  public double getTurretOrientation() {
-    return turretOrientation;
+  public double getRobotOrientation() {
+    return robotOrientation;
   }
 
   @Override

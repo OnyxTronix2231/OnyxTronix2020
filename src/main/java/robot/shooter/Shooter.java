@@ -4,11 +4,15 @@ import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.AT_SHOOTING_VELOCITY;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_VELOCITY_ERROR;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 

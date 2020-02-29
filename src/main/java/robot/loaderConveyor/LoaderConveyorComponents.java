@@ -8,5 +8,9 @@ public interface LoaderConveyorComponents {
 
   WPI_TalonSRX getMasterMotor();
 
+  Rev2mDistanceSensor getDistanceSensor();
+
   double getCurrentDistance();
+
+  void reinitializeDistanceSensor();
 }

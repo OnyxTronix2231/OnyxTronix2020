@@ -11,6 +11,6 @@ public class TestingLoaderConveyorOi {
   public TestingLoaderConveyorOi(final LoaderConveyor loaderConveyor, final UniqueButtonCache buttonsJoystickButtonCache) {
     final Trigger moveLoaderConveyorBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kA.value);
     moveLoaderConveyorBySpeed.whileActiveContinuous(new MoveLoaderConveyorBySpeed(loaderConveyor,
-        () -> PERCENTAGE_OUTPUT_MIN));
+        () -> LoaderConveyorConstants.MOVE_LOADER_BACK));
   }
 }

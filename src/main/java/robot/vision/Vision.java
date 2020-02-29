@@ -4,8 +4,10 @@ import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import robot.drivetrain.DriveTrain;
 import robot.vision.target.TargetChooser;
 import robot.vision.target.DistanceOrientationTargetChooser;
 import robot.vision.target.VisionTarget;
@@ -27,11 +29,11 @@ public class Vision extends SubsystemBase {
         MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
-    Shuffleboard.getTab("Vision").addNumber("Distance Outer", () -> outerTarget.getDistance());
-    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getLimelightOrientation());
-    Shuffleboard.getTab("Vision").addBoolean("Can Hit Inner", () ->
-        getDependableTarget() == innerTarget);
-    Limelight.getInstance().setLedMode(LimelightLedMode.useCurrentPipelineMode);
+    Shuffleboard.getTab("Vision").addNumber("Distance to chosen target", () -> getDependableTarget().getDistance());
+    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getRobotOrientation());
+    Shuffleboard.getTab("Vision").addNumber("Horizontal outer", () -> outerTarget.getHorizontalOffset());
+    Shuffleboard.getTab("Vision").addNumber("Horizontal inner", () -> innerTarget.getHorizontalOffset());
+    Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 
   @Override
@@ -44,6 +46,10 @@ public class Vision extends SubsystemBase {
 
   public VisionTarget getDependableTarget() {
     return targetChooser.chooseTarget();
+  }
+
+  public boolean canHitOuterTarget() {
+    return targetChooser.chooseTarget() == innerTarget;
   }
 
   public VisionTarget getInnerTarget() {

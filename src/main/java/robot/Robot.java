@@ -57,13 +57,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     LiveWindow.disableAllTelemetry();
-    final XboxController driveJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
-    final UniqueButtonCache driveJoystickButtonCache = new UniqueButtonCache(driveJoystick);
-    final UniqueAxisCache driveJoystickAxisCache = new UniqueAxisCache(driveJoystick);
-
-    final XboxController buttonsJoystick = new XboxController(BUTTONS_JOYSTICK_PORT);
-    final UniqueButtonCache buttonsJoystickButtonCache = new UniqueButtonCache(buttonsJoystick);
-    final UniqueAxisCache buttonsJoystickAxisCache = new UniqueAxisCache(buttonsJoystick);
 
     final DriveTrainComponents driveTrainComponents;
     final BallCollectorComponents ballCollectorComponents;
@@ -92,7 +85,6 @@ public class Robot extends TimedRobot {
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
-    driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
     final BallStopper ballStopper = new BallStopper(ballStopperComponents);
 
@@ -111,6 +103,9 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
+    new Oi(driveTrain, shooter, yawControl);
+
+    /*
     new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
         driveJoystickAxisCache,
         ballCollector, loaderConveyor,
@@ -139,6 +134,8 @@ public class Robot extends TimedRobot {
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
     Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
+
+     */
   }
 
   @Override

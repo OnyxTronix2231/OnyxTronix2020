@@ -15,6 +15,7 @@ import robot.autonomous.commands.AutonomousShooting;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BasicBallCollectorComponentsA;
+import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
@@ -68,6 +69,7 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
+    final BallCounter ballCounter;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -77,6 +79,7 @@ public class Robot extends TimedRobot {
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
+      ballCounter = new BallCounter();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -85,6 +88,7 @@ public class Robot extends TimedRobot {
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
+      ballCounter = new BallCounter();
     }
 
     final DriveTrain driveTrain = new DriveTrain(driveTrainComponents);
@@ -116,7 +120,7 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision);
+        storageConveyor, ballStopper, vision, ballCounter);
 
    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache, driveJoystickButtonCache);
 

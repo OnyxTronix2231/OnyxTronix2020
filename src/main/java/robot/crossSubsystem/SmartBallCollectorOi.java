@@ -34,8 +34,7 @@ public class SmartBallCollectorOi {
         XboxController.Axis.kLeftTrigger.value);
 
     final Trigger openAndCollectTrigger = openAndCollectButtonStick.or(openAndCollectDriveStick);
-    openAndCollectTrigger.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-        new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
+    openAndCollectTrigger.whileActiveContinuous(new OpenAndCollect(ballCollector));
 
     openAndCollectTrigger.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
         storageConveyor));

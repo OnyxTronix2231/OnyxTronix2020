@@ -17,6 +17,7 @@ import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
+import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
@@ -72,6 +73,7 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
+    final BallCounter ballCounter;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -81,6 +83,7 @@ public class Robot extends TimedRobot {
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
+      ballCounter = new BallCounter();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -89,6 +92,7 @@ public class Robot extends TimedRobot {
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
+      ballCounter = new BallCounter();
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
@@ -119,7 +123,7 @@ public class Robot extends TimedRobot {
     new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl);
+        storageConveyor, ballStopper, vision, yawControl, ballCounter);
 
     new TurretOi(yawControl, buttonsJoystickAxisCache);
 

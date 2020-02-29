@@ -11,7 +11,8 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCounter.BallCounter;
-import robot.ballCounter.commands.CountBall;
+import robot.ballCounter.commands.CountCollectedBall;
+import robot.ballCounter.commands.CountShotBall;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveAllConveyors;
@@ -37,7 +38,7 @@ public class SmartShooterOi {
                         final UniqueButtonCache buttonsJoystickButtonCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision, final BallCounter ballCounter) {
+                        final Vision vision, final YawControl yawControl, final BallCounter ballCounter) {
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
@@ -51,8 +52,9 @@ public class SmartShooterOi {
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, yawControl, true));
 
-    shootWithLoaderTriggerByDistance.whileActiveContinuous(new CountBall(ballCounter, shooter::isBallShot,
-        false));
+    shootWithLoaderTriggerByDistance.whileActiveContinuous(new CountShotBall(ballCounter, shooter,
+        shooter::isBallShot));
+
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
             () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,

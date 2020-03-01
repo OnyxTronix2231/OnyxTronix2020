@@ -53,24 +53,25 @@ public class Oi {
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value);
     final JoystickButton operatorSpinShooterWhileAligning = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kA.value);
-
     final Trigger driverAndOperatorSpinShooterAndAlign =
         driveSpinShooterWhileAligning.or(operatorSpinShooterWhileAligning);
 
-    final JoystickAxis driverShootAndAlign = driveJoystickAxisCache
+    final JoystickAxis driverAlignAndShootBall = driveJoystickAxisCache
         .createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
-    final JoystickButton driverShootAtCloseRange = driveJoystickButtonCache
+    final JoystickButton driverShootBallAtCloseRange = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperRight.value);
 
     new ShooterOiBinder(shooter, shootingDistanceSupplier,
-        driverAndOperatorSpinShooterAndAlign, driverShootAndAlign,
-        driverShootAtCloseRange);
+        driverAndOperatorSpinShooterAndAlign, driverAlignAndShootBall,
+        driverShootBallAtCloseRange);
     //endregion
 
     //region Turret
     final JoystickAxis operatorMoveTurretByAxis =
         operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
+
+    new TurretOiBinder(yawControl, operatorMoveTurretByAxis);
 
     final JoystickButton driverSetStateRTF = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBack.value);
@@ -81,10 +82,9 @@ public class Oi {
     final JoystickButton driverSetStateHoming = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kStickRight.value);
 
-    new TurretOiBinder(yawControl, operatorMoveTurretByAxis);
 
     new YawControlOiBinder(yawControl, targetSupplier, driverSetStateRTF, driverSetStateRTR,
-        driverSetStateHoming.or(driverShootAtCloseRange), driverAndOperatorSpinShooterAndAlign.or(driverShootAndAlign));
+        driverSetStateHoming.or(driverShootBallAtCloseRange), driverAndOperatorSpinShooterAndAlign.or(driverAlignAndShootBall));
     //endregion
 
     //region BallCollector
@@ -108,7 +108,7 @@ public class Oi {
         .createJoystickTrigger(XboxController.Button.kB.value);
 
     new BallTriggerOiBinder(loaderConveyor, storageConveyor, ballStopper, canReleaseBallSupplier,
-        canReleaseBallAtCloseRangeSupplier, openAndCollectBall, driverShootAndAlign, driverShootAtCloseRange,
+        canReleaseBallAtCloseRangeSupplier, openAndCollectBall, driverAlignAndShootBall, driverShootBallAtCloseRange,
         releaseBallManually);
     //endregion
   }

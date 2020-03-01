@@ -17,7 +17,6 @@ public class BallCollectorOiBinder {
 
   public BallCollectorOiBinder(final BallCollector ballCollector, final Trigger openAndCollect,
                                final Trigger uncollectBalls, final Trigger openThenCloseCollector) {
-
     openAndCollect.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
         new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
 

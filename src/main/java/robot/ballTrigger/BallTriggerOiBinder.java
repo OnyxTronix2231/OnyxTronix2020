@@ -19,22 +19,21 @@ public class BallTriggerOiBinder {
 
   public BallTriggerOiBinder(final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
                              final BallStopper ballStopper, final BooleanSupplier canReleaseBallSupplier,
-                             final BooleanSupplier canReleaseBallAtCloseRangeSupplier, final Trigger loadBall,
-                             final Trigger releaseBall, final Trigger releaseBallAtCloseRange,
-                             final Trigger releaseBallManually) {
-
+                             final BooleanSupplier canReleaseBallAtCloseRangeSupplier,
+                             final Trigger loadBall, final Trigger triggerBall,
+                             final Trigger triggerBallAtCloseRange, final Trigger triggerBallManually) {
     loadBall.whileActiveContinuous(new LoadBall(loaderConveyor, storageConveyor,
         ballStopper));
 
-    releaseBall.and(releaseBallManually.negate()).whileActiveContinuous(
+    triggerBall.and(triggerBallManually.negate()).whileActiveContinuous(
         new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,
             canReleaseBallSupplier));
 
-    releaseBallAtCloseRange.and(releaseBallManually.negate()).whileActiveContinuous(
+    triggerBallAtCloseRange.and(triggerBallManually.negate()).whileActiveContinuous(
         new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,
             canReleaseBallAtCloseRangeSupplier));
 
-    (releaseBall.or(releaseBallAtCloseRange)).and(releaseBallManually).whenActive(
+    (triggerBall.or(triggerBallAtCloseRange)).and(triggerBallManually).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
             () -> LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX,
             () -> StorageConveyorConstants.PERCENTAGE_OUTPUT, () -> BallStopperConstants.PERCENTAGE_OUTPUT)

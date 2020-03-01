@@ -10,8 +10,7 @@ import robot.yawControl.commands.AlignByOrientationAndThenVision;
 import robot.yawControl.commands.SetTurretState;
 
 public class YawControlOiBinder {
-  public YawControlOiBinder(final YawControl yawControl,
-                            final VisionTargetSupplier targetSupplier,
+  public YawControlOiBinder(final YawControl yawControl, final VisionTargetSupplier targetSupplier,
                             final Trigger setStateRTF, final Trigger setStateRTR,
                             final Trigger setStateHoming,
                             final Trigger alignToTarget) {

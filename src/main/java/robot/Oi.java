@@ -82,9 +82,10 @@ public class Oi {
     final JoystickButton driverSetStateHoming = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kStickRight.value);
 
-
-    new YawControlOiBinder(yawControl, targetSupplier, driverSetStateRTF, driverSetStateRTR,
-        driverSetStateHoming.or(driverShootBallAtCloseRange), driverAndOperatorSpinShooterAndAlign.or(driverAlignAndShootBall));
+    new YawControlOiBinder(yawControl, targetSupplier,
+        driverSetStateRTF, driverSetStateRTR,
+        driverSetStateHoming.or(driverShootBallAtCloseRange),
+        driverAndOperatorSpinShooterAndAlign.or(driverAlignAndShootBall));
     //endregion
 
     //region BallCollector
@@ -100,16 +101,19 @@ public class Oi {
     final Trigger operatorOpenThenCloseCollector = operatorJoystickButtonCache.
         createJoystickTrigger(XboxController.Button.kBumperLeft.value);
 
-    new BallCollectorOiBinder(ballCollector, openAndCollectBall, operatorUncollectBalls, operatorOpenThenCloseCollector);
+    new BallCollectorOiBinder(ballCollector, openAndCollectBall,
+        operatorUncollectBalls, operatorOpenThenCloseCollector);
     //endregion
 
     //region BallTrigger
-    final JoystickButton releaseBallManually = driveJoystickButtonCache
+    final JoystickButton triggerBallManually = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kB.value);
 
-    new BallTriggerOiBinder(loaderConveyor, storageConveyor, ballStopper, canReleaseBallSupplier,
-        canReleaseBallAtCloseRangeSupplier, openAndCollectBall, driverAlignAndShootBall, driverShootBallAtCloseRange,
-        releaseBallManually);
+    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
+        ballStopper, canReleaseBallSupplier,
+        canReleaseBallAtCloseRangeSupplier,
+        openAndCollectBall, driverAlignAndShootBall,
+        driverShootBallAtCloseRange, triggerBallManually);
     //endregion
   }
 }

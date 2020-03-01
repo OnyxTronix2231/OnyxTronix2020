@@ -10,7 +10,6 @@ import java.util.function.DoubleSupplier;
 public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
 
   private YawControl yawControl;
-  private double initialRobotAngle;
 
   public MoveToAngleRTF(final YawControl yawControl, final DoubleSupplier supplierAngle) {
     super(yawControl, supplierAngle);
@@ -18,14 +17,8 @@ public class MoveToAngleRTF extends MoveTurretToAngleAndKeep {
   }
 
   @Override
-  public void initialize() {
-    super.initialize();
-    initialRobotAngle = yawControl.getRobotHeading();
-  }
-
-  @Override
   public void execute() {
-    angle = supplierAngle.getAsDouble() - initialRobotAngle;
+    angle = supplierAngle.getAsDouble() - yawControl.getRobotHeading();
     super.execute();
   }
 }

@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class BallCollector extends SubsystemBase {
 
   private final BallCollectorComponents components;
+  private double lastAmpere;
 
   public BallCollector(final BallCollectorComponents components) {
     this.components = components;
+    lastAmpere = 0;
   }
 
   public void collectBySpeed(final double speed) {
@@ -33,7 +35,15 @@ public class BallCollector extends SubsystemBase {
   }
 
   public boolean isBallCollected() {
-    return getAmp() > MIN_AMP_FOR_ONE;
+    if (getAmp() > MIN_AMP_FOR_ONE && getAmp() > lastAmpere){
+      lastAmpere = getAmp();
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isBallNotCollected() {
+    return !isBallCollected();
   }
 
   public double getAmp() {

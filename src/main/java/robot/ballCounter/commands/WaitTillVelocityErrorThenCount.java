@@ -9,6 +9,6 @@ import robot.shooter.commands.IsVelocityErrorSufficient;
 public class WaitTillVelocityErrorThenCount extends SequentialCommandGroup {
   public WaitTillVelocityErrorThenCount(final Shooter shooter, final BallCounter ballCounter) {
     addCommands(new IsVelocityErrorSufficient(shooter), new WaitUntilCommand(shooter::isBallNotShot),
-        new AddBallToBallCounter(ballCounter));
+        new RemoveBallFromBallCounter(ballCounter));
   }
 }

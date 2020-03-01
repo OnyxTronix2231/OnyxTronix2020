@@ -15,6 +15,8 @@ import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
 import robot.ballCollector.commands.OpenAndCollect;
 import robot.ballCollector.commands.OpenBallCollectorPistons;
+import robot.ballCounter.BallCounter;
+import robot.ballCounter.commands.WaitTillAmpereThenCount;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveConveyorsUntilBallInLoader;
@@ -27,7 +29,8 @@ public class SmartBallCollectorOi {
   public SmartBallCollectorOi(final UniqueButtonCache driveJoystickButtonCache, final UniqueAxisCache buttonJoystickUniqueAxisCache,
                               final UniqueAxisCache driveJoystickAxisCache,
                               final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-                              final StorageConveyor storageConveyor, final BallStopper ballStopper) {
+                              final StorageConveyor storageConveyor, final BallStopper ballStopper,
+                              final BallCounter ballCounter) {
     final Trigger openAndCollectDriveStick = buttonJoystickUniqueAxisCache.createJoystickTrigger(
         XboxController.Axis.kLeftTrigger.value);
     final Trigger openAndCollectButtonStick = driveJoystickAxisCache.createJoystickTrigger(
@@ -38,6 +41,8 @@ public class SmartBallCollectorOi {
 
     openAndCollectTrigger.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
         storageConveyor));
+
+    openAndCollectTrigger.whileActiveContinuous(new WaitTillAmpereThenCount(ballCollector, ballCounter));
 
     openAndCollectTrigger.whenInactive(new CloseBallCollectorPistons(ballCollector).andThen(new WaitCommand(
         CLOSING_SEQUENCE_DELAY))

@@ -1,32 +1,22 @@
 package robot;
 
-import static robot.RobotConstants.BUTTONS_JOYSTICK_PORT;
-import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.ROBOT_TYPE;
 
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import onyxTronix.UniqueAxisCache;
-import onyxTronix.UniqueButtonCache;
 import robot.autonomous.commands.DriveThenShootAutonomous;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
-import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
-import robot.crossSubsystem.SmartBallCollectorOi;
-import robot.crossSubsystem.ConveyorsOi;
-import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
-import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
@@ -37,13 +27,11 @@ import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.turret.BasicTurretComponentsA;
-import robot.turret.TurretOi;
 import robot.turret.TurretComponents;
 import robot.vision.Vision;
 import robot.vision.VisionConstants;
 import robot.vision.target.VisionTargetFactory;
 import robot.yawControl.YawControl;
-import robot.yawControl.YawControlOi;
 import vision.limelight.Limelight;
 import vision.limelight.enums.LimelightLedMode;
 
@@ -103,28 +91,13 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
-    new Oi(driveTrain, shooter, yawControl);
-
-    /*
-    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
-        driveJoystickAxisCache,
-        ballCollector, loaderConveyor,
-        storageConveyor, ballStopper);
-
-    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
-
-    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl);
-
-    new TurretOi(yawControl, buttonsJoystickAxisCache);
-
-    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
-        driveJoystickButtonCache);
-
-    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
+    new Oi(driveTrain, shooter, yawControl, ballCollector, loaderConveyor, storageConveyor, ballStopper,
+        () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
+        () -> getWhenCanReleaseBall(shooter, yawControl),
+        () -> getWhenCanReleaseBallAtCloseRange(shooter, yawControl));
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
-        loaderConveyor, storageConveyor, ballStopper, vision);
+        loaderConveyor, storageConveyor, ballStopper, vision, () -> getWhenCanReleaseBall(shooter, yawControl));
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
@@ -134,8 +107,6 @@ public class Robot extends TimedRobot {
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
     Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
-
-     */
   }
 
   @Override
@@ -176,5 +147,13 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     CommandScheduler.getInstance().run();
+  }
+
+  private boolean getWhenCanReleaseBall(Shooter shooter, YawControl yawControl) {
+    return shooter.isOnTarget() && Limelight.getInstance().targetFound() && yawControl.isOnTarget();
+  }
+
+  private boolean getWhenCanReleaseBallAtCloseRange(Shooter shooter, YawControl yawControl) {
+    return shooter.isOnTarget() && yawControl.isOnTarget();
   }
 }

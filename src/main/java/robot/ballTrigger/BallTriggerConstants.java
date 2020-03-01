@@ -1,6 +1,6 @@
-package robot.crossSubsystem;
+package robot.ballTrigger;
 
-public class CrossSubsystemConstants {
+public class BallTriggerConstants {
 
   public static final double MAKE_A_SHOT_TIMEOUT = 0.2;
   public static final double OVERRIDE_SHOT_TIMEOUT = 0.2;

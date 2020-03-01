@@ -1,11 +1,11 @@
-package robot.crossSubsystem.commands;
+package robot.ballTrigger.commands;
 
-import static robot.crossSubsystem.CrossSubsystemConstants.BALL_STOPPER_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.DELAY_UNTIL_BALL_LOADING_ENDS;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_RETURN_BALL_DOWN_SPEED;
-import static robot.crossSubsystem.CrossSubsystemConstants.LOADER_RETURN_BALL_TIMEOUT;
-import static robot.crossSubsystem.CrossSubsystemConstants.STORAGE_SPEED;
+import static robot.ballTrigger.BallTriggerConstants.BALL_STOPPER_SPEED;
+import static robot.ballTrigger.BallTriggerConstants.DELAY_UNTIL_BALL_LOADING_ENDS;
+import static robot.ballTrigger.BallTriggerConstants.LOADER_SPEED;
+import static robot.ballTrigger.BallTriggerConstants.LOADER_RETURN_BALL_DOWN_SPEED;
+import static robot.ballTrigger.BallTriggerConstants.LOADER_RETURN_BALL_TIMEOUT;
+import static robot.ballTrigger.BallTriggerConstants.STORAGE_SPEED;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -15,10 +15,10 @@ import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.storageConveyor.StorageConveyor;
 
-public class MoveConveyorsUntilBallInLoader extends SequentialCommandGroup {
+public class LoadBall extends SequentialCommandGroup {
 
-  public MoveConveyorsUntilBallInLoader(LoaderConveyor loaderConveyor, BallStopper ballStopper,
-                                        StorageConveyor storageConveyor) {
+  public LoadBall(LoaderConveyor loaderConveyor, StorageConveyor storageConveyor,
+                  BallStopper ballStopper) {
     super(
         deadline(new WaitUntilCommand(loaderConveyor::isBallInLoader),
             new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,

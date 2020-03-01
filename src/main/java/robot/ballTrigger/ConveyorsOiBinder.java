@@ -1,4 +1,4 @@
-package robot.crossSubsystem;
+package robot.ballTrigger;
 
 import static robot.ballStopper.BallStopperConstants.DELAY;
 import static robot.ballStopper.BallStopperConstants.MOVE_STOPPER_BACK;
@@ -16,16 +16,15 @@ import robot.loaderConveyor.commands.MoveLoaderConveyorBySpeed;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
-public class ConveyorsOi {
+public class ConveyorsOiBinder {
 
-  public ConveyorsOi(final UniqueButtonCache driveJoystickButtonCache, final LoaderConveyor loaderConveyor,
-                     final StorageConveyor storageConveyor, final BallStopper ballStopper) {
-    final Trigger moveConveyorsBack = driveJoystickButtonCache.createJoystickTrigger(
-        XboxController.Button.kX.value);
-    moveConveyorsBack.whileActiveContinuous(new ParallelCommandGroup(
+  public ConveyorsOiBinder(final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
+                           final BallStopper ballStopper, Trigger moveConveyorsReverse) {
+
+
+    moveConveyorsReverse.whileActiveContinuous(new ParallelCommandGroup(
         new MoveLoaderConveyorBySpeed(loaderConveyor, () -> MOVE_LOADER_BACK),
         new MoveBallStopperBySpeed(ballStopper, () -> MOVE_STOPPER_BACK, DELAY),
-        new MoveStorageConveyorBySpeed(storageConveyor, () -> MOVE_STORAGE_BACK).withTimeout(0.2)
-    ));
+        new MoveStorageConveyorBySpeed(storageConveyor, () -> MOVE_STORAGE_BACK).withTimeout(0.2)));
   }
 }

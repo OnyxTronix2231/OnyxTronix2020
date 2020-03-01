@@ -1,4 +1,4 @@
-package robot.crossSubsystem.commands;
+package robot.ballTrigger.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import robot.ballStopper.BallStopper;

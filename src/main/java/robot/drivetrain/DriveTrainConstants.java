@@ -16,6 +16,7 @@ public final class DriveTrainConstants {
   static final double CONVERSION_RATE = 9.5;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
+  static final Pose2d TARGET_POSE = new Pose2d(6.8, 0, Rotation2d.fromDegrees(180));
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
@@ -28,7 +29,7 @@ public final class DriveTrainConstants {
     static final int RIGHT_MASTER_PORT = 0;
     static final int RIGHT_SLAVE_PORT = 1;
     static final int MAX_ACCELERATION = 1000; // TODO: Calibration with A
-    static final int MAX_VELOCITY = 13400; // TODO: Calibration with A
+    static final int MAX_VELOCITY = 22000; // TODO: Calibration with A
     static final int PIGEON_PORT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double DRIVE_BY_DISTANCE_P = 0; // TODO: Calibration with A
@@ -53,12 +54,11 @@ public final class DriveTrainConstants {
 
       public static final double RAMSETE_B = 2;
       public static final double RAMSETE_ZETA = 0.7;
-      static final int TRAJECTORY_PID_SLOT = 1;
-      static final int DEGREES_IN_FULL_ROTATION = 360;
+      public static final double TRAJECTORY_P = 0;
       static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
-      static final double VOLTS = 0.365; // TODO: Calibration with A
-      static final double VOLT_SECONDS_PER_METER = 0;
-      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.333; // TODO: Calibration with A
+      static final double VOLTS = 0.178; // TODO: Calibration with A
+      static final double VOLT_SECONDS_PER_METER = 2.15;
+      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.302; // TODO: Calibration with A
       static final double MAX_VOLTAGE = 10; // TODO: Calibration with A
       static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
       static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A
@@ -67,66 +67,67 @@ public final class DriveTrainConstants {
 
   }
 
-  static final class Paths {
+  public static final class Paths {
 
-    private static final List<Pose2d> PATH_1 = List.of(
-        new Pose2d(4.55, 4.55, Rotation2d.fromDegrees(8.70579)),
-        new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-49.3987)),
-        new Pose2d(5.59, 3.93, Rotation2d.fromDegrees(162.64597)),
-        new Pose2d(3, 2.7, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_2 = List.of(
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-        new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_3 = List.of(
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(7.3, 0.7, Rotation2d.fromDegrees(180)),
-        new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180))
-    );
-    private static final List<Pose2d> PATH_4 = List.of(
-        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(0)),
-        new Pose2d(6.3, 7.5, Rotation2d.fromDegrees(-140)),
-        new Pose2d(3.1, 5.1, Rotation2d.fromDegrees(-140))
-    );
-    private static final List<Pose2d> PATH_5 = List.of(
-        new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(9.8, 3.7, Rotation2d.fromDegrees(0)),
-        new Pose2d(10.2, 4.5, Rotation2d.fromDegrees(45))
-    );
-    static final List<List<Pose2d>> PATHS = List.of(PATH_1, PATH_2, PATH_3, PATH_4, PATH_5);
+    public static final Path[][] PATHS = {PRIMARY_PATH(), SECONDARY_PATH()};
 
-    static Path[] PrimaryPath() {
-      final Pose2d startingPose = new Pose2d(1, 1, Rotation2d.fromDegrees(0));
-
+    static Path[] PRIMARY_PATH() {
       final List<Pose2d> pathOnePoints = List.of(
-          new Pose2d(),
-          new Pose2d(),
-          new Pose2d()
+          new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(90)),
+          new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-69))
       );
       final Path pathOne = new Path(true, pathOnePoints);
 
       final List<Pose2d> pathTwoPoints = List.of(
-          new Pose2d(),
-          new Pose2d()
+          pathOne.getReversedAngleEndingPose(),
+          new Pose2d(5, 4.3, Rotation2d.fromDegrees(2))
       );
       final Path pathTwo = new Path(false, pathTwoPoints);
 
-      final Path[] paths = {pathOne, pathTwo};
-      return paths;
+      final List<Pose2d> pathThreePoints = List.of(
+          pathTwo.getReversedAngleEndingPose(),
+          new Pose2d(5.6, 3.9, Rotation2d.fromDegrees(-50))
+      );
+      final Path pathThree = new Path(true, pathThreePoints);
+
+      final List<Pose2d> pathFourPoints = List.of(
+          pathThree.getReversedAngleEndingPose(),
+          new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(-90))
+      );
+      final Path pathFour = new Path(false, pathFourPoints);
+
+      return new Path[]{pathOne, pathTwo, pathThree, pathFour};
     }
 
-    private static Pose2d[] startingPoses() {
-      final Pose2d[] startingPoses = new Pose2d[5];
-      startingPoses[0] = new Pose2d(3.1, 3.5, Rotation2d.fromDegrees(37.5686));
-      startingPoses[1] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(0));
-      startingPoses[2] = new Pose2d(3.2, 0.7, Rotation2d.fromDegrees(180));
-      startingPoses[3] = new Pose2d(3.2, 7.5, Rotation2d.fromDegrees(0));
-      startingPoses[4] = new Pose2d(3.2, 3.7, Rotation2d.fromDegrees(-140));
-      return startingPoses;
+    static Path[] SECONDARY_PATH() {
+      final List<Pose2d> pathOnePoints = List.of(
+          new Pose2d(3, 0.7, Rotation2d.fromDegrees(0)),
+          new Pose2d(7, 0.7, Rotation2d.fromDegrees(0))
+      );
+      final Path pathOne = new Path(true, pathOnePoints);
+
+      final List<Pose2d> pathTwoPoints = List.of(
+          pathOne.getReversedAngleEndingPose(),
+          new Pose2d(3, 0.7, Rotation2d.fromDegrees(180))
+      );
+      final Path pathTwo = new Path(false, pathTwoPoints);
+      return new Path[]{pathOne, pathTwo};
+    }
+
+    public static Path[] TEST_PATH() {
+      final List<Pose2d> test = List.of(
+          new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+          new Pose2d(1, 0, Rotation2d.fromDegrees(0))
+      );
+      final Path pathOne = new Path(true, test);
+
+      final List<Pose2d> pathTwoPoints = List.of(
+          new Pose2d(-1, 0, Rotation2d.fromDegrees(0)),
+          new Pose2d(0, 0, Rotation2d.fromDegrees(0))
+      );
+      final Path pathTwo = new Path(false, pathTwoPoints);
+
+      return new Path[]{pathOne, pathTwo};
     }
   }
 }

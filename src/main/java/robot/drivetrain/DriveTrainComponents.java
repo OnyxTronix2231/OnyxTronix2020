@@ -32,4 +32,6 @@ public interface DriveTrainComponents {
   DifferentialDriveVoltageConstraint getAutonomousVoltage();
 
   TrajectoryConfig getTrajectoryConfig();
+
+  OnyxTrajectoryGenerator getTrajectoryGenerator();
 }

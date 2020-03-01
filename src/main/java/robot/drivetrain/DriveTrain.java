@@ -7,11 +7,10 @@ import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITI
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
 import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.ENCODER_CPR;
-import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRAJECTORY_PID_SLOT;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
-import static robot.drivetrain.DriveTrainConstants.Paths.PATHS;
 import static robot.drivetrain.DriveTrainConstants.SEC_TO_100MS;
+import static robot.drivetrain.DriveTrainConstants.TARGET_POSE;
 import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -19,11 +18,11 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -37,20 +36,11 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
     resetEncoders();
-
-    Shuffleboard.getTab("Odometry").addNumber("Yaw angle", () -> getRawRobotHeading());
-    pathChooser.setDefaultOption("Path 1", 1);
-    pathChooser.addOption("Path 2", 2);
-    pathChooser.addOption("Path 3", 3);
-    pathChooser.addOption("Path 4", 4);
-    pathChooser.addOption("Path 5", 5);
-
-    Shuffleboard.getTab("Odometry").add("ComboBox", pathChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
   }
 
   @Override
   public void periodic() {
-    components.getOdometry().update(Rotation2d.fromDegrees(getOdometryHeading()),
+    components.getOdometry().update(Rotation2d.fromDegrees(-getOdometryHeading()),
         getLeftDistance() / CM_TO_METERS, getRightDistance() / CM_TO_METERS);
   }
 
@@ -61,16 +51,21 @@ public class DriveTrain extends SubsystemBase {
 
   public void arcadeDrive(final double forwardSpeed, final double rotationSpeed) {
     components.getDifferentialDrive().arcadeDrive(forwardSpeed * ARCADE_DRIVE_FORWARD_SENSITIVITY,
-        rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, false);
+        rotationSpeed * ARCADE_DRIVE_ROTATION_SENSITIVITY, true);
   }
 
-  public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
-    driveMotorByMotionMagic(getLeftMaster(), leftTarget);
-    driveMotorByMotionMagic(getRightMaster(), rightTarget);
+  public double getAngleToTargetFromCurrentPose() {
+    return Math.abs(getPose().getRotation().getDegrees() - Math.toDegrees(Math.atan2(getPose().getTranslation().getY() - TARGET_POSE.getTranslation().getY(),
+        getPose().getTranslation().getX() - TARGET_POSE.getTranslation().getX()))) - TARGET_POSE.getRotation().getDegrees();
   }
 
   public Pose2d getPose() {
     return components.getOdometry().getPoseMeters();
+  }
+
+  public Pose2d getReversedPose() {
+    return new Pose2d(-getPose().getTranslation().getX(), -getPose().getTranslation().getY(),
+        Rotation2d.fromDegrees(-getPose().getRotation().getDegrees()));
   }
 
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
@@ -78,19 +73,33 @@ public class DriveTrain extends SubsystemBase {
         Math.abs(rightTarget - getRightMaster().getSelectedSensorPosition()) < cmToEncoderUnits(TOLERANCE);
   }
 
-  public void driveTrainVelocity(final double leftVelocity, final double rightVelocity) {
-    final double leftFeedForwardVolts = components.getMotorFeedForward().calculate(leftVelocity, 0);
-    final double rightFeedForwardVolts = components.getMotorFeedForward().calculate(rightVelocity, 0);
-
-    initMotionProfileSlot(TRAJECTORY_PID_SLOT);
-    getLeftMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(leftVelocity),
-        DemandType.ArbitraryFeedForward, leftFeedForwardVolts / RobotController.getBatteryVoltage());
-    getRightMaster().set(ControlMode.Velocity, metersPerSecToStepsPer100ms(rightVelocity),
-        DemandType.ArbitraryFeedForward, rightFeedForwardVolts / RobotController.getBatteryVoltage());
+  public void driveByMotionMagic(final double leftTarget, final double rightTarget) {
+    driveMotorByMotionMagic(getLeftMaster(), leftTarget);
+    driveMotorByMotionMagic(getRightMaster(), rightTarget);
   }
 
-  public void driveTrainVelocityReverse(final double leftVelocity, final double rightVelocity) {
-    driveTrainVelocity(-leftVelocity, -rightVelocity);
+  public void tankDriveVolts(final double leftVoltage, final double rightVoltage) {
+    System.out.println(leftVoltage);
+    System.out.println(rightVoltage);
+    getLeftMaster().setVoltage(leftVoltage);
+    getRightMaster().setVoltage(rightVoltage);
+  }
+
+  public DifferentialDriveKinematics getKinematics() {
+    return components.getDriveKinematics();
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftMaster().getSelectedSensorVelocity(),
+        getRightMaster().getSelectedSensorVelocity());
+  }
+
+  public SimpleMotorFeedforward getFeedForward() {
+    return components.getMotorFeedForward();
+  }
+
+  public void tankDriveVoltsReverse(final double leftVelocity, final double rightVelocity) {
+    tankDriveVolts(-rightVelocity, -leftVelocity);
   }
 
   public double getRightTargetFromDistance(final double distance) {
@@ -99,12 +108,6 @@ public class DriveTrain extends SubsystemBase {
 
   public double getLeftTargetFromDistance(final double distance) {
     return getTargetFromDistance(getLeftMaster(), distance);
-  }
-
-  public List<Pose2d> getPath() {
-    if (getAutonomousPath() > 5 || getAutonomousPath() < 1)
-      return getPoseFromVision();
-    return PATHS.get(getAutonomousPath());
   }
 
   public void stopDrive() {
@@ -116,7 +119,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getOdometryHeading() {
-    return components.getPigeonIMU().getNormalizedYaw();
+    return components.getPigeonIMU().getRawYaw();
   }
 
   public double getRawRobotHeading() {
@@ -137,8 +140,17 @@ public class DriveTrain extends SubsystemBase {
     components.getRightSlaveMotor().setNeutralMode(NeutralMode.Brake);
   }
 
+  public OnyxTrajectoryGenerator getTrajectoryGenerator() {
+    return components.getTrajectoryGenerator();
+  }
+
   public void setGyroAngle(double angle) {
     components.getPigeonIMU().setYaw(angle);
+  }
+
+  public void resetOdometryToPose(final Pose2d pose) {
+    resetEncoders();
+    components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {
@@ -163,15 +175,6 @@ public class DriveTrain extends SubsystemBase {
 
   private double getRightDistance() {
     return ((double) getRightMaster().getSelectedSensorPosition() / ENCODER_CPR) * PERIMETER;
-  }
-
-  private void resetOdometryToPose(final Pose2d pose) {//For future Vision integration - will delete comment pre-merge
-    resetEncoders();
-    components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
-  }
-
-  private int getAutonomousPath() {
-    return pathChooser.getSelected();
   }
 
   private List<Pose2d> getPoseFromVision() {//For future Vision integration - will delete comment pre-merge

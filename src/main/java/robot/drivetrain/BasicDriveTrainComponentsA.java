@@ -32,12 +32,15 @@ import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.Traject
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_D;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_I;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.VELOCITY_CONTROLLER_P;
+import static robot.drivetrain.DriveTrainConstants.VELOCITY_CONTROLLER_PID_SLOT;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import controllers.VelocityController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
@@ -60,6 +63,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   private final DifferentialDriveKinematics driveKinematics;
   private final DifferentialDriveVoltageConstraint autonomousVoltage;
   private final TrajectoryConfig trajectoryConfig;
+  private final OnyxTrajectoryGenerator trajectoryGenerator;
 
   public BasicDriveTrainComponentsA() {
     rightMaster = new WPI_TalonFX(RIGHT_MASTER_PORT);
@@ -88,6 +92,19 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
     normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
 
+    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
+//    final VelocityController leftSlaveVelocityController = new VelocityController(leftSlave, MAX_VELOCITY,
+//        VELOCITY_CONTROLLER_PID_SLOT);
+
+    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
+        VELOCITY_CONTROLLER_PID_SLOT);
+//    final VelocityController rightSlaveVelocityController = new VelocityController(rightSlave, MAX_VELOCITY,
+//        VELOCITY_CONTROLLER_PID_SLOT);
+
+    final SpeedControllerGroup leftControllers = new SpeedControllerGroup(leftVelocityController);
+    final SpeedControllerGroup rightControllers = new SpeedControllerGroup(rightVelocityController);
+
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
     differentialDrive.setSafetyEnabled(false);
@@ -103,6 +120,8 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
 
     trajectoryConfig = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
         .setKinematics(driveKinematics).addConstraint(autonomousVoltage);
+
+    trajectoryGenerator = new OnyxTrajectoryGenerator(trajectoryConfig);
   }
 
   @Override
@@ -158,6 +177,11 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
   @Override
   public TrajectoryConfig getTrajectoryConfig() {
     return trajectoryConfig;
+  }
+
+  @Override
+  public OnyxTrajectoryGenerator getTrajectoryGenerator() {
+    return trajectoryGenerator;
   }
 
   private TalonFXConfiguration getFalconConfiguration() {

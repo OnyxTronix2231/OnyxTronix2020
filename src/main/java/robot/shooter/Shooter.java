@@ -15,10 +15,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 
 public class Shooter extends SubsystemBase {
 
   private final ShooterComponents components;
+  private double lastVelocityError;
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
@@ -26,6 +28,7 @@ public class Shooter extends SubsystemBase {
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
+    lastVelocityError = 0;
   }
 
   public void shootBySpeed(final double speed) {
@@ -72,7 +75,15 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isBallShot(){
-    return getVelocityError() > MIN_VELOCITY_ERROR;
+    if (getVelocityError() > MIN_VELOCITY_ERROR && getVelocityError() > lastVelocityError) {
+      lastVelocityError = getVelocityError();
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isBallNotShot() {
+    return !isBallShot();
   }
 
   public boolean isReadyToShoot() {

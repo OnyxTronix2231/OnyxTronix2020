@@ -25,5 +25,6 @@ public class ShooterOi {
 
     final Trigger closePiston = buttonsJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickRight.value);
     closePiston.whileActiveOnce(new CloseShooterPiston(shooter));
+
   }
 }

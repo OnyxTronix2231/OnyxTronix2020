@@ -13,6 +13,7 @@ import onyxTronix.UniqueButtonCache;
 import robot.ballCounter.BallCounter;
 import robot.ballCounter.commands.CountCollectedBall;
 import robot.ballCounter.commands.CountShotBall;
+import robot.ballCounter.commands.WaitTillVelocityErrorThenCount;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveAllConveyors;
@@ -52,8 +53,7 @@ public class SmartShooterOi {
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, yawControl, true));
 
-    shootWithLoaderTriggerByDistance.whileActiveContinuous(new CountShotBall(ballCounter, shooter,
-        shooter::isBallShot));
+    shootWithLoaderTriggerByDistance.whileActiveContinuous(new WaitTillVelocityErrorThenCount(shooter, ballCounter));
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,

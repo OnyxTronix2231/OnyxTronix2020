@@ -21,6 +21,11 @@ public class CountShotBall extends CommandBase {
   }
 
   @Override
+  public void initialize() {
+
+  }
+
+  @Override
   public void execute() {
     if (isVelocityErrorSufficient.getAsBoolean()) {
       timer++;

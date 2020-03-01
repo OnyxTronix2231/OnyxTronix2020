@@ -10,10 +10,16 @@ import robot.drivetrain.DriveTrain;
 import java.util.List;
 
 public class MoveToPose extends OnyxRamseteCommand {
-  public MoveToPose(final DriveTrain driveTrain, final Pose2d finishPose) {
+  public MoveToPose(final DriveTrain driveTrain,
+                    final Pose2d finishPose) {
     super(() -> driveTrain.getTrajectoryGenerator().getTrajectoryFromPoseList(List.of(driveTrain.getPose(), finishPose),
-        driveTrain.getComponents()), driveTrain::getPose, new RamseteController(RAMSETE_B, RAMSETE_ZETA),
-        driveTrain.getKinematics(), driveTrain::getWheelSpeeds, driveTrain::tankDriveVolts,
-        driveTrain.getFeedForward(), driveTrain);
+        driveTrain.getComponents()),
+        driveTrain::getPose,
+        new RamseteController(RAMSETE_B, RAMSETE_ZETA),
+        driveTrain.getKinematics(),
+        driveTrain::getWheelSpeeds,
+        driveTrain::tankDriveVolts,
+        driveTrain.getFeedForward(),
+        driveTrain);
   }
 }

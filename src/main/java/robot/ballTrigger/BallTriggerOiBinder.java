@@ -22,8 +22,7 @@ public class BallTriggerOiBinder {
                              final BooleanSupplier canReleaseBallAtCloseRangeSupplier,
                              final Trigger loadBall, final Trigger triggerBall,
                              final Trigger triggerBallAtCloseRange, final Trigger triggerBallManually) {
-    loadBall.whileActiveContinuous(new LoadBall(loaderConveyor, storageConveyor,
-        ballStopper));
+    loadBall.whileActiveContinuous(new LoadBall(loaderConveyor, storageConveyor, ballStopper));
 
     triggerBall.and(triggerBallManually.negate()).whileActiveContinuous(
         new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,

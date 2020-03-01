@@ -45,7 +45,8 @@ public class Oi {
     JoystickAxis driverForwardAxis = driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
     JoystickAxis driverRotateAxis = driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
 
-    new DriveTrainOiBinder(driveTrain, driverForwardAxis, driverRotateAxis);
+    new DriveTrainOiBinder(driveTrain, driverForwardAxis,
+        driverRotateAxis);
     //endregion
 
     //region Shooter
@@ -72,7 +73,9 @@ public class Oi {
         operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
 
     new TurretOiBinder(yawControl, operatorMoveTurretByAxis);
+    //endregion
 
+    //region YawControl
     final JoystickButton driverSetStateRTF = driveJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBack.value);
 

@@ -7,9 +7,7 @@ import robot.turret.commands.MoveTurretByJoystick;
 
 public class TurretOiBinder {
 
-  public TurretOiBinder(final Turret turret, JoystickAxis moveTurretByAxis) {
-
-    moveTurretByAxis.whileActiveContinuous(new MoveTurretByJoystick(turret,
-        moveTurretByAxis::getRawAxis));
+  public TurretOiBinder(final Turret turret, final JoystickAxis moveTurretByAxis) {
+    moveTurretByAxis.whileActiveContinuous(new MoveTurretByJoystick(turret, moveTurretByAxis::getRawAxis));
   }
 }

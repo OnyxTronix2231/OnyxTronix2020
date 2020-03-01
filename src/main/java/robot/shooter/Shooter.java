@@ -3,14 +3,10 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -21,13 +17,13 @@ public class Shooter extends SubsystemBase {
   public Shooter(final ShooterComponents components) {
     this.components = components;
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
-        () -> components.getMasterMotor().getClosedLoopError());
+        () -> components.getLeftMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
-        () -> components.getMasterMotor().getSelectedSensorVelocity());
+        () -> components.getLeftMasterMotor().getSelectedSensorVelocity());
   }
 
   public void shootBySpeed(final double speed) {
-    components.getMasterMotor().set(speed);
+    components.getLeftMasterMotor().set(speed);
   }
 
   public void stopMotor() {
@@ -35,15 +31,15 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isOnTarget() {
-    return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
+    return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
   public void configVelocitySlot() {
-    components.getMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
+    components.getLeftMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   public void setVelocity(final double velocity) {
-    components.getMasterMotor().set(ControlMode.Velocity, velocity);
+    components.getLeftMasterMotor().set(ControlMode.Velocity, velocity);
   }
 
   public void openShooterPiston() {

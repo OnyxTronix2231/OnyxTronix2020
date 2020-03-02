@@ -9,7 +9,7 @@ public interface ShooterComponents {
 
   WPI_TalonFX getMasterMotor();
 
-  WPI_TalonFX getSlaveMotor();
+  IMotorController getSlaveMotor();
 
   Solenoid getSolenoid();
 }

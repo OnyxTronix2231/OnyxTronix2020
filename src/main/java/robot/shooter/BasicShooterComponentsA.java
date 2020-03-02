@@ -14,6 +14,7 @@ import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -64,7 +65,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
   }
 
   @Override
-  public WPI_TalonFX getSlaveMotor() {
+  public IMotorController getSlaveMotor() {
     return slaveMotor;
   }
 

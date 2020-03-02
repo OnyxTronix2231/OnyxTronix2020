@@ -13,12 +13,10 @@ public class WaitTillAmpereThenCount extends SequentialCommandGroup {
   }
 
   @Override
-  public void initialize() {
-  }
-
-  @Override
   public boolean isFinished() {
-    initialize();
+    if (super.isFinished()) {
+      initialize();
+    }
     return false;
   }
 }

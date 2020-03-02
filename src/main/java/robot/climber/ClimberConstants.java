@@ -8,7 +8,7 @@ public final class ClimberConstants {
   public static final double SET_POINT_ON_BAR = 1; //TODO: check and change
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double TOLERANCE_IN_ENCODER = 3; // TODO: tuning is required
-  static final double ENCODER_UNITS = 2046.0;
+  static final int ENCODER_UNITS = 2046;
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
 

@@ -17,7 +17,6 @@ import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorComponents;
 import robot.ballCollector.BallCollectorOi;
 import robot.ballCollector.BasicBallCollectorComponentsA;
-import robot.ballCounter.BallCounter;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
@@ -31,11 +30,9 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
-import robot.loaderConveyor.TestingLoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
-import robot.shooter.TestingShooterOi;
 import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
@@ -75,7 +72,6 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
-    final BallCounter ballCounter;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -85,7 +81,6 @@ public class Robot extends TimedRobot {
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
-      ballCounter = new BallCounter();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -94,7 +89,6 @@ public class Robot extends TimedRobot {
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
-      ballCounter = new BallCounter();
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
@@ -124,19 +118,15 @@ public class Robot extends TimedRobot {
 
     new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
-    //new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl, ballCounter);
+    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
+        storageConveyor, ballStopper, vision, yawControl);
 
     new TurretOi(yawControl, buttonsJoystickAxisCache);
 
     new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
         driveJoystickButtonCache);
 
-    // new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
-
-    new TestingShooterOi(buttonsJoystickAxisCache , driveJoystickButtonCache, shooter);
-
-    new TestingLoaderConveyorOi(loaderConveyor,buttonsJoystickButtonCache);
+    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision);

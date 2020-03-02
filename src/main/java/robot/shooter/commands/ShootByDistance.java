@@ -8,6 +8,6 @@ import java.util.function.DoubleSupplier;
 public class ShootByDistance extends ShootByVelocity {
 
   public ShootByDistance(final Shooter shooter, final DoubleSupplier distanceSupplier) {
-    super(shooter, () -> shooter.distanceToVelocity(distanceSupplier.getAsDouble()));
+    super(shooter, () -> shooter.distanceToVelocity(distanceSupplier.getAsDouble()) / 2);
   }
 }

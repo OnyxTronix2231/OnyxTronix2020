@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
+import robot.shooter.commands.ShootByDistance;
 import robot.shooter.commands.ShootBySpeed;
 import onyxTronix.UniqueButtonCache;
 import robot.shooter.commands.CloseShooterPiston;
@@ -21,8 +22,8 @@ public class TestingShooterOi {
   public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
                           UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
 
-    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
+    final JoystickAxis shootByVelocityButton = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    shootByVelocityButton.whileActiveContinuous(new ShootByVelocity(shooter, () -> 16500));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

@@ -9,9 +9,9 @@ public final class ShooterConstants {
     static final int MASTER_PORT = 7;
     static final int SLAVE_PORT = 8;
     static final int SOLENOID_PORT = 1;
-    static final int PEAK_AMP = 40;//TODO check and change
-    static final int PEAK_AMP_DURATION = 100;//TODO check and change
-    static final int CONTINUOUS_CURRENT_LIMIT = 30; // TODO: check and change
+    static final int CURRENT_LIMIT = 40;//TODO check and change
+    static final int TRIGGER_THRESHOLD_TIME = 100;//TODO check and change
+    static final int TRIGGER_THRESHOLD_CURRENT = 30; // TODO: check and change
     static final int MIDDLE_DISTANCE = 450;
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;

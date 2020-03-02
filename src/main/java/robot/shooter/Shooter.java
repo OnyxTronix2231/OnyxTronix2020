@@ -11,7 +11,6 @@ import static robot.shooter.ShooterConstants.TOLERANCE;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 
 public class Shooter extends SubsystemBase {
 
@@ -22,13 +21,13 @@ public class Shooter extends SubsystemBase {
     this.components = components;
     lastVelocityError = Integer.MAX_VALUE;
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
-        () -> components.getLeftMasterMotor().getClosedLoopError());
+        () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
-        () -> components.getLeftMasterMotor().getSelectedSensorVelocity());
+        () -> components.getMasterMotor().getSelectedSensorVelocity());
   }
 
   public void shootBySpeed(final double speed) {
-    components.getLeftMasterMotor().set(speed);
+    components.getMasterMotor().set(speed);
   }
 
   public void stopMotor() {
@@ -36,15 +35,15 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean isOnTarget() {
-    return Math.abs(components.getLeftMasterMotor().getClosedLoopError()) < TOLERANCE;
+    return Math.abs(components.getMasterMotor().getClosedLoopError()) < TOLERANCE;
   }
 
   public void configVelocitySlot() {
-    components.getLeftMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
+    components.getMasterMotor().selectProfileSlot(VELOCITY_PID_SLOT, PRIMARY_PID);
   }
 
   public void setVelocity(final double velocity) {
-    components.getLeftMasterMotor().set(ControlMode.Velocity, velocity);
+    components.getMasterMotor().set(ControlMode.Velocity, velocity);
   }
 
   public void openShooterPiston() {
@@ -70,7 +69,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getVelocityError(){
-    return components.getLeftMasterMotor().getClosedLoopError();
+    return components.getMasterMotor().getClosedLoopError();
   }
 
   public boolean isBallShot(){

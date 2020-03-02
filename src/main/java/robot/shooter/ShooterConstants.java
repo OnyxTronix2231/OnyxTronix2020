@@ -25,6 +25,7 @@ public final class ShooterConstants {
     static final double AT_SHOOTING_VELOCITY = 400;
   }
 
+  static final double TESTING_VELOCITY = 18000;
   static final boolean IS_PISTON_OPEN = false;
   static final int PERCENT_OUT_PUT = 1; //TODO check and change very important meters
   static final int TOLERANCE = 300;

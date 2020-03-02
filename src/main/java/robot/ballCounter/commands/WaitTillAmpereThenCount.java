@@ -11,4 +11,14 @@ public class WaitTillAmpereThenCount extends SequentialCommandGroup {
     addCommands(new IsAmpereSufficient(ballCollector), new WaitUntilCommand(ballCollector::isBallNotCollected),
         new AddBallToBallCounter(ballCounter));
   }
+
+  @Override
+  public void initialize() {
+  }
+
+  @Override
+  public boolean isFinished() {
+    initialize();
+    return false;
+  }
 }

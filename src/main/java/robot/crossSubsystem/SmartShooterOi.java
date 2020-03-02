@@ -11,8 +11,6 @@ import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
 import robot.ballCounter.BallCounter;
-import robot.ballCounter.commands.CountCollectedBall;
-import robot.ballCounter.commands.CountShotBall;
 import robot.ballCounter.commands.WaitTillVelocityErrorThenCount;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;

@@ -67,7 +67,7 @@ public class Shooter extends SubsystemBase {
 
 
   public double getVelocityError(){
-    return components.getMasterMotor().getClosedLoopError();
+    return components.getLeftMasterMotor().getClosedLoopError();
   }
 
   public boolean isBallShot(){

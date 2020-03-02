@@ -13,6 +13,6 @@ public class RemoveBallFromBallCounter extends InstantCommand {
 
   @Override
   public void initialize() {
-    ballCounter.removeBall();
+    ballCounter.ballShot();
   }
 }

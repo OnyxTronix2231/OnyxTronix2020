@@ -3,7 +3,6 @@ package robot.ballCollector.commands;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import robot.ballCollector.BallCollector;
 import robot.ballCounter.BallCounter;
-import robot.ballCounter.commands.CountCollectedBall;
 
 public class CollectAndCount extends ParallelDeadlineGroup {
 

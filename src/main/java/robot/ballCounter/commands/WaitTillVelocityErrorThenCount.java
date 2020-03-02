@@ -11,4 +11,14 @@ public class WaitTillVelocityErrorThenCount extends SequentialCommandGroup {
     addCommands(new IsVelocityErrorSufficient(shooter), new WaitUntilCommand(shooter::isBallNotShot),
         new RemoveBallFromBallCounter(ballCounter));
   }
+
+  @Override
+  public void initialize() {
+  }
+
+  @Override
+  public boolean isFinished() {
+    initialize();
+    return false;
+  }
 }

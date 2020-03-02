@@ -15,11 +15,11 @@ public class BallCounter {
     Shuffleboard.getTab("BallCounter").addNumber("ballCounter", () -> ballCounter);
   }
 
-  public void addBall() {
+  public void ballCollected() {
     ballCounter++;
   }
 
-  public void removeBall() {
+  public void ballShot() {
     ballCounter--;
   }
 

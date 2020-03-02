@@ -12,6 +12,6 @@ public class AddBallToBallCounter extends InstantCommand {
 
   @Override
   public void initialize() {
-    ballCounter.addBall();
+    ballCounter.ballCollected();
   }
 }

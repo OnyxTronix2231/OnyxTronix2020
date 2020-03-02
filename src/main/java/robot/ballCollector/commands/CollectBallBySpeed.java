@@ -7,22 +7,22 @@ import java.util.function.DoubleSupplier;
 
 public class CollectBallBySpeed extends CommandBase {
 
-    private final BallCollector ballCollector;
-    private final DoubleSupplier speedSupplier;
+  private final BallCollector ballCollector;
+  private final DoubleSupplier speedSupplier;
 
-    public CollectBallBySpeed(final BallCollector ballCollector, final DoubleSupplier speedSupplier) {
-        this.ballCollector = ballCollector;
-        this.speedSupplier = speedSupplier;
-        addRequirements(ballCollector);
-    }
+  public CollectBallBySpeed(final BallCollector ballCollector, final DoubleSupplier speedSupplier) {
+    this.ballCollector = ballCollector;
+    this.speedSupplier = speedSupplier;
+    addRequirements(ballCollector);
+  }
 
-    @Override
-    public void execute() {
-        ballCollector.collectBySpeed(speedSupplier.getAsDouble());
-    }
+  @Override
+  public void execute() {
+    ballCollector.collectBySpeed(speedSupplier.getAsDouble());
+  }
 
-    @Override
-    public void end(final boolean interrupted) {
-        ballCollector.stopMotor();
-    }
+  @Override
+  public void end(final boolean interrupted) {
+    ballCollector.stopMotor();
+  }
 }

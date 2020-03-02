@@ -23,6 +23,7 @@ import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.climber.BasicClimberComponentsA;
 import robot.climber.Climber;
 import robot.climber.ClimberComponents;
+import robot.climber.ClimberOi;
 import robot.crossSubsystem.SmartBallCollectorOi;
 import robot.crossSubsystem.ConveyorsOi;
 import robot.crossSubsystem.SmartShooterOi;
@@ -136,6 +137,7 @@ public class Robot extends TimedRobot {
     new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 
     climber = new Climber(climberComponents);
+    new ClimberOi(driveJoystickButtonCache, climber);
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision);

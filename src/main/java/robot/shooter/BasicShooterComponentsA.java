@@ -21,22 +21,22 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class BasicShooterComponentsA implements ShooterComponents {
 
-  private final WPI_TalonFX leftMasterMotor;
-  private final WPI_TalonFX rightMasterMotor;
+  private final WPI_TalonFX masterMotor;
+  private final WPI_TalonFX slaveMotor;
   private final Solenoid solenoid;
 
   public BasicShooterComponentsA() {
-    leftMasterMotor = new WPI_TalonFX(MASTER_PORT);
-    leftMasterMotor.configFactoryDefault();
-    leftMasterMotor.configAllSettings(getFalconConfiguration());
-    leftMasterMotor.setNeutralMode(NeutralMode.Coast);
-    leftMasterMotor.setInverted(true);
+    masterMotor = new WPI_TalonFX(MASTER_PORT);
+    masterMotor.configFactoryDefault();
+    masterMotor.configAllSettings(getFalconConfiguration());
+    masterMotor.setNeutralMode(NeutralMode.Coast);
+    masterMotor.setInverted(true);
 
-    rightMasterMotor = new WPI_TalonFX(SLAVE_PORT);
-    leftMasterMotor.configAllSettings(getFalconConfiguration());
-    rightMasterMotor.configFactoryDefault();
-    rightMasterMotor.setNeutralMode(NeutralMode.Coast);
-    rightMasterMotor.follow(leftMasterMotor);
+    slaveMotor = new WPI_TalonFX(SLAVE_PORT);
+    slaveMotor.configAllSettings(getFalconConfiguration());
+    slaveMotor.configFactoryDefault();
+    slaveMotor.setNeutralMode(NeutralMode.Coast);
+    slaveMotor.follow(masterMotor);
 
     solenoid = new Solenoid(SOLENOID_PORT);
   }
@@ -59,13 +59,13 @@ public class BasicShooterComponentsA implements ShooterComponents {
   }
 
   @Override
-  public WPI_TalonFX getLeftMasterMotor() {
-    return leftMasterMotor;
+  public WPI_TalonFX getMasterMotor() {
+    return masterMotor;
   }
 
   @Override
-  public WPI_TalonFX getRightMasterMotor() {
-    return rightMasterMotor;
+  public WPI_TalonFX getSlaveMotor() {
+    return slaveMotor;
   }
 
   @Override

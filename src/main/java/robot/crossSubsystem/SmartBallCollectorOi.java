@@ -15,8 +15,6 @@ import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
 import robot.ballCollector.commands.OpenAndCollect;
 import robot.ballCollector.commands.OpenBallCollectorPistons;
-import robot.ballCounter.BallCounter;
-import robot.ballCounter.commands.WaitTillAmpereThenCount;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveConveyorsUntilBallInLoader;
@@ -29,20 +27,18 @@ public class SmartBallCollectorOi {
   public SmartBallCollectorOi(final UniqueButtonCache driveJoystickButtonCache, final UniqueAxisCache buttonJoystickUniqueAxisCache,
                               final UniqueAxisCache driveJoystickAxisCache,
                               final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-                              final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                              final BallCounter ballCounter) {
+                              final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     final Trigger openAndCollectDriveStick = buttonJoystickUniqueAxisCache.createJoystickTrigger(
         XboxController.Axis.kLeftTrigger.value);
     final Trigger openAndCollectButtonStick = driveJoystickAxisCache.createJoystickTrigger(
         XboxController.Axis.kLeftTrigger.value);
 
     final Trigger openAndCollectTrigger = openAndCollectButtonStick.or(openAndCollectDriveStick);
-    openAndCollectTrigger.whileActiveContinuous(new OpenAndCollect(ballCollector));
+    openAndCollectTrigger.whileActiveContinuous(new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
+        new CollectBallBySpeed(ballCollector, () -> PERCENT_OUTPUT)));
 
     openAndCollectTrigger.whileActiveContinuous(new MoveConveyorsUntilBallInLoader(loaderConveyor, ballStopper,
         storageConveyor));
-
-    openAndCollectTrigger.whileActiveContinuous(new WaitTillAmpereThenCount(ballCollector, ballCounter));
 
     openAndCollectTrigger.whenInactive(new CloseBallCollectorPistons(ballCollector).andThen(new WaitCommand(
         CLOSING_SEQUENCE_DELAY))

@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
-import robot.ballCounter.BallCounter;
-import robot.ballCounter.commands.WaitTillVelocityErrorThenCount;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
 import robot.crossSubsystem.commands.MoveAllConveyors;
@@ -37,7 +35,8 @@ public class SmartShooterOi {
                         final UniqueButtonCache buttonsJoystickButtonCache,
                         final Shooter shooter, final LoaderConveyor loaderConveyor,
                         final StorageConveyor storageConveyor, final BallStopper ballStopper,
-                        final Vision vision, final YawControl yawControl, final BallCounter ballCounter) {
+                        final Vision vision, final YawControl yawControl) {
+
     final JoystickAxis shootWithLoaderTriggerByDistance =
         driveJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
 
@@ -50,8 +49,6 @@ public class SmartShooterOi {
     shootWithLoaderTriggerByDistance.and(overrideTrigger.negate()).whileActiveContinuous(
         new MoveConveyorsByLoaderAsTrigger(shooter, loaderConveyor,
             storageConveyor, ballStopper, yawControl, true));
-
-    shootWithLoaderTriggerByDistance.whileActiveContinuous(new WaitTillVelocityErrorThenCount(shooter, ballCounter));
 
     overrideTrigger.and(shootWithLoaderTriggerByDistance).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,

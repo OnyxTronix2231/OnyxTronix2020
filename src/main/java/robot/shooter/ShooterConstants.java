@@ -21,6 +21,8 @@ public final class ShooterConstants {
     static final double VELOCITY_F = MAX_CLOSED_LOOP_OUTPUT / MAX_VELOCITY;
     static final double OPEN_LOOP_RAMP = 0;//TODO: check and change
     static final double CLOSE_LOOP_RAMP = 3;//TODO: check and change
+    static final double MIN_VELOCITY_ERROR = 1000;
+    static final double AT_SHOOTING_VELOCITY = 400;
   }
 
   static final double TESTING_VELOCITY = 18000;

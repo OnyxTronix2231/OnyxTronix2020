@@ -30,6 +30,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     leftMasterMotor.configFactoryDefault();
     leftMasterMotor.configAllSettings(getFalconConfiguration());
     leftMasterMotor.setNeutralMode(NeutralMode.Coast);
+    leftMasterMotor.setInverted(true);
 
     rightMasterMotor = new WPI_TalonFX(SLAVE_PORT);
     leftMasterMotor.configAllSettings(getFalconConfiguration());

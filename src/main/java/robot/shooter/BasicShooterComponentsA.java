@@ -36,6 +36,7 @@ public class BasicShooterComponentsA implements ShooterComponents {
     leftMasterMotor.configAllSettings(getFalconConfiguration());
     rightMasterMotor.configFactoryDefault();
     rightMasterMotor.setNeutralMode(NeutralMode.Coast);
+    rightMasterMotor.follow(leftMasterMotor);
 
     solenoid = new Solenoid(SOLENOID_PORT);
   }

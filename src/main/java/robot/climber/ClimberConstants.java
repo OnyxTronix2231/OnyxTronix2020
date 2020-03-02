@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public final class ClimberConstants {
 
-  public static final double UP_SPEED = 0.3; // TODO: check value
+  public static final double UP_SPEED = 0.3;
   public static final double SET_POINT_ON_BAR = 1; //TODO: check and change
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double TOLERANCE_IN_ENCODER = 3; // TODO: tuning is required
@@ -13,8 +13,8 @@ public final class ClimberConstants {
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
 
   public static final class ClimberComponentsA {
-    static final int MASTER_MOTOR_PORT = 13; // TODO: check value
-    static final int SLAVE_MOTOR_PORT = 14; // TODO: check value
+    static final int MASTER_MOTOR_PORT = 13;
+    static final int SLAVE_MOTOR_PORT = 14;
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 2; // TODO: check value
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 3; // TODO: check value
     static final double CURRENT_LIMIT = 40; // TODO: check value

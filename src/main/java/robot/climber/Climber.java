@@ -11,6 +11,7 @@ import static robot.climber.ClimberConstants.OPEN_SOLENOID_VALUE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
@@ -57,5 +58,15 @@ public class Climber extends SubsystemBase {
 
   private double cmToEncoderUnits(final double cm) {
     return CONVERSION_RATE * ENCODER_UNITS * cm / PERIMETER;
+  }
+
+  public void setNeutralModeToBrake() {
+    components.getMasterMotor().setNeutralMode(NeutralMode.Brake);
+    components.getSlaveMotor().setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setNeutralModeToCoast() {
+    components.getMasterMotor().setNeutralMode(NeutralMode.Coast);
+    components.getSlaveMotor().setNeutralMode(NeutralMode.Coast);
   }
 }

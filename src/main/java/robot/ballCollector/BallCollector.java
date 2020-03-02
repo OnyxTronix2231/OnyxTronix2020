@@ -34,6 +34,10 @@ public class BallCollector extends SubsystemBase {
     components.getSolenoid().set(CLOSE_SOLENOID);
   }
 
+  public void startChecking() {
+    lastAmpere = 0;
+  }
+
   public boolean isBallCollected() {
     if (getAmp() > MIN_AMP_FOR_ONE && getAmp() > lastAmpere){
       lastAmpere = getAmp();

@@ -20,11 +20,11 @@ public class Shooter extends SubsystemBase {
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
+    lastVelocityError = Integer.MAX_VALUE;
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getLeftMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getLeftMasterMotor().getSelectedSensorVelocity());
-    lastVelocityError = 0;
   }
 
   public void shootBySpeed(final double speed) {
@@ -65,6 +65,9 @@ public class Shooter extends SubsystemBase {
   // y= -0.0121x2 +26.707x + 24130 > 450
   //y = 0.1912x2 - 161.44x +67791 < 450
 
+  public void startChecking() {
+    lastVelocityError = Integer.MAX_VALUE;
+  }
 
   public double getVelocityError(){
     return components.getLeftMasterMotor().getClosedLoopError();

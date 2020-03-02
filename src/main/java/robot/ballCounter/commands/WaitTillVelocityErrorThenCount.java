@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import robot.ballCounter.BallCounter;
 import robot.shooter.Shooter;
-import robot.shooter.commands.IsVelocityErrorSufficient;
+import robot.shooter.commands.WaitUntilBallShotByVelocity;
 
 public class WaitTillVelocityErrorThenCount extends SequentialCommandGroup {
   public WaitTillVelocityErrorThenCount(final Shooter shooter, final BallCounter ballCounter) {
-    addCommands(new IsVelocityErrorSufficient(shooter), new WaitUntilCommand(shooter::isBallNotShot),
+    addCommands(new WaitUntilBallShotByVelocity(shooter), new WaitUntilCommand(shooter::isBallNotShot),
         new RemoveBallFromBallCounter(ballCounter));
   }
 

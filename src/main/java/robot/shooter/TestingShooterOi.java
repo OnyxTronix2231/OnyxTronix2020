@@ -15,14 +15,15 @@ import robot.shooter.commands.OpenShooterPiston;
 import robot.shooter.commands.ShootByVelocity;
 
 import static robot.shooter.ShooterConstants.PERCENT_OUT_PUT;
+import static robot.shooter.ShooterConstants.TESTING_VELOCITY;
 
 public class TestingShooterOi {
 
   public TestingShooterOi(final UniqueAxisCache buttonJoystickAxisCache,
                           UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
 
-    final JoystickAxis shootBySpeedAxis = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootBySpeedAxis.whileActiveContinuous(new ShootBySpeed(shooter, () -> PERCENT_OUT_PUT));
+    final JoystickAxis shootByVelocity = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    shootByVelocity.whileActiveContinuous(new ShootByVelocity (shooter, () -> TESTING_VELOCITY));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

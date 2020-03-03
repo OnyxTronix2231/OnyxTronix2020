@@ -26,6 +26,7 @@ import robot.crossSubsystem.SmartShooterOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
+import robot.drivetrain.TempOi;
 import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
@@ -94,58 +95,60 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain(driveTrainComponents);
     driveTrain.setDefaultCommand(new DriveByJoystick(driveTrain, driveJoystick));
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+    new TempOi(driveJoystickButtonCache, driveTrain);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
-
-    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
-
-    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
-
-    final Shooter shooter = new Shooter(shooterComponents);
-
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
-
-    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
-        driveTrain::getOdometryHeading,
-        VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
-        VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
-
-    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
-        driveJoystickAxisCache,
-        ballCollector, loaderConveyor,
-        storageConveyor, ballStopper);
-
-    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
-
-    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl);
-
-    new TurretOi(yawControl, buttonsJoystickAxisCache);
-
-    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
-        driveJoystickButtonCache);
-
-    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
-
-    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
-        loaderConveyor, storageConveyor, ballStopper, vision);
-
-    Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
-        () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
-    Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", shooter::isOnTarget);
-    Shuffleboard.getTab("Drive").addBoolean("Can Hit Inner", () ->
-        vision.canHitOuterTarget());
-    Shuffleboard.getTab("Drive").add("Starting angle", 180).
-        getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
-    Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
+//    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+//
+//    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+//
+//    final YawControl yawControl = new YawControl(turretComponents, driveTrain);
+//
+//    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
+//
+//    final Shooter shooter = new Shooter(shooterComponents);
+//
+//    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+//
+//    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
+//        driveTrain::getOdometryHeading,
+//        VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
+//        VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
+//
+//    new SmartBallCollectorOi(driveJoystickButtonCache, buttonsJoystickAxisCache,
+//        driveJoystickAxisCache,
+//        ballCollector, loaderConveyor,
+//        storageConveyor, ballStopper);
+//
+//    new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
+//
+//    new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
+//        storageConveyor, ballStopper, vision, yawControl);
+//
+//    new TurretOi(yawControl, buttonsJoystickAxisCache);
+//
+//    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
+//        driveJoystickButtonCache);
+//
+//    new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
+//
+//    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
+//        loaderConveyor, storageConveyor, ballStopper, vision);
+//
+//    Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
+//        () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
+//    Shuffleboard.getTab("Drive").addBoolean("Shooter On Target Velocity", shooter::isOnTarget);
+//    Shuffleboard.getTab("Drive").addBoolean("Can Hit Inner", () ->
+//        vision.canHitOuterTarget());
+//    Shuffleboard.getTab("Drive").add("Starting angle", 180).
+//        getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
+//    Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
   }
 
   @Override
   public void autonomousInit() {
-    vision.setLEDMode(LimelightLedMode.forceOn);
-    driveTrain.setNeutralModeToBrake();
-    autonomousShooting.schedule();
+//    vision.setLEDMode(LimelightLedMode.forceOn);
+//    driveTrain.setNeutralModeToBrake();
+//    autonomousShooting.schedule();
   }
 
   @Override
@@ -155,8 +158,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    vision.setLEDMode(LimelightLedMode.forceOn);
-    driveTrain.setNeutralModeToBrake();
+//    vision.setLEDMode(LimelightLedMode.forceOn);
+//    driveTrain.setNeutralModeToBrake();
   }
 
   @Override
@@ -173,7 +176,7 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     LiveWindow.setEnabled(false);
     vision.setLEDMode(LimelightLedMode.forceOff);
-    driveTrain.setNeutralModeToCoast();
+//    driveTrain.setNeutralModeToCoast();
   }
 
   @Override

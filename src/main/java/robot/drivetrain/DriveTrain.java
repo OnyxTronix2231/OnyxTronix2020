@@ -16,6 +16,7 @@ import static robot.drivetrain.DriveTrainConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -139,6 +140,14 @@ public class DriveTrain extends SubsystemBase {
 
   public void setGyroAngle(double angle) {
     components.getPigeonIMU().setYaw(angle);
+  }
+
+  public IMotorController getLeftMasterMotor() {
+    return components.getLeftMasterMotor();
+  }
+
+  public IMotorController getRightMasterMotor() {
+    return components.getRightMasterMotor();
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {

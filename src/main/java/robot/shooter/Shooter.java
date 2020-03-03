@@ -9,6 +9,8 @@ import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLO
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.IMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -50,6 +52,10 @@ public class Shooter extends SubsystemBase {
     components.getSolenoid().set(IS_PISTON_OPEN);
   }
 
+  public double getSpeed(){
+    return components.getMasterMotor().getSelectedSensorVelocity();
+  }
+
   public void closeShooterPiston() {
     components.getSolenoid().set(!IS_PISTON_OPEN);
   }
@@ -66,6 +72,10 @@ public class Shooter extends SubsystemBase {
 
   public void startChecking() {
     lastVelocityError = Integer.MAX_VALUE;
+  }
+
+  public IMotorController getMasterMotor(){
+    return components.getMasterMotor();
   }
 
   public double getVelocityError(){

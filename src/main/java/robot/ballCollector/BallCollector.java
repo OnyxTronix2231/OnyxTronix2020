@@ -4,6 +4,7 @@ import static robot.ballCollector.BallCollectorConstants.MIN_AMP_FOR_ONE;
 import static robot.ballCollector.BallCollectorConstants.CLOSE_SOLENOID;
 import static robot.ballCollector.BallCollectorConstants.OPEN_SOLENOID;
 
+import com.ctre.phoenix.motorcontrol.IMotorController;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -52,5 +53,9 @@ public class BallCollector extends SubsystemBase {
 
   public double getAmp() {
     return components.getMasterMotor().getStatorCurrent();
+  }
+
+  public IMotorController getMasterMotor() {
+    return components.getMasterMotor();
   }
 }

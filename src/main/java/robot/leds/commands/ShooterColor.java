@@ -17,10 +17,8 @@ public class ShooterColor extends CommandBase {
 
   @Override
   public void execute() {
-    if (shooter.getMasterMotor().getMotorOutputPercent() > 0) {
       if (shooter.isOnTarget())
         rgbLeds.changeColor(RGBLEDsConstants.GREEN);
       rgbLeds.changeColor(RGBLEDsConstants.BLUE);
-    }
   }
 }

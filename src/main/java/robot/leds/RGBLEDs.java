@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import java.util.Timer;
 
+import static robot.leds.RGBLEDsConstants.*;
+
 public class RGBLEDs extends SubsystemBase {
 
   private final CANifier canifier;
@@ -22,14 +24,14 @@ public class RGBLEDs extends SubsystemBase {
        C: B
        */
       case 'R':
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(RED_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(RED_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(RED_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'G':
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(GREEN_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(GREEN_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(GREEN_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'B':
         canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);

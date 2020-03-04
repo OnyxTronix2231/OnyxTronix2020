@@ -1,10 +1,6 @@
 package robot.yawControl;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import onyxTronix.UniqueButtonCache;
-import robot.drivetrain.DriveTrain;
 import robot.vision.target.VisionTargetSupplier;
 import robot.yawControl.commands.AlignByOrientationAndThenVision;
 import robot.yawControl.commands.SetTurretState;
@@ -23,4 +19,3 @@ public class YawControlOiBinder {
     setStateHoming.whenActive(new SetTurretState(yawControl, YawControl.TurretState.HOMING));
   }
 }
-

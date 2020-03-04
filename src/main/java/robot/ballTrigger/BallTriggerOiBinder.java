@@ -45,7 +45,7 @@ public class BallTriggerOiBinder {
         new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,
             canReleaseBallAtCloseRangeSupplier));
 
-    (triggerBall.or(triggerBallAtCloseRange)).and(triggerBallManually).whenActive(
+    triggerBall.or(triggerBallAtCloseRange).and(triggerBallManually).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
             () -> LOADER_SPEED, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED).withTimeout(OVERRIDE_SHOT_TIMEOUT));
 

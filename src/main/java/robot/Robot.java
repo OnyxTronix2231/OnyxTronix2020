@@ -102,11 +102,11 @@ public class Robot extends TimedRobot {
 
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
         () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
-        () -> getWhenCanReleaseBall(shooter, yawControl),
-        () -> getWhenCanReleaseBallAtCloseRange(shooter, yawControl));
+        () -> canReleaseBall(shooter, yawControl),
+        () -> canReleaseBallAtCloseRange(shooter, yawControl));
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
-        loaderConveyor, storageConveyor, ballStopper, vision, () -> getWhenCanReleaseBall(shooter, yawControl));
+        loaderConveyor, storageConveyor, ballStopper, vision, () -> canReleaseBall(shooter, yawControl));
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
@@ -161,11 +161,11 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
   }
 
-  private boolean getWhenCanReleaseBall(Shooter shooter, YawControl yawControl) {
+  private boolean canReleaseBall(Shooter shooter, YawControl yawControl) {
     return shooter.isOnTarget() && Limelight.getInstance().targetFound() && yawControl.isOnTarget();
   }
 
-  private boolean getWhenCanReleaseBallAtCloseRange(Shooter shooter, YawControl yawControl) {
+  private boolean canReleaseBallAtCloseRange(Shooter shooter, YawControl yawControl) {
     return shooter.isOnTarget() && yawControl.isOnTarget();
   }
 }

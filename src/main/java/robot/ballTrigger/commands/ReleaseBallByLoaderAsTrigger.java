@@ -21,11 +21,11 @@ public class ReleaseBallByLoaderAsTrigger extends SequentialCommandGroup {
                                       final BooleanSupplier canReleaseBallSupplier) {
     super(
         race(new WaitUntilCommand(() -> !loaderConveyor.isBallInLoader() || !canReleaseBallSupplier.getAsBoolean()),
-            sequence(new WaitCommand(WAIT_FOR_CONSISTENT_TARGET),
-                (new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_SHOT_SPEED).
-                    withTimeout(MAKE_A_SHOT_TIMEOUT)))),
-
-    new LoadBall(loaderConveyor, storageConveyor, ballStopper));
+            sequence(
+                new WaitCommand(WAIT_FOR_CONSISTENT_TARGET),
+                new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_SHOT_SPEED).
+                    withTimeout(MAKE_A_SHOT_TIMEOUT))),
+        new LoadBall(loaderConveyor, storageConveyor, ballStopper));
   }
 
   @Override

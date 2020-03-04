@@ -120,7 +120,7 @@ public class Oi {
     //endregion
 
     //region BallTrigger
-    final Trigger driverKBMakeAShotManually = driverJoystickButtonCache
+    final Trigger driverKBReleaseBallManually = driverJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kB.value);
 
     final Trigger driverKXMoveConveyorsReverse = driverJoystickButtonCache.
@@ -130,7 +130,7 @@ public class Oi {
         ballStopper, canReleaseBallSupplier,
         canReleaseBallAtCloseRangeSupplier,
         openAndCollectBall, driverKRightTriggerAlignAndShootBall,
-        driverKBumperRightShootBallAtCloseRange, driverKBMakeAShotManually,
+        driverKBumperRightShootBallAtCloseRange, driverKBReleaseBallManually,
         driverKXMoveConveyorsReverse);
     //endregion
   }

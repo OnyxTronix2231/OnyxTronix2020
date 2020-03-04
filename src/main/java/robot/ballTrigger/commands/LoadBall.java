@@ -20,13 +20,11 @@ public class LoadBall extends SequentialCommandGroup {
   public LoadBall(final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
                   final BallStopper ballStopper) {
     super(
-        deadline(
-            new WaitUntilCommand(loaderConveyor::isBallInLoader),
+        deadline(new WaitUntilCommand(loaderConveyor::isBallInLoader),
             new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,
                 () -> LOADER_SPEED, () -> STORAGE_SPEED, () -> BALL_STOPPER_SPEED)),
         new WaitCommand(DELAY_UNTIL_BALL_LOADING_ENDS),
-        race(
-            new WaitUntilCommand(loaderConveyor::isBallInLoader),
+        race(new WaitUntilCommand(loaderConveyor::isBallInLoader),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> LOADER_RETURN_BALL_DOWN_SPEED).
                 withTimeout(LOADER_RETURN_BALL_TIMEOUT)));
   }

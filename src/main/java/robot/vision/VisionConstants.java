@@ -15,6 +15,6 @@ public final class VisionConstants {
     public static final double CAMERA_VERTICAL_OFFSET_ANGLE = 23.21; // TODO: Check and change
     public static final double CAMERA_HEIGHT_CM = 46.5; //TODO: Check and change
     public static final double LIMELIGHT_TURRET_CENTER_CM = 22.5;
-    public static final double DISTANCE_TURRET_MIDDLE_ROBOT = 0;
+    public static final double DISTANCE_TURRET_MIDDLE_ROBOT = 0; //TODO: Check and Change
   }
 }

@@ -1,5 +1,6 @@
 package robot.vision.target;
 
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import vision.limelight.target.LimelightTarget;
 
 public interface VisionTarget {
@@ -18,8 +19,15 @@ public interface VisionTarget {
 
   double getCameraHeight();
 
-  double getX();
+  double getTurretX();
 
-  double getY();
+  double getTurretY();
 
+  double getRobotOrientation();
+
+  double getRobotX();
+
+  double getRobotY();
+
+  Pose2d getPose2D();
 }

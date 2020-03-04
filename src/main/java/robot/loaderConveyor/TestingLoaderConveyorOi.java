@@ -1,5 +1,6 @@
 package robot.loaderConveyor;
 
+import static robot.loaderConveyor.LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX;
 import static robot.loaderConveyor.LoaderConveyorConstants.PERCENTAGE_OUTPUT_MIN;
 
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -11,6 +12,6 @@ public class TestingLoaderConveyorOi {
   public TestingLoaderConveyorOi(final LoaderConveyor loaderConveyor, final UniqueButtonCache buttonsJoystickButtonCache) {
     final Trigger moveLoaderConveyorBySpeed = buttonsJoystickButtonCache.createJoystickTrigger(Button.kA.value);
     moveLoaderConveyorBySpeed.whileActiveContinuous(new MoveLoaderConveyorBySpeed(loaderConveyor,
-        () -> LoaderConveyorConstants.MOVE_LOADER_BACK));
+        () -> PERCENTAGE_OUTPUT_MAX));
   }
 }

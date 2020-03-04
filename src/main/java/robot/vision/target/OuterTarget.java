@@ -35,9 +35,9 @@ public class OuterTarget implements VisionTarget {
           Math.toRadians(target.getHorizontalOffsetToCrosshair())) /
           distance + VisionConstants.RobotAConstants.LIMELIGHT_TURRET_CENTER_CM));
       if(Double.isNaN(turretOffset)) turretOffset = 0;
-      this.robotOrientation = turretAngle + accelerometerAngle + turretOffset;
-      this.x = distance * Math.sin(Math.toRadians(robotOrientation));
-      this.y = distance * Math.cos(Math.toRadians(robotOrientation));
+      this.turretOrientation = turretAngle + accelerometerAngle + turretOffset;
+      this.x = distance * Math.sin(Math.toRadians(turretOrientation));
+      this.y = distance * Math.cos(Math.toRadians(turretOrientation));
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
     } else {
       this.horizontalOffset = 0;
@@ -60,8 +60,8 @@ public class OuterTarget implements VisionTarget {
   }
 
   @Override
-  public double getRobotOrientation() {
-    return robotOrientation;
+  public double getTurretOrientation() {
+    return turretOrientation;
   }
 
   @Override

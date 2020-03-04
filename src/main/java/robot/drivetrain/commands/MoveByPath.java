@@ -12,12 +12,12 @@ public class MoveByPath extends OnyxRamseteCommand {
   public MoveByPath(final DriveTrain driveTrain,
                     final Path path) {
     super(() -> driveTrain.getTrajectoryGenerator().getTrajectoryFromPoseList(path.getPath(),
-        driveTrain.getComponents()),
-        path.getIsForward() ? driveTrain::getPose : driveTrain::getReversedPose,
+        driveTrain.getComponents(), path.getIsForward()),
+        driveTrain::getPose,
         new RamseteController(RAMSETE_B, RAMSETE_ZETA),
         driveTrain.getKinematics(),
         driveTrain::getWheelSpeeds,
-        (path.getIsForward() ? driveTrain::tankDriveVolts : driveTrain::tankDriveVoltsReverse),
+        driveTrain::tankDriveVolts,
         driveTrain.getFeedForward(),
         driveTrain);
   }

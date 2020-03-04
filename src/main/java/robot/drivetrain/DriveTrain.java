@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -35,6 +36,12 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain(final DriveTrainComponents components) {
     this.components = components;
+    Shuffleboard.getTab("Odometry").addNumber("X",
+        () -> components.getOdometry().getPoseMeters().getTranslation().getX());
+    Shuffleboard.getTab("Odometry").addNumber("Y",
+        () -> components.getOdometry().getPoseMeters().getTranslation().getY());
+    Shuffleboard.getTab("Odometry").addNumber("Heading",
+        () -> components.getOdometry().getPoseMeters().getRotation().getDegrees());
     resetEncoders();
   }
 
@@ -64,8 +71,8 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public Pose2d getReversedPose() {
-    return new Pose2d(-getPose().getTranslation().getX(), -getPose().getTranslation().getY(),
-        Rotation2d.fromDegrees(-getPose().getRotation().getDegrees()));
+    return new Pose2d(getPose().getTranslation().getX(), getPose().getTranslation().getY(),
+        Rotation2d.fromDegrees(180 - getPose().getRotation().getDegrees()));
   }
 
   public boolean isDriveOnTarget(final double leftTarget, final double rightTarget) {
@@ -79,8 +86,6 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void tankDriveVolts(final double leftVoltage, final double rightVoltage) {
-    System.out.println(leftVoltage);
-    System.out.println(rightVoltage);
     getLeftMaster().setVoltage(leftVoltage);
     getRightMaster().setVoltage(rightVoltage);
   }
@@ -96,10 +101,6 @@ public class DriveTrain extends SubsystemBase {
 
   public SimpleMotorFeedforward getFeedForward() {
     return components.getMotorFeedForward();
-  }
-
-  public void tankDriveVoltsReverse(final double leftVelocity, final double rightVelocity) {
-    tankDriveVolts(-rightVelocity, -leftVelocity);
   }
 
   public double getRightTargetFromDistance(final double distance) {

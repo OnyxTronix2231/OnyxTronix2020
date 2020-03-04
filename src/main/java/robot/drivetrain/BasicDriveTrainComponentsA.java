@@ -91,19 +91,7 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     leftSlave.follow(leftMaster);
 
     normalizedPigeonIMU = new NormalizedPigeonIMU(PIGEON_PORT);
-
-    final VelocityController leftVelocityController = new VelocityController(leftMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
-//    final VelocityController leftSlaveVelocityController = new VelocityController(leftSlave, MAX_VELOCITY,
-//        VELOCITY_CONTROLLER_PID_SLOT);
-
-    final VelocityController rightVelocityController = new VelocityController(rightMaster, MAX_VELOCITY,
-        VELOCITY_CONTROLLER_PID_SLOT);
-//    final VelocityController rightSlaveVelocityController = new VelocityController(rightSlave, MAX_VELOCITY,
-//        VELOCITY_CONTROLLER_PID_SLOT);
-
-    final SpeedControllerGroup leftControllers = new SpeedControllerGroup(leftVelocityController);
-    final SpeedControllerGroup rightControllers = new SpeedControllerGroup(rightVelocityController);
+    normalizedPigeonIMU.setYaw(0);
 
     differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
     differentialDrive.setRightSideInverted(false);
@@ -119,7 +107,9 @@ public class BasicDriveTrainComponentsA implements DriveTrainComponents {
     autonomousVoltage = new DifferentialDriveVoltageConstraint(motorFeedforward, driveKinematics, MAX_VOLTAGE);
 
     trajectoryConfig = new TrajectoryConfig(MAX_SPEED_METERS_PER_SECOND, MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
-        .setKinematics(driveKinematics).addConstraint(autonomousVoltage);
+        .setKinematics(driveKinematics)
+        .addConstraint(autonomousVoltage)
+    ;
 
     trajectoryGenerator = new OnyxTrajectoryGenerator(trajectoryConfig);
   }

@@ -15,13 +15,15 @@ public class OnyxTrajectoryGenerator {
     this.trajectoryConfig = trajectoryConfig;
   }
 
-  public Trajectory getTrajectoryFromPoseList(final List<Pose2d> poses, final DriveTrainComponents components) {
-    try {
+  public Trajectory getTrajectoryFromPoseList(final List<Pose2d> poses, final DriveTrainComponents components,
+                                              final boolean isForward) {
+    trajectoryConfig.setReversed(!isForward);
+//    try {
       return TrajectoryGenerator.generateTrajectory(poses, trajectoryConfig);
-    } catch (final Exception e) {
-      System.out.println(e.toString());
-      System.out.println("Failed Trajectory Generation");
-      return TrajectoryGenerator.generateTrajectory(List.of(new Pose2d(), new Pose2d()), components.getTrajectoryConfig());
-    }
+//    } catch (final Exception e) {
+//      System.out.println(e.toString());
+//      System.out.println("Failed Trajectory Generation");
+//      return TrajectoryGenerator.generateTrajectory(List.of(new Pose2d(), new Pose2d()), components.getTrajectoryConfig());
+//    }
   }
 }

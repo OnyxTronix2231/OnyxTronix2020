@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 //    vision.setLEDMode(LimelightLedMode.forceOn);
-//    driveTrain.setNeutralModeToBrake();
+    driveTrain.setNeutralModeToBrake();
 //    autonomousShooting.schedule();
   }
 
@@ -159,7 +159,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
 //    vision.setLEDMode(LimelightLedMode.forceOn);
-//    driveTrain.setNeutralModeToBrake();
+    driveTrain.setNeutralModeToBrake();
   }
 
   @Override
@@ -175,7 +175,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     LiveWindow.setEnabled(false);
-    vision.setLEDMode(LimelightLedMode.forceOff);
+//    vision.setLEDMode(LimelightLedMode.forceOff);
 //    driveTrain.setNeutralModeToCoast();
   }
 

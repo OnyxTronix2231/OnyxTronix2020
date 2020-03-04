@@ -56,7 +56,12 @@ public class OnyxRamseteCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    trajectory = trajectorySupplier.get();
+    try {
+      trajectory = trajectorySupplier.get();
+    } catch (Exception e) {
+      System.out.println(e);
+      this.cancel();
+    }
     prevTime = 0;
     var initialState = trajectory.sample(0);
     prevSpeeds = kinematics.toWheelSpeeds(

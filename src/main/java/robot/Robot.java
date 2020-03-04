@@ -14,6 +14,10 @@ import robot.ballCollector.BasicBallCollectorComponentsA;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperComponents;
 import robot.ballStopper.BasicBallStopperComponentsA;
+import robot.climber.BasicClimberComponentsA;
+import robot.climber.Climber;
+import robot.climber.ClimberComponents;
+import robot.climber.ClimberOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
@@ -41,6 +45,7 @@ public class Robot extends TimedRobot {
 
   Vision vision;
   DriveTrain driveTrain;
+  Climber climber;
 
   @Override
   public void robotInit() {
@@ -53,6 +58,7 @@ public class Robot extends TimedRobot {
     final TurretComponents turretComponents;
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
+    final ClimberComponents climberComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -62,6 +68,7 @@ public class Robot extends TimedRobot {
       turretComponents = new BasicTurretComponentsA();
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
+      climberComponents = new BasicClimberComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -70,6 +77,7 @@ public class Robot extends TimedRobot {
       turretComponents = null;  //TODO: use BasicTurretComponentsB Here
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
+      climberComponents = null; // TODO: use BasicClimberComponentsB Here
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
@@ -96,6 +104,9 @@ public class Robot extends TimedRobot {
         () -> getWhenCanReleaseBall(shooter, yawControl),
         () -> getWhenCanReleaseBallAtCloseRange(shooter, yawControl));
 
+    climber = new Climber(climberComponents);
+    new ClimberOi(driveJoystickButtonCache, climber);
+
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision, () -> getWhenCanReleaseBall(shooter, yawControl));
 
@@ -113,6 +124,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
     driveTrain.setNeutralModeToBrake();
+    climber.setNeutralModeToBrake();
     autonomousShooting.schedule();
   }
 
@@ -125,6 +137,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     vision.setLEDMode(LimelightLedMode.forceOn);
     driveTrain.setNeutralModeToBrake();
+    climber.setNeutralModeToBrake();
   }
 
   @Override
@@ -142,6 +155,7 @@ public class Robot extends TimedRobot {
     LiveWindow.setEnabled(false);
     vision.setLEDMode(LimelightLedMode.forceOff);
     driveTrain.setNeutralModeToCoast();
+    climber.setNeutralModeToCoast();
   }
 
   @Override

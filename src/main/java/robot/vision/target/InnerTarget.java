@@ -4,6 +4,8 @@ import static robot.vision.VisionConstants.DISTANCE_BETWEEN_OUTER_INNER_TARGET;
 import static robot.vision.VisionConstants.HEIGHT_OFFSET_INNER_OUTER_CENTER;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 
+
+import robot.vision.VisionConstants;
 import vision.limelight.target.LimelightTarget;
 
 public class InnerTarget implements VisionTarget {
@@ -29,7 +31,7 @@ public class InnerTarget implements VisionTarget {
   private void calculateByOuterTarget() {
     this.y = outerTarget.getY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
     this.robotOrientation = Math.toDegrees(Math.atan(outerTarget.getX() / y));
-    this.distance = Math.sqrt(Math.pow(outerTarget.getX(), 2) + Math.pow(y, 2));
+    this.distance = Math.sqrt(Math.pow(outerTarget.getX(), 2) + Math.pow(y, 2)) + VisionConstants.RobotAConstants.LIMELIGHT_TURRET_CENTER_CM;
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (robotOrientation - outerTarget.getRobotOrientation());
     this.verticalOffset = Math.toDegrees(Math.atan((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));

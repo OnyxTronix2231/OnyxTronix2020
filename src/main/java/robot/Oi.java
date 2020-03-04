@@ -12,6 +12,8 @@ import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOiBinder;
 import robot.ballStopper.BallStopper;
 import robot.ballTrigger.BallTriggerOiBinder;
+import robot.climber.Climber;
+import robot.climber.ClimberOiBinder;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainOiBinder;
 import robot.loaderConveyor.LoaderConveyor;
@@ -27,7 +29,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class Oi {
-  public Oi(DriveTrain driveTrain, Shooter shooter, YawControl yawControl, BallCollector ballCollector,
+  public Oi(DriveTrain driveTrain, Shooter shooter, YawControl yawControl, Climber climber, BallCollector ballCollector,
             LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
             DoubleSupplier shootingDistanceSupplier, VisionTargetSupplier targetSupplier,
             BooleanSupplier canReleaseBallSupplier, BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
@@ -75,19 +77,29 @@ public class Oi {
     //endregion
 
     //region YawControl
-    final Trigger driverSetStateRTF = driverJoystickButtonCache
+    final Trigger driverSetStateRTF = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBack.value);
 
-    final Trigger driverSetStateRTR = driverJoystickButtonCache
+    final Trigger driverSetStateRTR = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kStart.value);
 
-    final Trigger driverSetStateHoming = driverJoystickButtonCache
+    final Trigger driverSetStateHoming = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kStickRight.value);
 
     new YawControlOiBinder(yawControl, targetSupplier,
         driverSetStateRTF, driverSetStateRTR,
         driverSetStateHoming.or(driverShootBallAtCloseRange),
         driverAndOperatorSpinShooterAndAlign.or(driverAlignAndShootBall));
+    //endregion
+
+    //region Climber
+    final Trigger driverOpenClimber = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kStart.value);
+
+    final Trigger driverClimb = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBack.value);
+
+    new ClimberOiBinder(climber, driverOpenClimber, driverClimb);
     //endregion
 
     //region BallCollector

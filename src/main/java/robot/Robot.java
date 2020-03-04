@@ -17,7 +17,6 @@ import robot.ballStopper.BasicBallStopperComponentsA;
 import robot.climber.BasicClimberComponentsA;
 import robot.climber.Climber;
 import robot.climber.ClimberComponents;
-import robot.climber.ClimberOi;
 import robot.drivetrain.BasicDriveTrainComponentsA;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainComponents;
@@ -94,18 +93,17 @@ public class Robot extends TimedRobot {
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
 
+    climber = new Climber(climberComponents);
+
     vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
-    new Oi(driveTrain, shooter, yawControl, ballCollector, loaderConveyor, storageConveyor, ballStopper,
+    new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
         () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
         () -> getWhenCanReleaseBall(shooter, yawControl),
         () -> getWhenCanReleaseBallAtCloseRange(shooter, yawControl));
-
-    climber = new Climber(climberComponents);
-    new ClimberOi(driveJoystickButtonCache, climber);
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision, () -> getWhenCanReleaseBall(shooter, yawControl));

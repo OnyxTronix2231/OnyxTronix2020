@@ -3,6 +3,7 @@ package robot.shooter;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public final class ShooterConstants {
+
   public static final class ShooterComponentsA {
 
     static final int MASTER_PORT = 7;

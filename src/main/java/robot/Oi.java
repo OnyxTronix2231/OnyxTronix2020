@@ -29,10 +29,11 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class Oi {
-  public Oi(DriveTrain driveTrain, Shooter shooter, YawControl yawControl, Climber climber, BallCollector ballCollector,
-            LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
-            DoubleSupplier shootingDistanceSupplier, VisionTargetSupplier targetSupplier,
-            BooleanSupplier canReleaseBallSupplier, BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
+  public Oi(final DriveTrain driveTrain, final Shooter shooter, final YawControl yawControl, final Climber climber,
+            final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
+            final StorageConveyor storageConveyor, final BallStopper ballStopper,
+            final DoubleSupplier shootingDistanceSupplier, final VisionTargetSupplier targetSupplier,
+            final BooleanSupplier canReleaseBallSupplier, final BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
 
     final XboxController driverJoystick = new XboxController(DRIVE_JOYSTICK_PORT);
     final UniqueButtonCache driverJoystickButtonCache = new UniqueButtonCache(driverJoystick);

@@ -6,7 +6,7 @@ import robot.climber.commands.OpenClimberPistons;
 
 public class ClimberOiBinder {
 
-  public ClimberOiBinder(final Climber climber, Trigger openClimber, Trigger climb) {
+  public ClimberOiBinder(final Climber climber, final Trigger openClimber, final Trigger climb) {
     openClimber.whenActive(new OpenClimberPistons(climber));
 
     climb.whenActive(new Climb(climber));

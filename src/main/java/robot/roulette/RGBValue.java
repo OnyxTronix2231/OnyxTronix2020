@@ -1,5 +1,8 @@
 package robot.roulette;
 
+import static robot.roulette.RouletteConstants.HOW_CLOSE_TO_PERCENT;
+import static robot.roulette.RouletteConstants.POW;
+
 import edu.wpi.first.wpilibj.util.Color;
 
 public class RGBValue {
@@ -35,7 +38,7 @@ public class RGBValue {
   }
 
   public double howCloseTo(final RGBValue anotherColor) {
-    return 1 - (squaredError(anotherColor.red, this.red) +
+    return HOW_CLOSE_TO_PERCENT - (squaredError(anotherColor.red, this.red) +
         squaredError(anotherColor.green, this.green) +
         squaredError(anotherColor.blue, this.blue));
   }
@@ -49,6 +52,6 @@ public class RGBValue {
   }
 
   private double squaredError(final double value, final double target) {
-    return Math.pow(value - target, 2);
+    return Math.pow(value - target, POW);
   }
 }

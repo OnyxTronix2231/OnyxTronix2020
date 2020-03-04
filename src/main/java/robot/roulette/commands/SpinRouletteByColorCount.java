@@ -1,7 +1,10 @@
 package robot.roulette.commands;
 
+import static robot.roulette.RouletteConstants.MINUS_ONE;
+
 import robot.roulette.Roulette;
 import robot.roulette.RouletteColor;
+import robot.roulette.RouletteConstants;
 
 import java.util.function.DoubleSupplier;
 
@@ -26,7 +29,7 @@ public class SpinRouletteByColorCount extends SpinRouletteToColor {
     currentColor = roulette.getCurrentColor();
     if (currentColor.compareTo(previousColor) == 0) {
       previousColor = currentColor;
-      colorsRequired = Math.copySign(Math.abs(colorsRequired) - 1, colorsRequired);
+      colorsRequired = Math.copySign(Math.abs(colorsRequired) + MINUS_ONE, colorsRequired);
     }
     super.execute();
   }

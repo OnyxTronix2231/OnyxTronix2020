@@ -25,9 +25,9 @@ import edu.wpi.first.wpilibj.I2C;
 public class BasicRouletteComponentsA implements RouletteComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final DoubleSolenoid doubleRightSolenoid;
-  private final DoubleSolenoid doubleLeftSolenoid;
-  private final ColorSensorV3 colorSensorV3;
+  private final DoubleSolenoid rightDoubleSolenoid;
+  private final DoubleSolenoid leftDoubleSolenoid;
+  private final ColorSensorV3 colorSensor;
 
   public BasicRouletteComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -37,13 +37,13 @@ public class BasicRouletteComponentsA implements RouletteComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setSensorPhase(true);
 
-    doubleLeftSolenoid = new DoubleSolenoid
+    leftDoubleSolenoid = new DoubleSolenoid
         (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
 
-    doubleRightSolenoid = new DoubleSolenoid
+    rightDoubleSolenoid = new DoubleSolenoid
         (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL, DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
 
-    colorSensorV3 = new ColorSensorV3(I2C.Port.kOnboard);
+    colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -66,17 +66,17 @@ public class BasicRouletteComponentsA implements RouletteComponents {
   }
 
   @Override
-  public DoubleSolenoid getDoubleRightSolenoid() {
-    return doubleRightSolenoid;
+  public DoubleSolenoid getRightDoubleSolenoid() {
+    return rightDoubleSolenoid;
   }
 
   @Override
-  public DoubleSolenoid getDoubleLeftSolenoid() {
-    return doubleLeftSolenoid;
+  public DoubleSolenoid getLeftDoubleSolenoid() {
+    return leftDoubleSolenoid;
   }
 
   @Override
-  public ColorSensorV3 getColorSensorV3() {
-    return colorSensorV3;
+  public ColorSensorV3 getColorSensor() {
+    return colorSensor;
   }
 }

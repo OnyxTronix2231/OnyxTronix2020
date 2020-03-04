@@ -20,7 +20,6 @@ public class Roulette extends SubsystemBase {
 
   private final RouletteComponents components;
   private final List<RouletteColor> rouletteColors;
-  double rouletteRotation = 0;
 
   public Roulette(final RouletteComponents components) {
     this.components = components;
@@ -32,44 +31,37 @@ public class Roulette extends SubsystemBase {
   }
 
   public void openPistons() {
-    components.getDoubleRightSolenoid().set(DoubleSolenoid.Value.kForward);
-    components.getDoubleLeftSolenoid().set(DoubleSolenoid.Value.kForward);
+    components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+    components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 
   public void closePistons() {
-    components.getDoubleRightSolenoid().close();
-    components.getDoubleLeftSolenoid().close();
+    components.getRightDoubleSolenoid().close();
+    components.getLeftDoubleSolenoid().close();
   }
 
   public RouletteColor getRequiredColorFromMatchColor() {
-    RouletteColor requiredMatchColor;
     if (DriverStation.getInstance().getGameSpecificMessage().isEmpty()) {
       return null;
     }
     switch (DriverStation.getInstance().getGameSpecificMessage().charAt(0)) {
       case 'B':
-        requiredMatchColor = RouletteColor.Blue;
-        break;
+        return RouletteColor.Blue;
       case 'G':
-        requiredMatchColor = RouletteColor.Green;
-        break;
+        return RouletteColor.Green;
       case 'R':
-        requiredMatchColor = RouletteColor.Red;
-        break;
+        return RouletteColor.Red;
       case 'Y':
-        requiredMatchColor = RouletteColor.Yellow;
-        break;
+        return RouletteColor.Yellow;
       default:
-        requiredMatchColor = null;
-        break;
+        return null;
     }
-    return requiredMatchColor;
   }
 
   public RouletteColor getCurrentColor() {
-    final Color detectedColor = components.getColorSensorV3().getColor();
+    final Color detectedColor = components.getColorSensor().getColor();
     final RouletteColor[] rouletteColors = RouletteColor.values();
-    Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
+    final Optional<RouletteColor> roulette = Arrays.stream(rouletteColors).max(
         Comparator.comparing(color -> color.getRgbValue().howCloseTo(detectedColor)));
     return roulette.orElse(null);
   }
@@ -79,7 +71,6 @@ public class Roulette extends SubsystemBase {
   }
 
   public void spinByColorsCount(final double requiredColorCount) {
-    rouletteRotation = getRouletteRotationByColorCount(requiredColorCount);
     getRouletteRotationToEncoderUnits(getRouletteRotationByColorCount(requiredColorCount));
   }
 
@@ -95,10 +86,10 @@ public class Roulette extends SubsystemBase {
    * @return When return value is positive, the roulette needs to be rotated clockwise
    */
 
-  public double getColorCountRequiredToColor(final RouletteColor requiredColor) {
-    int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
-    int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
-    int colorDistance = Math.abs(indexOfRequiredColor - indexOfCurrentColor);
+  public int getColorCountRequiredToColor(final RouletteColor requiredColor) {
+   final int indexOfRequiredColor = rouletteColors.indexOf(requiredColor);
+   final int indexOfCurrentColor = rouletteColors.indexOf(getCurrentColor());
+   int colorDistance = Math.abs(indexOfRequiredColor - indexOfCurrentColor);
     return colorDistance - DISTANCE_FROM_FIELD_SENSOR;
   }
 

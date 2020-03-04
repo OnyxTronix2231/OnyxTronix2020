@@ -6,7 +6,7 @@ import java.util.function.DoubleSupplier;
 
 public class SpinRouletteToColorPeriodically extends SpinRouletteToColor {
 
-  public SpinRouletteToColorPeriodically(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
+  public SpinRouletteToColorPeriodically(final Roulette roulette, final DoubleSupplier colorsRequiredSupplier) {
     super(roulette, colorsRequiredSupplier);
     addRequirements(roulette);
   }

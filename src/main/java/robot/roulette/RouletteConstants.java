@@ -2,18 +2,21 @@ package robot.roulette;
 
 public final class RouletteConstants {
 
+  public static final int MINUS_ONE = -1;
   static final RGBValue GREEN_RGB_VALUE = new RGBValue(0.149, 0.599, 0.250);
   static final RGBValue BLUE_RGB_VALUE = new RGBValue(0.108, 0.428, 0.462);
   static final RGBValue RED_RGB_VALUE = new RGBValue(0.551, 0.329, 0.119);
   static final RGBValue YELLOW_RGB_VALUE = new RGBValue(0.319, 0.571, 0.108);
   static final int TOLERANCE = 50; // TODO: check and change
   static final int COLORS_IN_ROTATIONS = 8;
+  static final int HOW_CLOSE_TO_PERCENT = 1;
+  static final int POW = 2;
   static final int ENCODER_UNITS_PER_ROTATION = 4000;
   static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
   static final double SPIN_COLOR_SPEED = 0.3; // TODO: check and change
   static final double SPIN_ROTATIONS_SPEED = 0.7; // TODO: check and change
   static final double RGB_EQUALS_THRESHOLD = 0.8; // TODO: check and change
-  static final double DISTANCE_FROM_FIELD_SENSOR = 2.0; // TODO: check and change
+  static final int DISTANCE_FROM_FIELD_SENSOR = 2; // TODO: check and change
   private static final double ROULETTE_RADIUS = 41;
 
   public static final class RouletteComponentsA {

@@ -34,9 +34,11 @@ import robot.drivetrain.commands.DriveByJoystick;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
+import robot.loaderConveyor.TestingLoaderConveyorOi;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
+import robot.shooter.TestingShooterOi;
 import robot.storageConveyor.BasicStorageConveyorComponentsA;
 import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
@@ -127,12 +129,16 @@ public class Robot extends TimedRobot {
     new BallCollectorOi(ballCollector, buttonsJoystickAxisCache, buttonsJoystickButtonCache);
 
     new SmartShooterOi(driveJoystickButtonCache, driveJoystickAxisCache, buttonsJoystickButtonCache, shooter, loaderConveyor,
-        storageConveyor, ballStopper, vision, yawControl);
+      storageConveyor, ballStopper, vision, yawControl);
+
+    new TestingLoaderConveyorOi(loaderConveyor,buttonsJoystickButtonCache);
+
+    new TestingShooterOi(buttonsJoystickAxisCache,driveJoystickButtonCache,shooter);
 
     new TurretOi(yawControl, buttonsJoystickAxisCache);
 
-    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
-        driveJoystickButtonCache);
+//    new YawControlOi(yawControl, driveTrain, vision::getDependableTarget, buttonsJoystickButtonCache,
+//        driveJoystickButtonCache);
 
     new ConveyorsOi(driveJoystickButtonCache, loaderConveyor, storageConveyor, ballStopper);
 

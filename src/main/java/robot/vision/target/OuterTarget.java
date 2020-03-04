@@ -29,7 +29,10 @@ public class OuterTarget implements VisionTarget {
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
           target.getVerticalOffsetToCrosshair()));
-      this.robotOrientation = turretAngle + target.getHorizontalOffsetToCrosshair() + accelerometerAngle;
+      double turretOffset = Math.toDegrees(Math.asin(Math.toRadians(target.getHorizontalOffsetToCrosshair() /
+          (distance * Math.sin(Math.toRadians(target.getHorizontalOffsetToCrosshair()))))));
+      if(Double.isNaN(turretOffset)) turretOffset = 0;
+      this.robotOrientation = turretAngle + accelerometerAngle - turretOffset;
       this.x = distance * Math.sin(Math.toRadians(robotOrientation));
       this.y = distance * Math.cos(Math.toRadians(robotOrientation));
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();

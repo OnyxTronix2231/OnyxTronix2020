@@ -1,5 +1,6 @@
 package robot.ballCollector;
 
+import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.BALL_COLLECTOR_RAMP;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.CONTINUOUS_CURRENT_LIMIT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.SOLENOID_PORT;
 import static robot.ballCollector.BallCollectorConstants.BallCollectorComponentsA.MASTER_MOTOR_PORT;
@@ -32,6 +33,7 @@ public class BasicBallCollectorComponentsA implements BallCollectorComponents {
     config.peakCurrentLimit = PEAK_AMP;
     config.peakCurrentDuration = PEAK_AMP_DURATION;
     config.continuousCurrentLimit = CONTINUOUS_CURRENT_LIMIT;
+    config.openloopRamp = BALL_COLLECTOR_RAMP;
     return config;
   }
 

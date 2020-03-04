@@ -2,24 +2,24 @@ package robot.shooter;
 
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.AT_SHOOTING_VELOCITY;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_D;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_I;
-import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_P;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_VELOCITY_ERROR;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
 
   private final ShooterComponents components;
+  private double lastVelocityError;
 
   public Shooter(final ShooterComponents components) {
     this.components = components;
+    lastVelocityError = Integer.MAX_VALUE;
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
@@ -64,4 +64,27 @@ public class Shooter extends SubsystemBase {
   // y= -0.0121x2 +26.707x + 24130 > 450
   //y = 0.1912x2 - 161.44x +67791 < 450
 
+  public void startChecking() {
+    lastVelocityError = Integer.MAX_VALUE;
+  }
+
+  public double getVelocityError(){
+    return components.getMasterMotor().getClosedLoopError();
+  }
+
+  public boolean isBallShot(){
+    if (getVelocityError() > MIN_VELOCITY_ERROR && getVelocityError() > lastVelocityError) {
+      lastVelocityError = getVelocityError();
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isBallNotShot() {
+    return !isBallShot();
+  }
+
+  public boolean isReadyToShoot() {
+    return getVelocityError() < AT_SHOOTING_VELOCITY;
+  }
 }

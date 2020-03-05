@@ -15,7 +15,6 @@ public class SpinRouletteByColorCount extends SpinRouletteToColor {
 
   public SpinRouletteByColorCount(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
     super(roulette, colorsRequiredSupplier);
-    addRequirements(roulette);
   }
 
   @Override

@@ -9,7 +9,6 @@ public class CloseRoulettePistons extends InstantCommand {
 
   public CloseRoulettePistons(final Roulette roulette) {
     this.roulette = roulette;
-    addRequirements(roulette);
   }
 
   @Override

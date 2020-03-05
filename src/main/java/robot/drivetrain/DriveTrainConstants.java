@@ -36,7 +36,7 @@ public final class DriveTrainConstants {
     static final double DRIVE_BY_DISTANCE_D = 0; // TODO: Calibration with A
     static final double CURRENT_LIMIT = 40; // TODO: check value
     static final double TRIGGER_THRESHOLD_CURRENT = 40; // TODO: check value
-    static final double TRIGGER_THRESHOLD_TIME = 30; // TODO: check value
+    static final double TRIGGER_THRESHOLD_TIME = 0.03; // TODO: check value
     static final double PERCENTAGE_CLOSED_LOOP_OUTPUT = 1.0;
     static final double OPEN_LOOP_RAMP = 0; // TODO: Calibration with A
     static final double CLOSED_LOOP_RAMP = 0;

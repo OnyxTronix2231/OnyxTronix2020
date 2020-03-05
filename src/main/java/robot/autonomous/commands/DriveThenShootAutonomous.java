@@ -23,11 +23,11 @@ public class DriveThenShootAutonomous extends SequentialCommandGroup {
   public DriveThenShootAutonomous(final YawControl yawControl, final DriveTrain driveTrain, final Shooter shooter,
                                   final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
                                   final BallStopper ballStopper, final Vision vision,
-                                  final BooleanSupplier cannotReleaseBallSupplier ) {
+                                  final BooleanSupplier cannotReleaseBallSupplier) {
     super(new DriveByDistance(driveTrain, () -> AUTONOMOUS_DISTANCE).withTimeout(DRIVE_AUTONOMOUS_TIMEOUT),
-            parallel(
-        new AlignByOrientationAndThenVision(yawControl, vision::getDependableTarget),
-        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
-        new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper, cannotReleaseBallSupplier)));
+        parallel(
+            new AlignByOrientationAndThenVision(yawControl, vision::getDependableTarget),
+            new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()),
+            new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper, cannotReleaseBallSupplier)));
   }
 }

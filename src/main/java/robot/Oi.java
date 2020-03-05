@@ -44,11 +44,10 @@ public class Oi {
     final UniqueAxisCache operatorJoystickAxisCache = new UniqueAxisCache(operatorJoystick);
 
     //region DriveTrain
-    JoystickAxis driverKLeftYForwardAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    JoystickAxis driverKLeftYRotateAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    final JoystickAxis driverKLeftYForwardAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    final JoystickAxis driverKLeftYRotateAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
 
-    new DriveTrainOiBinder(driveTrain, driverKLeftYForwardAxis,
-        driverKLeftYRotateAxis);
+    new DriveTrainOiBinder(driveTrain, driverKLeftYForwardAxis, driverKLeftYRotateAxis);
     //endregion
 
     //region Shooter

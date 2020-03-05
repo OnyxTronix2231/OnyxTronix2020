@@ -114,8 +114,7 @@ public class Robot extends TimedRobot {
 
     final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
 
-    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
-        driveTrain::getOdometryHeading,
+    vision = new Vision(new VisionTargetFactory(yawControl::getTurretAngleRTF,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 

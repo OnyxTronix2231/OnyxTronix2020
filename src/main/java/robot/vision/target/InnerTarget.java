@@ -2,7 +2,6 @@ package robot.vision.target;
 
 import static robot.vision.VisionConstants.DISTANCE_BETWEEN_OUTER_INNER_TARGET;
 import static robot.vision.VisionConstants.HEIGHT_OFFSET_INNER_OUTER_CENTER;
-import static robot.vision.VisionConstants.RobotAConstants.DISTANCE_TURRET_MIDDLE_ROBOT;
 import static robot.vision.VisionConstants.RobotAConstants.LIMELIGHT_TURRET_CENTER_CM;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 
@@ -18,24 +17,18 @@ public class InnerTarget implements VisionTarget {
   private double horizontalOffset;
   private double verticalOffset;
   private double turretOrientation;
-  private double accelerometerAngle;
   private double turretAngle;
   private double distance;
   private double turretY;
-  private double robotY;
-  private double robotOrientation;
   private OuterTarget outerTarget;
-  private Pose2d pose2d;
-
   InnerTarget(final OuterTarget target) {
     outerTarget = target;
     calculateByOuterTarget();
   }
 
   @Override
-  public void update(final double accelerometerAngle, final double turretAngle, final LimelightTarget target) {
-    outerTarget.update(accelerometerAngle, turretAngle, target);
-    this.accelerometerAngle = accelerometerAngle;
+  public void update(final double turretAngle, final LimelightTarget target) {
+    outerTarget.update(turretAngle, target);
     this.turretAngle = turretAngle;
     calculateByOuterTarget();
   }
@@ -48,11 +41,6 @@ public class InnerTarget implements VisionTarget {
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (turretOrientation - outerTarget.getTurretOrientation());
     this.verticalOffset = Math.toDegrees(Math.atan((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
-    double robotDistance = turretDistance - DISTANCE_TURRET_MIDDLE_ROBOT;
-    double robotOffset = Math.toDegrees(Math.asin(turretDistance * Math.sin(Math.toRadians(horizontalOffset)) / robotDistance));
-    this.robotOrientation = turretAngle + accelerometerAngle + robotOffset;
-    this.robotY = robotDistance * Math.sin(Math.toRadians(robotOrientation));
-    this.pose2d = new Pose2d(new Translation2d(outerTarget.getRobotX(), robotY), Rotation2d.fromDegrees(robotOrientation));
   }
 
   @Override
@@ -93,25 +81,5 @@ public class InnerTarget implements VisionTarget {
   @Override
   public double getTurretY() {
     return turretY;
-  }
-
-  @Override
-  public double getRobotOrientation() {
-    return robotOrientation;
-  }
-
-  @Override
-  public double getRobotX() {
-    return outerTarget.getRobotX();
-  }
-
-  @Override
-  public double getRobotY() {
-    return robotY;
-  }
-
-  @Override
-  public Pose2d getPose2D() {
-    return pose2d;
   }
 }

@@ -102,11 +102,11 @@ public class Robot extends TimedRobot {
 
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
         () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
-        () -> canReleaseBall(shooter, yawControl),
+        () -> yawControl.canReleaseBall(shooter, yawControl),
         () -> yawControl.canReleaseBallAtCloseRange(shooter, yawControl));
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
-        loaderConveyor, storageConveyor, ballStopper, vision, () -> canReleaseBall(shooter, yawControl));
+        loaderConveyor, storageConveyor, ballStopper, vision, () -> yawControl.canReleaseBall(shooter, yawControl));
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));
@@ -159,9 +159,5 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     CommandScheduler.getInstance().run();
-  }
-
-  private boolean canReleaseBall(final Shooter shooter, final YawControl yawControl) {
-    return shooter.isOnTarget() && Limelight.getInstance().targetFound() && yawControl.isOnTarget();
   }
 }

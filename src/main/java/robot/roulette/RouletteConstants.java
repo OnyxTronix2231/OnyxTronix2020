@@ -17,14 +17,15 @@ public final class RouletteConstants {
   static final double SPIN_ROTATIONS_SPEED = 0.7; // TODO: check and change
   static final double RGB_EQUALS_THRESHOLD = 0.8; // TODO: check and change
   static final int DISTANCE_FROM_FIELD_SENSOR = 2; // TODO: check and change
+  static final int MAX_ROTATIONS = 5;
+  static final int MIN_ROTATIONS = 3;
+  static final int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS) / 2;
+  public static final int AVERAGE_COLOR_COUNT = AVERAGE_ROTATIONS * COLORS_IN_ROTATIONS;
   private static final double ROULETTE_RADIUS = 41;
 
   public static final class RouletteComponentsA {
 
     static final int MASTER_MOTOR_PORT = 11; // TODO: check and change
-    static final int MAX_ROTATIONS = 5;
-    static final int MIN_ROTATIONS = 3;
-    static final int AVERAGE_ROTATIONS = (MIN_ROTATIONS + MAX_ROTATIONS) / 2;
     static final int PEAK_AMP = 40; // TODO: check and change
     static final int PEAK_AMP_DURATION = 1; // TODO: check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
@@ -42,5 +43,6 @@ public final class RouletteConstants {
     static final double VELOCITY_P = 0.1; // TODO: check and change
     static final double VELOCITY_I = 0; // TODO: check and change
     static final double VELOCITY_D = 0; // TODO: check and change
+
   }
 }

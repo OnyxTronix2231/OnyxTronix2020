@@ -9,10 +9,12 @@ public class Path {
 
   private final boolean isForward;
   private final List<Pose2d> path;
+  private final Pose2d endingPose;
 
   public Path(final boolean isForward, final List<Pose2d> path) {
     this.isForward = isForward;
     this.path = path;
+    endingPose = path.get(path.size() - 1);
   }
 
   public boolean getIsForward() {
@@ -23,12 +25,7 @@ public class Path {
     return path;
   }
 
-  public Pose2d getReversedAngleEndingPose() {
-    return new Pose2d(getFinishingPose().getTranslation().getX(), getFinishingPose().getTranslation().getY(),
-        Rotation2d.fromDegrees(getFinishingPose().getRotation().getDegrees()));
-  }
-
-  private Pose2d getFinishingPose() {
-    return path.get(path.size() - 1);
+  public Pose2d getEndingPose() {
+    return endingPose;
   }
 }

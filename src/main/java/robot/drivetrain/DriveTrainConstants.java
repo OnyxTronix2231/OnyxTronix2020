@@ -20,7 +20,7 @@ public final class DriveTrainConstants {
   private static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
-  private static final double ENCODER_UNITS = 2046;
+  private static final double ENCODER_UNITS = 2048;
 
   public static final class DriveTrainComponentsA {
 
@@ -74,25 +74,25 @@ public final class DriveTrainConstants {
     static Path[] PRIMARY_PATH() {
       final List<Pose2d> pathOnePoints = List.of(
           new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(90)),
-          new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-69))
+          new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-20))
       );
       final Path pathOne = new Path(true, pathOnePoints);
 
       final List<Pose2d> pathTwoPoints = List.of(
-          pathOne.getReversedAngleEndingPose(),
-          new Pose2d(5, 4.3, Rotation2d.fromDegrees(2))
+          pathOne.getEndingPose(),
+          new Pose2d(5, 4.3, Rotation2d.fromDegrees(20))
       );
       final Path pathTwo = new Path(false, pathTwoPoints);
 
       final List<Pose2d> pathThreePoints = List.of(
-          pathTwo.getReversedAngleEndingPose(),
-          new Pose2d(5.6, 3.9, Rotation2d.fromDegrees(-50))
+          pathTwo.getEndingPose(),
+          new Pose2d(5.6, 3.9, Rotation2d.fromDegrees(-20))
       );
       final Path pathThree = new Path(true, pathThreePoints);
 
       final List<Pose2d> pathFourPoints = List.of(
-          pathThree.getReversedAngleEndingPose(),
-          new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(-90))
+          pathThree.getEndingPose(),
+          new Pose2d(3.65, 3, Rotation2d.fromDegrees(120))
       );
       final Path pathFour = new Path(false, pathFourPoints);
 
@@ -107,8 +107,8 @@ public final class DriveTrainConstants {
       final Path pathOne = new Path(true, pathOnePoints);
 
       final List<Pose2d> pathTwoPoints = List.of(
-          pathOne.getReversedAngleEndingPose(),
-          new Pose2d(3, 0.7, Rotation2d.fromDegrees(180))
+          pathOne.getEndingPose(),
+          new Pose2d(3, 2.4, Rotation2d.fromDegrees(0))
       );
       final Path pathTwo = new Path(false, pathTwoPoints);
       return new Path[]{pathOne, pathTwo};

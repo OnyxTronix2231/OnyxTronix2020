@@ -134,9 +134,9 @@ public class Oi {
     //endregion
 
     //region Turret
-    final JoystickAxis operatorMoveTurretByAxis = operatorKRightAxis;
+    final JoystickAxis moveTurretByAxis = operatorKRightAxis;
 
-    new TurretOiBinder(yawControl, operatorMoveTurretByAxis);
+    new TurretOiBinder(yawControl, moveTurretByAxis);
     //endregion
 
     //region YawControl

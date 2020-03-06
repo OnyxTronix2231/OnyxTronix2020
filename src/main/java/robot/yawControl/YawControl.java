@@ -10,7 +10,6 @@ import robot.shooter.Shooter;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.commands.MoveTurretToAngleAndKeep;
-import vision.limelight.Limelight;
 
 public class YawControl extends Turret {
 
@@ -87,9 +86,5 @@ public class YawControl extends Turret {
 
   public boolean canReleaseBallAtCloseRange(final Shooter shooter, final YawControl yawControl) {
     return shooter.isOnTarget() && yawControl.isOnTarget();
-  }
-
-  public boolean canReleaseBall(final Shooter shooter, final YawControl yawControl) {
-    return shooter.isOnTarget() && Limelight.getInstance().targetFound() && yawControl.isOnTarget();
   }
 }

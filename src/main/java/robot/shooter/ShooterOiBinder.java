@@ -23,5 +23,6 @@ public class ShooterOiBinder {
     shootAtCloseRange.whileActiveContinuous(new CloseShooterPiston(shooter)
         .andThen(new ShootByVelocity(shooter, () -> SHOOT_WITHOUT_VISION_SPEED))).
         whenInactive(new OpenShooterPiston(shooter));
+
   }
 }

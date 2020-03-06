@@ -43,95 +43,153 @@ public class Oi {
     final UniqueButtonCache operatorJoystickButtonCache = new UniqueButtonCache(operatorJoystick);
     final UniqueAxisCache operatorJoystickAxisCache = new UniqueAxisCache(operatorJoystick);
 
-    //region DriveTrain
-    final JoystickAxis driverKLeftYForwardAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    final JoystickAxis driverKLeftYRotateAxis = driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
+    final JoystickAxis driverKLeftYAxis =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
 
-    new DriveTrainOiBinder(driveTrain, driverKLeftYForwardAxis, driverKLeftYRotateAxis);
+    final JoystickAxis driverKRightXAxis =
+        driverJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
+
+    //region Driver Triggers
+    final Trigger driverKX = driverJoystickButtonCache.
+        createJoystickTrigger(XboxController.Button.kX.value);
+
+    final Trigger driverKB = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kB.value);
+
+    final Trigger driveKBumperLeft = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+
+    final Trigger driverKBumperRight = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBumperRight.value);
+
+    final Trigger driverKBack = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBack.value);
+
+    final Trigger driverKStart = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kStart.value);
+
+    final Trigger driverKLeftTrigger = driverJoystickAxisCache.
+        createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
+
+    final JoystickAxis driverKRightTrigger = driverJoystickAxisCache
+        .createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+
+
+    //endregion
+
+    //region Operator Triggers
+    final Trigger operatorKA = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kA.value);
+
+    final Trigger operatorKBumperLeft = operatorJoystickButtonCache.
+        createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+
+    final Trigger operatorKBack = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kBack.value);
+
+    final Trigger operatorKStart = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kStart.value);
+
+    final Trigger operatorKStickRight = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kStickRight.value);
+
+    final Trigger operatorKLeftTrigger = operatorJoystickAxisCache.
+        createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
+
+    final Trigger operatorKRightTrigger = operatorJoystickAxisCache.
+        createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+
+    final JoystickAxis operatorKRightAxis =
+        operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
+    //endregion
+
+    //region Complex triggers
+    final Trigger spinShooterAndAlignToTarget = driveKBumperLeft.or(operatorKA);
+
+    final Trigger makeAShotAtCloseRangeAndMoveTurretToHome = driverKBumperRight;
+
+    final Trigger collectAndLoadBall = driverKLeftTrigger.or(operatorKLeftTrigger);
+
+    final JoystickAxis makeAShotAndAlign = driverKRightTrigger;
+    //endregion
+
+    //region DriveTrain
+    final JoystickAxis forwardDrive = driverKLeftYAxis;
+
+    final JoystickAxis rotateDrive = driverKRightXAxis;
+
+    new DriveTrainOiBinder(driveTrain, forwardDrive, rotateDrive);
     //endregion
 
     //region Shooter
-    final Trigger driveKBumperLeftSpinShooterWhileAligning = driverJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBumperLeft.value);
-    final Trigger operatorKASpinShooterWhileAligning = operatorJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kA.value);
-    final Trigger driverAndOperatorSpinShooterAndAlign =
-        driveKBumperLeftSpinShooterWhileAligning.or(operatorKASpinShooterWhileAligning);
+    final Trigger spinShooter = spinShooterAndAlignToTarget;
 
-    final JoystickAxis driverKRightTriggerAlignAndShootBall = driverJoystickAxisCache
-        .createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+    final JoystickAxis shootBall = makeAShotAndAlign;
 
-    final Trigger driverKBumperRightShootBallAtCloseRange = driverJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBumperRight.value);
+    final Trigger shootBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
 
     new ShooterOiBinder(shooter, shootingDistanceSupplier,
-        driverAndOperatorSpinShooterAndAlign, driverKRightTriggerAlignAndShootBall,
-        driverKBumperRightShootBallAtCloseRange);
+        spinShooter, shootBall,
+        shootBallAtCloseRange);
     //endregion
 
     //region Turret
-    final JoystickAxis operatorKRightXMoveTurretByAxis =
-        operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
+    final JoystickAxis operatorMoveTurretByAxis = operatorKRightAxis;
 
-    new TurretOiBinder(yawControl, operatorKRightXMoveTurretByAxis);
+    new TurretOiBinder(yawControl, operatorMoveTurretByAxis);
     //endregion
 
     //region YawControl
-    final Trigger operatorKBackSetStateRTF = operatorJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBack.value);
+    final Trigger setStateRTF = operatorKBack;
 
-    final Trigger operatorKStartSetStateRTR = operatorJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kStart.value);
+    final Trigger setStateRTR = operatorKStart;
 
-    final Trigger operatorKStickRightSetStateHoming = operatorJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kStickRight.value);
+    final Trigger setStateHoming = operatorKStickRight.or(makeAShotAtCloseRangeAndMoveTurretToHome);
+
+    final Trigger alignToTarget = spinShooterAndAlignToTarget.or(makeAShotAndAlign);
 
     new YawControlOiBinder(yawControl, targetSupplier,
-        operatorKBackSetStateRTF, operatorKStartSetStateRTR,
-        operatorKStickRightSetStateHoming.or(driverKBumperRightShootBallAtCloseRange),
-        driverAndOperatorSpinShooterAndAlign.or(driverKRightTriggerAlignAndShootBall));
+        setStateRTF, setStateRTR,
+        setStateHoming,
+        alignToTarget);
     //endregion
 
     //region Climber
-    final Trigger driverKStartOpenClimber = driverJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kStart.value);
+    final Trigger openClimber = driverKStart;
 
-    final Trigger driverKBackClimb = driverJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kBack.value);
+    final Trigger climb = driverKBack;
 
-    new ClimberOiBinder(climber, driverKStartOpenClimber, driverKBackClimb);
+    new ClimberOiBinder(climber, openClimber, climb);
     //endregion
 
     //region BallCollector
-    final Trigger driverKLeftTriggerOpenAndCollectBall = driverJoystickAxisCache.
-        createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-    final Trigger operatorKLeftTriggerOpenAndCollectBall = operatorJoystickAxisCache.
-        createJoystickTrigger(XboxController.Axis.kLeftTrigger.value);
-    final Trigger openAndCollectBall = driverKLeftTriggerOpenAndCollectBall.or(operatorKLeftTriggerOpenAndCollectBall);
+    final Trigger openAndCollectBall = collectAndLoadBall;
 
-    final Trigger operatorKRightTriggerUncollectBalls = operatorJoystickAxisCache.
-        createJoystickTrigger(XboxController.Axis.kRightTrigger.value);
+    final Trigger uncollectBalls = operatorKRightTrigger;
 
-    final Trigger operatorKBumperLeftOpenThenCloseCollector = operatorJoystickButtonCache.
-        createJoystickTrigger(XboxController.Button.kBumperLeft.value);
+    final Trigger openThenCloseCollector = operatorKBumperLeft;
 
     new BallCollectorOiBinder(ballCollector, openAndCollectBall,
-        operatorKRightTriggerUncollectBalls, operatorKBumperLeftOpenThenCloseCollector);
+        uncollectBalls, openThenCloseCollector);
     //endregion
 
     //region BallTrigger
-    final Trigger driverKBReleaseBallManually = driverJoystickButtonCache
-        .createJoystickTrigger(XboxController.Button.kB.value);
+    final Trigger loadBall = collectAndLoadBall;
 
-    final Trigger driverKXMoveConveyorsReverse = driverJoystickButtonCache.
-        createJoystickTrigger(XboxController.Button.kX.value);
+    final Trigger releaseBallManually = driverKB;
+
+    final Trigger moveConveyorsReverse = driverKX;
+
+    final Trigger triggerBall = makeAShotAndAlign;
+
+    final Trigger triggerBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
 
     new BallTriggerOiBinder(loaderConveyor, storageConveyor,
         ballStopper, canReleaseBallSupplier,
         canReleaseBallAtCloseRangeSupplier,
-        openAndCollectBall, driverKRightTriggerAlignAndShootBall,
-        driverKBumperRightShootBallAtCloseRange, driverKBReleaseBallManually,
-        driverKXMoveConveyorsReverse);
+        loadBall, triggerBall,
+        triggerBallAtCloseRange, releaseBallManually,
+        moveConveyorsReverse);
     //endregion
   }
 }

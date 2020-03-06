@@ -43,8 +43,7 @@ public class Vision extends SubsystemBase {
   }
 
   public VisionTarget getDependableTarget() {
-    //return targetChooser.chooseTarget();
-    return innerTarget;
+    return targetChooser.chooseTarget();
   }
 
   public boolean canHitOuterTarget() {

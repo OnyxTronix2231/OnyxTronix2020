@@ -21,6 +21,7 @@ public class InnerTarget implements VisionTarget {
   private double distance;
   private double turretY;
   private OuterTarget outerTarget;
+  private double robotY;
   InnerTarget(final OuterTarget target) {
     outerTarget = target;
     calculateByOuterTarget();
@@ -41,6 +42,7 @@ public class InnerTarget implements VisionTarget {
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (turretOrientation - outerTarget.getTurretOrientation());
     this.verticalOffset = Math.toDegrees(Math.atan((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
+    this.robotY = outerTarget.getRobotY() + DISTANCE_BETWEEN_OUTER_INNER_TARGET;
   }
 
   @Override
@@ -81,5 +83,15 @@ public class InnerTarget implements VisionTarget {
   @Override
   public double getTurretY() {
     return turretY;
+  }
+
+  @Override
+  public double getRobotX() {
+    return outerTarget.getRobotX();
+  }
+
+  @Override
+  public double getRobotY() {
+    return robotY;
   }
 }

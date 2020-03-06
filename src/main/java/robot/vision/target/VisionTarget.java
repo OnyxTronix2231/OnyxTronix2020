@@ -22,4 +22,8 @@ public interface VisionTarget {
   double getTurretX();
 
   double getTurretY();
+
+  double getRobotX();
+
+  double getRobotY();
 }

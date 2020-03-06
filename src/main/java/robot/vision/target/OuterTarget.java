@@ -31,10 +31,10 @@ public class OuterTarget implements VisionTarget {
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
           target.getVerticalOffsetToCrosshair()));
-      Vector2dEx offsetTurretVector = Vector2dEx.fromMagnitudeDirection(distance, target.getHorizontalOffsetToCrosshair());
-      offsetTurretVector.add(VECTOR_LIMELIGHT_TURRET_CENTER);
-      double turretDistance = offsetTurretVector.magnitude();
-      double turretOffset = offsetTurretVector.direction();
+      Vector2dEx turretCenterToTargetVector = Vector2dEx.fromMagnitudeDirection(distance, target.getHorizontalOffsetToCrosshair());
+      turretCenterToTargetVector.add(VECTOR_LIMELIGHT_TURRET_CENTER);
+      double turretDistance = turretCenterToTargetVector.magnitude();
+      double turretOffset = turretCenterToTargetVector.direction();
       if(Double.isNaN(turretOffset)) turretOffset = 0;
       this.turretOrientation = Math.IEEEremainder(turretAngle, 360) + turretOffset;
       this.turretToTargetVector = Vector2dEx.fromMagnitudeDirection(turretDistance, turretOrientation);

@@ -39,9 +39,9 @@ public class InnerTarget implements VisionTarget {
     this.turretToTargetVector.add(VECTOR_OUTER_INNER_TARGET);
     this.turretOrientation = turretToTargetVector.direction();
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (turretOrientation - outerTarget.getTurretOrientation());
-    Vector2dEx offsetLimelightVector = Vector2dEx.fromMagnitudeDirection(turretToTargetVector.magnitude(), horizontalOffset);
-    offsetLimelightVector.subtract(VECTOR_LIMELIGHT_TURRET_CENTER);
-    this.distance = offsetLimelightVector.magnitude();
+    Vector2dEx limelightCenterToTargetVector = Vector2dEx.fromMagnitudeDirection(turretToTargetVector.magnitude(), horizontalOffset);
+    limelightCenterToTargetVector.subtract(VECTOR_LIMELIGHT_TURRET_CENTER);
+    this.distance = limelightCenterToTargetVector.magnitude();
     this.verticalOffset = Math.toDegrees(Math.atan2((
         TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER), distance));
     Vector2dEx turretToRobotCenterVector = Vector2dEx.fromMagnitudeDirection(ROBOT_CENTER_TURRET_DISTANCE, gyroYaw);

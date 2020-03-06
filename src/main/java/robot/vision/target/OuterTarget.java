@@ -22,15 +22,15 @@ public class OuterTarget implements VisionTarget {
   private double robotX;
   private double robotY;
 
-  OuterTarget(final double turretAngle,
+  OuterTarget(final double gyroYaw, final double turretAngle,
               final double cameraHeight, final double cameraOffset, final LimelightTarget target) {
     this.cameraHeight = cameraHeight;
     this.cameraOffset = cameraOffset;
-    update(turretAngle, target);
+    update(gyroYaw ,turretAngle, target);
   }
 
   @Override
-  public void update(final double turretAngle, final LimelightTarget target) {
+  public void update(final double gyroYaw, final double turretAngle, final LimelightTarget target) {
     if (target != null) {
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
@@ -45,10 +45,17 @@ public class OuterTarget implements VisionTarget {
       this.turretX = turretDistance * Math.sin(Math.toRadians(turretOrientation));
       this.turretY = turretDistance * Math.cos(Math.toRadians(turretOrientation));
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
-      double robotDriverStationDistance = (turretY / Math.cos(Math.toRadians(turretAngle))) +
-          VisionConstants.RobotAConstants.ROBOT_TURRET_DISTANCE;
-      this.robotY = robotDriverStationDistance * Math.cos(Math.toRadians(turretAngle));
-      this.robotX = robotDriverStationDistance * Math.sin(Math.toRadians(turretAngle)) -
+      double normalizedGyroYaw = gyroYaw;
+      boolean addDistance = false;
+      if(Math.abs(normalizedGyroYaw) / 90 > 1) {
+        normalizedGyroYaw += 180;
+        addDistance = true;
+      }
+      double robotDriverStationDistance = (turretY / Math.cos(Math.toRadians(normalizedGyroYaw))) +
+          (addDistance ? VisionConstants.RobotAConstants.ROBOT_TURRET_DISTANCE :
+          -VisionConstants.RobotAConstants.ROBOT_TURRET_DISTANCE);
+      this.robotY = robotDriverStationDistance * Math.cos(Math.toRadians(gyroYaw));
+      this.robotX = robotDriverStationDistance * Math.sin(Math.toRadians(gyroYaw)) -
           turretDistance * Math.sin(Math.toRadians(turretAngle)) + turretX;
     } else {
       this.horizontalOffset = 0;

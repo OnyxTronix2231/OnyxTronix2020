@@ -165,7 +165,7 @@ public class Robot extends TimedRobot {
     return shooter.isOnTarget() && Limelight.getInstance().targetFound() && yawControl.isOnTarget();
   }
 
-  private boolean canReleaseBallAtCloseRange( final Shooter shooter, final YawControl yawControl) {
+  private boolean canReleaseBallAtCloseRange(final Shooter shooter, final YawControl yawControl) {
     return shooter.isOnTarget() && yawControl.isOnTarget();
   }
 }

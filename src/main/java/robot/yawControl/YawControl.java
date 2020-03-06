@@ -6,7 +6,6 @@ import static robot.yawControl.YawControlConstants.TARGET_Y;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import robot.drivetrain.DriveTrain;
-import robot.shooter.Shooter;
 import robot.turret.Turret;
 import robot.turret.TurretComponents;
 import robot.turret.commands.MoveTurretToAngleAndKeep;
@@ -82,9 +81,5 @@ public class YawControl extends Turret {
       side = -SIDE_NUMBER;
     }
     return ONE_EIGHTY_DEGREES + side * (Math.atan(Math.abs(y - TARGET_Y) / x) + angle);
-  }
-
-  public boolean canReleaseBallAtCloseRange(final Shooter shooter, final YawControl yawControl) {
-    return shooter.isOnTarget() && yawControl.isOnTarget();
   }
 }

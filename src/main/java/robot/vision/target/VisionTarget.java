@@ -1,11 +1,12 @@
 package robot.vision.target;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import robot.vision.Vector2dEx;
 import vision.limelight.target.LimelightTarget;
 
 public interface VisionTarget {
 
-  void update(double gyroYaw, double turretAngle, LimelightTarget target);
+  void update(double turretAngle, LimelightTarget target);
 
   double getHorizontalOffset();
 
@@ -19,11 +20,5 @@ public interface VisionTarget {
 
   double getCameraHeight();
 
-  double getTurretX();
-
-  double getTurretY();
-
-  double getRobotX();
-
-  double getRobotY();
+  Vector2dEx getTurretToTargetVector();
 }

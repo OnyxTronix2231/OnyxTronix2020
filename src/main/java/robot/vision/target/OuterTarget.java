@@ -1,11 +1,8 @@
 package robot.vision.target;
 
-import static robot.vision.VisionConstants.RobotAConstants.LIMELIGHT_TURRET_CENTER_CM;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
+import robot.vision.Vector2dEx;
 import robot.vision.VisionConstants;
 import vision.limelight.target.LimelightTarget;
 
@@ -17,55 +14,35 @@ public class OuterTarget implements VisionTarget {
   private double verticalOffset;
   private double turretOrientation;
   private double distance;
-  private double turretX;
-  private double turretY;
-  private double robotX;
-  private double robotY;
+  private Vector2dEx turretToTargetVector;
 
-  OuterTarget(final double gyroYaw, final double turretAngle,
+  OuterTarget(final double turretAngle,
               final double cameraHeight, final double cameraOffset, final LimelightTarget target) {
     this.cameraHeight = cameraHeight;
     this.cameraOffset = cameraOffset;
-    update(gyroYaw ,turretAngle, target);
+    update(turretAngle, target);
   }
 
   @Override
-  public void update(final double gyroYaw, final double turretAngle, final LimelightTarget target) {
+  public void update(final double turretAngle, final LimelightTarget target) {
     if (target != null) {
       this.verticalOffset = target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
           target.getVerticalOffsetToCrosshair()));
-      double turretDistance = Math.sqrt(Math.pow(distance * Math.sin(Math.toRadians(target.getHorizontalOffsetToCrosshair())), 2)
-      + Math.pow(distance * Math.cos(Math.toRadians(target.getHorizontalOffsetToCrosshair()))
-          + LIMELIGHT_TURRET_CENTER_CM, 2));
-      double turretOffset = Math.toDegrees(Math.asin(distance * Math.sin(
-          Math.toRadians(target.getHorizontalOffsetToCrosshair())) / turretDistance));
+      Vector2dEx offsetTurretVector = Vector2dEx.fromMagnitudeDirection(distance, target.getHorizontalOffsetToCrosshair());
+      offsetTurretVector.add(VisionConstants.RobotAConstants.VECTOR_LIMELIGHT_TURRET_CENTER);
+      double turretDistance = offsetTurretVector.magnitude();
+      double turretOffset = offsetTurretVector.direction();
       if(Double.isNaN(turretOffset)) turretOffset = 0;
       this.turretOrientation = Math.IEEEremainder(turretAngle, 360) + turretOffset;
-      this.turretX = turretDistance * Math.sin(Math.toRadians(turretOrientation));
-      this.turretY = turretDistance * Math.cos(Math.toRadians(turretOrientation));
+      this.turretToTargetVector = Vector2dEx.fromMagnitudeDirection(turretDistance, turretOrientation);
       this.horizontalOffset = target.getHorizontalOffsetToCrosshair();
-      double normalizedGyroYaw = gyroYaw;
-      boolean addDistance = false;
-      if(Math.abs(normalizedGyroYaw) / 90 > 1) {
-        normalizedGyroYaw += 180;
-        addDistance = true;
-      }
-      double robotDriverStationDistance = (turretY / Math.cos(Math.toRadians(normalizedGyroYaw))) +
-          (addDistance ? VisionConstants.RobotAConstants.ROBOT_TURRET_DISTANCE :
-          -VisionConstants.RobotAConstants.ROBOT_TURRET_DISTANCE);
-      this.robotY = robotDriverStationDistance * Math.cos(Math.toRadians(gyroYaw));
-      this.robotX = robotDriverStationDistance * Math.sin(Math.toRadians(gyroYaw)) -
-          turretDistance * Math.sin(Math.toRadians(turretAngle)) + turretX;
     } else {
       this.horizontalOffset = 0;
       this.verticalOffset = 0;
       this.distance = 0;
       this.turretOrientation = 0;
-      this.turretX = 0;
-      this.turretY = 0;
-      this.robotX = 0;
-      this.robotY = 0;
+      this.turretToTargetVector = new Vector2dEx(0, 0);
     }
   }
 
@@ -100,22 +77,7 @@ public class OuterTarget implements VisionTarget {
   }
 
   @Override
-  public double getTurretX() {
-    return turretX;
-  }
-
-  @Override
-  public double getTurretY() {
-    return turretY;
-  }
-
-  @Override
-  public double getRobotX() {
-    return robotX;
-  }
-
-  @Override
-  public double getRobotY() {
-    return robotY;
+  public Vector2dEx getTurretToTargetVector() {
+    return turretToTargetVector;
   }
 }

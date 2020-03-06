@@ -6,7 +6,7 @@ import vision.limelight.target.LimelightTarget;
 
 public interface VisionTarget {
 
-  void update(double turretAngle, LimelightTarget target);
+  void update(double gyroYaw, double turretRTFAngle, LimelightTarget target);
 
   double getHorizontalOffset();
 
@@ -21,4 +21,6 @@ public interface VisionTarget {
   double getCameraHeight();
 
   Vector2dEx getTurretToTargetVector();
+
+  Vector2dEx getRobotToTargetVector();
 }

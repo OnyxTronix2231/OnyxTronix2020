@@ -1,8 +1,10 @@
 package robot.vision.target;
 
 import static robot.vision.VisionConstants.HEIGHT_OFFSET_INNER_OUTER_CENTER;
+import static robot.vision.VisionConstants.RobotAConstants.ROBOT_CENTER_TURRET_DISTANCE;
 import static robot.vision.VisionConstants.RobotAConstants.VECTOR_LIMELIGHT_TURRET_CENTER;
 import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
+import static robot.vision.VisionConstants.VECTOR_OUTER_INNER_TARGET;
 
 import robot.vision.Vector2dEx;
 import robot.vision.VisionConstants;
@@ -13,34 +15,39 @@ public class InnerTarget implements VisionTarget {
   private double horizontalOffset;
   private double verticalOffset;
   private double turretOrientation;
-  private double turretAngle;
   private double distance;
+  private double gyroYaw;
   private Vector2dEx turretToTargetVector;
+  private Vector2dEx robotToTargetVector;
   private OuterTarget outerTarget;
 
-  InnerTarget(final OuterTarget target) {
+  InnerTarget(final double gyroYaw ,final OuterTarget target) {
     outerTarget = target;
+    this.gyroYaw = gyroYaw;
     calculateByOuterTarget();
   }
 
   @Override
-  public void update(final double turretAngle, final LimelightTarget target) {
-    outerTarget.update(turretAngle, target);
-    this.turretAngle = turretAngle;
+  public void update(final double gyroYaw ,final double turretAngle, final LimelightTarget target) {
+    outerTarget.update(gyroYaw ,turretAngle, target);
+    this.gyroYaw = gyroYaw;
     calculateByOuterTarget();
   }
 
   private void calculateByOuterTarget() {
     this.turretToTargetVector = outerTarget.getTurretToTargetVector().clone();
-    this.turretToTargetVector.add(VisionConstants.VECTOR_OUTER_INNER_TARGET);
+    this.turretToTargetVector.add(VECTOR_OUTER_INNER_TARGET);
     this.turretOrientation = turretToTargetVector.direction();
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (turretOrientation - outerTarget.getTurretOrientation());
     Vector2dEx offsetLimelightVector = Vector2dEx.fromMagnitudeDirection(turretToTargetVector.magnitude(), horizontalOffset);
     offsetLimelightVector.subtract(VECTOR_LIMELIGHT_TURRET_CENTER);
     this.distance = offsetLimelightVector.magnitude();
-    this.verticalOffset = Math.toDegrees(Math.atan((
-        TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER)));
-  }
+    this.verticalOffset = Math.toDegrees(Math.atan2((
+        TARGET_HEIGHT_CM - outerTarget.getCameraHeight() + HEIGHT_OFFSET_INNER_OUTER_CENTER), distance));
+    Vector2dEx turretToRobotCenterVector = Vector2dEx.fromMagnitudeDirection(ROBOT_CENTER_TURRET_DISTANCE, gyroYaw);
+    this.robotToTargetVector = turretToTargetVector.clone();
+    robotToTargetVector.subtract(turretToRobotCenterVector);
+}
 
   @Override
   public double getHorizontalOffset() {
@@ -75,5 +82,10 @@ public class InnerTarget implements VisionTarget {
   @Override
   public Vector2dEx getTurretToTargetVector() {
     return turretToTargetVector;
+  }
+
+  @Override
+  public Vector2dEx getRobotToTargetVector() {
+    return robotToTargetVector;
   }
 }

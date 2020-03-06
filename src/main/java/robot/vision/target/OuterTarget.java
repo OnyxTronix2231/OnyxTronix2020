@@ -84,11 +84,11 @@ public class OuterTarget implements VisionTarget {
 
   @Override
   public Vector2dEx getTurretToTargetVector() {
-    return turretToTargetVector;
+    return turretToTargetVector.clone();
   }
 
   @Override
   public Vector2dEx getRobotToTargetVector() {
-    return robotToTargetVector;
+    return robotToTargetVector.clone();
   }
 }

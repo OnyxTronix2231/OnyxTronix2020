@@ -35,7 +35,7 @@ public class InnerTarget implements VisionTarget {
   }
 
   private void calculateByOuterTarget() {
-    this.turretToTargetVector = outerTarget.getTurretToTargetVector().clone();
+    this.turretToTargetVector = outerTarget.getTurretToTargetVector();
     this.turretToTargetVector.add(VECTOR_OUTER_INNER_TARGET);
     this.turretOrientation = turretToTargetVector.direction();
     this.horizontalOffset = outerTarget.getHorizontalOffset() + (turretOrientation - outerTarget.getTurretOrientation());
@@ -81,11 +81,11 @@ public class InnerTarget implements VisionTarget {
 
   @Override
   public Vector2dEx getTurretToTargetVector() {
-    return turretToTargetVector;
+    return turretToTargetVector.clone();
   }
 
   @Override
   public Vector2dEx getRobotToTargetVector() {
-    return robotToTargetVector;
+    return robotToTargetVector.clone();
   }
 }

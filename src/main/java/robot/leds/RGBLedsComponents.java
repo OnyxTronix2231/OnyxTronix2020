@@ -1,6 +1,6 @@
 package robot.leds;
 
-public interface RGBLEDsComponents {
+public interface RGBLedsComponents {
 
   double getBusVoltage();
 }

@@ -1,38 +1,38 @@
 package robot.leds;
 
-import static robot.leds.RGBLEDsConstants.BLUE_B;
-import static robot.leds.RGBLEDsConstants.BLUE_G;
-import static robot.leds.RGBLEDsConstants.BLUE_R;
-import static robot.leds.RGBLEDsConstants.GREEN_B;
-import static robot.leds.RGBLEDsConstants.GREEN_G;
-import static robot.leds.RGBLEDsConstants.GREEN_R;
-import static robot.leds.RGBLEDsConstants.NOTHING_B;
-import static robot.leds.RGBLEDsConstants.NOTHING_G;
-import static robot.leds.RGBLEDsConstants.NOTHING_R;
-import static robot.leds.RGBLEDsConstants.ORANGE_B;
-import static robot.leds.RGBLEDsConstants.ORANGE_G;
-import static robot.leds.RGBLEDsConstants.ORANGE_R;
-import static robot.leds.RGBLEDsConstants.PURPLE_B;
-import static robot.leds.RGBLEDsConstants.PURPLE_G;
-import static robot.leds.RGBLEDsConstants.PURPLE_R;
-import static robot.leds.RGBLEDsConstants.RED_B;
-import static robot.leds.RGBLEDsConstants.RED_G;
-import static robot.leds.RGBLEDsConstants.RED_R;
-import static robot.leds.RGBLEDsConstants.WHITE_B;
-import static robot.leds.RGBLEDsConstants.WHITE_G;
-import static robot.leds.RGBLEDsConstants.WHITE_R;
-import static robot.leds.RGBLEDsConstants.YELLOW_B;
-import static robot.leds.RGBLEDsConstants.YELLOW_G;
-import static robot.leds.RGBLEDsConstants.YELLOW_R;
+import static robot.leds.RGBLedsConstants.BLUE_B;
+import static robot.leds.RGBLedsConstants.BLUE_G;
+import static robot.leds.RGBLedsConstants.BLUE_R;
+import static robot.leds.RGBLedsConstants.GREEN_B;
+import static robot.leds.RGBLedsConstants.GREEN_G;
+import static robot.leds.RGBLedsConstants.GREEN_R;
+import static robot.leds.RGBLedsConstants.NOTHING_B;
+import static robot.leds.RGBLedsConstants.NOTHING_G;
+import static robot.leds.RGBLedsConstants.NOTHING_R;
+import static robot.leds.RGBLedsConstants.ORANGE_B;
+import static robot.leds.RGBLedsConstants.ORANGE_G;
+import static robot.leds.RGBLedsConstants.ORANGE_R;
+import static robot.leds.RGBLedsConstants.PURPLE_B;
+import static robot.leds.RGBLedsConstants.PURPLE_G;
+import static robot.leds.RGBLedsConstants.PURPLE_R;
+import static robot.leds.RGBLedsConstants.RED_B;
+import static robot.leds.RGBLedsConstants.RED_G;
+import static robot.leds.RGBLedsConstants.RED_R;
+import static robot.leds.RGBLedsConstants.WHITE_B;
+import static robot.leds.RGBLedsConstants.WHITE_G;
+import static robot.leds.RGBLedsConstants.WHITE_R;
+import static robot.leds.RGBLedsConstants.YELLOW_B;
+import static robot.leds.RGBLedsConstants.YELLOW_G;
+import static robot.leds.RGBLedsConstants.YELLOW_R;
 
 import com.ctre.phoenix.CANifier;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class RGBLEDs extends SubsystemBase {
+public class RGBLeds extends SubsystemBase {
 
   private final CANifier canifier;
 
-  public RGBLEDs(final CANifier canifier) {
+  public RGBLeds(final CANifier canifier) {
     this.canifier = canifier;
     configCanifier();
   }

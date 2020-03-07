@@ -1,15 +1,15 @@
 package robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import robot.leds.RGBLEDs;
+import robot.leds.RGBLeds;
 import robot.roulette.Roulette;
 
 public class RouletteCurrentColor extends CommandBase {
 
-  private final RGBLEDs rgbLeds;
+  private final RGBLeds rgbLeds;
   private final Roulette roulette;
 
-  public RouletteCurrentColor(RGBLEDs rgbLeds, Roulette roulette) {
+  public RouletteCurrentColor(RGBLeds rgbLeds, Roulette roulette) {
     this.rgbLeds = rgbLeds;
     this.roulette = roulette;
     addRequirements(rgbLeds);

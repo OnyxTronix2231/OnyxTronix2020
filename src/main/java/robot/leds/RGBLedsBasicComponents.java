@@ -2,7 +2,7 @@ package robot.leds;
 
 import com.ctre.phoenix.CANifier;
 
-public class RGBLEDsBasicComponents implements RGBLEDsComponents {
+public class RGBLedsBasicComponents implements RGBLedsComponents {
 
   CANifier canifier = new CANifier(0);
 

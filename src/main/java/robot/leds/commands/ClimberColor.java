@@ -2,13 +2,13 @@ package robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import robot.leds.RGBLEDs;
+import robot.leds.RGBLeds;
 
 public class ClimberColor extends CommandBase {
 
-  private final RGBLEDs rgbLeds;
+  private final RGBLeds rgbLeds;
 
-  public ClimberColor(RGBLEDs rgbLeds) {
+  public ClimberColor(RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }

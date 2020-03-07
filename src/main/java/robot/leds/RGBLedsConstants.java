@@ -1,6 +1,6 @@
 package robot.leds;
 
-public class RGBLEDsConstants {
+public class RGBLedsConstants {
 
   public static final char GREEN = 'G';
   public static final char RED = 'R';

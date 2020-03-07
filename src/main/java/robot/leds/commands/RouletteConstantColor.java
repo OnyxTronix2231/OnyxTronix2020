@@ -2,13 +2,13 @@ package robot.leds.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import robot.leds.RGBLEDs;
+import robot.leds.RGBLeds;
 
 public class RouletteConstantColor extends CommandBase {
 
-  private final RGBLEDs rgbLeds;
+  private final RGBLeds rgbLeds;
 
-  public RouletteConstantColor(RGBLEDs rgbLeds) {
+  public RouletteConstantColor(RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }

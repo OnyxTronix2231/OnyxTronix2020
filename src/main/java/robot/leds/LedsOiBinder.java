@@ -10,7 +10,7 @@ import robot.shooter.Shooter;
 
 public class LedsOiBinder {
 
-  public LedsOiBinder(Shooter shooter, RGBLEDs rgbLeds, final JoystickAxis forwardAxis, final JoystickAxis rotateAxis,
+  public LedsOiBinder(Shooter shooter, RGBLeds rgbLeds, final JoystickAxis forwardAxis, final JoystickAxis rotateAxis,
                       final Trigger spinShooterAndAlignToTarget, final Trigger collectAndLoadBall,
                       final Trigger climb) {
     forwardAxis.whileActiveContinuous(new DriveColor(rgbLeds));

@@ -5,12 +5,12 @@ import robot.ballStopper.BallStopper;
 
 import java.util.function.DoubleSupplier;
 
-public class MoveBallStopper extends CommandBase {
+public class MoveBallStopperBySpeed extends CommandBase {
 
   private final robot.ballStopper.BallStopper ballStopper;
   private final DoubleSupplier speedSupplier;
 
-  public MoveBallStopper(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
+  public MoveBallStopperBySpeed(final BallStopper ballStopper, final DoubleSupplier speedSupplier) {
     this.ballStopper = ballStopper;
     this.speedSupplier = speedSupplier;
   }

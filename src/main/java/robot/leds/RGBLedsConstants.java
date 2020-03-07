@@ -9,6 +9,7 @@ public class RGBLedsConstants {
   public static final char PURPLE = 'P';
   public static final char YELLOW = 'P';
   public static final char WHITE = 'W';
+  public static final char NOTHING = 'N';
   static final double RED_R = 100;
   static final double RED_G = 0;
   static final double RED_B = 0;

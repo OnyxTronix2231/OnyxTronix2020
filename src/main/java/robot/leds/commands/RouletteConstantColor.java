@@ -8,7 +8,7 @@ public class RouletteConstantColor extends CommandBase {
 
   private final RGBLeds rgbLeds;
 
-  public RouletteConstantColor(RGBLeds rgbLeds) {
+  public RouletteConstantColor(final RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }

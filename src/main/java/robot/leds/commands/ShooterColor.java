@@ -1,5 +1,7 @@
 package robot.leds.commands;
 
+import static robot.leds.RGBLedsConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.leds.RGBLeds;
 import robot.leds.RGBLedsConstants;
@@ -19,7 +21,7 @@ public class ShooterColor extends CommandBase {
   @Override
   public void execute() {
     if (shooter.isOnTarget())
-      rgbLeds.changeColor(RGBLedsConstants.GREEN);
-    rgbLeds.changeColor(RGBLedsConstants.BLUE);
+      rgbLeds.changeColor(GREEN);
+    rgbLeds.changeColor(BLUE);
   }
 }

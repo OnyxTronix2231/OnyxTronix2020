@@ -1,5 +1,7 @@
 package robot.leds.commands;
 
+import static robot.leds.RGBLedsConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.leds.RGBLeds;
 import robot.leds.RGBLedsConstants;
@@ -15,6 +17,6 @@ public class BallCollectorColor extends CommandBase {
 
   @Override
   public void execute() {
-    rgbLeds.changeColor(RGBLedsConstants.PURPLE);
+    rgbLeds.changeColor(PURPLE);
   }
 }

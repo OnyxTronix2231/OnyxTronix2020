@@ -1,5 +1,7 @@
 package robot.leds.commands;
 
+import static robot.leds.RGBLedsConstants.*;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.leds.RGBLeds;
 import robot.leds.RGBLedsConstants;
@@ -8,13 +10,13 @@ public class DriveColor extends CommandBase {
 
   private final RGBLeds rgbLeds;
 
-  public DriveColor(RGBLeds rgbLeds) {
+  public DriveColor(final RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }
 
   @Override
   public void execute() {
-    rgbLeds.changeColor(RGBLedsConstants.YELLOW);
+    rgbLeds.changeColor(YELLOW);
   }
 }

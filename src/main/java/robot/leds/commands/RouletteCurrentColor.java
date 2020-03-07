@@ -9,7 +9,7 @@ public class RouletteCurrentColor extends CommandBase {
   private final RGBLeds rgbLeds;
   private final Roulette roulette;
 
-  public RouletteCurrentColor(RGBLeds rgbLeds, Roulette roulette) {
+  public RouletteCurrentColor(final RGBLeds rgbLeds, final Roulette roulette) {
     this.rgbLeds = rgbLeds;
     this.roulette = roulette;
     addRequirements(rgbLeds);

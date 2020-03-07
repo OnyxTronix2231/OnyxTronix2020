@@ -37,9 +37,9 @@ public class RGBLeds extends SubsystemBase {
     configCanifier();
   }
 
-  public void changeColor(final char ch) {
-    switch (ch) {
-      /**
+  public void changeColor(final char colorInitial) {
+    switch (colorInitial) {
+      /*
        A: G
        B: R
        C: B
@@ -48,6 +48,7 @@ public class RGBLeds extends SubsystemBase {
         canifier.setLEDOutput(WHITE_G, CANifier.LEDChannel.LEDChannelA);
         canifier.setLEDOutput(WHITE_R, CANifier.LEDChannel.LEDChannelB);
         canifier.setLEDOutput(WHITE_B, CANifier.LEDChannel.LEDChannelC);
+        break;
       case 'R':
         canifier.setLEDOutput(RED_G, CANifier.LEDChannel.LEDChannelA);
         canifier.setLEDOutput(RED_R, CANifier.LEDChannel.LEDChannelB);
@@ -79,6 +80,7 @@ public class RGBLeds extends SubsystemBase {
         canifier.setLEDOutput(ORANGE_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'N':
+      default:
         canifier.setLEDOutput(NOTHING_G, CANifier.LEDChannel.LEDChannelA);
         canifier.setLEDOutput(NOTHING_R, CANifier.LEDChannel.LEDChannelB);
         canifier.setLEDOutput(NOTHING_B, CANifier.LEDChannel.LEDChannelC);

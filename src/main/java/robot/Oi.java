@@ -16,6 +16,8 @@ import robot.climber.Climber;
 import robot.climber.ClimberOiBinder;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainOiBinder;
+import robot.leds.LedsOiBinder;
+import robot.leds.RGBLEDs;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterOiBinder;
@@ -31,7 +33,7 @@ import java.util.function.DoubleSupplier;
 public class Oi {
   public Oi(final DriveTrain driveTrain, final Shooter shooter, final YawControl yawControl, final Climber climber,
             final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-            final StorageConveyor storageConveyor, final BallStopper ballStopper,
+            final StorageConveyor storageConveyor, final BallStopper ballStopper, final RGBLEDs rgbLeds,
             final DoubleSupplier shootingDistanceSupplier, final VisionTargetSupplier targetSupplier,
             final BooleanSupplier canReleaseBallSupplier, final BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
 
@@ -191,5 +193,10 @@ public class Oi {
         triggerBallAtCloseRange, releaseBallManually,
         moveConveyorsReverse);
     //endregion
+
+    //region RGBLeds
+    new LedsOiBinder(shooter, rgbLeds, forwardDrive, rotateDrive, spinShooterAndAlignToTarget, collectAndLoadBall,
+        climb);
+    //end region
   }
 }

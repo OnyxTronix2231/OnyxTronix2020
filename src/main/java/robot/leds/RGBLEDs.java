@@ -1,14 +1,29 @@
 package robot.leds;
 
+import static robot.leds.RGBLEDsConstants.BLUE_B;
+import static robot.leds.RGBLEDsConstants.BLUE_G;
+import static robot.leds.RGBLEDsConstants.BLUE_R;
 import static robot.leds.RGBLEDsConstants.GREEN_B;
 import static robot.leds.RGBLEDsConstants.GREEN_G;
 import static robot.leds.RGBLEDsConstants.GREEN_R;
+import static robot.leds.RGBLEDsConstants.NOTHING_B;
+import static robot.leds.RGBLEDsConstants.NOTHING_G;
+import static robot.leds.RGBLEDsConstants.NOTHING_R;
+import static robot.leds.RGBLEDsConstants.ORANGE_B;
+import static robot.leds.RGBLEDsConstants.ORANGE_G;
+import static robot.leds.RGBLEDsConstants.ORANGE_R;
+import static robot.leds.RGBLEDsConstants.PURPLE_B;
+import static robot.leds.RGBLEDsConstants.PURPLE_G;
+import static robot.leds.RGBLEDsConstants.PURPLE_R;
 import static robot.leds.RGBLEDsConstants.RED_B;
 import static robot.leds.RGBLEDsConstants.RED_G;
 import static robot.leds.RGBLEDsConstants.RED_R;
 import static robot.leds.RGBLEDsConstants.WHITE_B;
 import static robot.leds.RGBLEDsConstants.WHITE_G;
 import static robot.leds.RGBLEDsConstants.WHITE_R;
+import static robot.leds.RGBLEDsConstants.YELLOW_B;
+import static robot.leds.RGBLEDsConstants.YELLOW_G;
+import static robot.leds.RGBLEDsConstants.YELLOW_R;
 
 import com.ctre.phoenix.CANifier;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -44,29 +59,29 @@ public class RGBLEDs extends SubsystemBase {
         canifier.setLEDOutput(GREEN_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'B':
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(BLUE_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(BLUE_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(BLUE_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'Y':
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(YELLOW_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(YELLOW_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(YELLOW_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'P':
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(90, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(90, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(PURPLE_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(PURPLE_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(PURPLE_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'O':
-        canifier.setLEDOutput(50, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(100, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(ORANGE_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(ORANGE_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(ORANGE_B, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'N':
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelB);
-        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(NOTHING_G, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(NOTHING_R, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(NOTHING_B, CANifier.LEDChannel.LEDChannelC);
     }
   }
 

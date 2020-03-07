@@ -10,6 +10,7 @@ public class ClimberColor extends CommandBase {
 
   public ClimberColor(RGBLEDs rgbLeds) {
     this.rgbLeds = rgbLeds;
+    addRequirements(rgbLeds);
   }
 
   @Override

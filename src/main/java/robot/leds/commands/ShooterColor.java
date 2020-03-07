@@ -13,6 +13,7 @@ public class ShooterColor extends CommandBase {
   public ShooterColor(final Shooter shooter, final RGBLEDs rgbLeds) {
     this.shooter = shooter;
     this.rgbLeds = rgbLeds;
+    addRequirements(rgbLeds);
   }
 
   @Override

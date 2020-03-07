@@ -7,12 +7,11 @@ import robot.leds.RGBLEDsConstants;
 
 public class BallCollectorColor extends CommandBase {
 
-  private final BallCollector ballCollector;
   private final RGBLEDs rgbLeds;
 
-  public BallCollectorColor(final BallCollector ballCollector, final RGBLEDs rgbLeds) {
-    this.ballCollector = ballCollector;
+  public BallCollectorColor(final RGBLEDs rgbLeds) {
     this.rgbLeds = rgbLeds;
+    addRequirements(rgbLeds);
   }
 
   @Override

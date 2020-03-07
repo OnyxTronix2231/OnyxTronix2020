@@ -11,6 +11,7 @@ public class DriveColor extends CommandBase {
 
   public DriveColor(RGBLEDs rgbLeds) {
     this.rgbLeds = rgbLeds;
+    addRequirements(rgbLeds);
   }
 
   @Override

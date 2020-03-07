@@ -1,7 +1,6 @@
 package robot.leds.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import robot.drivetrain.DriveTrain;
 import robot.leds.RGBLEDs;
 import robot.leds.RGBLEDsConstants;
 
@@ -16,6 +15,6 @@ public class DriveColor extends CommandBase {
 
   @Override
   public void execute() {
-      rgbLeds.changeColor(RGBLEDsConstants.YELLOW);
+    rgbLeds.changeColor(RGBLEDsConstants.YELLOW);
   }
 }

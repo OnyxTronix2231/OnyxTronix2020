@@ -3,8 +3,6 @@ package robot.leds.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.leds.RGBLEDs;
-import robot.leds.RGBLEDsConstants;
-import robot.roulette.Roulette;
 
 public class RouletteColor extends CommandBase {
 

@@ -1,23 +1,28 @@
 package robot.leds;
 
+import static robot.leds.RGBLEDsConstants.GREEN_B;
+import static robot.leds.RGBLEDsConstants.GREEN_G;
+import static robot.leds.RGBLEDsConstants.GREEN_R;
+import static robot.leds.RGBLEDsConstants.RED_B;
+import static robot.leds.RGBLEDsConstants.RED_G;
+import static robot.leds.RGBLEDsConstants.RED_R;
+import static robot.leds.RGBLEDsConstants.WHITE_B;
+import static robot.leds.RGBLEDsConstants.WHITE_G;
+import static robot.leds.RGBLEDsConstants.WHITE_R;
+
 import com.ctre.phoenix.CANifier;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-
-import java.util.Timer;
-
-import static robot.leds.RGBLEDsConstants.*;
 
 public class RGBLEDs extends SubsystemBase {
 
   private final CANifier canifier;
 
-  public RGBLEDs(final CANifier canifier){
+  public RGBLEDs(final CANifier canifier) {
     this.canifier = canifier;
     configCanifier();
   }
 
-  public void changeColor(final char ch){
+  public void changeColor(final char ch) {
     switch (ch) {
       /**
        A: G
@@ -59,13 +64,13 @@ public class RGBLEDs extends SubsystemBase {
         canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
         break;
       case 'N':
-          canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
-          canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelB);
-          canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
+        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelA);
+        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelB);
+        canifier.setLEDOutput(0, CANifier.LEDChannel.LEDChannelC);
     }
   }
 
-  public void configCanifier(){
+  public void configCanifier() {
     canifier.configFactoryDefault();
   }
 }

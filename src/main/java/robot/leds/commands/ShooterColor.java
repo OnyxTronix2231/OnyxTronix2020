@@ -22,6 +22,7 @@ public class ShooterColor extends CommandBase {
   public void execute() {
     if (shooter.isOnTarget())
       rgbLeds.changeColor(GREEN);
+    // Needs else, instant command with conditinal command.
     rgbLeds.changeColor(BLUE);
   }
 }

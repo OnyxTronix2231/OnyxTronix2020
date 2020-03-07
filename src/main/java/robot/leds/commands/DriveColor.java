@@ -7,7 +7,7 @@ import robot.leds.RGBLeds;
 import robot.leds.RGBLedsConstants;
 
 public class DriveColor extends CommandBase {
-
+  // Make instant command
   private final RGBLeds rgbLeds;
 
   public DriveColor(final RGBLeds rgbLeds) {

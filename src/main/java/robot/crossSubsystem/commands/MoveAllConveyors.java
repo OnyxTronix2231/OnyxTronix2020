@@ -15,7 +15,7 @@ public class MoveAllConveyors extends ParallelCommandGroup {
   public MoveAllConveyors(LoaderConveyor loaderConveyor, StorageConveyor storageConveyor, BallStopper ballStopper,
                           final DoubleSupplier loaderSpeed, final DoubleSupplier storageSpeed, final DoubleSupplier
                               stopperSpeed) {
-   super(new MoveBallStopper(ballStopper ,stopperSpeed),
+   super(new MoveBallStopper(ballStopper, stopperSpeed),
        new MoveLoaderConveyorBySpeed(loaderConveyor, loaderSpeed),
        new MoveStorageConveyorBySpeed(storageConveyor, storageSpeed));
   }

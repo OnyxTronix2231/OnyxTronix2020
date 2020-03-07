@@ -22,6 +22,8 @@ public class Shooter extends SubsystemBase {
     lastVelocityError = Integer.MAX_VALUE;
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getMasterMotor().getClosedLoopError());
+    Shuffleboard.getTab("Shooter").addNumber("Current RPM",
+        () -> components.getMasterMotor().getSelectedSensorVelocity() * 600 /2046.0);
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
   }

@@ -1,6 +1,5 @@
 package robot.ballTrigger;
 
-import static robot.ballStopper.BallStopperConstants.DELAY;
 import static robot.ballStopper.BallStopperConstants.MOVE_STOPPER_BACK;
 import static robot.ballTrigger.BallTriggerConstants.BALL_STOPPER_SPEED;
 import static robot.ballTrigger.BallTriggerConstants.LOADER_SPEED;
@@ -51,7 +50,7 @@ public class BallTriggerOiBinder {
 
     moveConveyorsReverse.whileActiveContinuous(new ParallelCommandGroup(
         new MoveLoaderConveyorBySpeed(loaderConveyor, () -> MOVE_LOADER_BACK),
-        new MoveBallStopperBySpeed(ballStopper, () -> MOVE_STOPPER_BACK, DELAY),
+        new MoveBallStopperBySpeed(ballStopper, () -> MOVE_STOPPER_BACK),
         new MoveStorageConveyorBySpeed(storageConveyor, () -> MOVE_STORAGE_BACK).withTimeout(STORAGE_REVERSE_TIMEOUT)));
   }
 }

@@ -29,10 +29,8 @@ public final class RouletteConstants {
     static final int PEAK_AMP = 40; // TODO: check and change
     static final int PEAK_AMP_DURATION = 1; // TODO: check and change
     static final int CONTINUOUS_CURRENT_LIMIT = 20; // TODO: check and change
-    static final int DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL = 1;
-    static final int DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL = 0;
-    static final int DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL = 2;
-    static final int DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL = 3;
+    static final int DOUBLE_SOLENOID_REVERSE_CHANNEL = 1; // TODO: check and change
+    static final int DOUBLE_SOLENOID_FORWARD_CHANNEL = 0; // TODO: check and change
     static final int MAX_VELOCITY = 8000; // TODO: check and change
     static final int MAX_ACCELERATION = 8000; // TODO: check and change
     static final int MOTION_CURVE_STRENGTH = 0;  // TODO: check and change

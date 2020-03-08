@@ -1,10 +1,8 @@
 package robot.roulette;
 
 import static robot.roulette.RouletteConstants.RouletteComponentsA.CONTINUOUS_CURRENT_LIMIT;
-import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL;
-import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL;
-import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL;
-import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_SOLENOID_FORWARD_CHANNEL;
+import static robot.roulette.RouletteConstants.RouletteComponentsA.DOUBLE_SOLENOID_REVERSE_CHANNEL;
 import static robot.roulette.RouletteConstants.RouletteComponentsA.MASTER_MOTOR_PORT;
 import static robot.roulette.RouletteConstants.RouletteComponentsA.MAX_ACCELERATION;
 import static robot.roulette.RouletteConstants.RouletteComponentsA.MAX_VELOCITY;
@@ -25,8 +23,7 @@ import edu.wpi.first.wpilibj.I2C;
 public class BasicRouletteComponentsA implements RouletteComponents {
 
   private final WPI_TalonSRX masterMotor;
-  private final DoubleSolenoid rightDoubleSolenoid;
-  private final DoubleSolenoid leftDoubleSolenoid;
+  private final DoubleSolenoid doubleSolenoid;
   private final ColorSensorV3 colorSensor;
 
   public BasicRouletteComponentsA() {
@@ -37,11 +34,8 @@ public class BasicRouletteComponentsA implements RouletteComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setSensorPhase(true);
 
-    leftDoubleSolenoid = new DoubleSolenoid
-        (DOUBLE_LEFT_SOLENOID_FORWARD_CHANNEL, DOUBLE_LEFT_SOLENOID_REVERSE_CHANNEL);
-
-    rightDoubleSolenoid = new DoubleSolenoid
-        (DOUBLE_RIGHT_SOLENOID_FORWARD_CHANNEL, DOUBLE_RIGHT_SOLENOID_REVERSE_CHANNEL);
+    doubleSolenoid = new DoubleSolenoid
+        (DOUBLE_SOLENOID_FORWARD_CHANNEL, DOUBLE_SOLENOID_REVERSE_CHANNEL);
 
     colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
   }
@@ -66,13 +60,8 @@ public class BasicRouletteComponentsA implements RouletteComponents {
   }
 
   @Override
-  public DoubleSolenoid getRightDoubleSolenoid() {
-    return rightDoubleSolenoid;
-  }
-
-  @Override
-  public DoubleSolenoid getLeftDoubleSolenoid() {
-    return leftDoubleSolenoid;
+  public DoubleSolenoid getDoubleSolenoid() {
+    return doubleSolenoid;
   }
 
   @Override

@@ -31,13 +31,11 @@ public class Roulette extends SubsystemBase {
   }
 
   public void openPistons() {
-    components.getRightDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
-    components.getLeftDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
+    components.getDoubleSolenoid().set(DoubleSolenoid.Value.kForward);
   }
 
   public void closePistons() {
-    components.getRightDoubleSolenoid().close();
-    components.getLeftDoubleSolenoid().close();
+    components.getDoubleSolenoid().close();
   }
 
   public RouletteColor getRequiredColorFromMatchColor() {

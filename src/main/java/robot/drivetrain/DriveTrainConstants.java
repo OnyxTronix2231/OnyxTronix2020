@@ -69,49 +69,71 @@ public final class DriveTrainConstants {
 
   public static final class Paths {
 
-    public static final Path[][] PATHS = {PRIMARY_PATH(), SECONDARY_PATH()};
+    public static final Path[][] PATHS = {FIRST_PATH(), SECOND_PATH()};
 
-    static Path[] PRIMARY_PATH() {
-      final List<Pose2d> pathOnePoints = List.of(
+    public static Path[] FIRST_PATH() {
+      final List<Pose2d> subPathOnePoints = List.of(
           new Pose2d(3.2, 2.4, Rotation2d.fromDegrees(90)),
           new Pose2d(5.8, 4.4, Rotation2d.fromDegrees(-20))
       );
-      final Path pathOne = new Path(true, pathOnePoints);
+      final Path subPathOne = new Path(true, subPathOnePoints);
 
-      final List<Pose2d> pathTwoPoints = List.of(
-          pathOne.getEndingPose(),
+      final List<Pose2d> subPathTwoPoints = List.of(
+          subPathOne.getEndingPose(),
           new Pose2d(5, 4.3, Rotation2d.fromDegrees(20))
       );
-      final Path pathTwo = new Path(false, pathTwoPoints);
+      final Path subPathTwo = new Path(false, subPathTwoPoints);
 
-      final List<Pose2d> pathThreePoints = List.of(
-          pathTwo.getEndingPose(),
+      final List<Pose2d> subPathThreePoints = List.of(
+          subPathTwo.getEndingPose(),
           new Pose2d(5.6, 3.9, Rotation2d.fromDegrees(-20))
       );
-      final Path pathThree = new Path(true, pathThreePoints);
+      final Path subPathThree = new Path(true, subPathThreePoints);
 
-      final List<Pose2d> pathFourPoints = List.of(
-          pathThree.getEndingPose(),
+      final List<Pose2d> subPathFourPoints = List.of(
+          subPathThree.getEndingPose(),
           new Pose2d(3.65, 3, Rotation2d.fromDegrees(120))
       );
-      final Path pathFour = new Path(false, pathFourPoints);
+      final Path subPathFour = new Path(false, subPathFourPoints);
 
-      return new Path[]{pathOne, pathTwo, pathThree, pathFour};
+      return new Path[]{subPathOne, subPathTwo, subPathThree, subPathFour};
     }
 
-    static Path[] SECONDARY_PATH() {
-      final List<Pose2d> pathOnePoints = List.of(
+    static Path[] SECOND_PATH() {
+      final List<Pose2d> subPathOnePoints = List.of(
           new Pose2d(3, 0.7, Rotation2d.fromDegrees(0)),
           new Pose2d(7, 0.7, Rotation2d.fromDegrees(0))
       );
-      final Path pathOne = new Path(true, pathOnePoints);
+      final Path subPathOne = new Path(true, subPathOnePoints);
 
-      final List<Pose2d> pathTwoPoints = List.of(
-          pathOne.getEndingPose(),
+      final List<Pose2d> subPathTwoPoints = List.of(
+          subPathOne.getEndingPose(),
           new Pose2d(3, 2.4, Rotation2d.fromDegrees(0))
       );
-      final Path pathTwo = new Path(false, pathTwoPoints);
-      return new Path[]{pathOne, pathTwo};
+      final Path subPathTwo = new Path(false, subPathTwoPoints);
+      return new Path[]{subPathOne, subPathTwo};
+    }
+
+    public static Path[] THIRD_PATH() {
+      final List<Pose2d> subPathOnePoints = List.of(
+          new Pose2d(3, 0.7, Rotation2d.fromDegrees(0)),
+          new Pose2d(7, 0.7, Rotation2d.fromDegrees(0))
+      );
+      final Path subPathOne = new Path(true, subPathOnePoints);
+
+      final List<Pose2d> subPathTwoPoints = List.of(
+          subPathOne.getEndingPose(),
+          new Pose2d(8, 0.7, Rotation2d.fromDegrees(0))
+      );
+      final Path subPathTwo = new Path(false, subPathTwoPoints);
+
+      final List<Pose2d> subPathThreePoints = List.of(
+          subPathTwo.getEndingPose(),
+          new Pose2d(5.6, 3.9, Rotation2d.fromDegrees(-20))
+      );
+      final Path subPathThree = new Path(true, subPathThreePoints);
+
+      return new Path[]{subPathOne, subPathTwo, subPathThree};
     }
 
     public static Path[] TEST_PATH() {
@@ -119,15 +141,15 @@ public final class DriveTrainConstants {
           new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
           new Pose2d(1, 0, Rotation2d.fromDegrees(0))
       );
-      final Path pathOne = new Path(true, test);
+      final Path subPathOne = new Path(true, test);
 
-      final List<Pose2d> pathTwoPoints = List.of(
+      final List<Pose2d> subPathTwoPoints = List.of(
           new Pose2d(1, 0, Rotation2d.fromDegrees(0)),
           new Pose2d(0, 0, Rotation2d.fromDegrees(0))
       );
-      final Path pathTwo = new Path(false, pathTwoPoints);
+      final Path subPathTwo = new Path(false, subPathTwoPoints);
 
-      return new Path[]{pathOne, pathTwo};
+      return new Path[]{subPathOne, subPathTwo};
     }
   }
 }

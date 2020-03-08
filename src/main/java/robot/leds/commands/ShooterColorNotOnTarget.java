@@ -1,21 +1,21 @@
 package robot.leds.commands;
 
-import static robot.leds.RGBLedsConstants.YELLOW;
+import static robot.leds.RGBLedsConstants.BLUE;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.leds.RGBLeds;
 
-public class DriveColor extends InstantCommand {
+public class ShooterColorNotOnTarget extends InstantCommand {
 
   private final RGBLeds rgbLeds;
 
-  public DriveColor(final RGBLeds rgbLeds) {
+  public ShooterColorNotOnTarget(RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }
 
   @Override
   public void initialize() {
-    rgbLeds.changeColor(YELLOW);
+    rgbLeds.changeColor(BLUE);
   }
 }

@@ -1,12 +1,12 @@
 package robot.leds.commands;
 
-import static robot.leds.RGBLedsConstants.*;
+import static robot.leds.RGBLedsConstants.NOTHING;
 import static robot.leds.RGBLedsConstants.RED;
+import static robot.leds.RGBLedsConstants.WAIT_BETWEEN_COLORS;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.leds.RGBLeds;
-import robot.leds.RGBLedsConstants;
 
 public class ClimberColor extends CommandBase {
 

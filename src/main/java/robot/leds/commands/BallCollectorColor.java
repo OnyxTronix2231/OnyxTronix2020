@@ -1,12 +1,11 @@
 package robot.leds.commands;
 
-import static robot.leds.RGBLedsConstants.*;
+import static robot.leds.RGBLedsConstants.PURPLE;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.leds.RGBLeds;
-import robot.leds.RGBLedsConstants;
 
-public class BallCollectorColor extends CommandBase {
+public class BallCollectorColor extends InstantCommand {
 
   private final RGBLeds rgbLeds;
 
@@ -16,7 +15,7 @@ public class BallCollectorColor extends CommandBase {
   }
 
   @Override
-  public void execute() {
+  public void initialize() {
     rgbLeds.changeColor(PURPLE);
   }
 }

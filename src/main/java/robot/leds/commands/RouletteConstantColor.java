@@ -1,10 +1,12 @@
 package robot.leds.commands;
 
+import static robot.leds.RGBLedsConstants.CHAR_AT;
+
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import robot.leds.RGBLeds;
 
-public class RouletteConstantColor extends CommandBase {
+public class RouletteConstantColor extends InstantCommand {
 
   private final RGBLeds rgbLeds;
 
@@ -14,8 +16,8 @@ public class RouletteConstantColor extends CommandBase {
   }
 
   @Override
-  public void execute() {
+  public void initialize() {
     if (!DriverStation.getInstance().getGameSpecificMessage().isEmpty())
-      rgbLeds.changeColor(DriverStation.getInstance().getGameSpecificMessage().charAt(0));
+      rgbLeds.changeColor(DriverStation.getInstance().getGameSpecificMessage().charAt(CHAR_AT));
   }
 }

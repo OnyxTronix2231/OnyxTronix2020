@@ -1,5 +1,7 @@
 package robot.leds.commands;
 
+import static robot.leds.RGBLedsConstants.CHAR_AT;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.leds.RGBLeds;
 import robot.roulette.Roulette;
@@ -17,6 +19,6 @@ public class RouletteCurrentColor extends CommandBase {
 
   @Override
   public void execute() {
-    rgbLeds.changeColor(roulette.getCurrentColor().name().charAt(0));
+    rgbLeds.changeColor(roulette.getCurrentColor().name().charAt(CHAR_AT));
   }
 }

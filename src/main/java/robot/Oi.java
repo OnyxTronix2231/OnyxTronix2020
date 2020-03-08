@@ -4,6 +4,7 @@ import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.OPERATOR_JOYSTICK_PORT;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
@@ -17,6 +18,10 @@ import robot.climber.ClimberOiBinder;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainOiBinder;
 import robot.loaderConveyor.LoaderConveyor;
+import robot.roulette.Roulette;
+import robot.roulette.RouletteOiBinder;
+import robot.roulette.commands.CloseRoulettePistons;
+import robot.roulette.commands.SpinRouletteToColorIfExists;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterOiBinder;
 import robot.storageConveyor.StorageConveyor;
@@ -31,7 +36,7 @@ import java.util.function.DoubleSupplier;
 public class Oi {
   public Oi(final DriveTrain driveTrain, final Shooter shooter, final YawControl yawControl, final Climber climber,
             final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-            final StorageConveyor storageConveyor, final BallStopper ballStopper,
+            final StorageConveyor storageConveyor, final BallStopper ballStopper, final Roulette roulette,
             final DoubleSupplier shootingDistanceSupplier, final VisionTargetSupplier targetSupplier,
             final BooleanSupplier canReleaseBallSupplier, final BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
 
@@ -80,6 +85,15 @@ public class Oi {
     //region Operator Triggers
     final Trigger operatorKA = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kA.value);
+
+    final JoystickButton operatorKB = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kB.value);
+
+    final JoystickButton operatorKX = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kX.value);
+
+    final JoystickButton operatorKY = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kY.value);
 
     final Trigger operatorKBumperLeft = operatorJoystickButtonCache.
         createJoystickTrigger(XboxController.Button.kBumperLeft.value);
@@ -190,6 +204,16 @@ public class Oi {
         loadBall, triggerBall,
         triggerBallAtCloseRange, releaseBallManually,
         moveConveyorsReverse);
+    //endregion
+
+    //region Roulette
+    final Trigger togglePistons = operatorKB;
+
+    final Trigger spinRouletteByColorExist = operatorKX;
+
+    final Trigger spinRouletteByColorCount = operatorKY;
+
+    new RouletteOiBinder(roulette, togglePistons, spinRouletteByColorExist, spinRouletteByColorCount);
     //endregion
   }
 }

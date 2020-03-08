@@ -23,6 +23,9 @@ import robot.drivetrain.DriveTrainComponents;
 import robot.loaderConveyor.BasicLoaderConveyorComponentsA;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.loaderConveyor.LoaderConveyorComponents;
+import robot.roulette.BasicRouletteComponentsA;
+import robot.roulette.Roulette;
+import robot.roulette.RouletteComponents;
 import robot.shooter.BasicShooterComponentsA;
 import robot.shooter.Shooter;
 import robot.shooter.ShooterComponents;
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
     final ClimberComponents climberComponents;
+    final RouletteComponents rouletteComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -68,6 +72,7 @@ public class Robot extends TimedRobot {
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
       climberComponents = new BasicClimberComponentsA();
+      rouletteComponents = new BasicRouletteComponentsA();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -77,6 +82,7 @@ public class Robot extends TimedRobot {
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
       climberComponents = null; // TODO: use BasicClimberComponentsB Here
+      rouletteComponents = null; // TODO: use BasicRouletteComponentsB Here
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
@@ -95,13 +101,15 @@ public class Robot extends TimedRobot {
 
     climber = new Climber(climberComponents);
 
+    Roulette roulette = new Roulette(rouletteComponents);
+
     vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
         driveTrain::getOdometryHeading,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
-        () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
+        roulette, () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
         () -> canReleaseBall(shooter, yawControl),
         () -> canReleaseBallAtCloseRange(shooter, yawControl));
 

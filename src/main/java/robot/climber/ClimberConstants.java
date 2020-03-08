@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public final class ClimberConstants {
 
-  public static final double UP_SPEED = 0.5; // TODO: check value
+  public static final double UP_SPEED = 0.3;
   public static final double SET_POINT_ON_BAR = 1; //TODO: check and change
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double TOLERANCE_IN_ENCODER = 3; // TODO: tuning is required
-  static final double ENCODER_UNITS = 1023;
+  static final int ENCODER_UNITS = 2046;
   static final DoubleSolenoid.Value OPEN_SOLENOID_VALUE = DoubleSolenoid.Value.kForward;
   static final DoubleSolenoid.Value CLOSE_SOLENOID_VALUE = DoubleSolenoid.Value.kReverse;
 
   public static final class ClimberComponentsA {
-    static final int MASTER_MOTOR_PORT = 9; // TODO: check value
-    static final int SLAVE_MOTOR_PORT = 10; // TODO: check value
+    static final int MASTER_MOTOR_PORT = 13;
+    static final int SLAVE_MOTOR_PORT = 14;
     static final int DOUBLE_SOLENOID_FORWARD_PORT = 2; // TODO: check value
     static final int DOUBLE_SOLENOID_REVERSE_PORT = 3; // TODO: check value
     static final double CURRENT_LIMIT = 40; // TODO: check value

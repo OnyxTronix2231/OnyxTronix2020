@@ -45,13 +45,13 @@ public final class AutonomousConstants {
         new Pose(new Pose2d(8.2, -0.73, Rotation2d.fromDegrees(0)), true));
 
     public static Path testPathS = new Path(
-        new Pose(new Pose2d(1.16,-0.8, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3,-2.2, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(4.42,-0.013, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(6.7,-0.8, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(4.42,-0.013, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(3,-2.2, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(1.16,-0.8, Rotation2d.fromDegrees(0)), false)
+        new Pose(new Pose2d(1,-1, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3,-2, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(5,0, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(7,-1, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(5,0, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(3,-2, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(1,-1, Rotation2d.fromDegrees(0)), false)
     );
 
     public static Path testPathNinetyDegrees = new Path(

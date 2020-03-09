@@ -11,7 +11,7 @@ public class SpinRouletteToColor extends CommandBase {
   protected final DoubleSupplier colorsRequiredSupplier;
   protected double colorsRequired;
 
-  public SpinRouletteToColor(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
+  public SpinRouletteToColor(final Roulette roulette, final DoubleSupplier colorsRequiredSupplier) {
     this.roulette = roulette;
     this.colorsRequiredSupplier = colorsRequiredSupplier;
     addRequirements(roulette);

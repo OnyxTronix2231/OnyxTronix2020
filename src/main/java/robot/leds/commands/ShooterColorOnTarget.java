@@ -9,7 +9,7 @@ public class ShooterColorOnTarget extends InstantCommand {
 
   private final RGBLeds rgbLeds;
 
-  public ShooterColorOnTarget(RGBLeds rgbLeds) {
+  public ShooterColorOnTarget(final RGBLeds rgbLeds) {
     this.rgbLeds = rgbLeds;
     addRequirements(rgbLeds);
   }

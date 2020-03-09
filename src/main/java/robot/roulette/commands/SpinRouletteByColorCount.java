@@ -13,7 +13,7 @@ public class SpinRouletteByColorCount extends SpinRouletteToColor {
   private RouletteColor currentColor;
   private RouletteColor previousColor;
 
-  public SpinRouletteByColorCount(final Roulette roulette, DoubleSupplier colorsRequiredSupplier) {
+  public SpinRouletteByColorCount(final Roulette roulette, final DoubleSupplier colorsRequiredSupplier) {
     super(roulette, colorsRequiredSupplier);
   }
 

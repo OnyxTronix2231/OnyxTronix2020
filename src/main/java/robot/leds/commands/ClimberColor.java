@@ -19,10 +19,8 @@ public class ClimberColor extends CommandBase {
 
   @Override
   public void execute() {
-    while (true) {
       rgbLeds.changeColor(RED);
       new WaitCommand(WAIT_BETWEEN_COLORS);
       rgbLeds.changeColor(NOTHING);
-    }
   }
 }

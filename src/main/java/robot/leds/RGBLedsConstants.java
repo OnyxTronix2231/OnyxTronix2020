@@ -2,7 +2,6 @@ package robot.leds;
 
 public class RGBLedsConstants {
 
-  public static final double WAIT_BETWEEN_COLORS = 0.1;
   public static final char GREEN = 'G';
   public static final char RED = 'R';
   public static final char BLUE = 'B';
@@ -12,6 +11,7 @@ public class RGBLedsConstants {
   public static final char WHITE = 'W';
   public static final char NOTHING = 'N'; // Black
   public static final int CHAR_AT = 0;
+  public static final double WAIT_BETWEEN_COLORS = 0.1;
   static final double RED_R = 100;
   static final double RED_G = 0;
   static final double RED_B = 0;

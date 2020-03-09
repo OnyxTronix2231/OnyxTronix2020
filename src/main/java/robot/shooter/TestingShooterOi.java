@@ -23,7 +23,7 @@ public class TestingShooterOi {
                           UniqueButtonCache driveJoystickButtonCache, final Shooter shooter) {
 
     final JoystickAxis shootByVelocity = buttonJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kLeftY.value);
-    shootByVelocity.whileActiveContinuous(new ShootByVelocity (shooter, () -> TESTING_VELOCITY));
+    shootByVelocity.whileActiveContinuous(new ShootByVelocity (shooter, () -> 17000));
 
     final Trigger openPiston = driveJoystickButtonCache.createJoystickTrigger(XboxController.Button.kStickLeft.value);
     openPiston.whileActiveOnce(new OpenShooterPiston(shooter));

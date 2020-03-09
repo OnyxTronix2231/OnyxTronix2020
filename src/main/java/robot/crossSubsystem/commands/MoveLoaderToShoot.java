@@ -32,7 +32,7 @@ public class MoveLoaderToShoot extends SequentialCommandGroup {
                     new WaitCommand(0.2),
                     new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)
                 ),
-                new MoveLoaderConveyorBySpeed(loaderConveyor, () -> 0.6)
+                new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)
             )
             ,
             new MoveBallStopperBySpeed(ballStopper, () -> PERCENTAGE_OUTPUT),

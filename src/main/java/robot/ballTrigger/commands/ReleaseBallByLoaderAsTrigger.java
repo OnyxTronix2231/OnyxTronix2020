@@ -26,4 +26,12 @@ public class ReleaseBallByLoaderAsTrigger extends SequentialCommandGroup {
             new MoveLoaderToShoot(loaderConveyor, ballStopper, storageConveyor)
         ));
   }
+
+  @Override
+  public boolean isFinished() {
+    if (super.isFinished()) {
+      initialize();
+    }
+    return false;
+  }
 }

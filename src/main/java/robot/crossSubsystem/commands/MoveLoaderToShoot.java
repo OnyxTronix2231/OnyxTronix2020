@@ -1,6 +1,5 @@
 package robot.crossSubsystem.commands;
 
-import static robot.ballStopper.BallStopperConstants.DELAY;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 import static robot.loaderConveyor.LoaderConveyorConstants.PERCENTAGE_OUTPUT_MAX;
 
@@ -24,7 +23,7 @@ public class MoveLoaderToShoot extends SequentialCommandGroup {
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)),
         CommandGroupBase.race(new WaitCommand(0.3),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX),
-            new MoveBallStopperBySpeed(ballStopper, () -> -PERCENTAGE_OUTPUT, DELAY),
+            new MoveBallStopperBySpeed(ballStopper, () -> -PERCENTAGE_OUTPUT),
             new MoveStorageConveyorBySpeed(storageConveyor, () -> StorageConveyorConstants.PERCENTAGE_OUTPUT)
         ),
         CommandGroupBase.parallel(
@@ -36,7 +35,7 @@ public class MoveLoaderToShoot extends SequentialCommandGroup {
                 new MoveLoaderConveyorBySpeed(loaderConveyor, () -> 0.6)
             )
             ,
-            new MoveBallStopperBySpeed(ballStopper, () -> PERCENTAGE_OUTPUT, DELAY),
+            new MoveBallStopperBySpeed(ballStopper, () -> PERCENTAGE_OUTPUT),
             new MoveStorageConveyorBySpeed(storageConveyor, () -> StorageConveyorConstants.PERCENTAGE_OUTPUT)));
   }
 }

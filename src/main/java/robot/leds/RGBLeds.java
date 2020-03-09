@@ -37,7 +37,7 @@ public class RGBLeds extends SubsystemBase {
     configCanifier();
   }
 
-  public void changeColor(final char colorInitial) {
+  public void changeColor(final char initialColor) {
     switch (colorInitial) {
       /*
        A: G

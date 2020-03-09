@@ -1,4 +1,4 @@
-package robot.drivetrain.commands;
+package robot.autonomous.commands;
 
 import static robot.autonomous.AutonomousConstants.SHOOTER_TIMER;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
@@ -12,17 +12,19 @@ import robot.ballCollector.commands.OpenBallCollectorPistons;
 import robot.ballStopper.BallStopper;
 import robot.ballTrigger.commands.LoadBall;
 import robot.drivetrain.DriveTrain;
+import robot.drivetrain.commands.MoveToPose;
 import robot.loaderConveyor.LoaderConveyor;
 import robot.shooter.Shooter;
 import robot.shooter.commands.ShootByDistance;
 import robot.storageConveyor.StorageConveyor;
 import robot.vision.Vision;
 
-public class FirstPath extends SequentialCommandGroup {
+public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends SequentialCommandGroup {
 
-  public FirstPath(final DriveTrain driveTrain, final Shooter shooter, final Vision vision,
-                   final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-                   final StorageConveyor storageConveyor, final BallStopper ballStopper) {
+  public TargetToThreeBallsAtGeneratorToInitiationLinePath(
+      final DriveTrain driveTrain, final Shooter shooter, final Vision vision,
+      final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
+      final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     super(
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(

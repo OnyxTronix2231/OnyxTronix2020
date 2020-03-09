@@ -45,7 +45,7 @@ public final class AutonomousConstants {
       return new Path[]{subPathOne, subPathTwo, subPathThree, subPathFour};
     }
 
-    static Path[] START_INFRONT_OF_TRENCH_COLLECT_TWO_BALLS_SHOOT_COLLECT_THREE_MORE() {
+    public static Path[] START_INFRONT_OF_TRENCH_COLLECT_TWO_BALLS_SHOOT_COLLECT_THREE_MORE() {
       final List<Pose2d> subPathOnePoints = List.of(
           new Pose2d(3, 0.7, Rotation2d.fromDegrees(0)),
           new Pose2d(7, 0.7, Rotation2d.fromDegrees(0))
@@ -63,7 +63,7 @@ public final class AutonomousConstants {
           new Pose2d(3, 2.4, Rotation2d.fromDegrees(0))
       );
       final Path subPathThree = new Path(false, subPathThreePoints);
-      return new Path[]{subPathOne, subPathThree};
+      return new Path[]{subPathOne, subPathTwo, subPathThree};
     }
 
     public static Path[] TEST_PATH() {

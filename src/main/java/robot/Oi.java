@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
 import onyxTronix.UniqueButtonCache;
+import robot.autonomous.AutonomousOiBinder;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.BallCollectorOiBinder;
 import robot.ballStopper.BallStopper;
@@ -101,6 +102,9 @@ public class Oi {
 
     final JoystickAxis operatorKRightAxis =
         operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
+
+    final JoystickAxis operatorKB =
+        operatorJoystickAxisCache.createJoystickTrigger(XboxController.Button.kB.value);
     //endregion
 
     //region Complex triggers
@@ -191,5 +195,11 @@ public class Oi {
         triggerBallAtCloseRange, releaseBallManually,
         moveConveyorsReverse);
     //endregion
+
+    // region autonomous
+
+    final Trigger testAutonomous = operatorKB;
+
+    new AutonomousOiBinder(driveTrain, testAutonomous);
   }
 }

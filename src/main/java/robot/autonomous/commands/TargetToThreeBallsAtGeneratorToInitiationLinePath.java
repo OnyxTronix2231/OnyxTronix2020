@@ -1,5 +1,6 @@
 package robot.autonomous.commands;
 
+import static robot.autonomous.AutonomousConstants.Paths.getTargetToThreeBallsAtGeneratorPath;
 import static robot.autonomous.AutonomousConstants.SHOOTER_TIMER;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -28,15 +29,15 @@ public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends Sequentia
     super(
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(
-            new MoveToPose(driveTrain, Paths.START_INFRONT_OF_TARGET_COLLECT_THREE_BALLS_FROM_SHIELD_GENERATOR()[0].getEndingPose()),
-            new MoveToPose(driveTrain, Paths.START_INFRONT_OF_TARGET_COLLECT_THREE_BALLS_FROM_SHIELD_GENERATOR()[1].getEndingPose()),
-            new MoveToPose(driveTrain, Paths.START_INFRONT_OF_TARGET_COLLECT_THREE_BALLS_FROM_SHIELD_GENERATOR()[2].getEndingPose()))
+            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(1)),
+            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(2)),
+            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(3))
             .deadlineWith(
             new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
                 new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
             new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
-        new MoveToPose(driveTrain, Paths.START_INFRONT_OF_TARGET_COLLECT_THREE_BALLS_FROM_SHIELD_GENERATOR()[3].getEndingPose()),
-        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER));
+        new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(4)),
+        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)));
   }
 }

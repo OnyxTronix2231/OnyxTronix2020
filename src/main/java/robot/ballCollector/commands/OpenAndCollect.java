@@ -15,8 +15,8 @@ public class OpenAndCollect extends SequentialCommandGroup {
   private final BallCollector ballCollector;
 
   public OpenAndCollect(final BallCollector ballCollector, final DoubleSupplier speedSupplier) {
+    super(new OpenBallCollectorPistons(ballCollector), new CollectBallBySpeed(ballCollector, speedSupplier));
     this.ballCollector = ballCollector;
-    addCommands(new OpenBallCollectorPistons(ballCollector), new CollectBallBySpeed(ballCollector, speedSupplier));
   }
 
   @Override

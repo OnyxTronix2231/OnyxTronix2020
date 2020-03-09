@@ -18,19 +18,10 @@ import java.util.function.BooleanSupplier;
 public class ReleaseBallByLoaderAsTrigger extends SequentialCommandGroup {
 
   public ReleaseBallByLoaderAsTrigger(final LoaderConveyor loaderConveyor, final StorageConveyor storageConveyor,
-                                      final BallStopper ballStopper, final BooleanSupplier canReleaseBallSupplier) {
-    super(
-        deadline(new WaitUntilCommand(() -> !loaderConveyor.isBallInLoader() || !canReleaseBallSupplier.getAsBoolean()),
-            sequence(
+                                      final BallStopper ballStopper) {
+    super(sequence(
                 new WaitCommand(WAIT_FOR_CONSISTENT_TARGET),
-                new MoveLoaderToShoot(loaderConveyor, ballStopper, storageConveyor))));
-  }
-
-  @Override
-  public boolean isFinished() {
-    if (super.isFinished()) {
-      initialize();
-    }
-    return false;
+                new WaitUntilCommand(() -> loaderConveyor.isOnTarget()),
+                new MoveLoaderToShoot(loaderConveyor, ballStopper, storageConveyor)));
   }
 }

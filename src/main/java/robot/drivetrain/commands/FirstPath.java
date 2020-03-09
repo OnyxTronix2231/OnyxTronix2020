@@ -35,6 +35,6 @@ public class FirstPath extends SequentialCommandGroup {
             new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
         new MoveToPose(driveTrain, Paths.FIRST_PATH()[3].getEndingPose()),
-        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()));
+        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(3));
   }
 }

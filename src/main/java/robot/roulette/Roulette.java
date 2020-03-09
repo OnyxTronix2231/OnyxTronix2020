@@ -23,7 +23,7 @@ public class Roulette extends SubsystemBase {
 
   public Roulette(final RouletteComponents components) {
     this.components = components;
-    this.rouletteColors = Arrays.asList(RouletteColor.values());
+    rouletteColors = Arrays.asList(RouletteColor.values());
   }
 
   public void moveRouletteBySpeed(final double speed) {

@@ -153,7 +153,7 @@ public class Robot extends TimedRobot {
     LiveWindow.setEnabled(false);
     vision.setLEDMode(LimelightLedMode.forceOff);
     driveTrain.setNeutralModeToCoast();
-    climber.setNeutralModeToCoast();
+    climber.setNeutralModeToBrake();
   }
 
   @Override

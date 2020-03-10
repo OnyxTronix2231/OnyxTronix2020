@@ -32,8 +32,8 @@ public class Vision extends SubsystemBase {
     Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getTurretOrientation());
     Shuffleboard.getTab("Vision").addNumber("Horizontal outer", () -> outerTarget.getHorizontalOffset());
     Shuffleboard.getTab("Vision").addNumber("Horizontal inner", () -> innerTarget.getHorizontalOffset());
-    Shuffleboard.getTab("Vision").addNumber("Robot X", () -> outerTarget.getRobotToTargetVector().x);
-    Shuffleboard.getTab("Vision").addNumber("Robot Y", () -> outerTarget.getRobotToTargetVector().y);
+    Shuffleboard.getTab("Vision").addNumber("Robot X", () -> getVectorRobotToFieldZeroMeters().x);
+    Shuffleboard.getTab("Vision").addNumber("Robot Y", () -> getVectorRobotToFieldZeroMeters().y);
     Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 

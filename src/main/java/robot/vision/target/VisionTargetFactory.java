@@ -6,17 +6,15 @@ import java.util.function.DoubleSupplier;
 
 public class VisionTargetFactory {
 
-  private final Limelight limelight;
   private final DoubleSupplier turretAngleSupplier;
-  private final DoubleSupplier accelerometerAngleSupplier;
+  private final DoubleSupplier gyroAngleSupplier;
   private final double cameraHeight;
   private final double cameraOffset;
 
-  public VisionTargetFactory(final DoubleSupplier turretAngleSupplier, final DoubleSupplier accelerometerAngleSupplier,
-                             final double cameraAngleOffset, final double cameraHeight, final Limelight limelight) {
-    this.limelight = limelight;
+  public VisionTargetFactory(final DoubleSupplier gyroAngleSupplier, final DoubleSupplier turretAngleSupplier,
+                             final double cameraAngleOffset, final double cameraHeight) {
     this.turretAngleSupplier = turretAngleSupplier;
-    this.accelerometerAngleSupplier = accelerometerAngleSupplier;
+    this.gyroAngleSupplier = gyroAngleSupplier;
     this.cameraHeight = cameraHeight;
     this.cameraOffset = cameraAngleOffset;
   }
@@ -30,11 +28,11 @@ public class VisionTargetFactory {
   }
 
   private OuterTarget generateOuterTarget() {
-    return new OuterTarget(accelerometerAngleSupplier.getAsDouble(),
-        turretAngleSupplier.getAsDouble(), cameraHeight, cameraOffset, limelight.getTarget());
+    return new OuterTarget(gyroAngleSupplier.getAsDouble(), turretAngleSupplier.getAsDouble(),
+        cameraHeight, cameraOffset, Limelight.getInstance().getTarget());
   }
 
   private InnerTarget generateInnerTarget() {
-    return new InnerTarget(generateOuterTarget());
+    return new InnerTarget(gyroAngleSupplier.getAsDouble(), generateOuterTarget());
   }
 }

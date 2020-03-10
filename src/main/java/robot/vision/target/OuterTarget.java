@@ -28,7 +28,7 @@ public class OuterTarget implements VisionTarget {
   @Override
   public void update(final double gyroYaw,final double turretAngle, final LimelightTarget target) {
     if (target != null) {
-      this.verticalOffset = target.getVerticalOffsetToCrosshair();
+      this.verticalOffset = -target.getVerticalOffsetToCrosshair();
       this.distance = (TARGET_HEIGHT_CM - cameraHeight) / Math.tan(Math.toRadians(cameraOffset +
           target.getVerticalOffsetToCrosshair()));
       Vector2dEx turretCenterToTargetVector = Vector2dEx.fromMagnitudeDirection(distance, target.getHorizontalOffsetToCrosshair());

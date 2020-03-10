@@ -1,10 +1,9 @@
 package robot.autonomous.commands;
 
-import static robot.autonomous.AutonomousConstants.Paths.getTargetToThreeBallsAtGeneratorPath;
+import static robot.autonomous.AutonomousConstants.Paths.GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH;
 import static robot.autonomous.AutonomousConstants.SHOOTER_TIMER;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import robot.autonomous.AutonomousConstants.Paths;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
@@ -29,15 +28,15 @@ public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends Sequentia
     super(
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(
-            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(1)),
-            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(2)),
-            new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(3))
+            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(1)),
+            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(2)),
+            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(3))
             .deadlineWith(
             new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
                 new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
             new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
-        new MoveToPose(driveTrain, getTargetToThreeBallsAtGeneratorPath.getPoseAt(4)),
+        new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(4)),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)));
   }
 }

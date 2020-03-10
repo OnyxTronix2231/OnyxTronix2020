@@ -1,6 +1,6 @@
 package robot.autonomous.commands;
 
-import static robot.autonomous.AutonomousConstants.Paths.getTrenchToTwoBallsToOneToTwoFromGeneratorPath;
+import static robot.autonomous.AutonomousConstants.Paths.GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR;
 import static robot.autonomous.AutonomousConstants.SHOOTER_TIMER;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -25,7 +25,7 @@ public class TrenchRunToTwoBallsToThreeMorePath extends SequentialCommandGroup {
                                             final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
                                             final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     super(
-        new MoveToPose(driveTrain, getTrenchToTwoBallsToOneToTwoFromGeneratorPath.getPoseAt(1))
+        new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(1))
             .deadlineWith(
                 new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
                     new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
@@ -33,9 +33,9 @@ public class TrenchRunToTwoBallsToThreeMorePath extends SequentialCommandGroup {
         new CloseBallCollectorPistons(ballCollector),
         new ShootByDistance(shooter,  () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(
-            new MoveToPose(driveTrain, getTrenchToTwoBallsToOneToTwoFromGeneratorPath.getPoseAt(2)),
-            new MoveToPose(driveTrain, getTrenchToTwoBallsToOneToTwoFromGeneratorPath.getPoseAt(3)),
-            new MoveToPose(driveTrain, getTrenchToTwoBallsToOneToTwoFromGeneratorPath.getPoseAt(4)))
+            new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(2)),
+            new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(3)),
+            new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(4)))
                 .deadlineWith(
                     new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
                         new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),

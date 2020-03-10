@@ -31,6 +31,8 @@ public class Vision extends SubsystemBase {
     Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getTurretOrientation());
     Shuffleboard.getTab("Vision").addNumber("Horizontal outer", () -> outerTarget.getHorizontalOffset());
     Shuffleboard.getTab("Vision").addNumber("Horizontal inner", () -> innerTarget.getHorizontalOffset());
+    Shuffleboard.getTab("Vision").addNumber("Robot X", () -> outerTarget.getRobotToTargetVector().x);
+    Shuffleboard.getTab("Vision").addNumber("Robot Y", () -> outerTarget.getRobotToTargetVector().y);
     Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 
@@ -60,6 +62,12 @@ public class Vision extends SubsystemBase {
 
   public void setPipeline(final int index) {
     Limelight.getInstance().setPipeline(index);
+  }
+
+  public Vector2dEx getVectorToFieldZero() {
+    Vector2dEx vectorToFieldZero = outerTarget.getRobotToTargetVector();
+    vectorToFieldZero.subtract(VisionConstants.VECTOR_FIELD_ZERO_TO_OUTER);
+    return vectorToFieldZero;
   }
 
   public void setLEDMode(LimelightLedMode ledMode) {

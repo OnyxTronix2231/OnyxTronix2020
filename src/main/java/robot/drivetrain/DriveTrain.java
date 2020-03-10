@@ -116,7 +116,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getOdometryHeading() {
-    return components.getPigeonIMU().getRawYaw();
+    return components.getPigeonIMU().getNormalizedYaw();
   }
 
   public double getRawRobotHeading() {

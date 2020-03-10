@@ -17,7 +17,7 @@ public final class LoaderConveyorConstants {
   }
 
   public static final double PERCENTAGE_OUTPUT_MIN = 0.45;
-  public static final double PERCENTAGE_OUTPUT_MAX = 1;
+  public static final double PERCENTAGE_OUTPUT_MAX = 0.8;
   public static final double MOVE_LOADER_BACK = -0.3;
   static final int TOLERANCE = 50;
 }

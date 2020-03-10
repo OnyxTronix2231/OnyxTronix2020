@@ -4,6 +4,7 @@ import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.OPERATOR_JOYSTICK_PORT;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
@@ -103,8 +104,8 @@ public class Oi {
     final JoystickAxis operatorKRightAxis =
         operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
 
-    final JoystickAxis operatorKB =
-        operatorJoystickAxisCache.createJoystickTrigger(XboxController.Button.kB.value);
+    final JoystickButton operatorKB =
+        operatorJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
     //endregion
 
     //region Complex triggers

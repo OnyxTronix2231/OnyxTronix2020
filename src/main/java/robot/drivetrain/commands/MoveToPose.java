@@ -14,7 +14,7 @@ public class MoveToPose extends OnyxRamseteCommand {
                     final Pose finishPose) {
     super(() -> driveTrain.getTrajectoryGenerator().getTrajectoryFromPoseList(List.of(driveTrain.getPose(),
         finishPose.getPose2d()),
-        driveTrain.getComponents(), true),
+        driveTrain.getComponents(), finishPose.isForward()),
         driveTrain::getPose,
         new RamseteController(RAMSETE_B, RAMSETE_ZETA),
         driveTrain.getKinematics(),
@@ -22,5 +22,17 @@ public class MoveToPose extends OnyxRamseteCommand {
         driveTrain::tankDriveVolts,
         driveTrain.getFeedForward(),
         driveTrain);
+  }
+
+  @Override
+  public void initialize() {
+    super.initialize();
+    System.out.println("Start");
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    super.end(interrupted);
+    System.out.println("End");
   }
 }

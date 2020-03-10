@@ -112,8 +112,8 @@ public class OnyxRamseteCommand extends CommandBase {
     outputVoltage.accept(0.0, 0.0);
   }
 
-  @Override
-  public boolean isFinished() {
-    return timer.hasPeriodPassed(trajectory.getTotalTimeSeconds());
-  }
+//  @Override
+//  public boolean isFinished() {
+//    return timer.hasPeriodPassed(trajectory.getTotalTimeSeconds());
+//  }
 }

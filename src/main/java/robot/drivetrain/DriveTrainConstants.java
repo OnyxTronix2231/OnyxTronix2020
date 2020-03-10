@@ -44,8 +44,8 @@ public final class DriveTrainConstants {
     static final double VELOCITY_CONTROLLER_P = 0; // TODO: Calibration with A
     static final double VELOCITY_CONTROLLER_I = 0; // TODO: Calibration with A
     static final double VELOCITY_CONTROLLER_D = 0; // TODO: Calibration with A
-    static final double MAX_OUTPUT_FORWARD = 0.6;
-    static final double MAX_OUTPUT_REVERSE = -0.6;
+    static final double MAX_OUTPUT_FORWARD = 1;
+    static final double MAX_OUTPUT_REVERSE = -1;
     static final double TRAJECTORY_P = 0.4; // TODO: Calibration with A
     static final double TRAJECTORY_I = 0; // TODO: Calibration with A
     static final double TRAJECTORY_D = 4; // TODO: Calibration with A
@@ -59,7 +59,7 @@ public final class DriveTrainConstants {
       static final double VOLTS = 0.238; // TODO: Calibration with A
       static final double VOLT_SECONDS_PER_METER = 2.11;
       static final double VOLT_SECONDS_SQUARED_PER_METER = 0.364; // TODO: Calibration with A
-      static final double MAX_VOLTAGE = 12 * MAX_OUTPUT_FORWARD; // TODO: Calibration with A
+      static final double MAX_VOLTAGE = 12 * 0.6; // TODO: Calibration with A
       static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
       static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A
       static final double TRACKWIDTH_METERS = 0.62879; // TODO: Calibration with A

@@ -66,10 +66,10 @@ public final class AutonomousConstants {
 
     public static Path testWeirdPath = new Path(
         new Pose(new Pose2d(1,-4, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(90)), true),
         new Pose(new Pose2d(5,-4, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(1,-4, Rotation2d.fromDegrees(0)), true)
+        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(1,-4, Rotation2d.fromDegrees(0)), false)
     );
   }
 }

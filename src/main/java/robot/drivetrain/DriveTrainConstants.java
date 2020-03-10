@@ -56,9 +56,9 @@ public final class DriveTrainConstants {
       public static final double RAMSETE_ZETA = 0.7;
       public static final double TRAJECTORY_P = 0;
       static final double ENCODER_CPR = ENCODER_UNITS * 9.5; // TODO: Calibration with A
-      static final double VOLTS = 0.238; // TODO: Calibration with A
-      static final double VOLT_SECONDS_PER_METER = 2.11;
-      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.364; // TODO: Calibration with A
+      static final double VOLTS = 0.24; // TODO: Calibration with A
+      static final double VOLT_SECONDS_PER_METER = 2.15;
+      static final double VOLT_SECONDS_SQUARED_PER_METER = 0.354; // TODO: Calibration with A
       static final double MAX_VOLTAGE = 12 * 0.6; // TODO: Calibration with A
       static final double MAX_SPEED_METERS_PER_SECOND = 3; // TODO: Calibration with A
       static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3; // TODO: Calibration with A

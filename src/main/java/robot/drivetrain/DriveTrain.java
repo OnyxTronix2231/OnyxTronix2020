@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
     Shuffleboard.getTab("Odometry").addNumber("Heading",
         () -> components.getOdometry().getPoseMeters().getRotation().getDegrees());
     resetEncoders();
-    components.getOdometry().resetPosition(new Pose2d(1, -4, Rotation2d.fromDegrees(0)),
+    components.getOdometry().resetPosition(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
         Rotation2d.fromDegrees(0));
   }
 

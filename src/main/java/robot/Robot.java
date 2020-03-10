@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
 
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
-        () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
+        () -> vision.getInnerTarget().getDistance(), vision::getDependableTarget,
         () -> canReleaseBall(shooter, yawControl),
         () -> canReleaseBallAtCloseRange(shooter, yawControl));
 

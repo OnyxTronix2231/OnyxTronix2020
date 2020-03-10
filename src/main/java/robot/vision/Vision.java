@@ -65,7 +65,7 @@ public class Vision extends SubsystemBase {
     Limelight.getInstance().setPipeline(index);
   }
 
-  public Vector2dEx getVectorToFieldZeroMeters() {
+  public Vector2dEx getVectorRobotToFieldZeroMeters() {
     Vector2dEx vectorToFieldZero = outerTarget.getRobotToTargetVector();
     vectorToFieldZero.subtract(VisionConstants.VECTOR_FIELD_ZERO_TO_OUTER);
     vectorToFieldZero.x /= 100;

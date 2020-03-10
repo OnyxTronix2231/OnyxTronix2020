@@ -3,7 +3,10 @@ package robot.shooter;
 import static robot.RobotConstants.PRIMARY_PID;
 import static robot.shooter.ShooterConstants.IS_PISTON_OPEN;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.AT_SHOOTING_VELOCITY;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.LAST_DISTANCE_VELOCITY;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MAX_LAST_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIDDLE_DISTANCE;
+import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_LAST_DISTANCE;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.MIN_VELOCITY_ERROR;
 import static robot.shooter.ShooterConstants.ShooterComponentsA.VELOCITY_PID_SLOT;
 import static robot.shooter.ShooterConstants.TOLERANCE;
@@ -23,7 +26,7 @@ public class Shooter extends SubsystemBase {
     Shuffleboard.getTab("Shooter").addNumber("PID Error",
         () -> components.getMasterMotor().getClosedLoopError());
     Shuffleboard.getTab("Shooter").addNumber("Current RPM",
-        () -> components.getMasterMotor().getSelectedSensorVelocity() * 600 /2046.0);
+        () -> components.getMasterMotor().getSelectedSensorVelocity() * 600 / 2046.0);
     Shuffleboard.getTab("Shooter").addNumber("Current velocity",
         () -> components.getMasterMotor().getSelectedSensorVelocity());
   }
@@ -57,14 +60,21 @@ public class Shooter extends SubsystemBase {
   }
 
   public double distanceToVelocity(double distance) {
-    if (distance > MIDDLE_DISTANCE) {
-      return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
+    if (distance < MIDDLE_DISTANCE) {
+      return 632637 * Math.pow(distance, -0.584);
+    } else if (distance < MIN_LAST_DISTANCE) {
+      return 2654.4 * Math.pow(distance, 0.2844);
+    } else if (distance < MAX_LAST_DISTANCE){
+      return LAST_DISTANCE_VELOCITY;
     }
-    return 0.1912 * Math.pow(distance, 2) - 161.44 * distance +67791;
+    return -0.2 * Math.pow(distance, 2) + 325 * distance - 114250;
   }
+// y = 632637 * Math.pow(distance, -0.584); 400 - 550
+// y = 2654.4 * Math.pow(distance, 0.2844); 550 - 675
+// y = 17000; 675 - 750
+// y = -0.2 * Math.pow(distance, 2) + 325 * distance - 114250; 750 - 800
 
-  // y= -0.0121x2 +26.707x + 24130 > 450
-  //y = 0.1912x2 - 161.44x +67791 < 450
+
 
   public void startChecking() {
     lastVelocityError = Integer.MAX_VALUE;

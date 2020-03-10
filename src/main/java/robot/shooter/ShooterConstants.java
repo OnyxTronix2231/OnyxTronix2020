@@ -13,8 +13,11 @@ public final class ShooterConstants {
     static final int CURRENT_LIMIT = 40;//TODO check and change
     static final double TRIGGER_THRESHOLD_TIME = 0.1;//TODO check and change
     static final int TRIGGER_THRESHOLD_CURRENT = 30; // TODO: check and change
-    static final int MIDDLE_DISTANCE = 450;
+    static final int MIDDLE_DISTANCE = 550;
+    static final int MIN_LAST_DISTANCE = 675;
+    static final int MAX_LAST_DISTANCE = 750;
     static final int VELOCITY_PID_SLOT = 0;
+    static final int LAST_DISTANCE_VELOCITY = 17000;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double VELOCITY_P = 0.6;
     static final double VELOCITY_I = 0;

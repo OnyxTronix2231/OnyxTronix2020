@@ -14,18 +14,17 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorConstants;
 import robot.storageConveyor.commands.MoveStorageConveyorBySpeed;
 
-public class MoveLoaderToShoot extends SequentialCommandGroup {
+public class MoveConveyorsBeforeShoot extends SequentialCommandGroup {
 
-  public MoveLoaderToShoot(final LoaderConveyor loaderConveyor, final BallStopper ballStopper,
-                           final StorageConveyor storageConveyor) {
-
-    CommandGroupBase.parallel(
-        CommandGroupBase.sequence(
-            CommandGroupBase.race(
-                new WaitCommand(0.2),
-                new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)),
+  public MoveConveyorsBeforeShoot(final LoaderConveyor loaderConveyor, final BallStopper ballStopper,
+                                  final StorageConveyor storageConveyor) {
+    super(
+        new WaitCommand(0.2).raceWith(
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)),
-        new MoveBallStopperBySpeed(ballStopper, () -> PERCENTAGE_OUTPUT),
-        new MoveStorageConveyorBySpeed(storageConveyor, () -> StorageConveyorConstants.PERCENTAGE_OUTPUT));
+        CommandGroupBase.race(new WaitCommand(0.3),
+            new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX),
+            new MoveBallStopperBySpeed(ballStopper, () -> -PERCENTAGE_OUTPUT),
+            new MoveStorageConveyorBySpeed(storageConveyor, () -> StorageConveyorConstants.PERCENTAGE_OUTPUT)
+        ));
   }
 }

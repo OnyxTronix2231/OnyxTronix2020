@@ -2,7 +2,7 @@ package robot.storageConveyor;
 
 public final class StorageConveyorConstants {
 
-  public static final double PERCENTAGE_OUTPUT = 0.8;
+  public static final double PERCENTAGE_OUTPUT = 0.5;
   public static final double MOVE_STORAGE_BACK = -0.8;
 
   public static final class StorageConveyorComponentsA {

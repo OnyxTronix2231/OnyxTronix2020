@@ -10,6 +10,7 @@ import static robot.loaderConveyor.LoaderConveyorConstants.MOVE_LOADER_BACK;
 import static robot.storageConveyor.StorageConveyorConstants.MOVE_STORAGE_BACK;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import robot.ballStopper.BallStopper;
 import robot.ballStopper.BallStopperConstants;
@@ -41,8 +42,8 @@ public class BallTriggerOiBinder {
             canReleaseBallSupplier));
 
     triggerBallAtCloseRange.and(triggerBallManually.negate()).whileActiveContinuous(
-        new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,
-            canReleaseBallAtCloseRangeSupplier));
+        new WaitCommand(0.5).andThen(new ReleaseBallByLoaderAsTrigger(loaderConveyor, storageConveyor, ballStopper,
+            canReleaseBallAtCloseRangeSupplier)));
 
     triggerBall.or(triggerBallAtCloseRange).and(triggerBallManually).whenActive(
         new MoveAllConveyors(loaderConveyor, storageConveyor, ballStopper,

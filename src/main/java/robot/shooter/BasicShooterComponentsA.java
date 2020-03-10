@@ -31,13 +31,13 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.configFactoryDefault();
     masterMotor.configAllSettings(getFalconConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Coast);
+    masterMotor.setInverted(true);
 
     slaveMotor = new WPI_TalonFX(SLAVE_PORT);
     slaveMotor.configAllSettings(getFalconConfiguration());
     slaveMotor.configFactoryDefault();
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
-    slaveMotor.setInverted(true);
 
     solenoid = new Solenoid(SOLENOID_PORT);
   }

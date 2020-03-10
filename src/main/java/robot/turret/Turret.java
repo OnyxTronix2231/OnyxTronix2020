@@ -43,7 +43,6 @@ public class Turret extends SubsystemBase {
     } else if (tempAngle < -DEGREES_IN_CIRCLE + MAX_ANGLE) {
       tempAngle += DEGREES_IN_CIRCLE;
     }
-
     components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 

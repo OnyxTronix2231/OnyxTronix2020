@@ -13,8 +13,8 @@ public final class VisionConstants {
   public static final double MAX_INNER_ORIENTATION = 15;
 
   public static final class RobotAConstants {
-    public static final double CAMERA_VERTICAL_OFFSET_ANGLE = 23.21; // TODO: Check and change
-    public static final double CAMERA_HEIGHT_CM = 46.5; //TODO: Check and change
+    public static final double CAMERA_VERTICAL_OFFSET_ANGLE = 34.08; // TODO: Check and change
+    public static final double CAMERA_HEIGHT_CM = 55; //TODO: Check and change
     public static final double LIMELIGHT_TURRET_CENTER_CM = 22.5;
     public static final Vector2dEx VECTOR_LIMELIGHT_TURRET_CENTER = new Vector2dEx(LIMELIGHT_TURRET_CENTER_CM, 0);
     public static final double ROBOT_CENTER_TURRET_DISTANCE = 0; // TODO: Check and change

@@ -14,9 +14,4 @@ public class BallStopper extends SubsystemBase {
   public void moveBallStopperMotor(final double speed) {
     components.getBallStopperMotor().set(ControlMode.PercentOutput, speed);
   }
-
-  public void moveBallStopperDelayMotor(final double speed) {
-    components.getDelayMotor().set(ControlMode.PercentOutput, speed);
-  }
-
 }

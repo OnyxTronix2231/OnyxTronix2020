@@ -13,7 +13,7 @@ public final class BallCollectorConstants {
 
   public static final class BallCollectorComponentsA {
     static final int MASTER_MOTOR_PORT = 10;
-    static final int SOLENOID_PORT = 3;
+    static final int SOLENOID_PORT = 7;
     static final int PEAK_AMP = 20; // TODO: check value
     static final int PEAK_AMP_DURATION = 0; // TODO: check value
     static final double BALL_COLLECTOR_RAMP = 1;

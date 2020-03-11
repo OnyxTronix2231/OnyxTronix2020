@@ -9,7 +9,7 @@ public final class ShooterConstants {
     static final int MASTER_PORT = 7;
     public static final double MAX_VELOCITY = 19000;
     static final int SLAVE_PORT = 8;
-    static final int SOLENOID_PORT = 2;
+    static final int SOLENOID_PORT = 1;
     static final int CURRENT_LIMIT = 40;//TODO check and change
     static final double TRIGGER_THRESHOLD_TIME = 0.1;//TODO check and change
     static final int TRIGGER_THRESHOLD_CURRENT = 30; // TODO: check and change

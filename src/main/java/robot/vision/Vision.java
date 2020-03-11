@@ -4,9 +4,10 @@ import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.loaderConveyor.LoaderConveyor;
+import robot.drivetrain.DriveTrain;
 import robot.vision.target.TargetChooser;
 import robot.vision.target.DistanceOrientationTargetChooser;
 import robot.vision.target.VisionTarget;
@@ -29,11 +30,9 @@ public class Vision extends SubsystemBase {
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
     Shuffleboard.getTab("Vision").addNumber("Distance to chosen target", () -> getDependableTarget().getDistance());
-    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getTurretOrientation());
+    Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getRobotOrientation());
     Shuffleboard.getTab("Vision").addNumber("Horizontal outer", () -> outerTarget.getHorizontalOffset());
     Shuffleboard.getTab("Vision").addNumber("Horizontal inner", () -> innerTarget.getHorizontalOffset());
-    Shuffleboard.getTab("Vision").addNumber("Robot X", () -> getVectorRobotToFieldZeroMeters().x);
-    Shuffleboard.getTab("Vision").addNumber("Robot Y", () -> getVectorRobotToFieldZeroMeters().y);
     Limelight.getInstance().setLedMode(LimelightLedMode.forceOff);
   }
 
@@ -50,7 +49,7 @@ public class Vision extends SubsystemBase {
   }
 
   public boolean canHitOuterTarget() {
-    return targetChooser.chooseTarget() == innerTarget && Limelight.getInstance().targetFound();
+    return targetChooser.chooseTarget() == innerTarget;
   }
 
   public VisionTarget getInnerTarget() {
@@ -61,16 +60,12 @@ public class Vision extends SubsystemBase {
     return outerTarget;
   }
 
-  public void setPipeline(final int index) {
-    Limelight.getInstance().setPipeline(index);
+  public void setLedMode(final LimelightLedMode ledMode) {
+    Limelight.getInstance().setLedMode(ledMode);
   }
 
-  public Vector2dEx getVectorRobotToFieldZeroMeters() {
-    Vector2dEx vectorToFieldZero = outerTarget.getRobotToTargetVector();
-    vectorToFieldZero.subtract(VisionConstants.VECTOR_FIELD_ZERO_TO_OUTER);
-    vectorToFieldZero.x /= 100;
-    vectorToFieldZero.y /= 100;
-    return vectorToFieldZero;
+  public void setPipeline(final int index) {
+    Limelight.getInstance().setPipeline(index);
   }
 
   public void setLEDMode(LimelightLedMode ledMode) {

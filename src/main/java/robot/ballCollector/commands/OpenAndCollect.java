@@ -18,12 +18,4 @@ public class OpenAndCollect extends SequentialCommandGroup {
     super(new OpenBallCollectorPistons(ballCollector), new CollectBallBySpeed(ballCollector, speedSupplier));
     this.ballCollector = ballCollector;
   }
-
-  @Override
-  public void end(final boolean interrupted) {
-    new CloseBallCollectorPistons(ballCollector).alongWith(sequence(new WaitCommand(CLOSING_SEQUENCE_DELAY),
-    new CollectBallBySpeed(ballCollector, () -> DURING_CLOSED_PERCENT_OUTPUT).
-        withTimeout(CLOSING_SEQUENCE_TIMEOUT))).schedule();
-
-  }
 }

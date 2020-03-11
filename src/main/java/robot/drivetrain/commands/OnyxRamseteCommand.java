@@ -3,6 +3,7 @@ package robot.drivetrain.commands;
 import static edu.wpi.first.wpilibj.util.ErrorMessages.requireNonNullParam;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.TRAJECTORY_P;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -32,6 +34,7 @@ public class OnyxRamseteCommand extends CommandBase {
   private double prevTime;
   private Trajectory trajectory;
   private DifferentialDriveWheelSpeeds prevSpeeds;
+  private static NetworkTableEntry networkTableEntry;
 
   public OnyxRamseteCommand(final Supplier<Trajectory> trajectorySupplier,
                             final Supplier<Pose2d> pose2dSupplier,
@@ -51,6 +54,12 @@ public class OnyxRamseteCommand extends CommandBase {
     leftController = new PIDController(TRAJECTORY_P, 0, 0);
     rightController = new PIDController(TRAJECTORY_P, 0, 0);
 
+    try {
+      networkTableEntry =
+          Shuffleboard.getTab("Odometry").add("9", leftController.getPositionError()).getEntry();
+    } catch (Exception e) {
+
+    }
     addRequirements(requirements);
   }
 
@@ -102,8 +111,10 @@ public class OnyxRamseteCommand extends CommandBase {
 
     outputVoltage.accept(leftOutput, rightOutput);
 
+    networkTableEntry.setValue(leftController.getPositionError());
     prevTime = currentTime;
     prevSpeeds = targetWheelSpeeds;
+
   }
 
   @Override
@@ -112,8 +123,8 @@ public class OnyxRamseteCommand extends CommandBase {
     outputVoltage.accept(0.0, 0.0);
   }
 
-//  @Override
-//  public boolean isFinished() {
-//    return timer.hasPeriodPassed(trajectory.getTotalTimeSeconds());
-//  }
+  @Override
+  public boolean isFinished() {
+    return timer.hasPeriodPassed(trajectory.getTotalTimeSeconds());
+  }
 }

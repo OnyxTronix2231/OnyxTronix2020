@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
     Shuffleboard.getTab("Odometry").addNumber("Heading",
         () -> components.getOdometry().getPoseMeters().getRotation().getDegrees());
     resetEncoders();
-    components.getOdometry().resetPosition(new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+    components.getOdometry().resetPosition(new Pose2d(1, -4, Rotation2d.fromDegrees(0)),
         Rotation2d.fromDegrees(0));
   }
 
@@ -92,8 +92,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getLeftMaster().getSelectedSensorVelocity(),
-        getRightMaster().getSelectedSensorVelocity());
+    return new DifferentialDriveWheelSpeeds(encoderUnitsToMeter(getLeftMaster().getSelectedSensorVelocity()
+    * 10),
+        encoderUnitsToMeter(getRightMaster().getSelectedSensorVelocity() * 10));
   }
 
   public SimpleMotorFeedforward getFeedForward() {
@@ -180,7 +181,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   private double cmToEncoderUnits(final double cm) {
-    return CONVERSION_RATE * ENCODER_CPR * cm / PERIMETER;
+    return ENCODER_CPR * cm / PERIMETER;
+  }
+
+  private double encoderUnitsToMeter(final double encoder) {
+    return encoder / ENCODER_CPR * PERIMETER_IN_METERS;
   }
 
   private double metersToSteps(final double meters) {

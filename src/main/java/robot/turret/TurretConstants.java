@@ -24,8 +24,8 @@ final class TurretConstants {
   static final int DEGREES_IN_CIRCLE = 360;
   static final int TOLERANCE = 3;
   static final int FLIP_POINT = 360;
-  static final int MAX_ANGLE = 225;
-  static final int MIN_ANGLE = -135;
+  static final int MAX_ANGLE = 40;
+  static final int MIN_ANGLE = -40;
   private static final int ENCODER_UNITS = 1023;
   private static final double CONVERSION_RATE = 1;
   static final double ENCODER_TO_ANGLE = DEGREES_IN_CIRCLE / (ENCODER_UNITS * CONVERSION_RATE);

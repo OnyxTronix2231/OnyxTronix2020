@@ -37,6 +37,7 @@ public class Turret extends SubsystemBase {
 
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
+    tempAngle %= DEGREES_IN_CIRCLE;
     if (tempAngle < -FLIP_POINT) {
       tempAngle = MAX_ANGLE;
     } else if (tempAngle > FLIP_POINT) {
@@ -50,7 +51,6 @@ public class Turret extends SubsystemBase {
     } else if (tempAngle < MIN_ANGLE) {
       tempAngle = MIN_ANGLE;
     }
-
     components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 

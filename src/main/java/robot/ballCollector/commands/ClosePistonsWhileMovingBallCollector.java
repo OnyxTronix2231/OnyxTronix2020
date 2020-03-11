@@ -10,7 +10,7 @@ public class ClosePistonsWhileMovingBallCollector extends InstantCommand {
 
   private final BallCollector ballCollector;
 
-  public ClosePistonsWhileMovingBallCollector(BallCollector ballCollector){
+  public ClosePistonsWhileMovingBallCollector(final BallCollector ballCollector){
     this.ballCollector = ballCollector;
   }
 

@@ -6,5 +6,5 @@ public interface TurretComponents {
 
   WPI_TalonSRX getMasterMotor();
 
-  double getAbsoluteEncoderOffset();
+  int getAbsoluteEncoderOffset();
 }

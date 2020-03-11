@@ -13,15 +13,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Turret extends SubsystemBase {
 
   private final TurretComponents components;
-  private final double absoluteEncoderOffset;
+  private final int absoluteEncoderOffset;
 
   public Turret(final TurretComponents components) {
     this.components = components;
     absoluteEncoderOffset = components.getAbsoluteEncoderOffset();
+    components.getMasterMotor().configForwardSoftLimitThreshold(convertAngleToEncoderUnits(MAX_ANGLE));
+    components.getMasterMotor().configReverseSoftLimitThreshold(convertAngleToEncoderUnits(MIN_ANGLE));
+    components.getMasterMotor().configForwardSoftLimitEnable(true);
+    components.getMasterMotor().configReverseSoftLimitEnable(true);
   }
 
   public void initMoveMotionMagic() {
-
   }
 
   public void moveTurretBySpeed(final double speed) {
@@ -34,20 +37,25 @@ public class Turret extends SubsystemBase {
 
   public void moveToAngle(final double angle) {
     double tempAngle = angle;
-    if (tempAngle < -FLIP_POINT && getAngleRTR() <= MIN_ANGLE) {
+    tempAngle %= DEGREES_IN_CIRCLE;
+    if (tempAngle < -FLIP_POINT) {
       tempAngle = MAX_ANGLE;
-    } else if (tempAngle > FLIP_POINT && getAngleRTR() >= MAX_ANGLE) {
+    } else if (tempAngle > FLIP_POINT) {
       tempAngle = MIN_ANGLE;
     } else if (tempAngle > DEGREES_IN_CIRCLE + MIN_ANGLE) {
       tempAngle -= DEGREES_IN_CIRCLE;
     } else if (tempAngle < -DEGREES_IN_CIRCLE + MAX_ANGLE) {
       tempAngle += DEGREES_IN_CIRCLE;
+    } else if (tempAngle > MAX_ANGLE) {
+      tempAngle = MAX_ANGLE;
+    } else if (tempAngle < MIN_ANGLE) {
+      tempAngle = MIN_ANGLE;
     }
     components.getMasterMotor().set(ControlMode.MotionMagic, convertAngleToEncoderUnits(tempAngle));
   }
 
-  public double convertAngleToEncoderUnits(final double angle) {
-    return angle / ENCODER_TO_ANGLE + absoluteEncoderOffset;
+  public int convertAngleToEncoderUnits(final double angle) {
+    return (int) (angle / ENCODER_TO_ANGLE + absoluteEncoderOffset);
   }
 
   public double getAngleRTR() {

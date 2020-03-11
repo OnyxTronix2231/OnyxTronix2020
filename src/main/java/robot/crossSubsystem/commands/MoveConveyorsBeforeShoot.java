@@ -21,7 +21,7 @@ public class MoveConveyorsBeforeShoot extends SequentialCommandGroup {
     super(
         new WaitCommand(0.2).raceWith(
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX)),
-        CommandGroupBase.race(new WaitCommand(0.3),
+        race(new WaitCommand(0.3),
             new MoveLoaderConveyorBySpeed(loaderConveyor, () -> PERCENTAGE_OUTPUT_MAX),
             new MoveBallStopperBySpeed(ballStopper, () -> -PERCENTAGE_OUTPUT),
             new MoveStorageConveyorBySpeed(storageConveyor, () -> StorageConveyorConstants.PERCENTAGE_OUTPUT)

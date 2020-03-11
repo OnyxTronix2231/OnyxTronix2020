@@ -1,7 +1,7 @@
 package robot.yawControl;
 
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import robot.turret.commands.MoveTurretToAngle;
+import robot.turret.commands.MoveTurretToAngleAndKeep;
 import robot.vision.target.VisionTargetSupplier;
 import robot.yawControl.commands.AlignByOrientationAndThenVision;
 import robot.yawControl.commands.SetTurretState;
@@ -20,6 +20,6 @@ public class YawControlOiBinder {
 
     setStateHoming.whenActive(new SetTurretState(yawControl, YawControl.TurretState.HOMING));
 
-    moveTurretToHome.whenActive(new MoveTurretToAngle(yawControl, () -> 0));
+    moveTurretToHome.whileActiveContinuous(new MoveTurretToAngleAndKeep(yawControl, () -> 0));
   }
 }

@@ -10,6 +10,6 @@ public class ClimberOiBinder {
   public ClimberOiBinder(final Climber climber, final Trigger openClimber, final Trigger climb) {
     openClimber.toggleWhenActive(new OpenClimberPistons(climber));
 
-    climb.whileActiveContinuous(new ClimbBySpeed(climber, () -> 0.3));
+    climb.whileActiveContinuous(new Climb(climber));
   }
 }

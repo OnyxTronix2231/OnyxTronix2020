@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import robot.drivetrain.Path;
 import robot.drivetrain.Pose;
 
-import java.util.List;
-
 public final class AutonomousConstants {
 
 
@@ -45,31 +43,31 @@ public final class AutonomousConstants {
         new Pose(new Pose2d(8.2, -0.73, Rotation2d.fromDegrees(0)), true));
 
     public static Path TEST_S_PATH = new Path(
-        new Pose(new Pose2d(1,-1, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3,-2, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(5,0, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(7,-1, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(5,0, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(3,-2, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(1,-1, Rotation2d.fromDegrees(0)), false)
+        new Pose(new Pose2d(1, -1, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3, -2, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(5, 0, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(7, -1, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(5, 0, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(3, -2, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(1, -1, Rotation2d.fromDegrees(0)), false)
     );
 
     public static Path TEST_PATH_NINETY_DEGREES = new Path(
-        new Pose(new Pose2d(0,0, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3.1,0, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3.1,-2, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(6,-2, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3.1,-2, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(3.1,0, Rotation2d.fromDegrees(0)), false),
-        new Pose(new Pose2d(0,0, Rotation2d.fromDegrees(0)), false)
+        new Pose(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3.1, 0, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3.1, -2, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(6, -2, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3.1, -2, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(3.1, 0, Rotation2d.fromDegrees(0)), false),
+        new Pose(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), false)
     );
 
     public static Path TEST_ARROW_PATH = new Path(
-        new Pose(new Pose2d(1,-4, Rotation2d.fromDegrees(0)), true),
-        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(-90)), true),
-        new Pose(new Pose2d(5,-4, Rotation2d.fromDegrees(180)), false),
-        new Pose(new Pose2d(3,-6, Rotation2d.fromDegrees(-90)), true),
-        new Pose(new Pose2d(1,-4, Rotation2d.fromDegrees(0)), false)
+        new Pose(new Pose2d(1, -4, Rotation2d.fromDegrees(0)), true),
+        new Pose(new Pose2d(3, -6, Rotation2d.fromDegrees(-90)), true),
+        new Pose(new Pose2d(5, -4, Rotation2d.fromDegrees(180)), false),
+        new Pose(new Pose2d(3, -6, Rotation2d.fromDegrees(-90)), true),
+        new Pose(new Pose2d(1, -4, Rotation2d.fromDegrees(0)), false)
     );
   }
 }

@@ -3,23 +3,21 @@ package robot.drivetrain;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 
-import java.util.List;
-
 public final class DriveTrainConstants {
 
   public static final int DRIVE_BY_DISTANCE_SLOT = 0;
-  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.6;
-  static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
   static final int VELOCITY_CONTROLLER_PID_SLOT = 2;
   static final int CM_TO_METERS = 100;
   static final int SEC_TO_100MS = 10;
+  static final double ARCADE_DRIVE_ROTATION_SENSITIVITY = 0.6;
+  static final double ARCADE_DRIVE_FORWARD_SENSITIVITY = 0.8;
   static final double CONVERSION_RATE = 9.5;
   static final double TOLERANCE = 3; // TODO: tuning is required
   static final double ARB_FEED_FORWARD = 0.04; // TODO: tuning is required
-  static final Pose2d TARGET_POSE = new Pose2d(6.8, 0, Rotation2d.fromDegrees(180));
-  private static final double INCH_TO_CM = 2.54;
+  static final double INCH_TO_CM = 2.54;
   static final double PERIMETER = 6 * INCH_TO_CM * Math.PI; //TODO: tuning is required
   static final double PERIMETER_IN_METERS = PERIMETER / 100;
+  static final Pose2d TARGET_POSE = new Pose2d(6.8, 0, Rotation2d.fromDegrees(180));
   private static final double ENCODER_UNITS = 2048;
 
   public static final class DriveTrainComponentsA {

@@ -21,6 +21,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class OnyxRamseteCommand extends CommandBase {
+  private static NetworkTableEntry networkTableEntry;
   public final Timer timer = new Timer();
   private final Supplier<Trajectory> trajectorySupplier;
   private final Supplier<Pose2d> pose2dSupplier;
@@ -34,7 +35,6 @@ public class OnyxRamseteCommand extends CommandBase {
   private double prevTime;
   private Trajectory trajectory;
   private DifferentialDriveWheelSpeeds prevSpeeds;
-  private static NetworkTableEntry networkTableEntry;
 
   public OnyxRamseteCommand(final Supplier<Trajectory> trajectorySupplier,
                             final Supplier<Pose2d> pose2dSupplier,

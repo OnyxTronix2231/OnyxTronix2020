@@ -5,7 +5,6 @@ import static robot.autonomous.AutonomousConstants.SHOOTER_TIMER;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import robot.autonomous.AutonomousConstants;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
 import robot.ballCollector.commands.CollectBallBySpeed;
@@ -25,7 +24,7 @@ public class ThreeBallsAtOurTrench extends SequentialCommandGroup {
 
   public ThreeBallsAtOurTrench(final DriveTrain driveTrain, final Shooter shooter, final Vision vision,
                                final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-                               final StorageConveyor storageConveyor, final BallStopper ballStopper){
+                               final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     super(new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         new MoveToPose(driveTrain, getTrenchThreeBallPath.getPoseAt(1))
             .deadlineWith(

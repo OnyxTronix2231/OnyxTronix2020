@@ -19,7 +19,7 @@ public class OnyxTrajectoryGenerator {
                                               final boolean isForward) {
     trajectoryConfig.setReversed(!isForward);
 //    try {
-      return TrajectoryGenerator.generateTrajectory(poses, trajectoryConfig);
+    return TrajectoryGenerator.generateTrajectory(poses, trajectoryConfig);
 //    } catch (final Exception e) {
 //      System.out.println(e.toString());
 //      System.out.println("Failed Trajectory Generation");

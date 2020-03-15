@@ -5,7 +5,6 @@ import static robot.drivetrain.DriveTrainConstants.ARB_FEED_FORWARD;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_FORWARD_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.ARCADE_DRIVE_ROTATION_SENSITIVITY;
 import static robot.drivetrain.DriveTrainConstants.CM_TO_METERS;
-import static robot.drivetrain.DriveTrainConstants.CONVERSION_RATE;
 import static robot.drivetrain.DriveTrainConstants.DriveTrainComponentsA.TrajectoryParams.ENCODER_CPR;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER;
 import static robot.drivetrain.DriveTrainConstants.PERIMETER_IN_METERS;
@@ -93,7 +92,7 @@ public class DriveTrain extends SubsystemBase {
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(encoderUnitsToMeter(getLeftMaster().getSelectedSensorVelocity()
-    * 10),
+        * 10),
         encoderUnitsToMeter(getRightMaster().getSelectedSensorVelocity() * 10));
   }
 

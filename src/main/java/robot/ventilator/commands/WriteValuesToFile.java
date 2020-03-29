@@ -30,9 +30,7 @@ public class WriteValuesToFile extends CommandBase {
     } catch(IOException ex) {
       ex.printStackTrace();
     }
-
     printWriter.println("Ampere" + "," + "ClosedLoopError" + "," + "RPM");
-
   }
 
   @Override

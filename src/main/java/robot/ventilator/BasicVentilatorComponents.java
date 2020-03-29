@@ -26,6 +26,7 @@ public class BasicVentilatorComponents implements VentilatorComponents {
     masterMotor.enableCurrentLimit(true);
     masterMotor.setInverted(true);
   }
+
   @Override
   public WPI_TalonSRX getMasterMotor() {
     return masterMotor;

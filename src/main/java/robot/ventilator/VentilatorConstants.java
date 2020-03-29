@@ -16,7 +16,7 @@ public class VentilatorConstants {
     static final double DISTANCE_WITH_BALL = 180; // TODO: check and change
     static final int PEAK_AMP = 0; //TODO check and change
     static final int CHECKS_PER_SECOND = 10; //TODO check and change
-    static final int SECONDS_PER_MINUTE= 60;
-    static final double PERCENTAGE_OUTPUT= 0.5;
+    static final int SECONDS_PER_MINUTE = 60;
+    static final double PERCENTAGE_OUTPUT = 0.5;
   }
 }

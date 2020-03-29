@@ -2,6 +2,7 @@ package robot.ventilator.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.ventilator.Ventilator;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +17,7 @@ public class WriteValuesToFile extends CommandBase {
   private PrintWriter printWriter;
   private BufferedWriter writer;
 
-  public WriteValuesToFile(Ventilator ventilator){
+  public WriteValuesToFile(Ventilator ventilator) {
     this.ventilator = ventilator;
   }
 
@@ -26,7 +27,7 @@ public class WriteValuesToFile extends CommandBase {
     try {
       this.writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
       this.printWriter = new PrintWriter(writer);
-    } catch(IOException ex) {
+    } catch (IOException ex) {
       ex.printStackTrace();
     }
     printWriter.println("Stator Current" + "," + "Supply Current" + "," + "Encoder units per second" + "," + "RPM");

@@ -30,12 +30,12 @@ public class Ventilator extends SubsystemBase {
     return components.getMasterMotor().getSupplyCurrent();
   }
 
-  public final double getRpm(){
+  public final double getRpm() {
     return components.getMasterMotor().getSelectedSensorVelocity() * CHECKS_PER_SECOND *
-        SECONDS_PER_MINUTE/ ENCODER_UNITS;
+        SECONDS_PER_MINUTE / ENCODER_UNITS;
   }
 
-  public final double getEncoderUnitsPerSec(){
+  public final double getEncoderUnitsPerSec() {
     return components.getMasterMotor().getSelectedSensorVelocity() * CHECKS_PER_SECOND;
   }
 }

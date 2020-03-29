@@ -28,7 +28,7 @@ public class BasicVentilatorComponents implements VentilatorComponents {
   }
   @Override
   public WPI_TalonSRX getMasterMotor() {
-    return null;
+    return masterMotor;
   }
 
   private TalonSRXConfiguration getConfiguration() {

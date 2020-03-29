@@ -108,102 +108,102 @@ public class Oi {
     final JoystickAxis operatorKRightAxis =
         operatorJoystickAxisCache.createJoystickTrigger(XboxController.Axis.kRightX.value);
     //endregion
+//    //region Complex triggers
+//    final Trigger spinShooterAndAlignToTarget = driveKBumperLeft.or(operatorKA);
+//
+//    final Trigger makeAShotAtCloseRangeAndMoveTurretToHome = driverKBumperRight;
+//
+//    final Trigger collectAndLoadBall = driverKLeftTrigger.or(operatorKLeftTrigger);
+//
+//    final JoystickAxis makeAShotAndAlign = driverKRightTrigger;
+//    //endregion
+//
+//    //region DriveTrain
+//    final JoystickAxis forwardDrive = driverKLeftYAxis;
+//
+//    final JoystickAxis rotateDrive = driverKRightXAxis;
+//
+//    new DriveTrainOiBinder(driveTrain, forwardDrive, rotateDrive);
+//    //endregion
+//
+//    //region Shooter
+//    final Trigger spinShooter = spinShooterAndAlignToTarget;
+//
+//    final JoystickAxis shootBall = makeAShotAndAlign;
+//
+//    final Trigger shootBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
+//
+//    new ShooterOiBinder(shooter, shootingDistanceSupplier,
+//        spinShooter, shootBall,
+//        shootBallAtCloseRange);
+//    //endregion
+//
+//    //region Turret
+//    final JoystickAxis moveTurretByAxis = operatorKRightAxis;
+//
+//    new TurretOiBinder(yawControl, moveTurretByAxis);
+//    //endregion
 
-    //region Complex triggers
-    final Trigger spinShooterAndAlignToTarget = driveKBumperLeft.or(operatorKA);
-
-    final Trigger makeAShotAtCloseRangeAndMoveTurretToHome = driverKBumperRight;
-
-    final Trigger collectAndLoadBall = driverKLeftTrigger.or(operatorKLeftTrigger);
-
-    final JoystickAxis makeAShotAndAlign = driverKRightTrigger;
-    //endregion
-
-    //region DriveTrain
-    final JoystickAxis forwardDrive = driverKLeftYAxis;
-
-    final JoystickAxis rotateDrive = driverKRightXAxis;
-
-    new DriveTrainOiBinder(driveTrain, forwardDrive, rotateDrive);
-    //endregion
-
-    //region Shooter
-    final Trigger spinShooter = spinShooterAndAlignToTarget;
-
-    final JoystickAxis shootBall = makeAShotAndAlign;
-
-    final Trigger shootBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
-
-    new ShooterOiBinder(shooter, shootingDistanceSupplier,
-        spinShooter, shootBall,
-        shootBallAtCloseRange);
-    //endregion
-
-    //region Turret
-    final JoystickAxis moveTurretByAxis = operatorKRightAxis;
-
-    new TurretOiBinder(yawControl, moveTurretByAxis);
-    //endregion
-
-    //region YawControl
-    final Trigger setStateRTF = operatorKBack;
-
-    final Trigger setStateRTR = operatorKStart;
-
-    final Trigger setStateHoming = operatorKStickRight;
-
-    final Trigger alignToTarget = spinShooterAndAlignToTarget.or(makeAShotAndAlign);
-
-    final Trigger moveTurretToHome = makeAShotAtCloseRangeAndMoveTurretToHome;
-
-    new YawControlOiBinder(yawControl, targetSupplier,
-        setStateRTF, setStateRTR,
-        setStateHoming,
-        alignToTarget,
-        moveTurretToHome);
+//    //region YawControl
+//    final Trigger setStateRTF = operatorKBack;
+//
+//    final Trigger setStateRTR = operatorKStart;
+//
+//    final Trigger setStateHoming = operatorKStickRight;
+//
+//    final Trigger alignToTarget = spinShooterAndAlignToTarget.or(makeAShotAndAlign);
+//
+//    final Trigger moveTurretToHome = makeAShotAtCloseRangeAndMoveTurretToHome;
+//
+//    new YawControlOiBinder(yawControl, targetSupplier,
+//        setStateRTF, setStateRTR,
+//        setStateHoming,
+//        alignToTarget,
+//        moveTurretToHome);
     //endregion
 
     //region Climber
-    final Trigger openClimber = driverKStart;
-
-    final Trigger climb = driverKBack;
-
-    new ClimberOiBinder(climber, openClimber, climb);
+//    final Trigger openClimber = driverKStart;
+//
+//    final Trigger climb = driverKBack;
+//
+//    new ClimberOiBinder(climber, openClimber, climb);
     //endregion
 
     //region BallCollector
-    final Trigger openAndCollectBall = collectAndLoadBall;
-
-    final Trigger uncollectBalls = operatorKRightTrigger;
-
-    final Trigger openThenCloseCollector = operatorKBumperLeft;
-
-    new BallCollectorOiBinder(ballCollector, openAndCollectBall,
-        uncollectBalls, openThenCloseCollector);
+//    final Trigger openAndCollectBall = collectAndLoadBall;
+//
+//    final Trigger uncollectBalls = operatorKRightTrigger;
+//
+//    final Trigger openThenCloseCollector = operatorKBumperLeft;
+//
+//    new BallCollectorOiBinder(ballCollector, openAndCollectBall,
+//        uncollectBalls, openThenCloseCollector);
     //endregion
 
     //region BallTrigger
-    final Trigger loadBall = collectAndLoadBall;
-
-    final Trigger releaseBallManually = driverKB;
-
-    final Trigger moveConveyorsReverse = driverKX;
-
-    final Trigger triggerBall = makeAShotAndAlign;
-
-    final Trigger triggerBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
-
-    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
-        ballStopper, canReleaseBallSupplier,
-        canReleaseBallAtCloseRangeSupplier,
-        loadBall, triggerBall,
-        triggerBallAtCloseRange, releaseBallManually,
-        moveConveyorsReverse);
+//    final Trigger loadBall = collectAndLoadBall;
+//
+//    final Trigger releaseBallManually = driverKB;
+//
+//    final Trigger moveConveyorsReverse = driverKX;
+//
+//    final Trigger triggerBall = makeAShotAndAlign;
+//
+//    final Trigger triggerBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
+//
+//    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
+//        ballStopper, canReleaseBallSupplier,
+//        canReleaseBallAtCloseRangeSupplier,
+//        loadBall, triggerBall,
+//        triggerBallAtCloseRange, releaseBallManually,
+//        moveConveyorsReverse);
     //endregion
 
     //region Ventilator
     final Trigger moveVentilator = operatorKB;
 
     new VentilatorOiBinder(ventilator, (JoystickButton) moveVentilator);
+    //endregion
   }
 }

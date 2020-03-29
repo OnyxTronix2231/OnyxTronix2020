@@ -4,6 +4,7 @@ import static robot.RobotConstants.DRIVE_JOYSTICK_PORT;
 import static robot.RobotConstants.OPERATOR_JOYSTICK_PORT;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import onyxTronix.JoystickAxis;
 import onyxTronix.UniqueAxisCache;
@@ -21,6 +22,8 @@ import robot.shooter.Shooter;
 import robot.shooter.ShooterOiBinder;
 import robot.storageConveyor.StorageConveyor;
 import robot.turret.TurretOiBinder;
+import robot.ventilator.Ventilator;
+import robot.ventilator.VentilatorOiBinder;
 import robot.vision.target.VisionTargetSupplier;
 import robot.yawControl.YawControl;
 import robot.yawControl.YawControlOiBinder;
@@ -31,7 +34,7 @@ import java.util.function.DoubleSupplier;
 public class Oi {
   public Oi(final DriveTrain driveTrain, final Shooter shooter, final YawControl yawControl, final Climber climber,
             final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-            final StorageConveyor storageConveyor, final BallStopper ballStopper,
+            final StorageConveyor storageConveyor, final BallStopper ballStopper, final Ventilator ventilator,
             final DoubleSupplier shootingDistanceSupplier, final VisionTargetSupplier targetSupplier,
             final BooleanSupplier canReleaseBallSupplier, final BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
 
@@ -80,6 +83,9 @@ public class Oi {
     //region Operator Triggers
     final Trigger operatorKA = operatorJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kA.value);
+
+    final Trigger operatorKB = operatorJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kB.value);
 
     final Trigger operatorKBumperLeft = operatorJoystickButtonCache.
         createJoystickTrigger(XboxController.Button.kBumperLeft.value);
@@ -194,5 +200,10 @@ public class Oi {
         triggerBallAtCloseRange, releaseBallManually,
         moveConveyorsReverse);
     //endregion
+
+    //region Ventilator
+    final Trigger moveVentilator = operatorKB;
+
+    new VentilatorOiBinder(ventilator, (JoystickButton) moveVentilator);
   }
 }

@@ -2,7 +2,6 @@ package robot.ventilator.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.ventilator.Ventilator;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,12 +29,13 @@ public class WriteValuesToFile extends CommandBase {
     } catch(IOException ex) {
       ex.printStackTrace();
     }
-    printWriter.println("Ampere" + "," + "ClosedLoopError" + "," + "RPM");
+    printWriter.println("Stator Current" + "," + "Supply Current" + "," + "Encoder units per second" + "," + "RPM");
   }
 
   @Override
   public void execute() {
-    printWriter.println(ventilator.getAmp() + "," + ventilator.getClosedLoopError() + "," + ventilator.getRpm());
+    printWriter.println(ventilator.getStatorCurrent() + "," + ventilator.getSupplyCurrent() + ","
+        + ventilator.getEncoderUnitsPerSec() + "," + ventilator.getRpm());
   }
 
   @Override

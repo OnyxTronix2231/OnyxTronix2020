@@ -31,6 +31,9 @@ import robot.storageConveyor.StorageConveyor;
 import robot.storageConveyor.StorageConveyorComponents;
 import robot.turret.BasicTurretComponentsA;
 import robot.turret.TurretComponents;
+import robot.ventilator.BasicVentilatorComponents;
+import robot.ventilator.Ventilator;
+import robot.ventilator.VentilatorComponents;
 import robot.vision.Vision;
 import robot.vision.VisionConstants;
 import robot.vision.target.VisionTargetFactory;
@@ -58,6 +61,7 @@ public class Robot extends TimedRobot {
     final LoaderConveyorComponents loaderConveyorComponents;
     final ShooterComponents shooterComponents;
     final ClimberComponents climberComponents;
+    final VentilatorComponents ventilatorComponents;
 
     if (ROBOT_TYPE == RobotType.A) {
       driveTrainComponents = new BasicDriveTrainComponentsA();
@@ -68,6 +72,7 @@ public class Robot extends TimedRobot {
       loaderConveyorComponents = new BasicLoaderConveyorComponentsA();
       shooterComponents = new BasicShooterComponentsA();
       climberComponents = new BasicClimberComponentsA();
+      ventilatorComponents = new BasicVentilatorComponents();
     } else {
       driveTrainComponents = null; //TODO: use BasicDriveTrainComponentsB Here
       ballCollectorComponents = null; //TODO: use BasicBallCollectorComponentsB Here
@@ -77,6 +82,7 @@ public class Robot extends TimedRobot {
       loaderConveyorComponents = null; //TODO: use BasicLoaderConveyorComponentsB Here
       shooterComponents = null; //TODO: use BasicShooterComponentsB Here
       climberComponents = null; // TODO: use BasicClimberComponentsB Here
+      ventilatorComponents = null;
     }
 
     driveTrain = new DriveTrain(driveTrainComponents);
@@ -100,10 +106,11 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM));
 
+    final Ventilator ventilator = new Ventilator(ventilatorComponents);
+
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
-        () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
-        () -> canReleaseBall(shooter, yawControl),
-        () -> canReleaseBallAtCloseRange(shooter, yawControl));
+        ventilator, () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
+        () -> canReleaseBall(shooter, yawControl), () -> canReleaseBallAtCloseRange(shooter, yawControl));
 
     autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
         loaderConveyor, storageConveyor, ballStopper, vision, () -> canReleaseBall(shooter, yawControl));

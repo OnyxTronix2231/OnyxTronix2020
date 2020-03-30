@@ -23,7 +23,13 @@ public class WriteValuesToFile extends CommandBase {
 
   @Override
   public void initialize() {
+    try {
+      Files.delete(Paths.get("/home/lvuser/VentilatorValues.csv"));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     Path path = Paths.get("/home/lvuser/VentilatorValues.csv");
+
     try {
       this.writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
       this.printWriter = new PrintWriter(writer);

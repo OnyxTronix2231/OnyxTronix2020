@@ -9,10 +9,12 @@ import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class BasicStorageConveyorComponentsA implements StorageConveyorComponents {
 
   private final WPI_TalonSRX masterMotor;
+  private final WPI_VictorSPX slaveMotor;
 
   public BasicStorageConveyorComponentsA() {
     masterMotor = new WPI_TalonSRX(MASTER_MOTOR_PORT);
@@ -20,6 +22,10 @@ public class BasicStorageConveyorComponentsA implements StorageConveyorComponent
     masterMotor.configAllSettings(getConfiguration());
     masterMotor.setNeutralMode(NeutralMode.Brake);
     masterMotor.enableCurrentLimit(true);
+
+    slaveMotor = new WPI_VictorSPX(20); //TODO: has to change!!!!
+    slaveMotor.configFactoryDefault();
+    slaveMotor.follow(masterMotor);
   }
 
   private TalonSRXConfiguration getConfiguration() {
@@ -33,5 +39,10 @@ public class BasicStorageConveyorComponentsA implements StorageConveyorComponent
   @Override
   public IMotorController getMasterMotor() {
     return masterMotor;
+  }
+
+  @Override
+  public IMotorController getSlaveMotor() {
+    return slaveMotor;
   }
 }

@@ -106,6 +106,9 @@ public class Oi {
 
     final JoystickButton operatorKB =
         operatorJoystickButtonCache.createJoystickTrigger(XboxController.Button.kB.value);
+
+    final JoystickButton operatorKX =
+        operatorJoystickButtonCache.createJoystickTrigger(XboxController.Button.kX.value);
     //endregion
 
     //region Complex triggers
@@ -181,26 +184,28 @@ public class Oi {
     //region BallTrigger
     final Trigger loadBall = collectAndLoadBall;
 
-    final Trigger releaseBallManually = driverKB;
+//    final Trigger releaseBallManually = driverKB;
 
-    final Trigger moveConveyorsReverse = driverKX;
+//    final Trigger moveConveyorsReverse = driverKX;
 
     final Trigger triggerBall = makeAShotAndAlign;
 
     final Trigger triggerBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
 
-    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
-        ballStopper, canReleaseBallSupplier,
-        canReleaseBallAtCloseRangeSupplier,
-        loadBall, triggerBall,
-        triggerBallAtCloseRange, releaseBallManually,
-        moveConveyorsReverse);
+//    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
+//        ballStopper, canReleaseBallSupplier,
+//        canReleaseBallAtCloseRangeSupplier,
+//        loadBall, triggerBall,
+//        triggerBallAtCloseRange, releaseBallManually,
+//        moveConveyorsReverse);
     //endregion
 
     // region autonomous
 
-    final Trigger testAutonomous = operatorKB;
+    final Trigger testAutonomous = driverKB;
 
-    new AutonomousOiBinder(driveTrain, testAutonomous);
+    final Trigger resetPosition = driverKX;
+
+    new AutonomousOiBinder(driveTrain, testAutonomous, resetPosition);
   }
 }

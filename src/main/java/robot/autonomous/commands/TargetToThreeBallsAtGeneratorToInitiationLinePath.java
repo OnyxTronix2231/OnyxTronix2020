@@ -23,11 +23,11 @@ import robot.vision.Vision;
 public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends SequentialCommandGroup {
 
   public TargetToThreeBallsAtGeneratorToInitiationLinePath(
-      final DriveTrain driveTrain, final Shooter shooter, final Vision vision,
+      final DriveTrain driveTrain, /*final Shooter shooter, final Vision vision,*/
       final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
       final StorageConveyor storageConveyor, final BallStopper ballStopper) {
     super(
-        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
+//        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(
             new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(1)),
             new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(2)),
@@ -37,7 +37,7 @@ public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends Sequentia
                         new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
                     new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
             new CloseBallCollectorPistons(ballCollector),
-            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(4)),
-            new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)));
+            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(4))));
+//            new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)));
   }
 }

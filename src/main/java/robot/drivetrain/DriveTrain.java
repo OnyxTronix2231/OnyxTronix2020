@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import robot.autonomous.AutonomousConstants;
 
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class DriveTrain extends SubsystemBase {
     Shuffleboard.getTab("Odometry").addNumber("Heading",
         () -> components.getOdometry().getPoseMeters().getRotation().getDegrees());
     resetEncoders();
-    components.getOdometry().resetPosition(new Pose2d(1, -4, Rotation2d.fromDegrees(0)),
-        Rotation2d.fromDegrees(0));
+    components.getOdometry().resetPosition(AutonomousConstants.STARTING_POSE, AutonomousConstants.STARTING_POSE.getRotation());
   }
 
   @Override
@@ -149,6 +149,12 @@ public class DriveTrain extends SubsystemBase {
   public void resetOdometryToPose(final Pose2d pose) {
     resetEncoders();
     components.getOdometry().resetPosition(pose, Rotation2d.fromDegrees(getOdometryHeading()));
+  }
+
+  public void resetRobotToPose(final Pose2d pose) {
+    resetEncoders();
+    setGyroAngle(pose.getRotation().getDegrees());
+    components.getOdometry().resetPosition(pose, pose.getRotation());
   }
 
   private void driveMotorByMotionMagic(final TalonFX motor, final double target) {

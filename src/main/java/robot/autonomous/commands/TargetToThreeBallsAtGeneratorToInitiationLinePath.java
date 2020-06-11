@@ -3,6 +3,7 @@ package robot.autonomous.commands;
 import static robot.autonomous.AutonomousConstants.Paths.GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH;
 import static robot.ballStopper.BallStopperConstants.PERCENTAGE_OUTPUT;
 
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import robot.ballCollector.BallCollector;
 import robot.ballCollector.commands.CloseBallCollectorPistons;
@@ -24,12 +25,15 @@ public class TargetToThreeBallsAtGeneratorToInitiationLinePath extends Sequentia
 //        new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         sequence(
             new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(1)),
-            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(2)),
+            new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(2))
+                .deadlineWith(
+                    new OpenAndCollect(ballCollector, () -> PERCENTAGE_OUTPUT)),
             new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(3))
                 .deadlineWith(
                     new OpenAndCollect(ballCollector, () -> PERCENTAGE_OUTPUT)),
             new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
+        new PrintCommand("closed"),
         new MoveToPose(driveTrain, GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(4)));
 //            new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)));
   }

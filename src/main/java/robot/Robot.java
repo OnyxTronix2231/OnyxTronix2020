@@ -3,6 +3,7 @@ package robot;
 import static robot.RobotConstants.ROBOT_TYPE;
 
 import edu.wpi.first.networktables.EntryListenerFlags;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -116,6 +117,8 @@ public class Robot extends TimedRobot {
     Shuffleboard.getTab("Drive").add("Starting angle", 180).
         getEntry().addListener(v -> driveTrain.setGyroAngle(v.value.getDouble()), EntryListenerFlags.kUpdate);
     Shuffleboard.getTab("Drive").addBoolean("Vision Target Found", () -> Limelight.getInstance().targetFound());
+    Compressor compressor = new Compressor(0);
+    compressor.start();
   }
 
   @Override

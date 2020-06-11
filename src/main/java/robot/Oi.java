@@ -206,6 +206,7 @@ public class Oi {
 
     final Trigger resetPosition = driverKX;
 
-    new AutonomousOiBinder(driveTrain, testAutonomous, resetPosition);
+    new AutonomousOiBinder(driveTrain, testAutonomous, resetPosition, ballCollector,
+        loaderConveyor, storageConveyor, ballStopper);
   }
 }

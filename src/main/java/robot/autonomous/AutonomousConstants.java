@@ -12,7 +12,7 @@ public final class AutonomousConstants {
   public static final double DRIVE_AUTONOMOUS_TIMEOUT = 5;
   public static final double SHOOTER_TIMER = 4;
 
-  public static Pose2d STARTING_POSE = new Pose2d(0, 0, Rotation2d.fromDegrees(0));
+  public static Pose2d STARTING_POSE = Paths.GET_TARGET_TO_THREE_BALLS_AT_GENERATOR_PATH.getPoseAt(0).getPose2d();
 
   public static final class Paths {
 

@@ -96,10 +96,10 @@ public class Robot extends TimedRobot {
 
     climber = new Climber(climberComponents);
 
-    vision = new Vision(new VisionTargetFactory(yawControl::getAngleRTR,
-        driveTrain::getOdometryHeading,
+    vision = new Vision(new VisionTargetFactory(driveTrain::getOdometryHeading,
+        yawControl::getTurretAngleRTF,
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
-        VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM, Limelight.getInstance()));
+        VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM));
 
     new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
         () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
@@ -156,7 +156,7 @@ public class Robot extends TimedRobot {
     LiveWindow.setEnabled(false);
     vision.setLEDMode(LimelightLedMode.forceOff);
     driveTrain.setNeutralModeToCoast();
-    climber.setNeutralModeToCoast();
+    climber.setNeutralModeToBrake();
   }
 
   @Override

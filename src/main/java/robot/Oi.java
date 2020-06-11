@@ -152,14 +152,17 @@ public class Oi {
 
     final Trigger setStateRTR = operatorKStart;
 
-    final Trigger setStateHoming = operatorKStickRight.or(makeAShotAtCloseRangeAndMoveTurretToHome);
+    final Trigger setStateHoming = operatorKStickRight;
 
     final Trigger alignToTarget = spinShooterAndAlignToTarget.or(makeAShotAndAlign);
+
+    final Trigger moveTurretToHome = makeAShotAtCloseRangeAndMoveTurretToHome;
 
     new YawControlOiBinder(yawControl, targetSupplier,
         setStateRTF, setStateRTR,
         setStateHoming,
-        alignToTarget);
+        alignToTarget,
+        moveTurretToHome);
     //endregion
 
     //region Climber

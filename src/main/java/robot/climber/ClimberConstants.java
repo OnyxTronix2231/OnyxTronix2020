@@ -15,8 +15,8 @@ public final class ClimberConstants {
   public static final class ClimberComponentsA {
     static final int MASTER_MOTOR_PORT = 13;
     static final int SLAVE_MOTOR_PORT = 14;
-    static final int DOUBLE_SOLENOID_FORWARD_PORT = 2; // TODO: check value
-    static final int DOUBLE_SOLENOID_REVERSE_PORT = 3; // TODO: check value
+    static final int DOUBLE_SOLENOID_PORT_FORWARD = 0; // TODO: check value
+    static final int DOUBLE_SOLENOID_PORT_REVERSE = 1; // TODO: check value
     static final double CURRENT_LIMIT = 40; // TODO: check value
     static final double TRIGGER_THRESHOLD_CURRENT = 40; // TODO: check value
     static final double TRIGGER_THRESHOLD_TIME = 0; // TODO: check value

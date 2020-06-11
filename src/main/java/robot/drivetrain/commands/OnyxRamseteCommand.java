@@ -58,7 +58,7 @@ public class OnyxRamseteCommand extends CommandBase {
       networkTableEntry =
           Shuffleboard.getTab("Odometry").add("9", leftController.getPositionError()).getEntry();
     } catch (Exception e) {
-
+      e.printStackTrace();
     }
     addRequirements(requirements);
   }

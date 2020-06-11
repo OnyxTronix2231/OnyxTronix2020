@@ -28,8 +28,7 @@ public class TrenchRunToTwoBallsToThreeMorePath extends SequentialCommandGroup {
     super(
         new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(1))
             .deadlineWith(
-                new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-                    new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
+                new OpenAndCollect(ballCollector, () -> PERCENTAGE_OUTPUT),
                 new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
@@ -38,8 +37,7 @@ public class TrenchRunToTwoBallsToThreeMorePath extends SequentialCommandGroup {
             new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(3)),
             new MoveToPose(driveTrain, GET_THREE_BALLS_AT_TRENCH_AND_TWO_AT_GENERATOR.getPoseAt(4)))
             .deadlineWith(
-                new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-                    new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
+                new OpenAndCollect(ballCollector, () -> PERCENTAGE_OUTPUT),
                 new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER)

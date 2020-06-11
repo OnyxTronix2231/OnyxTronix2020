@@ -28,8 +28,7 @@ public class ThreeBallsAtOurTrench extends SequentialCommandGroup {
     super(new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER),
         new MoveToPose(driveTrain, getTrenchThreeBallPath.getPoseAt(1))
             .deadlineWith(
-                new OpenAndCollect(new OpenBallCollectorPistons(ballCollector),
-                    new CollectBallBySpeed(ballCollector, () -> PERCENTAGE_OUTPUT)),
+                new OpenAndCollect(ballCollector, () -> PERCENTAGE_OUTPUT),
                 new LoadBall(loaderConveyor, storageConveyor, ballStopper)),
         new CloseBallCollectorPistons(ballCollector),
         new ShootByDistance(shooter, () -> vision.getOuterTarget().getDistance()).withTimeout(SHOOTER_TIMER));

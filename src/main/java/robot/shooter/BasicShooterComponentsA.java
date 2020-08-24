@@ -33,8 +33,8 @@ public class BasicShooterComponentsA implements ShooterComponents {
     masterMotor.setNeutralMode(NeutralMode.Coast);
 
     slaveMotor = new WPI_TalonFX(SLAVE_PORT);
-    slaveMotor.configAllSettings(getFalconConfiguration());
     slaveMotor.configFactoryDefault();
+    slaveMotor.configAllSettings(getFalconConfiguration());
     slaveMotor.setNeutralMode(NeutralMode.Coast);
     slaveMotor.follow(masterMotor);
     slaveMotor.setInverted(true);

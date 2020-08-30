@@ -162,7 +162,10 @@ public class Oi {
 
     final Trigger climb = driverKBack;
 
-    new ClimberOiBinder(climber, openClimber, climb);
+    final Trigger rollUp = driverKB;
+    final Trigger rollDown = driverKX;
+
+    new ClimberOiBinder(climber, openClimber, climb, rollUp, rollDown);
     //endregion
 
     //region BallCollector
@@ -179,20 +182,20 @@ public class Oi {
     //region BallTrigger
     final Trigger loadBall = collectAndLoadBall;
 
-    final Trigger releaseBallManually = driverKB;
-
-    final Trigger moveConveyorsReverse = driverKX;
+//    final Trigger releaseBallManually = null;
+//
+//    final Trigger moveConveyorsReverse = null;
 
     final Trigger triggerBall = makeAShotAndAlign;
 
     final Trigger triggerBallAtCloseRange = makeAShotAtCloseRangeAndMoveTurretToHome;
 
-    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
-        ballStopper, canReleaseBallSupplier,
-        canReleaseBallAtCloseRangeSupplier,
-        loadBall, triggerBall,
-        triggerBallAtCloseRange, releaseBallManually,
-        moveConveyorsReverse);
+//    new BallTriggerOiBinder(loaderConveyor, storageConveyor,
+//        ballStopper, canReleaseBallSupplier,
+//        canReleaseBallAtCloseRangeSupplier,
+//        loadBall, triggerBall,
+//        triggerBallAtCloseRange, releaseBallManually,
+//        moveConveyorsReverse);
     //endregion
   }
 }

@@ -30,8 +30,6 @@ import java.util.function.DoubleSupplier;
 
 public class Oi {
   public Oi(final DriveTrain driveTrain, final Shooter shooter, final YawControl yawControl, final Climber climber,
-            final BallCollector ballCollector, final LoaderConveyor loaderConveyor,
-            final StorageConveyor storageConveyor, final BallStopper ballStopper,
             final DoubleSupplier shootingDistanceSupplier, final VisionTargetSupplier targetSupplier,
             final BooleanSupplier canReleaseBallSupplier, final BooleanSupplier canReleaseBallAtCloseRangeSupplier) {
 
@@ -55,6 +53,10 @@ public class Oi {
 
     final Trigger driverKB = driverJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kB.value);
+    final Trigger driverKA = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kA.value);
+    final Trigger driverKY = driverJoystickButtonCache
+        .createJoystickTrigger(XboxController.Button.kY.value);
 
     final Trigger driveKBumperLeft = driverJoystickButtonCache
         .createJoystickTrigger(XboxController.Button.kBumperLeft.value);
@@ -160,12 +162,12 @@ public class Oi {
     //region Climber
     final Trigger openClimber = driverKStart;
 
-    final Trigger climb = driverKBack;
+    final Trigger closePistons = driverKBack;
 
     final Trigger rollUp = driverKB;
     final Trigger rollDown = driverKX;
 
-    new ClimberOiBinder(climber, openClimber, climb, rollUp, rollDown);
+    new ClimberOiBinder(climber, openClimber, closePistons, rollUp, rollDown);
     //endregion
 
     //region BallCollector
@@ -175,8 +177,9 @@ public class Oi {
 
     final Trigger openThenCloseCollector = operatorKBumperLeft;
 
-    new BallCollectorOiBinder(ballCollector, openAndCollectBall,
-        uncollectBalls, openThenCloseCollector);
+
+//    new BallCollectorOiBinder(ballCollector, openAndCollectBall,
+//        uncollectBalls, openThenCloseCollector);
     //endregion
 
     //region BallTrigger

@@ -81,17 +81,17 @@ public class Robot extends TimedRobot {
 
     driveTrain = new DriveTrain(driveTrainComponents);
 
-    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
+//    final BallStopper ballStopper = new BallStopper(ballStopperComponents);
 
-    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
+//    final StorageConveyor storageConveyor = new StorageConveyor(storageConveyorComponents);
 
     final YawControl yawControl = new YawControl(turretComponents, driveTrain);
 
-    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
+//    final LoaderConveyor loaderConveyor = new LoaderConveyor(loaderConveyorComponents);
 
     final Shooter shooter = new Shooter(shooterComponents);
 
-    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
+//    final BallCollector ballCollector = new BallCollector(ballCollectorComponents);
 
     climber = new Climber(climberComponents);
 
@@ -100,13 +100,13 @@ public class Robot extends TimedRobot {
         VisionConstants.RobotAConstants.CAMERA_VERTICAL_OFFSET_ANGLE,
         VisionConstants.RobotAConstants.CAMERA_HEIGHT_CM));
 
-    new Oi(driveTrain, shooter, yawControl, climber, ballCollector, loaderConveyor, storageConveyor, ballStopper,
+    new Oi(driveTrain, shooter, yawControl, climber,
         () -> vision.getOuterTarget().getDistance(), vision::getDependableTarget,
         () -> canReleaseBall(shooter, yawControl),
         () -> canReleaseBallAtCloseRange(shooter, yawControl));
 
-    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
-        loaderConveyor, storageConveyor, ballStopper, vision, () -> canReleaseBall(shooter, yawControl));
+//    autonomousShooting = new DriveThenShootAutonomous(yawControl, driveTrain, shooter,
+//        loaderConveyor, storageConveyor, ballStopper, vision, () -> canReleaseBall(shooter, yawControl));
 
     Shuffleboard.getTab("Shooter").addNumber("Velocity by distance",
         () -> shooter.distanceToVelocity(vision.getDependableTarget().getDistance()));

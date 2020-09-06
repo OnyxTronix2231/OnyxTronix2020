@@ -22,7 +22,6 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 import java.io.IOException;
 
-
 public class BasicLoaderConveyorComponentsA implements LoaderConveyorComponents {
 
   private final WPI_TalonSRX masterMotor;

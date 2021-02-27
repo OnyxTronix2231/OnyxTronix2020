@@ -12,6 +12,7 @@ public final class VisionConstants {
   public static final int MAX_INNER_DISTANCE = 700; // TODO: Check and Change
   public static final int MIN_INNER_DISTANCE = 290;
   public static final double MAX_INNER_ORIENTATION = 18;
+  public static final int DEFAULT_PIPELINE = 1;
 
   public static final class RobotAConstants {
     public static final double CAMERA_VERTICAL_OFFSET_ANGLE = 34.08; // TODO: Check and change

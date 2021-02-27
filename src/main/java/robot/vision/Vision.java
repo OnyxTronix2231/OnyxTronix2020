@@ -1,5 +1,6 @@
 package robot.vision;
 
+import static robot.vision.VisionConstants.DEFAULT_PIPELINE;
 import static robot.vision.VisionConstants.MAX_INNER_DISTANCE;
 import static robot.vision.VisionConstants.MAX_INNER_ORIENTATION;
 import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
@@ -28,6 +29,7 @@ public class Vision extends SubsystemBase {
         MAX_INNER_ORIENTATION);
     innerTarget = factory.makeTarget(VisionTargetType.INNER_TARGET);
     outerTarget = factory.makeTarget(VisionTargetType.OUTER_TARGET);
+    setPipeline(DEFAULT_PIPELINE);
     Shuffleboard.getTab("Vision").addNumber("Distance to chosen target", () -> getDependableTarget().getDistance());
     Shuffleboard.getTab("Vision").addNumber("Orientation Outer", () -> outerTarget.getTurretOrientation());
     Shuffleboard.getTab("Vision").addNumber("Horizontal outer", () -> outerTarget.getHorizontalOffset());

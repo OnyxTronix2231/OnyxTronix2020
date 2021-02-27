@@ -57,10 +57,11 @@ public class Shooter extends SubsystemBase {
   }
 
   public double distanceToVelocity(double distance) {
-    if (distance > MIDDLE_DISTANCE) {
-      return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
-    }
-    return 0.1912 * Math.pow(distance, 2) - 161.44 * distance +67791;
+//    if (distance > MIDDLE_DISTANCE) {
+//      return -0.0121 * Math.pow(distance, 2) + 26.707 * distance + 24130;
+//    }
+//    return 0.1912 * Math.pow(distance, 2) - 161.44 * distance +67791;
+    return 5500 * 2048 / 600d;
   }
 
   // y= -0.0121x2 +26.707x + 24130 > 450

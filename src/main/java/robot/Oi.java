@@ -162,7 +162,7 @@ public class Oi {
 
     final Trigger climb = driverKBack;
 
-    new ClimberOiBinder(climber, openClimber, climb);
+    //new ClimberOiBinder(climber, openClimber, climb);
     //endregion
 
     //region BallCollector

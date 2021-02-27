@@ -1,6 +1,8 @@
 package robot;
 
 import static robot.RobotConstants.ROBOT_TYPE;
+import static robot.vision.VisionConstants.DEFAULT_PIPELINE;
+
 
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -136,6 +138,7 @@ public class Robot extends TimedRobot {
     vision.setLEDMode(LimelightLedMode.forceOn);
     driveTrain.setNeutralModeToBrake();
     climber.setNeutralModeToBrake();
+    vision.setPipeline(DEFAULT_PIPELINE);
   }
 
   @Override

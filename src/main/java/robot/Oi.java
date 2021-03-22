@@ -13,7 +13,6 @@ import robot.ballCollector.BallCollectorOiBinder;
 import robot.ballStopper.BallStopper;
 import robot.ballTrigger.BallTriggerOiBinder;
 import robot.climber.Climber;
-import robot.climber.ClimberOiBinder;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.DriveTrainOiBinder;
 import robot.loaderConveyor.LoaderConveyor;

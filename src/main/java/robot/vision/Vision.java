@@ -7,7 +7,6 @@ import static robot.vision.VisionConstants.MIN_INNER_DISTANCE;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.loaderConveyor.LoaderConveyor;
 import robot.vision.target.TargetChooser;
 import robot.vision.target.DistanceOrientationTargetChooser;
 import robot.vision.target.VisionTarget;

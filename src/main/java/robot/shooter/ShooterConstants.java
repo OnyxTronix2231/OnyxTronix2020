@@ -6,14 +6,14 @@ public final class ShooterConstants {
 
   public static final class ShooterComponentsA {
 
-    static final int MASTER_PORT = 7;
+    public static final int MIDDLE_DISTANCE = 350;
     public static final double MAX_VELOCITY = 20000;
+    static final int MASTER_PORT = 7;
     static final int SLAVE_PORT = 8;
     static final int SOLENOID_PORT = 2;
     static final int CURRENT_LIMIT = 40;//TODO check and change
     static final double TRIGGER_THRESHOLD_TIME = 0.1;//TODO check and change
     static final int TRIGGER_THRESHOLD_CURRENT = 30; // TODO: check and change
-    static final int MIDDLE_DISTANCE = 350;
     static final int VELOCITY_PID_SLOT = 0;
     static final double MAX_CLOSED_LOOP_OUTPUT = 1023;
     static final double VELOCITY_P = 0.7;

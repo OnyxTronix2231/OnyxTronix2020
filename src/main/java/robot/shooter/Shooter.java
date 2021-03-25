@@ -60,12 +60,13 @@ public class Shooter extends SubsystemBase {
    if (distance > MIDDLE_DISTANCE) {
       return 0.0579 * Math.pow(distance,2) - 61.583 * distance + 33262;
    }
-    return 15000;
+    return -0.0008 * Math.pow(distance, 3) + 0.5302 * Math.pow(distance,2) - 111.5 * distance + 18257;
   }
 
   // old y= -0.0121x2 +26.707x + 24130 > 450
   // old y = 0.1912x2 - 161.44x +67791 < 450
   //new y = 0.0579x2 - 61.583x + 33262 far distance > 350
+  //new y = -0.0008x3 + 0.5302x2 - 111.5x + 18257 < 350
 
   public void startChecking() {
     lastVelocityError = Integer.MAX_VALUE;

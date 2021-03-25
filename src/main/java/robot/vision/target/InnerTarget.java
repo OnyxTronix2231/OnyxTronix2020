@@ -7,7 +7,6 @@ import static robot.vision.VisionConstants.TARGET_HEIGHT_CM;
 import static robot.vision.VisionConstants.VECTOR_OUTER_INNER_TARGET;
 
 import robot.vision.Vector2dEx;
-import robot.vision.VisionConstants;
 import vision.limelight.target.LimelightTarget;
 
 public class InnerTarget implements VisionTarget {

@@ -1,6 +1,5 @@
 package robot.vision.target;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
 import robot.vision.Vector2dEx;
 import vision.limelight.target.LimelightTarget;
 
